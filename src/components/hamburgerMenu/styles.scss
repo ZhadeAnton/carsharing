@@ -1,0 +1,44 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+%hamburger-menu-line {
+  width: 20px;
+  height: 2px;
+  margin: 3px 0;
+  transition: 0.4s;
+  border-radius: 8px;
+  z-index: $layer-max;
+  background-color: $white-color;
+}
+
+.hamburger-menu {
+  @include flex-center;
+  flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    & > * {
+      background-color: $grey-strong-color;
+    }
+  }
+
+  &__line {
+    @extend %hamburger-menu-line;
+  }
+
+  &__line-change {
+    @extend %hamburger-menu-line;
+
+    &:nth-child(1) {
+      transform: rotate(-45deg) translate(-3px, 5px);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: rotate(45deg) translate(-6px, -8px);
+    }
+  }
+}
