@@ -1,8 +1,31 @@
 // Colors 
 $primary-accent-color: #0EC261;
 $primary-color: #121212;
+$white-color: #FFFFFF;
 $grey-color: #EEEEEE;
 $grey-strong-color: #999999;
+
+// Font sizes
+$font-size-1: 13px;
+
+// Line heights
+$line-height-1: 15px;
+
+// Layers
+$layer-1: 1;
+$layer-2: 10;
+$layer-3: 100;
+$layer-4: 200;
+$layer-5: 300;
+$layer-max: 1000;
+
+// Spaces
+$baseline: 8px;
+$space-small: $baseline;
+$space-md: calc(#{$baseline} * 2);
+$space-lg: calc(#{$baseline} * 4);
+$space-xl: calc(#{$baseline} * 5);
+$space-xxl: calc(#{$baseline} * 8);
 
 // Breakpoints
 $grid-breakpoints: (
