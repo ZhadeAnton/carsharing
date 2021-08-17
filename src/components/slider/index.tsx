@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import './styles.scss'
 import useWindowSize from '../../hooks/useWindowSize'
@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function Slider(props: Props) {
+  const resizeRef = useRef<any>()
   const windowMeasures = useWindowSize()
   const windowWidth = windowMeasures.width ? windowMeasures.width : 0
 
@@ -21,7 +22,27 @@ export default function Slider(props: Props) {
     transition: 0.45 as any
   })
 
+  useEffect(() => {
+    resizeRef.current = handleResize
+  })
+
+  useEffect(() => {
+    const resize = () => {
+      resizeRef.current()
+    }
+
+    const onResize = window.addEventListener('resize', resize)
+
+    return () => {
+      window.removeEventListener('resize', onResize!)
+    }
+  }, [])
+
   const { translate, transition, activeIndex } = state
+
+  const handleResize = () => {
+    setState({ ...state, translate: windowMeasures.width, transition: 0 })
+  }
 
   const nextSlide = () => {
     if (activeIndex === props.slides.length - 1) {
