@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+/* Roboto 300 */
+@font-face {
+  font-family: 'RobotoLight';
+  src: local('Roboto-light'), url('./assets/typography/Roboto-Light.ttf')
+}
+
 /* Roboto 400 */
 @font-face {
   font-family: 'RobotoRegular';

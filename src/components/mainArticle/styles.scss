@@ -1,0 +1,20 @@
+@import '../../scss/variables';
+@import '../../scss/typography';
+
+.main-article {
+  &__title {
+    @extend %heading70;
+
+    &-green {
+      color: $primary-accent-color;
+    }
+  }
+
+  &__text {
+    margin-top: $space-lg;
+    margin-bottom: $space-xxl;
+    font-family: 'RobotoLight';
+    @extend %heading26;
+    color: $grey-strong-color;
+  }
+}

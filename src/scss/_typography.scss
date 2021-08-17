@@ -1,5 +1,17 @@
 @import './variables';
 
+%heading70 {
+  font-family: 'RobotoBold';
+  font-size: $font-size-70;
+  line-height: $line-height-65;
+}
+
+%heading26 {
+  font-family: 'RobotoBold';
+  font-size: $font-size-26;
+  line-height: $line-height-30;
+}
+
 %heading30 {
   font-family: 'RobotoBold';
   font-size: $font-size-30;
