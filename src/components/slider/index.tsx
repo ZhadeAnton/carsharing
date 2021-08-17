@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import './styles.scss'
 import useWindowSize from '../../hooks/useWindowSize'
 import SliderContent from './sliderContent'
-import Slide from './slide'
+import Slide from './slider'
 import Arrow from './sliderArrow'
+import SliderDots from './sliderDots'
 
 interface Props {
   slides: any
@@ -54,6 +55,14 @@ export default function Slider(props: Props) {
     })
   }
 
+  const setSlide = (index: number) => {
+    setState({
+      ...state,
+      activeIndex: index,
+      translate: (index) * windowWidth
+    })
+  }
+
   return (
     <div className='slider' style={{overflow: 'hidden'}}>
       <SliderContent
@@ -68,6 +77,12 @@ export default function Slider(props: Props) {
 
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />
+
+      <SliderDots
+        slides={props.slides}
+        activeIndex={activeIndex}
+        setSlide={setSlide}
+      />
     </div>
   )
 }
