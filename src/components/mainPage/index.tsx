@@ -2,6 +2,7 @@ import React from 'react'
 
 import './styles.scss'
 import MainAside from './aside'
+import Footer from '../footer'
 
 export default function MainPage() {
   return (
@@ -10,6 +11,8 @@ export default function MainPage() {
 
       <section>
         Main info
+
+        <Footer />
       </section>
 
       <section>

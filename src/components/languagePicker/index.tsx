@@ -12,9 +12,7 @@ export default function LanguagePicker() {
       onClick={setIsEnglish}
     >
       <h6 className='language-picker__title'>
-        {
-          isEnglish ? 'Eng' : 'Rus'
-        }
+        { isEnglish ? 'Eng' : 'Rus' }
       </h6>
     </div>
   )

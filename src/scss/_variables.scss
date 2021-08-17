@@ -6,10 +6,28 @@ $grey-color: #EEEEEE;
 $grey-strong-color: #999999;
 
 // Font sizes
-$font-size-1: 13px;
+$font-size-13: 13px;
+$font-size-14: 14px;
+$font-size-16: 16px;
+$font-size-18: 18px;
+$font-size-24: 24px;
+$font-size-26: 26px;
+$font-size-30: 30px;
+$font-size-32: 32px;
+$font-size-40: 40px;
+$font-size-70: 70px;
 
 // Line heights
-$line-height-1: 15px;
+$line-height-15: 15px;
+$line-height-16: 16px;
+$line-height-21: 21px;
+$line-height-30: 30px;
+$line-height-35: 35px;
+$line-height-46: 46px;
+
+// Transitions
+$transition-sm: .2s ease-in-out;
+$transition-md: .4s ease-in-out;
 
 // Layers
 $layer-1: 1;
@@ -22,10 +40,10 @@ $layer-max: 1000;
 // Spaces
 $baseline: 8px;
 $space-small: $baseline;
-$space-md: calc(#{$baseline} * 2);
-$space-lg: calc(#{$baseline} * 4);
-$space-xl: calc(#{$baseline} * 5);
-$space-xxl: calc(#{$baseline} * 8);
+$space-md: calc(#{$baseline} * 2); // 16px
+$space-lg: calc(#{$baseline} * 4); // 32px
+$space-xl: calc(#{$baseline} * 5); // 40px
+$space-xxl: calc(#{$baseline} * 8); // 64px
 
 // Breakpoints
 $grid-breakpoints: (

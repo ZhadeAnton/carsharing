@@ -1,0 +1,12 @@
+@import '../../scss/variables';
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+
+  &__text {
+    font-size: $font-size-13;
+    line-height: $line-height-15;
+    color: $grey-strong-color;
+  }
+}

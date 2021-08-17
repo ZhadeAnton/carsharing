@@ -1,0 +1,13 @@
+@import '../../scss/variables';
+
+.phone-number {
+  transition: $transition-sm;
+  text-decoration: none;
+  font-size: $font-size-13;
+  line-height: $line-height-15;
+  color: $primary-color;
+
+  &:hover {
+    color: $primary-accent-color;
+  }
+}
