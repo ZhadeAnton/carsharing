@@ -1,0 +1,24 @@
+@import '../../../scss/variables';
+@import '../../../scss/typography';
+
+.slider-article {
+  width: 495px;
+  // z-index: $layer-3;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  padding: 0 2.5rem;
+
+  &__title {
+    @extend %heading40;
+    font-family: 'RobotoMedium';
+    color: $white-color;
+  }
+
+  &__text {
+    font-family:'RobotoLight';
+    color: $grey-color;
+    margin-bottom: 32px;
+  }
+}
