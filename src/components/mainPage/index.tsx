@@ -1,13 +1,13 @@
 import React from 'react'
 
 import './styles.scss'
-import MainAside from './aside'
+import Aside from '../aside'
 import Footer from '../footer'
 
 export default function MainPage() {
   return (
     <main className='main-page'>
-      <MainAside />
+      <Aside />
 
       <section>
         Main info
