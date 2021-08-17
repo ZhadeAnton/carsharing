@@ -14,9 +14,9 @@ export default function SliderDots(props: Props) {
     <div className='slider-dots'>
       { props.slides.map((slide, i) => (
         <SliderDot
-          key={slide}
-          active={props.activeIndex === i}
+          key={i}
           index={i}
+          active={props.activeIndex === i}
           setSlide={props.setSlide}
         />
       ))}

@@ -1,21 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 import './styles.scss'
-import useWindowSize from '../../hooks/useWindowSize'
+import { ISlide } from '../../interfaces/sliderArticleInterfaces'
 import SliderContent from './sliderContent'
-import Slide from './slider'
+import Slide from './slide'
 import Arrow from './sliderArrow'
 import SliderDots from './sliderDots'
 
 interface Props {
-  slides: any
+  slides: Array<ISlide>
 }
 
 export default function Slider(props: Props) {
   const resizeRef = useRef<any>()
-  const windowMeasures = useWindowSize()
-  const windowWidth = windowMeasures.width ? windowMeasures.width : 0
+  const sliderRef = useRef<any>()
 
+  const [sliderWidth, setSliderWidth] = useState<number>()
   const [state, setState] = useState({
     activeIndex: 0,
     translate: 0 as any,
@@ -24,6 +24,10 @@ export default function Slider(props: Props) {
 
   useEffect(() => {
     resizeRef.current = handleResize
+
+    if (sliderRef.current) {
+      setSliderWidth(sliderRef.current.offsetWidth)
+    }
   })
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function Slider(props: Props) {
   const { translate, transition, activeIndex } = state
 
   const handleResize = () => {
-    setState({ ...state, translate: windowMeasures.width, transition: 0 })
+    setState({ ...state, translate: sliderWidth! * activeIndex, transition: 0 })
   }
 
   const nextSlide = () => {
@@ -56,7 +60,7 @@ export default function Slider(props: Props) {
     setState({
       ...state,
       activeIndex: activeIndex + 1,
-      translate: (activeIndex + 1) * windowWidth
+      translate: (activeIndex + 1) * sliderWidth!
     })
   }
 
@@ -64,7 +68,7 @@ export default function Slider(props: Props) {
     if (activeIndex === 0) {
       return setState({
         ...state,
-        translate: (props.slides.length - 1) * windowWidth,
+        translate: (props.slides.length - 1) * sliderWidth!,
         activeIndex: props.slides.length - 1
       })
     }
@@ -72,7 +76,7 @@ export default function Slider(props: Props) {
     setState({
       ...state,
       activeIndex: activeIndex - 1,
-      translate: (activeIndex - 1) * windowWidth
+      translate: (activeIndex - 1) * sliderWidth!
     })
   }
 
@@ -80,20 +84,23 @@ export default function Slider(props: Props) {
     setState({
       ...state,
       activeIndex: index,
-      translate: (index) * windowWidth
+      translate: (index) * sliderWidth!
     })
   }
 
   return (
-    <div className='slider' style={{overflow: 'hidden'}}>
-      <div className='slider__overlay' />
+    <div
+      className='slider'
+      style={{overflow: 'hidden'}}
+      ref={sliderRef}
+    >
       <SliderContent
         translate={translate}
         transition={transition}
-        width={windowWidth * props.slides.length}
+        width={sliderWidth! * props.slides.length}
       >
-        { props.slides.map((slide: any, i: number) => (
-          <Slide key={slide + i} content={slide} />
+        { props.slides.map((slide, i: number) => (
+          <Slide key={i} { ...slide } />
         )) }
       </SliderContent>
 

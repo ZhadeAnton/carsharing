@@ -6,6 +6,11 @@
   line-height: $line-height-65;
 }
 
+%heading24 {
+  font-size: $font-size-24;
+  line-height: $line-height-21;
+}
+
 %heading26 {
   font-family: 'RobotoBold';
   font-size: $font-size-26;
@@ -16,6 +21,11 @@
   font-family: 'RobotoBold';
   font-size: $font-size-30;
   line-height: $line-height-35;
+}
+
+%heading40 {
+  font-size: $font-size-40;
+  line-height: $line-height-46;
 }
 
 %heading18 {

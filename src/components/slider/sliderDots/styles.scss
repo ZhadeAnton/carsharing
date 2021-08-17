@@ -2,7 +2,7 @@
 @import '../../../scss/variables';
 
 .slider-dots {
-  width: 50%;
+  width: 100%;
   @include flex-center;
   @include abs-position(auto, auto, 32px, auto);
   z-index: $layer-2;
