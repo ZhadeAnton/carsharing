@@ -15,7 +15,7 @@ export default function SliderArticle(props: ISliderArticle) {
         { props.text }
       </p>
 
-      <ButtonSecondary>
+      <ButtonSecondary backgroundColor={props.buttonColor}>
         { props.buttonTitle }
       </ButtonSecondary>
     </article>
