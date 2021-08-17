@@ -86,6 +86,7 @@ export default function Slider(props: Props) {
 
   return (
     <div className='slider' style={{overflow: 'hidden'}}>
+      <div className='slider__overlay' />
       <SliderContent
         translate={translate}
         transition={transition}
