@@ -1,0 +1,12 @@
+@import '../../scss/typography';
+@import '../../scss/variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &__title {
+    @extend %heading30;
+    color: $primary-accent-color;
+  }
+}

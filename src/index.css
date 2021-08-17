@@ -15,13 +15,13 @@ code {
 /* Roboto 400 */
 @font-face {
   font-family: 'RobotoRegular';
-  src: local('Roboto-bold'), url('./assets/typography/Roboto-Regular.ttf')
+  src: local('Roboto-regular'), url('./assets/typography/Roboto-Regular.ttf')
 }
 
 /* Roboto 500 */
 @font-face {
   font-family: 'RobotoMedium';
-  src: local('Roboto-bold'), url('./assets/typography/Roboto-Medium.ttf')
+  src: local('Roboto-medium'), url('./assets/typography/Roboto-Medium.ttf')
 }
 
 /* Roboto 700 */

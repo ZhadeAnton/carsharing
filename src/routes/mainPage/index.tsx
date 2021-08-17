@@ -1,8 +1,9 @@
 import React from 'react'
 
 import './styles.scss'
-import Aside from '../aside'
-import Footer from '../footer'
+import Header from '../../components/header'
+import Aside from '../../components/aside'
+import Footer from '../../components/footer'
 
 export default function MainPage() {
   return (
@@ -10,7 +11,7 @@ export default function MainPage() {
       <Aside />
 
       <section>
-        Main info
+        <Header />
 
         <Footer />
       </section>
