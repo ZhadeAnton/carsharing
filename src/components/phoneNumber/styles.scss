@@ -4,7 +4,7 @@
 .phone-number {
   @extend %text-small;
   transition: $transition-sm;
-  color: $primary-color;
+  color: inherit;
 
   &:hover {
     color: $primary-accent-color;

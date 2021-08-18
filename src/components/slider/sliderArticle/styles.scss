@@ -1,12 +1,10 @@
 @import '../../../scss/variables';
 @import '../../../scss/typography';
+@import '../../../scss/mixins';
 
 .slider-article {
   width: 495px;
-  // z-index: $layer-3;
-  position: absolute;
-  top: 42%;
-  left: 50%;
+  @include abs-position(42%, auto, auto, 50%);
   transform: translate(-50%, -42%);
 
   &__title {
@@ -17,9 +15,30 @@
   }
 
   &__text {
+    margin-bottom: 32px;
     font-family:'RobotoLight';
     @extend %heading24;
     color: $grey-color;
-    margin-bottom: 32px;
+  }
+
+  @media (max-width: getBreackpoint('xl')) {
+    width: 400px;
+  }
+
+  @media (max-width: 1100px) {
+    width: 350px;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    width: 280px;
+
+    &__title {
+      font-size: $font-size-32;
+      line-height: $line-height-35;
+    }
+
+    &__text {
+      font-size: $font-size-22;
+    }
   }
 }

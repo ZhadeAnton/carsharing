@@ -16,3 +16,11 @@
   bottom: $bottom;
   left: $left;
 }
+
+@mixin fix-position ($top, $right, $bottom, $left) {
+  position: fixed; 
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}

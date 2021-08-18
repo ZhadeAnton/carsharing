@@ -1,22 +1,25 @@
 @import '../../../scss/variables';
 @import '../../../scss/mixins';
 
+%arrow-area-width {
+  width: 64px;
+}
+
 .slider-arrow {
-  width: 50px;
+  @extend %arrow-area-width;
   height: 100%;
   @include flex-center;
-  position: absolute;
-  top: 0;
+  @include abs-position(0, auto, auto, auto);
   cursor: pointer;
-  z-index: 10;
+  z-index: $layer-3;
 
   &__overlay {
+    @extend %arrow-area-width;
     height: 100%;
-    width: $space-xxl;
     position: absolute;
 
     &:hover {
-      background-color: #0EC261;
+      background-color: $primary-accent-color;
       transition: background-color $transition-md;
       opacity: 0.2;
     }
@@ -28,5 +31,19 @@
 
   &__right {
     right: 0%;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    %arrow-area-width {
+      width: 32px;
+    }
+
+    &__left {
+      left: -3.6%;
+    }
+  
+    &__right {
+      right: -3.6%;
+    }
   }
 }

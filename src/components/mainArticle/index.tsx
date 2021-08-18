@@ -1,7 +1,7 @@
 import React from 'react'
+import ButtonPrimary from '../buttons/buttonPrimary'
 
 import './styles.scss'
-import ButtonPrimary from '../buttons/buttonPrimary'
 
 export default function MainArticle() {
   return (
@@ -19,7 +19,7 @@ export default function MainArticle() {
       </p>
 
       <ButtonPrimary>
-        Забронировать
+          Забронировать
       </ButtonPrimary>
     </article>
   )

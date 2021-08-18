@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Colors 
 $primary-accent-color: #0EC261;
 $primary-color: #121212;
@@ -10,6 +12,7 @@ $font-size-13: 13px;
 $font-size-14: 14px;
 $font-size-16: 16px;
 $font-size-18: 18px;
+$font-size-22: 22px;
 $font-size-24: 24px;
 $font-size-26: 26px;
 $font-size-30: 30px;
@@ -54,3 +57,7 @@ $grid-breakpoints: (
   lg: 1024px,
   xl: 1440px,
 );
+
+@function getBreackpoint($breakpoint) {
+  @return map-get($grid-breakpoints, $breakpoint)
+}

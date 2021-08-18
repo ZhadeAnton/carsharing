@@ -1,4 +1,5 @@
 @import '../../scss/variables';
+@import '../../scss/mixins';
 
 .main-page {
   width: 100%;
@@ -11,12 +12,58 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: $space-xxl;
+    padding: $space-xl $space-xxl;
   }
 
   &__slider {
     height: 100%;
     overflow: hidden;
+  }
+
+  &__menu {
+    display: none;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    grid-template-columns: 64px 1fr 410px;
+
+    &__content {
+      padding: $space-lg;
+    }
+  }
+
+  @media (max-width: 925px) {
+    grid-template-columns: 64px 1fr;
+
+    &__slider {
+      display: none;
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    grid-template-columns: 85px 1fr;
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    grid-template-columns: 1fr;
+
+    &__aside {
+      display: none;
+    }
+
+    &__content {
+      padding: 0;
+      justify-content: flex-start;
+
+      & > * article {
+        margin-top: $space-lg;
+      }
+    }
+
+    &__menu {
+      display: block;
+      @include fix-position(24px, auto, auto, 16px);
+    }
   }
 }
 

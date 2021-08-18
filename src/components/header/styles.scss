@@ -9,4 +9,15 @@
     @extend %heading30;
     color: $primary-accent-color;
   }
+
+  @media (max-width: getBreackpoint('sm')) {
+    flex-direction: column;
+    align-items: flex-end;
+    padding: $space-md;
+    padding-bottom: 0;
+
+    &__title {
+      margin-bottom: $space-small;
+    }
+  }
 }

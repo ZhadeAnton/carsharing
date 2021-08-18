@@ -1,5 +1,6 @@
 @import '../../scss/variables';
 @import '../../scss/typography';
+@import '../../scss/mixins';
 
 .footer {
   display: flex;
@@ -8,5 +9,29 @@
   &__text {
     @extend %text-small;
     color: $grey-strong-color;
+  }
+
+  &__number {
+    color: $primary-color;
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    width: 100%;
+    height: 70px;
+    @include fix-position(auto, auto, 0, 0);
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 $space-md;
+    background-color: $primary-color;
+
+    &__text {
+      margin-top: $space-small;
+    }
+
+    &__number {
+      color: $primary-accent-color;
+    }
   }
 }

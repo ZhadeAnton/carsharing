@@ -17,7 +17,7 @@ const Arrow = (props: Props) => {
       className={`slider-arrow slider-arrow__${preffix}`}
       onClick={props.handleClick}
     >
-      <div className='slider-arrow__overlay'></div>
+      <div className='slider-arrow__overlay' />
 
       {props.direction === 'right' ? <img src={rightArrow} /> : <img src={leftArrow} />}
     </div>

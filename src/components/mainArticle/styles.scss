@@ -17,4 +17,20 @@
     @extend %heading26;
     color: $grey-strong-color;
   }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__title {
+      padding: 0 $space-md;
+      font-size: $font-size-30;
+      line-height: $line-height-30;
+    }
+
+    &__text {
+      margin-top: $space-md;
+      margin-bottom: $space-xl;
+      padding: 0 $space-md;
+      font-size: $font-size-18;
+      line-height: $line-height-21;
+    }
+  }
 }

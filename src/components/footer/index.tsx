@@ -10,7 +10,9 @@ export default function Footer() {
         &copy; 2016-2019 &laquo;Need for drive&raquo;
       </p>
 
-      <PhoneNumber />
+      <div className='footer__number'>
+        <PhoneNumber />
+      </div>
     </footer>
   )
 }
