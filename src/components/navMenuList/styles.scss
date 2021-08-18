@@ -11,11 +11,21 @@
     }
 
     &--link {
+      transition: color $transition-sm;
       @extend %heading32;
       text-transform: uppercase;
       text-decoration: none;
       font-family: 'RobotoRegular';
       color: $white-color;
+
+      &:hover {
+        color: $primary-accent-color;
+      }
+
+      @media (max-width: getBreackpoint('sm')) {
+        font-size: $font-size-22;
+        line-height: $line-height-25;
+      }
     }
   }
 }

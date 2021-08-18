@@ -10,10 +10,17 @@
   &__left-section {
     flex: 1 + $aside-width;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: $primary-color;
+
+    &--wrapper {
+      padding-left: 128px;
+
+      & > :first-child {
+        margin-bottom: $space-xl;
+      }
+    }
   }
 
   &__right-section {
@@ -38,6 +45,17 @@
   
     &__right-section {
       flex: 0;
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__left-section {
+      justify-content: flex-start;
+  
+      &--wrapper {
+        padding-top: 80px;
+        padding-left: 28px;
+      }
     }
   }
 }

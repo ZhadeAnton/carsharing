@@ -8,9 +8,11 @@ export default function OverlayMenu() {
   return (
     <section className='overlay-menu'>
       <section className='overlay-menu__left-section'>
-        <NavMenuList />
+        <div className='overlay-menu__left-section--wrapper'>
+          <NavMenuList />
 
-        <SocialList />
+          <SocialList />
+        </div>
       </section>
 
       <section className='overlay-menu__right-section'>
