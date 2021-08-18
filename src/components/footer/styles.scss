@@ -3,7 +3,7 @@
 @import '../../scss/mixins';
 
 .footer {
-  display: flex;
+  @include flex-aling-center;
   justify-content: space-between;
 
   &__text {

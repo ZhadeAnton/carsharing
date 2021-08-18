@@ -28,6 +28,11 @@
     background: rgba(21, 27, 31, 0.81);
   }
 
+  &__language-picker {
+    display: none;
+    @include fix-position(auto, auto, 28px, 16px);
+  }
+
   @media (max-width: 1060px) {
     &__left-section {
       flex: calc(100% - 410px);
@@ -48,6 +53,14 @@
     }
   }
 
+  @media (max-width: getBreackpoint('lg')) {
+    &__left-section {
+      &--wrapper {
+        padding-left: 100px;
+      }
+    }
+  }
+
   @media (max-width: getBreackpoint('sm')) {
     &__left-section {
       justify-content: flex-start;
@@ -56,6 +69,10 @@
         padding-top: 80px;
         padding-left: 28px;
       }
+    }
+
+    &__language-picker {
+      display: block;
     }
   }
 }

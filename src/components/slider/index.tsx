@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import './styles.scss'
 import { ISlide } from '../../interfaces/sliderArticleInterfaces'
-import SliderContent from './sliderContent'
-import Slide from './slide'
 import Arrow from './sliderArrow'
 import SliderDots from './sliderDots'
+import SliderContent from './sliderContent'
 
 interface Props {
   slides: Array<ISlide>
@@ -95,14 +94,11 @@ export default function Slider(props: Props) {
       ref={sliderRef}
     >
       <SliderContent
-        translate={translate}
         transition={transition}
+        translate={translate}
         width={sliderWidth! * props.slides.length}
-      >
-        { props.slides.map((slide, i: number) => (
-          <Slide key={i} { ...slide } />
-        )) }
-      </SliderContent>
+        slides={props.slides}
+      />
 
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />

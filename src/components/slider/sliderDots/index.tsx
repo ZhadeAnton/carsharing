@@ -1,18 +1,19 @@
 import React from 'react'
 
 import './styles.scss'
+import { ISlide } from '../../../interfaces/sliderArticleInterfaces'
 import SliderDot from '../sliderDot'
 
 interface Props {
-  slides: Array<any>,
-  activeIndex : number,
+  slides: Array<ISlide>,
+  activeIndex: number,
   setSlide: (index: number) => void
 }
 
 export default function SliderDots(props: Props) {
   return (
     <div className='slider-dots'>
-      { props.slides.map((slide, i) => (
+      { props.slides.map((_, i) => (
         <SliderDot
           key={i}
           index={i}

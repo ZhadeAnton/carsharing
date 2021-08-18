@@ -1,11 +1,29 @@
-import styled from '@emotion/styled'
-import { CSSProperties } from '@emotion/serialize'
+import React from 'react'
 
-const SliderContent = styled.div`
-  transform: translateX(-${(props) => props.translate}px);
-  transition: transform ease-out ${(props: CSSProperties) => props.transition}s;
-  height: 100%;
-  width: ${(props: CSSProperties) => props.width}px;
-  display: flex;
-`
-export default SliderContent
+import { ISlide } from '../../../interfaces/sliderArticleInterfaces'
+import Slide from '../slide'
+
+interface Props {
+  translate: number,
+  transition: number,
+  width: number,
+  slides: Array<ISlide>
+}
+
+export default function SliderContent(props: Props) {
+  return (
+    <div
+      style={{
+        transform: `translateX(-${props.translate}px)`,
+        transition: `transform ease-out ${props.transition}s`,
+        width: `${props.width}px`,
+        display: 'flex',
+        height: 100 + '%'
+      }}
+    >
+      { props.slides.map((slide, i: number) => (
+        <Slide key={i} { ...slide } />
+      )) }
+    </div>
+  )
+}

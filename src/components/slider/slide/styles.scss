@@ -1,4 +1,5 @@
 @import '../../../scss/mixins';
+@import '../../../scss/variables';
 
 .slide {
   height: 100vh;
@@ -8,7 +9,7 @@
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
-  z-index: 333;
+  z-index: $layer-1;
 
   &:after {
     content: '';

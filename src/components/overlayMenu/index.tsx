@@ -3,6 +3,7 @@ import React from 'react'
 import './styles.scss'
 import SocialList from '../socialList'
 import NavMenuList from '../navMenuList'
+import LanguagePicker from '../languagePicker'
 
 export default function OverlayMenu() {
   return (
@@ -12,6 +13,10 @@ export default function OverlayMenu() {
           <NavMenuList />
 
           <SocialList />
+        </div>
+
+        <div className='overlay-menu__language-picker'>
+          <LanguagePicker />
         </div>
       </section>
 
