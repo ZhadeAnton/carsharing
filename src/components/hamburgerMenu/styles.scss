@@ -9,17 +9,13 @@
   transition: $transition-md;
   z-index: $layer-max;
   background-color: $white-color;
-
-  @media (max-width: getBreackpoint('sm')) {
-    width: 19px;
-    background-color: $primary-color;
-  }
 }
 
 .hamburger-menu {
   @include flex-center;
   flex-direction: column;
   cursor: pointer;
+  z-index: $layer-max;
 
   &:hover {
     & > * {
@@ -44,6 +40,17 @@
 
     &:nth-child(3) {
       transform: rotate(45deg) translate(-6px, -8px);
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    %hamburger-menu-line {
+      width: 19px;
+      background-color: $primary-color;
+    }
+    
+    &__line-change {
+      background-color: $white-color !important;
     }
   }
 }

@@ -26,6 +26,7 @@ $line-height-16: 16px;
 $line-height-21: 21px;
 $line-height-30: 30px;
 $line-height-35: 35px;
+$line-height-37: 37px;
 $line-height-46: 46px;
 $line-height-65: 65px;
 
@@ -48,6 +49,9 @@ $space-md: calc(#{$baseline} * 2); // 16px
 $space-lg: calc(#{$baseline} * 4); // 32px
 $space-xl: calc(#{$baseline} * 5); // 40px
 $space-xxl: calc(#{$baseline} * 8); // 64px
+
+// Measures
+$aside-width: 64px;
 
 // Breakpoints
 $grid-breakpoints: (

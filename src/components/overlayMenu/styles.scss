@@ -1,0 +1,43 @@
+@import '../../scss/typography';
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.overlay-menu {
+  @include fix-position(0, 0, 0, 0);
+  display: flex;
+  z-index: $layer-max - 1;
+
+  &__left-section {
+    flex: 1 + $aside-width;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $primary-color;
+  }
+
+  &__right-section {
+    flex: 1;
+    background: rgba(21, 27, 31, 0.81);
+  }
+
+  @media (max-width: 1060px) {
+    &__left-section {
+      flex: calc(100% - 410px);
+    }
+  
+    &__right-section {
+      flex: 410px;
+    }
+  }
+
+  @media (max-width: 925px) {
+    &__left-section {
+      flex: 1;
+    }
+  
+    &__right-section {
+      flex: 0;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import '../../scss/variables';
+@import '../../scss/typography';
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: $space-md;
+    }
+
+    &--link {
+      @extend %heading32;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'RobotoRegular';
+      color: $white-color;
+    }
+  }
+}

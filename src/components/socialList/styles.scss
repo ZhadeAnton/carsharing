@@ -1,0 +1,20 @@
+@import '../../scss/variables';
+
+.social-list {
+  display: flex;
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 24px;
+    }
+
+    &--icon {
+      &:hover {
+        path {
+          transition: fill $transition-sm;
+          fill: $primary-accent-color;
+        }
+      }
+    }
+  }
+}
