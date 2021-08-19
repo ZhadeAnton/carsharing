@@ -3,7 +3,7 @@
 @import '../../scss/mixins';
 
 .location-picker {
-  @include flex-aling-center;
+  @include flex-align-center;
   cursor: pointer;
   user-select: none;
 
