@@ -16,17 +16,27 @@ export default function HamburgerMenu(props: Props) {
     <div
       className='hamburger-menu'
       onClick={handleClick}
+      data-testid='hamburger-menu'
     >
-      <span className={`hamburger-menu__line
-        ${props.isOpen ? 'hamburger-menu__line-change' : ''}`}>
+      <span
+        className={`hamburger-menu__line
+          ${props.isOpen ? 'hamburger-menu__line-change' : ''}`}
+        data-testid='hamburger-line'
+      >
       </span>
 
-      <span className={`hamburger-menu__line
-        ${props.isOpen ? 'hamburger-menu__line-change' : ''}`}>
+      <span
+        className={`hamburger-menu__line
+          ${props.isOpen ? 'hamburger-menu__line-change' : ''}`}
+        data-testid='hamburger-line'
+      >
       </span>
 
-      <span className={`hamburger-menu__line
-        ${props.isOpen ? 'hamburger-menu__line-change' : ''}`}>
+      <span
+        className={`hamburger-menu__line
+          ${props.isOpen ? 'hamburger-menu__line-change' : ''}`}
+        data-testid='hamburger-line'
+      >
       </span>
     </div>
   )

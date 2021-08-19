@@ -7,7 +7,10 @@ import LanguagePicker from '../languagePicker'
 
 export default function OverlayMenu() {
   return (
-    <section className='overlay-menu'>
+    <section
+      className='overlay-menu'
+      data-testid='overlay-menu'
+    >
       <section className='overlay-menu__left-section'>
         <div className='overlay-menu__left-section--wrapper'>
           <NavMenuList />

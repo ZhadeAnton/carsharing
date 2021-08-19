@@ -7,7 +7,7 @@ import ButtonPrimary from '../components/buttons/buttonPrimary/index.tsx'
 
 const handleButtonClick = jest.fn()
 
-describe('ButtonPrimary component', () => {
+describe('buttonPrimary component', () => {
   it('should correctly render recived title (as children)', () => {
     const { getByRole } = render(
         <ButtonPrimary>
