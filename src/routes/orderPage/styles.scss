@@ -1,0 +1,25 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.order-page {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: $aside-width 1fr;
+  overflow: hidden;
+
+  &__main {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 100px 50px 1fr;
+  }
+
+  &__tabs {
+  }
+
+  &__menu {
+    z-index: $layer-max;
+    @include fix-position(24px, auto, auto, 16px);
+  }
+}

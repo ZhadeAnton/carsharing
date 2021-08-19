@@ -1,0 +1,32 @@
+@import '../../scss/typography';
+@import '../../scss/variables';
+
+%bread-title {
+  cursor: pointer;
+  font-family:'RobotoBold';
+  @extend %heading14;
+}
+
+.breadcrumb {
+  user-select: none;
+
+  span {
+    &:not(:first-child) {
+      margin-left: 1rem;
+    }
+  }
+
+  &__item {
+    @extend %bread-title;
+    color: $grey-strong-color;
+
+    &-active {
+      @extend %bread-title;
+      color: $primary-accent-color;
+    }
+
+    &:hover {
+      opacity: .9;
+    }
+  }
+}
