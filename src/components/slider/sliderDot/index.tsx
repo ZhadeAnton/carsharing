@@ -16,6 +16,7 @@ export default function SliderDot(props: Props) {
         background: props.active ? '#0EC261' : '#FFFFFF'
       }}
       onClick={() => props.setSlide(props.index)}
+      data-testid='slider-dot'
     />
   )
 }

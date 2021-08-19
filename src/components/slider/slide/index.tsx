@@ -11,6 +11,7 @@ export default function Slide(props: ISlide) {
       style={{
         backgroundImage: `url(${props.background})`
       }}
+      data-testid='slide'
     >
       <SliderArticle
         title={props.title}

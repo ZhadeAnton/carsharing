@@ -16,6 +16,7 @@ const Arrow = (props: Props) => {
     <div
       className={`slider-arrow slider-arrow__${preffix}`}
       onClick={props.handleClick}
+      data-testid='slider-arrow'
     >
       <div className='slider-arrow__overlay' />
 
