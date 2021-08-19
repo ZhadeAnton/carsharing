@@ -1,0 +1,20 @@
+@import '../../../scss/variables';
+@import '../../../scss/typography';
+
+.search-location-form {
+  max-width: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  &__form-wrapper {
+    display: flex;
+
+    label {
+      margin-right: $space-small;
+      font-family: 'RobotoLight';
+      @extend %heading14;
+      color: $primary-color;
+    }
+  }
+}

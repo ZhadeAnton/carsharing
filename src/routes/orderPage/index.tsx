@@ -8,6 +8,7 @@ import OverlayMenu from '../../components/overlayMenu'
 import Header from '../../components/header'
 import Breadcrumbs from '../../components/breadcrumb'
 import GoogleMap from '../../components/googleMap'
+import SearchLocationForm from '../../components/forms/locationForm'
 
 const location = {
   address: 'Ульяновск',
@@ -28,6 +29,8 @@ export default function OrderPage() {
         <Breadcrumbs activeIdx={0}/>
 
         <section className='order-page__content'>
+          <SearchLocationForm />
+
           <GoogleMap location={location} zoomLevel={14}/>
         </section>
       </section>
