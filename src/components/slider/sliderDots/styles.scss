@@ -1,9 +1,26 @@
 @import '../../../scss/mixins';
 @import '../../../scss/variables';
 
+%slider-dot {
+  padding: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
 .slider-dots {
   width: 100%;
   @include flex-center;
   @include abs-position(auto, auto, 32px, auto);
   z-index: $layer-2;
+
+  &__dot {
+    @extend %slider-dot;
+    background: $white-color;
+
+    &-active {
+      @extend %slider-dot;
+      background: $primary-accent-color;
+    }
+  }
 }

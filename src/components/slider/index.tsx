@@ -1,113 +1,53 @@
-import React, { useState, useRef, useEffect } from 'react'
+/* eslint-disable react/display-name */
+import React, { useState, useRef } from 'react'
+import { Carousel } from 'antd';
 
-import './styles.scss'
-import { ISlide } from '../../interfaces/sliderArticleInterfaces'
-import Arrow from './sliderArrow'
-import SliderDots from './sliderDots'
-import SliderContent from './sliderContent'
+import { ISlide } from '../../interfaces/sliderArticleInterfaces';
+import Slide from '../slider/slide';
+import Arrow from '../slider/sliderArrow';
+import SliderDots from '../slider/sliderDots';
 
 interface Props {
   slides: Array<ISlide>
 }
 
 export default function Slider(props: Props) {
-  const resizeRef = useRef<any>()
   const sliderRef = useRef<any>()
+  const [activeSlide, setActiveSlide] = useState<number>(0)
 
-  const [sliderWidth, setSliderWidth] = useState<number>()
-  const [state, setState] = useState({
-    activeIndex: 0,
-    translate: 0 as any,
-    transition: 0.45 as any
-  })
-
-  useEffect(() => {
-    resizeRef.current = handleResize
-
-    if (sliderRef.current) {
-      setSliderWidth(sliderRef.current.offsetWidth)
-    }
-  })
-
-  useEffect(() => {
-    const resize = () => {
-      resizeRef.current()
-    }
-
-    const onResize = window.addEventListener('resize', resize)
-
-    return () => {
-      window.removeEventListener('resize', onResize!)
-    }
-  }, [])
-
-  const { translate, transition, activeIndex } = state
-
-  const handleResize = () => {
-    setState({ ...state, translate: sliderWidth! * activeIndex, transition: 0 })
+  const handleClickByDot = (index: number) => {
+    setActiveSlide(index)
+    sliderRef.current.goTo(index)
   }
 
-  const nextSlide = () => {
-    if (activeIndex === props.slides.length - 1) {
-      return setState({
-        ...state,
-        translate: 0,
-        activeIndex: 0
-      })
-    }
-
-    setState({
-      ...state,
-      activeIndex: activeIndex + 1,
-      translate: (activeIndex + 1) * sliderWidth!
-    })
-  }
-
-  const prevSlide = () => {
-    if (activeIndex === 0) {
-      return setState({
-        ...state,
-        translate: (props.slides.length - 1) * sliderWidth!,
-        activeIndex: props.slides.length - 1
-      })
-    }
-
-    setState({
-      ...state,
-      activeIndex: activeIndex - 1,
-      translate: (activeIndex - 1) * sliderWidth!
-    })
-  }
-
-  const setSlide = (index: number) => {
-    setState({
-      ...state,
-      activeIndex: index,
-      translate: (index) * sliderWidth!
-    })
+  const settings = {
+    dots: true,
+    arrows: true,
+    infinite: true,
+    speed: 400,
+    accessibility: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    prevArrow: <Arrow direction="left" />,
+    nextArrow: <Arrow direction="right" />,
+    beforeChange: (_: any, next: number) => setActiveSlide(next),
+    appendDots: (dots: any) => (
+      <SliderDots
+        dots={dots}
+        active={activeSlide}
+        onSetActiveSlide={handleClickByDot}
+      />
+    )
   }
 
   return (
-    <div
-      className='slider'
-      style={{overflow: 'hidden'}}
-      ref={sliderRef}
-    >
-      <SliderContent
-        transition={transition}
-        translate={translate}
-        width={sliderWidth! * props.slides.length}
-        slides={props.slides}
-      />
+    <Carousel ref={sliderRef} {...settings}>
+      {
+        props.slides.map((slide, i: number) => (
+          <Slide key={i} { ...slide }/>
+        ))
+      }
 
-      <Arrow direction="left" handleClick={prevSlide} />
-      <Arrow direction="right" handleClick={nextSlide} />
-
-      <SliderDots
-        slides={props.slides}
-        activeIndex={activeIndex}
-        setSlide={setSlide}
-      />
-    </div>
+    </Carousel>
   )
 }

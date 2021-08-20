@@ -2,6 +2,8 @@
 @import '../../../scss/variables';
 
 .button-primary {
+  @extend %button-rules;
+
   width: 250px;
   height: 50px;
   border-radius: 8px;
@@ -13,10 +15,6 @@
   font-family: 'RobotoMedium';
   color: $white-color;
   background: linear-gradient(90deg, #0EC261 2.61%, #039F67 112.6%);
-
-  &:hover {
-    opacity: .9;
-  }
 
   @media (max-width: getBreackpoint('sm')) {
     width: 100%;

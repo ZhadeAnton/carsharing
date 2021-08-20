@@ -2,6 +2,8 @@
 @import '../../../scss/variables';
 
 .button-secondary {
+  @extend %button-rules;
+
   width: 165px;
   height: 50px;
   outline: none;
@@ -11,8 +13,4 @@
   @extend %heading18;
   font-family: 'RobotoMedium';
   color: $grey-color;
-
-  &:hover {
-    opacity: .9;
-  }
 }

@@ -4,8 +4,10 @@
 .main-article {
   &__title {
     @extend %heading70;
+    font-family: 'RobotoBold';
+    color: $primary-color;
 
-    &-green {
+    span {
       color: $primary-accent-color;
     }
   }
@@ -18,19 +20,42 @@
     color: $grey-strong-color;
   }
 
+  @media (max-width: getBreackpoint('lg')) {
+    &__title {
+      font-size: 60px;
+      line-height: 60px;
+    }
+
+    &__text {
+      font-size: 19px;
+    }
+  }
+
+  @media (max-width: 910px) {
+    &__title {
+      font-size: 50px;
+      line-height: 50px;
+    }
+
+    &__text {
+      font-size: 18px;
+      margin-bottom: $space-xl;
+    }
+  }
+
   @media (max-width: getBreackpoint('sm')) {
     &__title {
       padding: 0 $space-md;
-      font-size: $font-size-30;
-      line-height: $line-height-30;
+      font-size: 30px;
+      line-height: 30px;
     }
 
     &__text {
       margin-top: $space-md;
       margin-bottom: $space-xl;
       padding: 0 $space-md;
-      font-size: $font-size-18;
-      line-height: $line-height-21;
+      font-size: 18px;
+      line-height: 21px;
     }
   }
 }

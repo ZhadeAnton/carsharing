@@ -10,7 +10,7 @@
   &__town {
     margin-left: $space-small;
     transition: $transition-sm;
-    @extend %text-small;
+    @extend %heading13;
     color: $grey-strong-color;
 
     &:hover {

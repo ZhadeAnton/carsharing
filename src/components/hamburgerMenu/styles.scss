@@ -3,7 +3,7 @@
 
 %hamburger-menu-line {
   width: 31px;
-  height: 2px;
+  height: 3px;
   margin: 3px 0;
   border-radius: 8px;
   transition: $transition-md;
@@ -39,7 +39,7 @@
     }
 
     &:nth-child(3) {
-      transform: rotate(45deg) translate(-6px, -8px);
+      transform: rotate(45deg) translate(-8px, -9px);
     }
   }
 

@@ -7,9 +7,9 @@ import Header from '../../components/header'
 import Aside from '../../components/aside'
 import Footer from '../../components/footer'
 import MainArticle from '../../components/mainArticle'
-import Slider from '../../components/slider'
 import HamburgerMenu from '../../components/hamburgerMenu'
 import OverlayMenu from '../../components/overlayMenu'
+import Slider from '../../components/slider'
 
 export default function MainPage() {
   const [isOpen, setIsOpen] = useToggle(false)
@@ -24,14 +24,18 @@ export default function MainPage() {
         <Header />
 
         <section className='main-page__info'>
-          <MainArticle />
+          <div className='main-page__article'>
+            <MainArticle />
+          </div>
         </section>
 
-        <Footer />
+        <div className='main-page__footer'>
+          <Footer />
+        </div>
       </section>
 
       <section className='main-page__slider'>
-        <Slider slides={slides} />
+        <Slider slides={slides}/>
       </section>
 
       <div className='main-page__menu'>
