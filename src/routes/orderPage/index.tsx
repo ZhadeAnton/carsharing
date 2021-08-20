@@ -9,6 +9,8 @@ import Header from '../../components/header'
 import Breadcrumbs from '../../components/breadcrumb'
 import GoogleMap from '../../components/googleMap'
 import SearchLocationForm from '../../components/forms/locationForm'
+import OrderField from '../../components/forms/orderField'
+import PriceRange from '../../components/forms/priceRange'
 
 const location = {
   address: 'Ульяновск',
@@ -42,7 +44,10 @@ export default function OrderPage() {
           </section>
 
           <section className='order-page__content--right'>
-            right
+            <OrderField fieldName='Пункт выдачи' fieldInfo='Ульяновск, Наримова 42'/>
+            <OrderField fieldName='Модель' fieldInfo='Hyndai, i30 N'/>
+
+            <PriceRange minPrice={10000} maxPrice={32000} />
           </section>
         </section>
       </section>

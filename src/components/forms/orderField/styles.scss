@@ -1,0 +1,35 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+%order-font {
+  font-family: 'RobotoLight';
+  @extend %heading14;
+}
+
+.order-field {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  &__name {
+    max-width: 100px;
+    white-space: nowrap;
+    @extend %order-font;
+    color: $primary-color;
+  }
+
+  &__info {
+    width: 185px;
+    text-align: end;
+    overflow-wrap: break-word;
+    @extend %order-font;
+    color: $grey-strong-color;
+  }
+
+  &__dots {
+    width: 100%;
+    margin: auto $space-small 0 $space-small;
+    border-bottom: 1px dotted $grey-strong-color;
+  }
+}
