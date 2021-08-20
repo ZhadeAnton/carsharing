@@ -23,15 +23,27 @@ export default function OrderPage() {
     <main className='order-page'>
       <Aside />
 
-      <section className='order-page__main'>
+      <section className='order-page__main container'>
         <Header />
 
         <Breadcrumbs activeIdx={0}/>
 
         <section className='order-page__content'>
-          <SearchLocationForm />
+          <section className='order-page__content--left'>
+            <SearchLocationForm />
 
-          <GoogleMap location={location} zoomLevel={14}/>
+            <div className='order-page__content--map'>
+              <h6 className='order-page__content--title'>
+                Выбрать на карте:
+              </h6>
+
+              <GoogleMap location={location} zoomLevel={14}/>
+            </div>
+          </section>
+
+          <section className='order-page__content--right'>
+            right
+          </section>
         </section>
       </section>
 
