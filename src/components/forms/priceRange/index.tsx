@@ -1,20 +1,34 @@
 import React from 'react'
 
+import './styles.scss'
+
 interface Props {
-  minPrice: number,
-  maxPrice: number
+  lowPrice?: number,
+  highPrice?: number,
+  totalPrice?: number
 }
 
 export default function PriceRange(props: Props) {
   return (
-    <div>
-      <h5>
-        Цена:
+    <div className='price-range'>
+      <h5 className='price-range__title'>
+        <strong>
+          Цена:&nbsp;
+        </strong>
       </h5>
 
-      <h6>
-        от { props.minPrice } до { props.maxPrice }&#8381;
-      </h6>
+      {
+        props.lowPrice && props.highPrice
+        ?
+        <h6 className='price-range__price'>
+          от { props.lowPrice.toLocaleString('ru') }
+          до { props.highPrice.toLocaleString('ru') } &#8381;
+        </h6>
+        :
+        <h6 className='price-range__price'>
+          { props.totalPrice?.toLocaleString('ru') } &#8381;
+        </h6>
+      }
     </div>
   )
 }

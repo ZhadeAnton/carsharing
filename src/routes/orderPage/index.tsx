@@ -45,9 +45,8 @@ export default function OrderPage() {
 
           <section className='order-page__content--right'>
             <OrderField fieldName='Пункт выдачи' fieldInfo='Ульяновск, Наримова 42'/>
-            <OrderField fieldName='Модель' fieldInfo='Hyndai, i30 N'/>
 
-            <PriceRange minPrice={10000} maxPrice={32000} />
+            <PriceRange totalPrice={16000} />
           </section>
         </section>
       </section>
