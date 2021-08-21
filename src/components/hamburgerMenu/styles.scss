@@ -1,0 +1,56 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+%hamburger-menu-line {
+  width: 31px;
+  height: 3px;
+  margin: 3px 0;
+  border-radius: 8px;
+  transition: $transition-md;
+  z-index: $layer-max;
+  background-color: $white-color;
+}
+
+.hamburger-menu {
+  @include flex-center;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: $layer-max;
+
+  &:hover {
+    & > * {
+      background-color: $grey-strong-color;
+    }
+  }
+
+  &__line {
+    @extend %hamburger-menu-line;
+  }
+
+  &__line-change {
+    @extend %hamburger-menu-line;
+
+    &:nth-child(1) {
+      transform: rotate(-45deg) translate(-3px, 5px);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: rotate(45deg) translate(-8px, -9px);
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    %hamburger-menu-line {
+      width: 19px;
+      background-color: $primary-color;
+    }
+    
+    &__line-change {
+      background-color: $white-color !important;
+    }
+  }
+}

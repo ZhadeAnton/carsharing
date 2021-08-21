@@ -1,0 +1,31 @@
+@import '../../scss/variables';
+@import '../../scss/typography';
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: $space-md;
+    }
+
+    &--link {
+      transition: color $transition-sm;
+      @extend %heading32;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'RobotoRegular';
+      color: $white-color;
+
+      &:hover {
+        color: $primary-accent-color;
+      }
+
+      @media (max-width: getBreackpoint('sm')) {
+        font-size: 22px;
+        line-height: 25px;
+      }
+    }
+  }
+}

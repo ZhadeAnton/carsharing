@@ -1,0 +1,44 @@
+@use "sass:map";
+
+// Colors 
+$primary-accent-color: #0EC261;
+$primary-color: #121212;
+$white-color: #FFFFFF;
+$grey-color: #EEEEEE;
+$grey-strong-color: #999999;
+
+// Transitions
+$transition-sm: .2s ease-in-out;
+$transition-md: .4s ease-in-out;
+
+// Layers
+$layer-1: 1;
+$layer-2: 10;
+$layer-3: 100;
+$layer-4: 200;
+$layer-5: 300;
+$layer-max: 1000;
+
+// Spaces
+$baseline: 8px;
+$space-small: $baseline;
+$space-md: calc(#{$baseline} * 2); // 16px
+$space-lg: calc(#{$baseline} * 4); // 32px
+$space-xl: calc(#{$baseline} * 5); // 40px
+$space-xxl: calc(#{$baseline} * 8); // 64px
+
+// Measures
+$aside-width: 64px;
+
+// Breakpoints
+$grid-breakpoints: (
+  tiny: 320px,
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+);
+
+@function getBreackpoint($breakpoint) {
+  @return map-get($grid-breakpoints, $breakpoint)
+}

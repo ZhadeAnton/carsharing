@@ -1,0 +1,81 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.main-page {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: $aside-width 1fr 1fr;
+  overflow: hidden;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: $space-lg $space-xxl;
+  }
+
+  &__article {
+    margin-top: 160px;
+  }
+
+  &__slider {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__menu {
+    display: block;
+    @include fix-position(35px, auto, auto, 16px);
+    z-index: $layer-max;
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+
+  @media (max-width: 1060px) {
+    grid-template-columns: $aside-width 1fr 410px;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    &__content {
+      padding: $space-lg $space-lg;
+    }
+  }
+
+  @media (max-width: 910px) {
+    grid-template-columns: $aside-width 1fr 370px;
+
+    &__slider {
+      display: none;
+    }
+  }
+
+  @media (max-width: 910px) {
+    grid-template-columns: $aside-width 1fr;
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    grid-template-columns: 1fr;
+
+    &__aside {
+      display: none;
+    }
+
+    &__content {
+      padding: 0;
+    }
+
+    &__article {
+      margin-top: 30px;
+    }
+
+    &__menu {
+      @include fix-position(24px, auto, auto, 16px);
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
