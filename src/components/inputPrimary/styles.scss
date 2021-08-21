@@ -18,10 +18,19 @@
     &:hover {
       border-bottom: 1px solid $grey-strong-color;
     }
+
+    @media (max-width: getBreackpoint('sm')) {
+      width: 200px;
+      font-size: 13px;
+    }
+
+    @media (max-width: getBreackpoint('sm')) {
+      width: 180px;
+    }
   }
 
   &__close-btn {
-    @include abs-position(auto, 3.5%, auto, auto);
+    @include abs-position(auto, 3.5%, 3%, auto);
     cursor: pointer;
     z-index: $layer-2;
 

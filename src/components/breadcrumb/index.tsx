@@ -23,9 +23,15 @@ export default function Breadcrumbs(props: Props) {
             className={`${props.activeIdx === i ?
                 'breadcrumb__item-active' : 'breadcrumb__item'}`}
           >
-            <>
-              { i !== 0 && <BreadArrow/> } <span>{ bread }</span>
-            </>
+            <div className='breadcrumb__item__wrapper'>
+              <span className='breadcrumb__item__wrapper--title'>
+                { bread }
+              </span>
+
+              <span className='breadcrumb__item__wrapper--arrow'>
+                { i !== breads.length - 1 && <BreadArrow/> }
+              </span>
+            </div>
           </Breadcrumb.Item>
         ))
       }

@@ -8,13 +8,11 @@
 }
 
 .breadcrumb {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   user-select: none;
-
-  span {
-    &:not(:first-child) {
-      margin-left: 1rem;
-    }
-  }
+  padding: 4px 0;
 
   &__item {
     @extend %bread-title;
@@ -28,5 +26,24 @@
     &:hover {
       opacity: .9;
     }
+
+    &__wrapper {
+      text-align: left;
+      padding: 4px 0;
+
+      &--arrow {
+        margin: 16px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    %bread-title {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    padding: 4px 0;
   }
 }

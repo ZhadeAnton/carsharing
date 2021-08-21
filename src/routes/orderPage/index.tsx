@@ -9,8 +9,7 @@ import Header from '../../components/header'
 import Breadcrumbs from '../../components/breadcrumb'
 import GoogleMap from '../../components/googleMap'
 import SearchLocationForm from '../../components/forms/locationForm'
-import OrderField from '../../components/forms/orderField'
-import PriceRange from '../../components/forms/priceRange'
+import OrderInfo from '../../components/forms/orderInfo'
 
 const location = {
   address: 'Ульяновск',
@@ -23,18 +22,22 @@ export default function OrderPage() {
 
   return (
     <main className='order-page'>
-      <Aside />
+      <div className='order-page__aside'>
+        <Aside />
+      </div>
 
       <section className='order-page__main'>
-        <div className='order-page__header'>
+        <div className='order-page__header container'>
           <Header />
         </div>
 
         <div className='order-page__breadcrumbs'>
-          <Breadcrumbs activeIdx={0}/>
+          <div className='container'>
+            <Breadcrumbs activeIdx={0}/>
+          </div>
         </div>
 
-        <section className='order-page__content'>
+        <section className='order-page__content container'>
           <section className='order-page__content--left'>
             <SearchLocationForm />
 
@@ -48,15 +51,7 @@ export default function OrderPage() {
           </section>
 
           <section className='order-page__content--right'>
-            <OrderField
-              fieldName='Пункт выдачи'
-              fieldInfo='Ульяновск, Наримова 42'
-            />
-
-            <OrderField fieldName='Модель' fieldInfo='Huinday, I 30'/>
-            <OrderField fieldName='Полный бак' fieldInfo='Да'/>
-
-            <PriceRange totalPrice={16000} />
+            <OrderInfo />
           </section>
         </section>
       </section>

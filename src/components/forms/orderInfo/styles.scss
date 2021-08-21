@@ -1,0 +1,20 @@
+@import '../../../scss/variables';
+
+.order-info {
+  &__title {
+    text-align: end;
+    margin-bottom: $space-lg;
+    font-family: 'RobotoMedium';
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  &__price-range {
+    margin-top: $space-md;
+    margin-bottom: $space-lg;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}

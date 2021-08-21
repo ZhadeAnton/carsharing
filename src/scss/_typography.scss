@@ -37,7 +37,7 @@
 
 %heading14 {
   font-size: 14px;
-  line-height: 14px;
+  line-height: 16px;
 }
 
 %heading13 {
@@ -57,5 +57,20 @@
   &:disabled {
     background: none;
     background-color: $grey-color;
+  }
+}
+
+.container {
+  max-width: 1350px;
+  width: 100%;
+  padding: 0 $space-xxl;
+  margin: 0 auto;
+
+  @media (max-width: getBreackpoint('lg')) {
+    padding: 0 $space-lg;
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    padding: 0 $space-md;
   }
 }
