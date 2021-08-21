@@ -21,7 +21,9 @@ export default function MainPage() {
       </div>
 
       <section className='main-page__content'>
-        <Header />
+        <div className='main-page__header'>
+          <Header />
+        </div>
 
         <section className='main-page__info'>
           <MainArticle />

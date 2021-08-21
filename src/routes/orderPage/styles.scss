@@ -57,7 +57,7 @@
   }
 
   &__menu {
-    @include fix-position(24px, auto, auto, 16px);
+    @include fix-position(40px, auto, auto, 16px);
     z-index: $layer-max;
   }
 
@@ -115,6 +115,10 @@
       &--map {
         height: 280px;
       }
+    }
+
+    &__menu {
+      @include fix-position(24px, auto, auto, 16px);
     }
   }
 

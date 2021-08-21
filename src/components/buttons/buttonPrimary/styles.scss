@@ -2,6 +2,8 @@
 @import '../../../scss/variables';
 
 .button-primary {
+  @extend %button-rules;
+
   width: 100%;
   height: 50px;
   border-radius: 8px;

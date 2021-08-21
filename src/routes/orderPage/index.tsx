@@ -46,7 +46,7 @@ export default function OrderPage() {
                 Выбрать на карте:
               </h6>
 
-              <GoogleMap location={location} zoomLevel={14}/>
+              <GoogleMap location={location} zoomLevel={13}/>
             </div>
           </section>
 

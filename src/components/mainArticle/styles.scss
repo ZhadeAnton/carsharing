@@ -18,6 +18,10 @@
     color: $grey-strong-color;
   }
 
+  &__button {
+    width: 250px;
+  }
+
   @media (max-width: getBreackpoint('sm')) {
     &__title {
       padding: 0 $space-md;
@@ -31,6 +35,10 @@
       padding: 0 $space-md;
       font-size: 18px;
       line-height: 21px;
+    }
+
+    &__button {
+      width: 100%;
     }
   }
 }

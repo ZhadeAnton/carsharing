@@ -12,7 +12,7 @@ export default function InputPrimary(props: Props) {
   const [value, setValue] = useState('')
 
   return (
-    <form className='input-primary'>
+    <div className='input-primary'>
       <input
         className='input-primary__input'
         placeholder={props.placeholder}
@@ -26,6 +26,6 @@ export default function InputPrimary(props: Props) {
       >
         { value !== '' && <Close /> }
       </span>
-    </form>
+    </div>
   )
 }

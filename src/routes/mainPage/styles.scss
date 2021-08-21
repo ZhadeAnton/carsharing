@@ -45,6 +45,10 @@
   @media (max-width: getBreackpoint('sm')) {
     grid-template-columns: 1fr;
 
+    &__header {
+      padding: 0 $space-md;
+    }
+
     &__aside {
       display: none;
     }
