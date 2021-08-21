@@ -1,55 +1,61 @@
 @import './variables';
 
 %heading70 {
-  font-family: 'RobotoBold';
-  font-size: $font-size-70;
-  line-height: $line-height-65;
-}
-
-%heading24 {
-  font-size: $font-size-24;
-  line-height: $line-height-21;
-}
-
-%heading26 {
-  font-family: 'RobotoBold';
-  font-size: $font-size-26;
-  line-height: $line-height-30;
-}
-
-%heading32 {
-  font-size: $font-size-32;
-  line-height: $line-height-37;
-}
-
-%heading30 {
-  font-family: 'RobotoBold';
-  font-size: $font-size-30;
-  line-height: $line-height-35;
+  font-size: 70px;
+  line-height: 65px;
 }
 
 %heading40 {
-  font-size: $font-size-40;
-  line-height: $line-height-46;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+%heading32 {
+  font-size: 32px;
+  line-height: 37px;
+}
+
+%heading30 {
+  font-size: 30px;
+  line-height: 35px;
+}
+
+%heading26 {
+  font-size: 26px;
+  line-height: 30px;
+}
+
+%heading24 {
+  font-size: 24px;
+  line-height: 21px;
 }
 
 %heading18 {
-  font-size: $font-size-18;
-  line-height: $line-height-21;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 %heading14 {
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 14px;
 }
 
-%heading14 {
-  font-size: $font-size-14;
-  line-height: $line-height-16;
+%heading13 {
+  font-size: 13px;
+  line-height: 15px;
 }
 
-%text-small {
-  text-decoration: none;
-  font-size: $font-size-13;
-  line-height: $line-height-15;
+%button-rules {
+  &:hover, &:focus {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+
+  &:disabled {
+    background: none;
+    background-color: $grey-color;
+  }
 }

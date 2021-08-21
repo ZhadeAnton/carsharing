@@ -34,9 +34,3 @@ export const slides = [
     buttonColor: 'linear-gradient(90deg, #281349 0%, #720C7B 100%)'
   }
 ]
-
-export const separateNumer = (num: number) => {
-  const str = num.toString().split('.')
-  str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-  return str.join(' ');
-}

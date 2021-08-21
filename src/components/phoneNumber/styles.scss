@@ -2,7 +2,7 @@
 @import '../../scss/typography';
 
 .phone-number {
-  @extend %text-small;
+  @extend %heading13;
   transition: $transition-sm;
   color: inherit;
 

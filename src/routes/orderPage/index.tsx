@@ -25,10 +25,14 @@ export default function OrderPage() {
     <main className='order-page'>
       <Aside />
 
-      <section className='order-page__main container'>
-        <Header />
+      <section className='order-page__main'>
+        <div className='order-page__header'>
+          <Header />
+        </div>
 
-        <Breadcrumbs activeIdx={0}/>
+        <div className='order-page__breadcrumbs'>
+          <Breadcrumbs activeIdx={0}/>
+        </div>
 
         <section className='order-page__content'>
           <section className='order-page__content--left'>
@@ -44,7 +48,13 @@ export default function OrderPage() {
           </section>
 
           <section className='order-page__content--right'>
-            <OrderField fieldName='Пункт выдачи' fieldInfo='Ульяновск, Наримова 42'/>
+            <OrderField
+              fieldName='Пункт выдачи'
+              fieldInfo='Ульяновск, Наримова 42'
+            />
+
+            <OrderField fieldName='Модель' fieldInfo='Huinday, I 30'/>
+            <OrderField fieldName='Полный бак' fieldInfo='Да'/>
 
             <PriceRange totalPrice={16000} />
           </section>

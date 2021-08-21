@@ -8,7 +8,7 @@
   transform: translate(-50%, -42%);
 
   &__title {
-    margin-bottom: $space-small;
+    margin-bottom: $space-sm;
     @extend %heading40;
     font-family: 'RobotoMedium';
     color: $white-color;
@@ -33,12 +33,12 @@
     width: 280px;
 
     &__title {
-      font-size: $font-size-32;
-      line-height: $line-height-35;
+      font-size: 32px;
+      line-height: 35px;
     }
 
     &__text {
-      font-size: $font-size-22;
+      font-size: 22px;
     }
   }
 }

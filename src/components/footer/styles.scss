@@ -7,7 +7,7 @@
   justify-content: space-between;
 
   &__text {
-    @extend %text-small;
+    @extend %heading13;
     color: $grey-strong-color;
   }
 
@@ -27,7 +27,7 @@
     background-color: $primary-color;
 
     &__text {
-      margin-top: $space-small;
+      margin-top: $space-sm;
     }
 
     &__number {

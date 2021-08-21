@@ -8,9 +8,9 @@
   user-select: none;
 
   &__town {
-    margin-left: $space-small;
+    margin-left: $space-sm;
     transition: $transition-sm;
-    @extend %text-small;
+    @extend %heading13;
     color: $grey-strong-color;
 
     &:hover {
