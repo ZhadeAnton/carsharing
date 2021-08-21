@@ -1,0 +1,12 @@
+@import '../../scss/variables';
+@import '../../scss/typography';
+
+.phone-number {
+  @extend %heading13;
+  transition: $transition-sm;
+  color: inherit;
+
+  &:hover, &:active {
+    color: $primary-accent-color;
+  }
+}

@@ -1,0 +1,20 @@
+@import '../../scss/typography';
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.location-picker {
+  @include flex-aling-center;
+  cursor: pointer;
+  user-select: none;
+
+  &__town {
+    margin-left: $space-small;
+    transition: $transition-sm;
+    @extend %heading13;
+    color: $grey-strong-color;
+
+    &:hover {
+      color: $primary-accent-color;
+    }
+  }
+}

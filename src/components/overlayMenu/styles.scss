@@ -1,0 +1,78 @@
+@import '../../scss/typography';
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.overlay-menu {
+  @include fix-position(0, 0, 0, 0);
+  display: flex;
+  z-index: $layer-max - 1;
+
+  &__left-section {
+    flex: 1 + $aside-width;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $primary-color;
+
+    &--wrapper {
+      padding-left: 128px;
+
+      & > :first-child {
+        margin-bottom: $space-xl;
+      }
+    }
+  }
+
+  &__right-section {
+    flex: 1;
+    background: rgba(21, 27, 31, 0.81);
+  }
+
+  &__language-picker {
+    display: none;
+    @include fix-position(auto, auto, 28px, 16px);
+  }
+
+  @media (max-width: 1060px) {
+    &__left-section {
+      flex: calc(100% - 410px);
+    }
+  
+    &__right-section {
+      flex: 410px;
+    }
+  }
+
+  @media (max-width: 925px) {
+    &__left-section {
+      flex: 1;
+    }
+  
+    &__right-section {
+      flex: 0;
+    }
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    &__left-section {
+      &--wrapper {
+        padding-left: 100px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__left-section {
+      justify-content: flex-start;
+  
+      &--wrapper {
+        padding-top: 80px;
+        padding-left: 28px;
+      }
+    }
+
+    &__language-picker {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+%arrow-area-width {
+  width: 64px;
+}
+
+.slider-arrow {
+  @extend %arrow-area-width;
+  height: 100%;
+  @include flex-center;
+  @include abs-position(0, auto, auto, auto);
+  cursor: pointer;
+  z-index: $layer-3;
+
+  &__overlay {
+    @extend %arrow-area-width;
+    height: 100%;
+    position: absolute;
+
+    &:hover {
+      background-color: $primary-accent-color;
+      transition: background-color $transition-md;
+      opacity: 0.2;
+    }
+  }
+
+  &__left {
+    left: 0%;
+  }
+
+  &__right {
+    right: 0%;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    %arrow-area-width {
+      width: 32px;
+    }
+
+    &__left {
+      left: -3.6%;
+    }
+  
+    &__right {
+      right: -3.6%;
+    }
+  }
+}

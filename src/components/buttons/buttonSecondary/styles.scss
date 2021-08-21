@@ -1,0 +1,16 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+
+.button-secondary {
+  @extend %button-rules;
+
+  width: 165px;
+  height: 50px;
+  outline: none;
+  border: none;
+  transition: $transition-sm;
+  border-radius: 4px;
+  @extend %heading18;
+  font-family: 'RobotoMedium';
+  color: $grey-color;
+}

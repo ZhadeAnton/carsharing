@@ -1,0 +1,37 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+@import '../../scss/typography';
+
+.language-picker {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  color: $primary-accent-color;
+
+  &:hover {
+    color: $white-color;
+
+    &:after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    @include abs-position(50%, auto, auto, 50%);
+    transform: translate(-50%, -50%);
+    border: 1px solid $grey-color;
+    border-radius: 50%;
+    }
+  }
+
+  &:active {
+    color: $primary-accent-color;
+  }
+
+  &__title {
+    color: inherit;
+    text-transform: capitalize;
+    font-family: 'RobotoBold';
+    @extend %heading13;
+  }
+}

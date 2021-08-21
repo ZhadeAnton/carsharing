@@ -1,0 +1,26 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-aling-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin abs-position ($top, $right, $bottom, $left) {
+  position: absolute; 
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin fix-position ($top, $right, $bottom, $left) {
+  position: fixed; 
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
