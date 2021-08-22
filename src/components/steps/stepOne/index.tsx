@@ -13,8 +13,8 @@ const location = {
 
 export default function StepOne() {
   return (
-    <section className='step-one'>
-      <div className='step-one__left'>
+    <section className='step-one step'>
+      <div className='step-one__left step__left'>
         <SearchLocationForm />
 
         <h6 className='step-one__left--title'>
@@ -29,7 +29,7 @@ export default function StepOne() {
         </div>
       </div>
 
-      <div className='step-one__right'>
+      <div className='step-one__right step__right'>
         <OrderInfo />
       </div>
     </section>
