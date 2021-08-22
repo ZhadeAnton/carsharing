@@ -11,6 +11,7 @@
   }
 
   &__price {
+    display: flex;
     font-family: 'RobotoRegular';
     @extend %heading14;
     color: $primary-color;

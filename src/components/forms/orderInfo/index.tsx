@@ -5,10 +5,7 @@ import OrderField from '../orderField'
 import PriceRange from '../priceRange'
 import ButtonPrimary from '../../buttons/buttonPrimary'
 
-interface Props {
-}
-
-export default function OrderInfo(props: Props) {
+export default function OrderInfo() {
   return (
     <form className='order-info'>
       <h5 className='order-info__title'>
@@ -21,11 +18,11 @@ export default function OrderInfo(props: Props) {
           fieldInfo='Ульяновск, Наримова 42'
         />
 
-        <OrderField fieldName='Модель' fieldInfo='Huinday, I 30'/>
-        <OrderField fieldName='Полный бак' fieldInfo='Да'/>
-
         <div className='order-info__price-range'>
-          <PriceRange totalPrice={16000} />
+          <PriceRange
+            lowPrice={8000}
+            highPrice={12000}
+          />
         </div>
 
         <div className='order-info__button'>

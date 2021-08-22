@@ -8,6 +8,10 @@
   grid-template-columns: $aside-width 1fr;
   overflow-y: auto;
   overflow-x: hidden;
+  
+  &__header {
+    display: flex;
+  }
 
   &__main {
     display: grid;
@@ -28,7 +32,7 @@
     display: flex;
 
     &--left {
-      flex: 2.5;
+      flex: 3;
       padding-top: $space-lg;
       padding-right: $space-lg;
       border-right: 1px solid $grey-color;
@@ -56,9 +60,19 @@
     }
   }
 
-  &__menu {
-    @include fix-position(40px, auto, auto, 16px);
-    z-index: $layer-max;
+  @media (max-width: 1200px) {
+    &__content {
+      &--left {
+        flex: 2.7;
+      }
+  
+      &--right {
+        padding-top: $space-lg;
+        padding-left: $space-md;
+        padding-right: 0;
+        padding-bottom: 0;
+      }
+    }
   }
 
   @media (max-width: getBreackpoint('lg')) {
@@ -99,6 +113,10 @@
   @media (max-width: getBreackpoint('sm')) {
     grid-template-columns: 1fr;
 
+    &__header {
+      display: block;
+    }
+
     &__main {
       grid-template-rows: 100px auto 1fr;
     }
@@ -115,10 +133,6 @@
       &--map {
         height: 280px;
       }
-    }
-
-    &__menu {
-      @include fix-position(24px, auto, auto, 16px);
     }
   }
 

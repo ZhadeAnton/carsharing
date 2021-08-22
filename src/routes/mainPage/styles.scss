@@ -11,8 +11,11 @@
   &__content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: $space-lg $space-xxl;
+  }
+
+  &__article {
+    margin-top: 160px;
   }
 
   &__slider {
@@ -20,33 +23,37 @@
     overflow: hidden;
   }
 
-  &__menu {
-    display: block;
-    @include fix-position(40px, auto, auto, 16px);
-    z-index: $layer-max;
+  &__footer {
+    margin-top: auto;
   }
 
   @media (max-width: 1060px) {
     grid-template-columns: $aside-width 1fr 410px;
+  }
 
+  @media (max-width: getBreackpoint('lg')) {
     &__content {
-      padding: $space-lg;
+      padding: $space-lg $space-lg;
     }
   }
 
-  @media (max-width: 925px) {
-    grid-template-columns: $aside-width 1fr;
+  @media (max-width: 910px) {
+    grid-template-columns: $aside-width 1fr 370px;
 
     &__slider {
       display: none;
     }
   }
 
+  @media (max-width: 910px) {
+    grid-template-columns: $aside-width 1fr;
+  }
+
   @media (max-width: getBreackpoint('sm')) {
     grid-template-columns: 1fr;
 
     &__header {
-      padding: 0 $space-md;
+       padding-right: $space-md;
     }
 
     &__aside {
@@ -55,15 +62,10 @@
 
     &__content {
       padding: 0;
-      justify-content: flex-start;
-
-      & > * article {
-        margin-top: $space-lg;
-      }
     }
 
-    &__menu {
-      @include fix-position(24px, auto, auto, 16px);
+    &__article {
+      margin-top: 30px;
     }
   }
 }

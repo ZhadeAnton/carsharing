@@ -46,7 +46,10 @@ export default function OrderPage() {
                 Выбрать на карте:
               </h6>
 
-              <GoogleMap location={location} zoomLevel={13}/>
+              <GoogleMap
+                location={location}
+                zoomLevel={13}
+              />
             </div>
           </section>
 
@@ -56,12 +59,10 @@ export default function OrderPage() {
         </section>
       </section>
 
-      <div className='order-page__menu'>
-        <HamburgerMenu
-          isOpen={isOpen}
-          onClickByMenu={setIsOpen}
-        />
-      </div>
+      <HamburgerMenu
+        isOpen={isOpen}
+        onClickByMenu={setIsOpen}
+      />
 
       { isOpen && <OverlayMenu /> }
     </main>

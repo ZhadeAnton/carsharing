@@ -10,13 +10,13 @@ interface Props {
 export default function OrderField(props: Props) {
   return (
     <div className='order-field'>
-      <span className='order-field__name'>
+      <h6 className='order-field__name'>
         { props.fieldName }
-      </span>
+      </h6>
 
-      <span className='order-field__info'>
+      <h6 className='order-field__info'>
         { props.fieldInfo }
-      </span>
+      </h6>
     </div>
   )
 }

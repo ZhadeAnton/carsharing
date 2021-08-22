@@ -4,8 +4,8 @@
 
 .slider-article {
   width: 495px;
-  @include abs-position(42%, auto, auto, 50%);
-  transform: translate(-50%, -42%);
+  @include abs-position(40%, auto, auto, 50%);
+  transform: translate(-50%, -40%);
 
   &__title {
     margin-bottom: $space-sm;
@@ -18,19 +18,13 @@
     margin-bottom: 32px;
     font-family:'RobotoLight';
     @extend %heading24;
+    line-height: 22px;
     color: $grey-color;
   }
 
   @media (max-width: getBreackpoint('xl')) {
-    width: 400px;
-  }
-
-  @media (max-width: 1060px) {
-    width: 300px;
-  }
-
-  @media (max-width: getBreackpoint('lg')) {
-    width: 280px;
+    @include abs-position(50%, auto, auto, 50%);
+    transform: translate(-50%, -50%);
 
     &__title {
       font-size: 32px;
@@ -39,6 +33,26 @@
 
     &__text {
       font-size: 22px;
+      line-height: 24px;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    width: 400px;
+  }
+
+  @media (max-width: 1060px) {
+    width: 300px;
+  }
+
+  @media (max-width: 910px) {
+    &__title {
+      font-size: 30px;
+    }
+
+    &__text {
+      font-size: 20px;
+      line-height: 26px;
     }
   }
 }

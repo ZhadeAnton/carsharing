@@ -4,8 +4,10 @@
 .main-article {
   &__title {
     @extend %heading70;
+    font-family: 'RobotoBold';
+    color: $primary-color;
 
-    &-green {
+    span {
       color: $primary-accent-color;
     }
   }
@@ -20,6 +22,12 @@
 
   &__button {
     width: 250px;
+  }
+
+  @media (max-width: 910px) {
+    &__button {
+      width: 100%;
+    }
   }
 
   @media (max-width: getBreackpoint('sm')) {

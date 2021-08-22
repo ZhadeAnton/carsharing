@@ -14,7 +14,7 @@ export default function InputPrimary(props: Props) {
   return (
     <div className='input-primary'>
       <input
-        className='input-primary__input'
+        className='input-primary__field'
         placeholder={props.placeholder}
         value={value}
         onChange={(e) => setValue(e.currentTarget.value)}
