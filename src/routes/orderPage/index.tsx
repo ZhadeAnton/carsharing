@@ -24,17 +24,35 @@ export default function OrderPage() {
           <Header />
         </div>
 
-        <Tabs type="card" className='order-page__tabs'>
-          <TabPane className='container' tab="Местоположение" key="1">
+        <Tabs
+          type="card"
+          className='order-page__tabs'
+        >
+          <TabPane
+            tab="Местоположение"
+            key="1"
+          >
             <StepOne />
           </TabPane>
-          <TabPane tab="Модель" key="2">
+
+          <TabPane
+            tab="Модель"
+            key="2"
+          >
             <h1>V-03</h1>
           </TabPane>
-          <TabPane tab="Дополнительно" key="3">
+
+          <TabPane
+            tab="Дополнительно"
+            key="3"
+          >
             <h1>V-04</h1>
           </TabPane>
-          <TabPane tab="Итого" key="4">
+
+          <TabPane
+            tab="Итого"
+            key="4"
+          >
             <h1>V-05</h1>
           </TabPane>
         </Tabs>

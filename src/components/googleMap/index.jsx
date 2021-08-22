@@ -8,9 +8,8 @@ export default function GoogleMap({ location, zoomLevel }) {
     <div style={{ height: '100%', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyAHsXVmKxiEc2J3QSK6wjzhGsWpMJvtTzk' }}
-        defaultCenter={location}
+        center={location}
         defaultZoom={zoomLevel}
-        yesIWantToUseGoogleMapApiInternals
       >
         <MapMarker />
       </GoogleMapReact>
