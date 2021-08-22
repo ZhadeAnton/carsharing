@@ -6,16 +6,14 @@ import rightArrow from '../../../assets/SVG/rightArrow.svg'
 
 interface Props {
   direction: string,
-  handleClick: () => void
+  onClick?: () => void
 }
 
 const Arrow = (props: Props) => {
-  const preffix = props.direction === 'right' ? 'right' : 'left'
-
   return (
     <div
-      className={`slider-arrow slider-arrow__${preffix}`}
-      onClick={props.handleClick}
+      className={`slider-arrow slider-arrow__${props.direction}`}
+      onClick={props.onClick}
       data-testid='slider-arrow'
     >
       <div className='slider-arrow__overlay' />

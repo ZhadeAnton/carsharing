@@ -6,7 +6,7 @@
   transition: $transition-sm;
   color: inherit;
 
-  &:hover {
+  &:hover, &:active {
     color: $primary-accent-color;
   }
 }

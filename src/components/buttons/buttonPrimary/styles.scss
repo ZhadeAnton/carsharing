@@ -16,10 +16,6 @@
   color: $white-color;
   background: linear-gradient(90deg, #0EC261 2.61%, #039F67 112.6%);
 
-  &:hover {
-    opacity: .9;
-  }
-
   @media (max-width: getBreackpoint('sm')) {
     width: 100%;
     height: 50px;

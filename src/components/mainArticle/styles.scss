@@ -24,7 +24,28 @@
     width: 250px;
   }
 
+  @media (max-width: getBreackpoint('lg')) {
+    &__title {
+      font-size: 60px;
+      line-height: 60px;
+    }
+
+    &__text {
+      font-size: 19px;
+    }
+  }
+
   @media (max-width: 910px) {
+    &__title {
+      font-size: 50px;
+      line-height: 50px;
+    }
+
+    &__text {
+      font-size: 18px;
+      margin-bottom: $space-xl;
+    }
+
     &__button {
       width: 100%;
     }

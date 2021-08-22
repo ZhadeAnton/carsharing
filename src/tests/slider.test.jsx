@@ -53,7 +53,7 @@ describe('slider test', () => {
 describe('slider arrows', () => {
   it('slider arrow should correctly call handler', () => {
     const { queryByTestId } = render(
-        <Arrow handleClick={handleClick} />
+        <Arrow onClick={handleClick} />
     )
 
     const arrow = queryByTestId('slider-arrow')

@@ -20,9 +20,9 @@
     height: 70px;
     @include fix-position(auto, auto, 0, 0);
     display: flex;
-    flex-direction: column-reverse;
     justify-content: center;
     align-items: flex-end;
+    flex-direction: column-reverse;
     padding: 0 $space-md;
     background-color: $primary-color;
 

@@ -10,7 +10,7 @@ interface Props {
 export default function ButtonPrimary(props: Props) {
   return (
     <button
-      className='button-primary'
+      className='button-primary my-class'
       onClick={props.onClick}
     >
       { props.children }
