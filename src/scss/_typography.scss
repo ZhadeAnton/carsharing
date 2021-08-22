@@ -60,9 +60,10 @@
   }
 }
 
-.container {
+%container {
   max-width: 1350px;
   width: 100%;
+  height: 100%;
   padding: 0 $space-xxl;
   margin: 0 auto;
 
@@ -73,4 +74,8 @@
   @media (max-width: getBreackpoint('sm')) {
     padding: 0 $space-md;
   }
+}
+
+.container {
+  @extend %container;
 }
