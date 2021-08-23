@@ -1,0 +1,12 @@
+@import '../../../scss/variables';
+
+.radio-buttons-form {
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    &:not(:last-child) {
+      margin-right: $space-md;
+    }
+  }
+}
