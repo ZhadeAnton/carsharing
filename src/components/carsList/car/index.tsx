@@ -4,12 +4,17 @@ import './styles.scss'
 import { ICar } from '../../../interfaces/carsInterfaces'
 
 interface Props {
-  car: ICar
+  car: ICar,
+  selected?: boolean,
+  onSelectCart: (car: ICar) => void
 }
 
 export default function Car(props: Props) {
   return (
-    <div className='car-item'>
+    <div
+      className={`car-item${props.selected ? '-selected' : ''}`}
+      onClick={() => props.onSelectCart(props.car)}
+    >
       <div className='car-item__header'>
         <h6 className='car-item__header--title'>
           {props.car.carName}
@@ -21,8 +26,12 @@ export default function Car(props: Props) {
         </div>
       </div>
 
-      <div>
-        <img src={props.car.carImage} alt={props.car.carName} />
+      <div className='car-item__image-wrapper'>
+        <img
+          className='car-item__image-wrapper--image'
+          src={props.car.carImage}
+          alt={props.car.carName}
+        />
       </div>
     </div>
   )

@@ -1,4 +1,22 @@
+@import '../../scss/variables';
+
 .cars-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 370px 370px;
+
+  @media (max-width: 1250px) {
+    grid-template-columns: 340px 340px;
+  }
+
+  @media (max-width: 1160px) {
+    grid-template-columns: 285px 285px;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    grid-template-columns: 33% 33% 33%;
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    grid-template-columns: 50% 50%;
+  }
 }

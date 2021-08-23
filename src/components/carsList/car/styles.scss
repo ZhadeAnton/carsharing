@@ -1,14 +1,24 @@
 @import '../../../scss/variables';
 
-.car-item {
-  width: 370px;
+%cart-item-properties {
+  width: auto;
+  max-width: 370px;
   padding: $space-md;
   cursor: pointer;
+}
+
+.car-item {
+  @extend %cart-item-properties;
   border: 1px solid $grey-color;
 
   &:hover {
     transition: $transition-sm;
     border: 1px solid $grey-strong-color;
+  }
+
+  &-selected {
+    @extend %cart-item-properties;
+    border: 1px solid $primary-accent-color;
   }
 
   &__header {
@@ -20,6 +30,40 @@
 
     &--price {
 
+    }
+  }
+
+  &__image-wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    &--image {
+      width: 100%;
+      max-width: 256px;
+      min-width: 120px;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 1160px) {
+    padding: $space-sm;
+
+    &-selected {
+      padding: $space-sm;
+    }
+
+    &__image-wrapper {
+      &--image {
+        width: 80%;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    padding: $space-sm - 2px;
+
+    &-selected {
+      padding: $space-sm - 2px;
     }
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import './styles.scss'
-import { cars } from '../../../utils/carsListMock';
+import { carsMock } from '../../../utils/carsListMock';
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
@@ -26,7 +26,7 @@ export default function StepTwo() {
         </div>
 
         <div className='step-two__left--cars'>
-          <CarsList cars={cars}/>
+          <CarsList cars={carsMock}/>
         </div>
       </section>
 
