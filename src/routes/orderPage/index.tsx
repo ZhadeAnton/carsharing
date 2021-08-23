@@ -39,21 +39,21 @@ export default function OrderPage() {
             tab="Модель"
             key="2"
           >
-            <h1>V-03</h1>
+            <span>V-03</span>
           </TabPane>
 
           <TabPane
             tab="Дополнительно"
             key="3"
           >
-            <h1>V-04</h1>
+            <span>V-04</span>
           </TabPane>
 
           <TabPane
             tab="Итого"
             key="4"
           >
-            <h1>V-05</h1>
+            <span>V-05</span>
           </TabPane>
         </Tabs>
       </section>
