@@ -3,13 +3,7 @@ import React from 'react'
 import './styles.scss'
 import SearchLocationForm from '../../forms/locationForm'
 import OrderInfo from '../../forms/orderInfo'
-import GoogleMap from '../../googleMap'
-
-const location = {
-  address: 'Ульяновск',
-  lat: 54.3187,
-  lng: 48.3978,
-}
+import CustomMap from '../../map'
 
 export default function StepOne() {
   return (
@@ -22,10 +16,7 @@ export default function StepOne() {
         </h6>
 
         <div className='step-one__left--map'>
-          <GoogleMap
-            location={location}
-            zoomLevel={13}
-          />
+          <CustomMap />
         </div>
       </div>
 
