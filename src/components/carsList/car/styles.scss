@@ -1,0 +1,25 @@
+@import '../../../scss/variables';
+
+.car-item {
+  width: 370px;
+  padding: $space-md;
+  cursor: pointer;
+  border: 1px solid $grey-color;
+
+  &:hover {
+    transition: $transition-sm;
+    border: 1px solid $grey-strong-color;
+  }
+
+  &__header {
+    display: flex;
+
+    &--title {
+
+    }
+
+    &--price {
+
+    }
+  }
+}

@@ -4,6 +4,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  &-vertical {
+    flex-direction: column;
+  }
+
   & > * {
     &:not(:last-child) {
       margin-right: $space-md;
