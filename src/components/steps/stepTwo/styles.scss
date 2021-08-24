@@ -2,16 +2,30 @@
 
 .step-two {
   &__left {
-    height: 100vh;
+    height: 100%;
+
     &--form {
       margin-bottom: 50px;
     }
+  }
 
-    &--cars {
-
+  @media (max-width: getBreackpoint('md')) {
+    &__left {
+      height: 100%;
+  
+      &--form {
+        margin-bottom: 40px;
+      }
     }
   }
 
-  &__right {
+  @media (max-width: getBreackpoint('sm')) {
+    &__left {
+      height: 100%;
+  
+      &--form {
+        margin-bottom: 30px;
+      }
+    }
   }
 }

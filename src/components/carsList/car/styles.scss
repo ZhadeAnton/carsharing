@@ -1,4 +1,5 @@
 @import '../../../scss/variables';
+@import '../../../scss/typography';
 
 %cart-item-properties {
   width: auto;
@@ -23,13 +24,13 @@
 
   &__header {
     display: flex;
+    flex-direction: column;
 
     &--title {
-
-    }
-
-    &--price {
-
+      margin-bottom: 2px;
+      @extend %heading18;
+      font-family: 'RobotoRegular';
+      color: $primary-color;
     }
   }
 
@@ -40,7 +41,7 @@
     &--image {
       width: 100%;
       max-width: 256px;
-      min-width: 120px;
+      min-width: 100px;
       height: auto;
     }
   }
@@ -59,11 +60,29 @@
     }
   }
 
+  @media (max-width: getBreackpoint('lg')) {
+    &__header {
+      &--title {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__header {
+      &--title {
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+  }
+
   @media (max-width: getBreackpoint('vsm')) {
-    padding: $space-sm - 2px;
+    padding: $space-sm - 4px;
 
     &-selected {
-      padding: $space-sm - 2px;
+      padding: $space-sm - 4px;
     }
   }
 }

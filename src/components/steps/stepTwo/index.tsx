@@ -25,9 +25,7 @@ export default function StepTwo() {
           />
         </div>
 
-        <div className='step-two__left--cars'>
-          <CarsList cars={carsMock}/>
-        </div>
+        <CarsList cars={carsMock}/>
       </section>
 
       <div className='step-two__right step__right'>

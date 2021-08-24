@@ -12,8 +12,8 @@ export const carsMock = [
   },
   {
     carName: 'i30',
-    lowPrice: 12000,
-    highPrice: 25000,
+    lowPrice: 10000,
+    highPrice: 32000,
     carImage: i30
   },
   {

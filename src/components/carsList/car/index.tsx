@@ -2,6 +2,7 @@ import React from 'react'
 
 import './styles.scss'
 import { ICar } from '../../../interfaces/carsInterfaces'
+import CarPrice from './carPrice'
 
 interface Props {
   car: ICar,
@@ -20,10 +21,10 @@ export default function Car(props: Props) {
           {props.car.carName}
         </h6>
 
-        <div className='car-item__header--price'>
-          <h6>{props.car.lowPrice}</h6>
-          <h6>{props.car.highPrice}</h6>
-        </div>
+        <CarPrice
+          lowPrice={props.car.lowPrice}
+          highPrice={props.car.highPrice}
+        />
       </div>
 
       <div className='car-item__image-wrapper'>
