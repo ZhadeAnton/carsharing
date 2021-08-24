@@ -20,6 +20,10 @@
     color: $grey-strong-color;
   }
 
+  &__button {
+    width: 250px;
+  }
+
   @media (max-width: getBreackpoint('lg')) {
     &__title {
       font-size: 60px;
@@ -41,6 +45,10 @@
       font-size: 18px;
       margin-bottom: $space-xl;
     }
+
+    &__button {
+      width: 100%;
+    }
   }
 
   @media (max-width: getBreackpoint('sm')) {
@@ -56,6 +64,10 @@
       padding: 0 $space-md;
       font-size: 18px;
       line-height: 21px;
+    }
+
+    &__button {
+      width: 100%;
     }
   }
 }

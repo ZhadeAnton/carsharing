@@ -8,7 +8,7 @@
   transform: translate(-50%, -40%);
 
   &__title {
-    margin-bottom: $space-small;
+    margin-bottom: $space-sm;
     @extend %heading40;
     font-family: 'RobotoMedium';
     color: $white-color;
@@ -22,16 +22,7 @@
     color: $grey-color;
   }
 
-  @media (max-width: 1300px) {
-    width: 400px;
-  }
-
-  @media (max-width: 1060px) {
-    width: 300px;
-  }
-
-  @media (max-width: getBreackpoint('lg')) {
-    width: 280px;
+  @media (max-width: getBreackpoint('xl')) {
     @include abs-position(50%, auto, auto, 50%);
     transform: translate(-50%, -50%);
 
@@ -44,6 +35,14 @@
       font-size: 22px;
       line-height: 24px;
     }
+  }
+
+  @media (max-width: 1300px) {
+    width: 400px;
+  }
+
+  @media (max-width: 1060px) {
+    width: 300px;
   }
 
   @media (max-width: 910px) {

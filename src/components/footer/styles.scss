@@ -3,8 +3,7 @@
 @import '../../scss/mixins';
 
 .footer {
-  height: 14px;
-  @include flex-aling-center;
+  @include flex-align-center;
   justify-content: space-between;
 
   &__text {
@@ -28,7 +27,7 @@
     background-color: $primary-color;
 
     &__text {
-      margin-top: $space-small;
+      margin-top: $space-sm;
     }
 
     &__number {

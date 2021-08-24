@@ -1,0 +1,19 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+.price-range {
+  @include flex-align-center;
+
+  &__title {
+    @extend %heading14;
+    color: $primary-color;
+  }
+
+  &__price {
+    display: flex;
+    font-family: 'RobotoRegular';
+    @extend %heading14;
+    color: $primary-color;
+  }
+}

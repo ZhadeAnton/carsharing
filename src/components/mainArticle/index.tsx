@@ -1,9 +1,12 @@
 import React from 'react'
-import ButtonPrimary from '../buttons/buttonPrimary'
 
 import './styles.scss'
+import useHistory from '../../hooks/useHistory'
+import ButtonPrimary from '../buttons/buttonPrimary'
 
 export default function MainArticle() {
+  const history = useHistory()
+
   return (
     <article className='main-article'>
       <h1 className='main-article__title'>
@@ -15,9 +18,11 @@ export default function MainArticle() {
         Поминутная аренда авто твоего города
       </p>
 
-      <ButtonPrimary>
+      <div className='main-article__button'>
+        <ButtonPrimary onClick={() => history('/order')}>
           Забронировать
-      </ButtonPrimary>
+        </ButtonPrimary>
+      </div>
     </article>
   )
 }

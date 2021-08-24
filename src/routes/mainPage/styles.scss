@@ -23,12 +23,6 @@
     overflow: hidden;
   }
 
-  &__menu {
-    display: block;
-    @include fix-position(35px, auto, auto, 16px);
-    z-index: $layer-max;
-  }
-
   &__footer {
     margin-top: auto;
   }
@@ -58,6 +52,10 @@
   @media (max-width: getBreackpoint('sm')) {
     grid-template-columns: 1fr;
 
+    &__header {
+       padding-right: $space-md;
+    }
+
     &__aside {
       display: none;
     }
@@ -68,10 +66,6 @@
 
     &__article {
       margin-top: 30px;
-    }
-
-    &__menu {
-      @include fix-position(24px, auto, auto, 16px);
     }
   }
 }
