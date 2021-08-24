@@ -14,7 +14,7 @@ export default function CarPrice(props: Props) {
         { props.lowPrice }
       </output>
 
-      <span>
+      <span className='car-price__separator'>
         -
       </span>
 

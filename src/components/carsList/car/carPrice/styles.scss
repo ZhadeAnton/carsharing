@@ -6,6 +6,10 @@
   font-family: 'RobotoRegular';
   color: $grey-strong-color;
 
+  &__separator {
+    margin: 0 4px;
+  }
+
   @media (max-width: getBreackpoint('lg')) {
     font-size: 14px;
   }

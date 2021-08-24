@@ -11,7 +11,7 @@ export const carsMock = [
     carImage: elentra
   },
   {
-    carName: 'i30',
+    carName: 'i30 N',
     lowPrice: 10000,
     highPrice: 32000,
     carImage: i30
@@ -35,7 +35,7 @@ export const carsMock = [
     carImage: elentra
   },
   {
-    carName: 'i30',
+    carName: 'i30 N',
     lowPrice: 12000,
     highPrice: 25000,
     carImage: i30
