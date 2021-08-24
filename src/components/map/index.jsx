@@ -1,56 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import {
   GoogleMap,
   useLoadScript,
   Marker,
 } from '@react-google-maps/api';
 
-import mapStyles from './mapStyles'
-
-const libraries = ['places']
-const mapContainerStyle = {
-  height: '100%'
-}
-const center = {
-  lat: 54.3187,
-  lng: 48.3978
-}
-const options = {
-  styles: mapStyles,
-  disableDefaultUI: true,
-  zoomControl: false,
-};
+import * as settings from './mapSettings.ts'
 
 export default function CustomMap() {
+  const mapRef = useRef();
   const [markers, setMarkers] = useState([{lat: 54.3187, lng: 48.3978}])
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAHsXVmKxiEc2J3QSK6wjzhGsWpMJvtTzk',
-    libraries,
+    googleMapsApiKey: settings.mapAPIKey,
+    libraries: settings.libraries,
   });
 
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback((map) => {
+  const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+
+  const handleMapClick = (event) => {
+    setMarkers((current) => [
+      ...current,
+      {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      }])
+  }
 
   return (
     isLoaded ? (
       <GoogleMap
         id="map"
-        mapContainerStyle={mapContainerStyle}
+        mapContainerStyle={settings.mapContainerStyle}
         zoom={12}
-        center={center}
-        options={options}
+        center={settings.center}
+        options={{...settings.options}}
         onLoad={onMapLoad}
-        onClick={(event) => {
-          setMarkers((current) => [
-            ...current,
-            {
-              lat: event.latLng.lat(),
-              lng: event.latLng.lng(),
-            }])
-        }}
+        onClick={(event) => handleMapClick(event)}
       >
         {markers.map((marker) => (
           <Marker

@@ -6,14 +6,16 @@
   @include flex-align-center;
 
   &__title {
-    @extend %heading14;
+    @extend %heading16;
+    font-family: 'RobotoMedium';
+    font-weight: 500;
     color: $primary-color;
   }
 
   &__price {
     display: flex;
     font-family: 'RobotoRegular';
-    @extend %heading14;
+    @extend %heading16;
     color: $primary-color;
   }
 }
