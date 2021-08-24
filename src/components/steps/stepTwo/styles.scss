@@ -1,0 +1,43 @@
+@import '../../../scss/variables';
+
+.step-two {
+  &__left {
+    height: 100%;
+
+    &--form {
+      margin-bottom: 50px;
+    }
+
+    &--list {
+      padding-bottom: 20px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    &__left {
+      &--list {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    &__left {
+      height: 100%;
+  
+      &--form {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__left {
+      height: 100%;
+  
+      &--form {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
