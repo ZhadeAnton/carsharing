@@ -1,55 +1,48 @@
 @import '../../../scss/variables';
-@import '../../../scss/mixins';
 @import '../../../scss/typography';
+@import '../../../scss/mixins';
 
-%checkbox-properties {
-  width: 12px;
-  height: 12px;
-  border-radius: 100%;
-  @include abs-position(50%, auto, auto, 0);
-  transform: translateY(-50%);
+.checkbox-custom {
+  display: none;
 }
 
-.radio-button-primary {
-  [type="radio"]{
-    opacity: 0;
-    display: none;
-  }
-  
-  [type="radio"] + label {
-    display: inline-block;
-    position: relative;
-    padding-left: 17px;
-    cursor: pointer;
-    user-select: none;
-    font-family: 'RobotoLight';
-    font-weight: 300;
-    @extend %heading14;
-    color: $grey-strong-color;
-  }
+.checkbox-custom-label {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  @extend %heading14;
+  font-family: 'RobotoLight';
+  color: $grey-strong-color;
+}
 
-  [type="radio"]:checked + label {
-    cursor: pointer;
-    transition: all .2s linear;
-    color: $primary-color;
-  }
-  
-  [type="radio"] + label::before {
-    content:"";
-    @extend %checkbox-properties;
-    background: transparent;
-    border: 1px solid $grey-strong-color;
-  }
-  
-  [type="radio"]:checked + label::after {
-    content:"";
-    @extend %checkbox-properties;
-    border: 3px solid $primary-accent-color;
-  }
+.checkbox-custom + .checkbox-custom-label:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  height: 12px;
+  padding: 2px;
+  margin-right: $space-sm;
+  background: transparent;
+  border: 1px solid $grey-strong-color;
+}
 
-  @media (max-width: getBreackpoint('sm')) {
-    [type="radio"] + label {
-      font-size: 13px;
-    }
-  }
+.checkbox-custom:checked + .checkbox-custom-label:before {
+  border: 1px solid $primary-accent-color;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label {
+  color: $primary-color;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:after {
+  content: "";
+  width: 11px;
+  height: 7px;
+  @include abs-position(3px, auto, auto, 3px);
+  border: solid $primary-color;
+  border-width: 2px 2px 0 0;
+  transform: rotate(130deg);
 }

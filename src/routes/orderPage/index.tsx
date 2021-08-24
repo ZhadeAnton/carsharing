@@ -10,6 +10,7 @@ import OverlayMenu from '../../components/overlayMenu'
 import Header from '../../components/header'
 import StepOne from '../../components/steps/stepOne';
 import StepTwo from '../../components/steps/stepTwo';
+import StepThree from '../../components/steps/stepThree';
 
 export default function OrderPage() {
   const [isOpen, setIsOpen] = useToggle(false)
@@ -47,7 +48,7 @@ export default function OrderPage() {
             tab="Дополнительно"
             key="3"
           >
-            <span>V-04</span>
+            <StepThree />
           </TabPane>
 
           <TabPane

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './styles.scss'
-import RadioButton from '../../inputs/checkboxPrimary'
+import RadioButton from '../../inputs/radioButtonPrimary'
 
 interface Props {
   buttons: Array<string>,

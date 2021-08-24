@@ -1,27 +1,25 @@
-import React from 'react';
+import React from 'react'
 
 import './styles.scss'
 
 interface Props {
   value: string,
-  checked: boolean,
-  handleChange: (value: string) => void
+  checked: boolean
 }
 
-export default function RadioButton(props: Props) {
+export default function CheckboxPrimary(props: Props) {
   return (
-    <div className='radio-button-primary'>
+    <div>
       <input
-        type="radio"
-        value={props.value}
-        name='check-box-primary'
+        className="checkbox-custom"
+        name="checkbox-custom"
+        type="checkbox"
         checked={props.checked}
-        onChange={() => props.handleChange(props.value)}
       />
 
       <label
-        htmlFor='check-box-primary'
-        onClick={() => props.handleChange(props.value)}
+        htmlFor="checkbox-custom"
+        className="checkbox-custom-label"
       >
         { props.value }
       </label>
