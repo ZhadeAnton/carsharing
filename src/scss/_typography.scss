@@ -35,6 +35,11 @@
   line-height: 22px;
 }
 
+%heading16 {
+  font-size: 16px;
+  line-height: 16px;
+}
+
 %heading14 {
   font-size: 14px;
   line-height: 16px;
@@ -87,7 +92,7 @@
 
   &__left {
     flex: 3;
-    height: 100%;
+    height: auto;
     padding-top: $space-lg;
     padding-right: $space-lg;
     border-right: 1px solid $grey-color;

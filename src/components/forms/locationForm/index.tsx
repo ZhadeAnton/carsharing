@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './styles.scss'
-import InputPrimary from '../../inputPrimary'
+import InputPrimary from '../../inputs/inputPrimary'
 
 export default function SearchLocationForm() {
   return (

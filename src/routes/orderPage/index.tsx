@@ -9,6 +9,7 @@ import HamburgerMenu from '../../components/hamburgerMenu'
 import OverlayMenu from '../../components/overlayMenu'
 import Header from '../../components/header'
 import StepOne from '../../components/steps/stepOne';
+import StepTwo from '../../components/steps/stepTwo';
 
 export default function OrderPage() {
   const [isOpen, setIsOpen] = useToggle(false)
@@ -39,7 +40,7 @@ export default function OrderPage() {
             tab="Модель"
             key="2"
           >
-            <span>V-03</span>
+            <StepTwo />
           </TabPane>
 
           <TabPane

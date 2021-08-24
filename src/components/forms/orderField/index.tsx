@@ -4,7 +4,7 @@ import './styles.scss'
 
 interface Props {
   fieldName: string,
-  fieldInfo: string
+  fieldInfo: string | undefined
 }
 
 export default function OrderField(props: Props) {

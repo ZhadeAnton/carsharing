@@ -5,7 +5,13 @@ import OrderField from '../orderField'
 import PriceRange from '../priceRange'
 import ButtonPrimary from '../../buttons/buttonPrimary'
 
-export default function OrderInfo() {
+interface Props {
+  orderFields: Array<{title: string, value: string | undefined}>,
+  lowPrice: number | undefined,
+  highPrice: number | undefined
+}
+
+export default function OrderInfo(props: Props) {
   return (
     <form className='order-info'>
       <h5 className='order-info__title'>
@@ -13,17 +19,25 @@ export default function OrderInfo() {
       </h5>
 
       <div>
-        <OrderField
-          fieldName='Пункт выдачи'
-          fieldInfo='Ульяновск, Наримова 42'
-        />
+        {
+          props.orderFields.map((field, i) => (
+            <OrderField
+              key={i}
+              fieldName={field.title}
+              fieldInfo={field.value}
+            />
+          ))
+        }
 
-        <div className='order-info__price-range'>
-          <PriceRange
-            lowPrice={8000}
-            highPrice={12000}
-          />
-        </div>
+        {
+          props.lowPrice && props.highPrice &&
+          <div className='order-info__price-range'>
+            <PriceRange
+              lowPrice={props.lowPrice}
+              highPrice={props.highPrice}
+            />
+          </div>
+        }
 
         <div className='order-info__button'>
           <ButtonPrimary>

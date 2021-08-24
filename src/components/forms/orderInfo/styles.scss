@@ -5,16 +5,17 @@
     text-align: end;
     margin-bottom: $space-lg;
     font-family: 'RobotoMedium';
+    font-weight: 500;
     font-size: 18px;
     line-height: 21px;
   }
 
   &__price-range {
     margin-top: 24px;
-    margin-bottom: $space-lg;
   }
 
   &__button {
     width: 100%;
+    margin-top: $space-lg;
   }
 }
