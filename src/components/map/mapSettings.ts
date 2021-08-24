@@ -1,4 +1,3 @@
-
 import mapStyles from './mapStyles'
 
 export const libraries = ['places']

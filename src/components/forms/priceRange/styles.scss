@@ -17,6 +17,7 @@
     @extend %heading16;
     font-family: 'RobotoRegular';
     font-weight: 400;
+    @extend %heading16;
     color: $primary-color;
   }
 }
