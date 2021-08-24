@@ -12,9 +12,7 @@ export default function PriceRange(props: Props) {
   return (
     <div className='price-range'>
       <h5 className='price-range__title'>
-        <strong>
-          Цена:&nbsp;
-        </strong>
+        Цена:&nbsp;
       </h5>
 
       {
