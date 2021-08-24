@@ -21,7 +21,9 @@ export default function MainPage() {
       </div>
 
       <section className='main-page__content'>
-        <Header />
+        <div className='main-page__header'>
+          <Header />
+        </div>
 
         <section className='main-page__info'>
           <div className='main-page__article'>
@@ -38,12 +40,10 @@ export default function MainPage() {
         <Slider slides={slides}/>
       </section>
 
-      <div className='main-page__menu'>
-        <HamburgerMenu
-          isOpen={isOpen}
-          onClickByMenu={setIsOpen}
-        />
-      </div>
+      <HamburgerMenu
+        isOpen={isOpen}
+        onClickByMenu={setIsOpen}
+      />
 
       { isOpen && <OverlayMenu /> }
     </main>

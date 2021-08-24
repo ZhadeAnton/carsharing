@@ -1,24 +1,29 @@
 @import '../../scss/typography';
 @import '../../scss/variables';
+@import '../../scss/mixins';
 
 .header {
-  display: flex;
+  width: 100%;
+  @include flex-align-center;
   justify-content: space-between;
 
   &__title {
+    cursor: pointer;
+    font-family: 'RobotoBold';
     @extend %heading30;
     font-family: 'RobotoBold';
     color: $primary-accent-color;
   }
 
   @media (max-width: getBreackpoint('sm')) {
+    height: auto;
     flex-direction: column;
     align-items: flex-end;
-    padding: $space-md;
+    padding: $space-md 0;
     padding-bottom: 0;
 
     &__title {
-      margin-bottom: $space-small;
+      margin-bottom: $space-sm;
     }
   }
 }

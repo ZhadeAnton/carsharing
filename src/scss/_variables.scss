@@ -21,7 +21,7 @@ $layer-max: 1000;
 
 // Spaces
 $baseline: 8px;
-$space-small: $baseline;
+$space-sm: $baseline;
 $space-md: calc(#{$baseline} * 2); // 16px
 $space-lg: calc(#{$baseline} * 4); // 32px
 $space-xl: calc(#{$baseline} * 5); // 40px
@@ -33,6 +33,7 @@ $aside-width: 64px;
 // Breakpoints
 $grid-breakpoints: (
   tiny: 320px,
+  vsm: 460px,
   sm: 576px,
   md: 768px,
   lg: 1024px,

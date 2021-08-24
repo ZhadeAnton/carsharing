@@ -3,12 +3,12 @@
 @import '../../scss/mixins';
 
 .location-picker {
-  @include flex-aling-center;
+  @include flex-align-center;
   cursor: pointer;
   user-select: none;
 
   &__town {
-    margin-left: $space-small;
+    margin-left: $space-sm;
     transition: $transition-sm;
     @extend %heading13;
     color: $grey-strong-color;

@@ -1,0 +1,51 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+%order-font {
+  font-family: 'RobotoLight';
+  @extend %heading14;
+}
+
+.order-field {
+  width: 100%;
+  position: relative;
+  margin: .5rem 0;
+  background-color: $white-color;
+
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    order: 2;
+    overflow: hidden;
+    flex-grow: 1;
+    background-image: radial-gradient(circle, currentcolor .2px, transparent 40%);
+    background-position: bottom;
+    background-size: .275rem 3px;
+    background-repeat: space no-repeat;
+    @include abs-position(auto, auto, 5px, auto);
+    color: $grey-strong-color;
+  }
+
+  &__name {
+    display: inline;
+    position: relative;
+    padding-right: $space-sm;
+    z-index: $layer-2;
+    @extend %order-font;
+    color: $primary-color;
+    background-color: inherit;
+  }
+
+  &__info {
+    max-width: 95px;
+    @include abs-position(auto, 0, 3px, auto);
+    padding-left: $space-sm;
+    z-index: $layer-2;
+    text-align: right;
+    @extend %order-font;
+    color: $grey-strong-color;
+    background-color: inherit;
+  }
+}

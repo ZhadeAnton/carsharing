@@ -1,0 +1,41 @@
+@import '../../scss/variables';
+@import '../../scss/typography';
+@import '../../scss/mixins';
+
+.input-primary {
+  position: relative;
+
+  &__field {
+    width: 225px;
+    border: none;
+    outline: none;
+    padding: 0 $space-sm;
+    border-bottom: 1px solid $grey-strong-color;
+    font-family: 'RobotoLight';
+    @extend %heading14;
+    color: $primary-color;
+
+    &:hover {
+      border-bottom: 1px solid $grey-strong-color;
+    }
+
+    @media (max-width: getBreackpoint('sm')) {
+      width: 200px;
+      font-size: 13px;
+    }
+
+    @media (max-width: getBreackpoint('sm')) {
+      width: 180px;
+    }
+  }
+
+  &__close-btn {
+    @include abs-position(auto, 3.5%, 3%, auto);
+    cursor: pointer;
+    z-index: $layer-2;
+
+    &:hover {
+      opacity: .9;
+    }
+  }
+}

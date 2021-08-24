@@ -15,6 +15,7 @@
   @include flex-center;
   flex-direction: column;
   cursor: pointer;
+  @include fix-position(35px, auto, auto, 16px);
   z-index: $layer-max;
 
   &:hover {
@@ -44,6 +45,8 @@
   }
 
   @media (max-width: getBreackpoint('sm')) {
+    @include fix-position(24px, auto, auto, 16px);
+
     %hamburger-menu-line {
       width: 19px;
       background-color: $primary-color;

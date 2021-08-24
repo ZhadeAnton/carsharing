@@ -4,7 +4,7 @@
 .button-primary {
   @extend %button-rules;
 
-  width: 250px;
+  width: 100%;
   height: 50px;
   border-radius: 8px;
   transition: $transition-sm;
