@@ -2,22 +2,30 @@
 @import '../../../scss/typography';
 
 .step-three {
-  display: flex;
-  flex-direction: column;
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
-    margin-top: $space-xl;
     margin-bottom: $space-md;
     font-family: 'RobotoLight';
     font-weight: 300;
     @extend %heading14;
     color: $primary-color;
+
+    &:not(:first-child) {
+      margin-top: $space-xl;
+    }
   }
 
   @media (max-width: getBreackpoint('sm')) {
     &__title {
-      margin-top: $space-lg;
       margin-bottom: $space-sm;
+
+      &:not(:first-child) {
+        margin-top: $space-xl;
+      }
     }
   }
 }

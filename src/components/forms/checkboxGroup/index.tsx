@@ -1,34 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import CheckboxPrimary from '../../inputs/checkboxPrimary'
+import { ICheckbox } from '../../../interfaces/inputInterfaces'
 
 interface Props {
-  checkboxes: Array<string>
+  checkboxes: Array<ICheckbox>,
+  handleChange: (checkbox: ICheckbox) => void
 }
 
 export default function CheckboxGroup(props: Props) {
-  const [checkedState, setCheckedState] = useState(
-      new Array(props.checkboxes.length).fill(false)
-  )
-
-  const handleOnChange = (position: number) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    )
-
-    setCheckedState(updatedCheckedState)
-  }
-
   return (
     <form>
       {
-        props.checkboxes.map((checkbox, i) => (
+        props.checkboxes.map((checkbox) => (
           <CheckboxPrimary
-            key={i}
-            value={checkbox}
-            checked={checkedState[i]}
-            index={i}
-            onChange={handleOnChange}
+            key={checkbox.id}
+            checkbox={checkbox}
+            onChange={props.handleChange}
           />
         ))
       }

@@ -1,9 +1,19 @@
 import React from 'react'
 
 import './styles.scss'
+import { IDate } from '../../../interfaces/inputInterfaces'
 import DatePickerPrimary from '../../inputs/datePicker'
 
-export default function DateForm() {
+interface Props {
+  dateFrom: IDate,
+  dateTo: IDate,
+  onUpdateDateFrom: (date: IDate) => void,
+  onUpdateDateTo: (date: IDate) => void,
+  onClearDateFrom: () => void,
+  onClearDateTo: () => void,
+}
+
+export default function DateForm(props: Props) {
   return (
     <div className='date-form'>
       <div className='date-form__line'>
@@ -11,7 +21,11 @@ export default function DateForm() {
           С
         </h6>
 
-        <DatePickerPrimary />
+        <DatePickerPrimary
+          date={props.dateFrom}
+          onUpdateDate={props.onUpdateDateFrom}
+          onClearDate={props.onClearDateFrom}
+        />
       </div>
 
       <div className='date-form__line'>
@@ -19,7 +33,11 @@ export default function DateForm() {
           По
         </h6>
 
-        <DatePickerPrimary />
+        <DatePickerPrimary
+          date={props.dateTo}
+          onUpdateDate={props.onUpdateDateTo}
+          onClearDate={props.onClearDateTo}
+        />
       </div>
     </div>
   )

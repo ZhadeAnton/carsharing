@@ -1,13 +1,14 @@
 import React from 'react'
 
 import './styles.scss'
+import { IRadioButton } from '../../../interfaces/inputInterfaces'
 import RadioButton from '../../inputs/radioButtonPrimary'
 
 interface Props {
-  buttons: Array<string>,
-  selected: string,
+  buttons: Array<IRadioButton>,
+  selected: IRadioButton | undefined,
   vertical?: boolean,
-  handleChange: (value: string) => any
+  handleChange: ({title, value}: IRadioButton) => any
 }
 
 export default function RadioGroup(props: Props) {
@@ -19,8 +20,8 @@ export default function RadioGroup(props: Props) {
         props.buttons.map((button, i) => (
           <RadioButton
             key={i}
-            value={button}
-            checked={props.selected === button}
+            button={button}
+            checked={props.selected?.title === button.title}
             handleChange={props.handleChange}
           />
         ))

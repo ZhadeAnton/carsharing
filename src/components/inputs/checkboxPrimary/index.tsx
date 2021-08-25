@@ -1,31 +1,31 @@
 import React from 'react'
 
 import './styles.scss'
+import { ICheckbox } from '../../../interfaces/inputInterfaces'
 
 interface Props {
-  value: string,
-  checked: boolean,
-  index: number,
-  onChange: (position: number) => void
+  checkbox: ICheckbox,
+  onChange: (checkbox: ICheckbox) => void
 }
 
 export default function CheckboxPrimary(props: Props) {
   return (
     <div>
       <input
-        className="checkbox-custom"
-        name="checkbox-custom"
         type="checkbox"
-        checked={props.checked}
-        onChange={() => props.onChange(props.index)}
+        className="checkbox-custom"
+        name={props.checkbox.title}
+        checked={props.checkbox.isChecked}
+        onChange={() => props.onChange(props.checkbox)}
       />
 
       <label
-        htmlFor="checkbox-custom"
+        key={props.checkbox.title}
+        htmlFor={props.checkbox.title}
         className="checkbox-custom-label"
-        onClick={() => props.onChange(props.index)}
+        onClick={() => props.onChange(props.checkbox)}
       >
-        { props.value }
+        { props.checkbox.title }
       </label>
     </div>
   )

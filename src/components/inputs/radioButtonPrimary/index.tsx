@@ -1,11 +1,12 @@
 import React from 'react';
 
 import './styles.scss'
+import { IRadioButton } from '../../../interfaces/inputInterfaces';
 
 interface Props {
-  value: string,
+  button: IRadioButton,
   checked: boolean,
-  handleChange: (value: string) => void
+  handleChange: ({title, value}: IRadioButton) => any
 }
 
 export default function RadioButton(props: Props) {
@@ -13,17 +14,17 @@ export default function RadioButton(props: Props) {
     <div className='radio-button-primary'>
       <input
         type="radio"
-        value={props.value}
+        value={props.button.value}
         name='check-box-primary'
         checked={props.checked}
-        onChange={() => props.handleChange(props.value)}
+        onChange={() => props.handleChange(props.button)}
       />
 
       <label
         htmlFor='check-box-primary'
-        onClick={() => props.handleChange(props.value)}
+        onClick={() => props.handleChange(props.button)}
       >
-        { props.value }
+        { props.button.title }
       </label>
     </div>
   )

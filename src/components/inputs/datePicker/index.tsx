@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import moment, { Moment } from 'moment'
 import { DatePicker } from 'antd'
 
 import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
 
-export default function DatePickerPrimary() {
-  const [date, setDate] = useState<Moment | null | undefined>()
+interface Props {
+  date: Moment | null | undefined,
+  onUpdateDate: (date: Moment | null | undefined) => void,
+  onClearDate: () => void
+}
 
-  function handleUpdateDate(date: any) {
-    setDate(moment(date))
-  }
-
+export default function DatePickerPrimary(props: Props) {
   function disabledDate(current: any) {
     return current && current < moment().endOf('day');
   }
@@ -19,10 +19,10 @@ export default function DatePickerPrimary() {
   return (
     <div className='date-picker-primary input-primary'>
       <DatePicker
-        value={date}
+        value={props.date}
         placeholder='Введите дату и время'
-        format="DD.MM.YYYY hh:mm"
-        onOk={handleUpdateDate}
+        format="DD.MM.YYYY HH:mm"
+        onOk={props.onUpdateDate}
         disabledDate={disabledDate}
         size='small'
         showTime
@@ -30,9 +30,9 @@ export default function DatePickerPrimary() {
 
       <span
         className='input-primary__close-btn'
-        onClick={() => setDate(null)}
+        onClick={() => props.onClearDate()}
       >
-        { date && <Close /> }
+        { props.date && <Close /> }
       </span>
     </div>
   )
