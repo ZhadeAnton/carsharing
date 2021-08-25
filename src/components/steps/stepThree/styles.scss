@@ -13,4 +13,11 @@
     @extend %heading14;
     color: $primary-color;
   }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__title {
+      margin-top: $space-lg;
+      margin-bottom: $space-sm;
+    }
+  }
 }
