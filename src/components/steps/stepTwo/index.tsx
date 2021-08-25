@@ -7,14 +7,15 @@ import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
 
+const radioGroup= ['Все модели', 'Эконом', 'Премиум']
+
 export default function StepTwo() {
   const [selected, setSelected] = useState<string>('Все модели')
   const [selectedCar, setSelectedCar] = useState<ICar>()
 
-  const radioGroup= ['Все модели', 'Эконом', 'Премиум']
   const orderFields = [
     {title: 'Пункт выдачи', value: 'Ульяновск, Наримова 42'},
-    {title: 'Модель', value: selectedCar?.carName ? selectedCar?.carName : 'Не выбрано'}
+    {title: 'Модель', value: selectedCar?.carName ?? 'Не выбрано'}
   ]
 
   const handleButtonChange = (value: string) => {

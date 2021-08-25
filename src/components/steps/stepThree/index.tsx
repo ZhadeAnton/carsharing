@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 
 import './styles.scss'
 import RadioGroup from '../../forms/radiopGroup'
-import CheckboxPrimary from '../../inputs/checkboxPrimary'
+import CheckboxGroup from '../../forms/checkboxGroup'
+import DatePickerPrimary from '../../inputs/datePicker'
+
+const radioGroup = ['Любой', 'Красный', 'Голубой']
+const checkboxGroup = ['Полный бак, 500р', 'Детское кресло, 200р', 'Правый руль, 1600р']
 
 export default function StepThree() {
   const [colorSelected, setColorSelected] = useState<string>('Любой')
   const [rateSelected, setRateSelected] = useState<string>('Любой')
-  const radioGroup = ['Любой', 'Красный', 'Голубой']
 
   const handleColorChange = (value: string) => {
     setColorSelected(value);
@@ -28,6 +31,7 @@ export default function StepThree() {
       />
 
       <h6 className='step-three__title'>Дата аренды</h6>
+      <DatePickerPrimary />
 
       <h6 className='step-three__title'>Тариф</h6>
 
@@ -40,9 +44,7 @@ export default function StepThree() {
 
       <h6 className='step-three__title'>Доп услуги</h6>
 
-      <CheckboxPrimary checked value='Полный бак, 500р'/>
-      <CheckboxPrimary checked={false} value='Детское кресло, 200р'/>
-      <CheckboxPrimary checked={true} value='Правый руль, 1600р'/>
+      <CheckboxGroup checkboxes={checkboxGroup} />
     </section>
   )
 }
