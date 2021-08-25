@@ -1,0 +1,31 @@
+@import '../../../scss/variables';
+@import '../../../scss/typography';
+
+.date-form {
+  width: fit-content;
+  display: inline-block;
+
+  &__line {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &:not(:last-child) {
+      margin-bottom: $space-sm;
+    }
+  }
+
+  &__title {
+    margin-right: $space-sm;
+    @extend %heading14;
+    font-family: 'RobotoLight';
+    font-weight: 300;
+    color: $primary-color;
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__title {
+      font-size: 13px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { DatePicker } from 'antd'
 import moment, { Moment } from 'moment'
+import { DatePicker } from 'antd'
 
 import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'

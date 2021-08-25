@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './styles.scss'
 import RadioGroup from '../../forms/radiopGroup'
 import CheckboxGroup from '../../forms/checkboxGroup'
-import DatePickerPrimary from '../../inputs/datePicker'
+import DateForm from '../../forms/dateForm'
 
 const radioGroup = ['Любой', 'Красный', 'Голубой']
 const checkboxGroup = ['Полный бак, 500р', 'Детское кресло, 200р', 'Правый руль, 1600р']
@@ -31,7 +31,7 @@ export default function StepThree() {
       />
 
       <h6 className='step-three__title'>Дата аренды</h6>
-      <DatePickerPrimary />
+      <DateForm />
 
       <h6 className='step-three__title'>Тариф</h6>
 
