@@ -34,26 +34,23 @@ export default function StepThree() {
   const [dateFrom, setDateFrom] = useState<IDate>()
   const [dateTo, setDateTo] = useState<IDate>()
 
-  const isAfter = moment(dateFrom).isAfter(dateTo)
+  const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
 
   const orderFields = [
     {title: 'Пункт выдачи', value: 'Ульяновск, Наримова 42'},
     {title: 'Модель', value: 'Hyndai, i30 N'},
     {title: 'Цвет', value: colorSelected.title},
-    {title: 'Длительность аренды',
-      value: durationLease !== '' ? durationLease : 'Ничего'},
+    {title: 'Длительность аренды', value: durationLease},
     {title: 'Тариф', value: rateSelected.value},
   ]
 
   checkedItems.forEach((item) => {
-    item.isChecked === true
-    ? orderFields.push({title: item.value, value: 'Да'})
-    : null
+    item.isChecked === true ? orderFields.push({title: item.value, value: 'Да'}) : null
   })
 
   useEffect(() => {
-    if (dateFrom && dateTo && isAfter) {
+    if (dateFrom && dateTo && isDateAfter) {
       setDateFrom(null)
       setDateTo(null)
       message.error('Неккоректная дата');
