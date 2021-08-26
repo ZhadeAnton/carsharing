@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import {
   GoogleMap,
   useLoadScript,
@@ -7,9 +7,8 @@ import {
 
 import * as settings from './mapSettings.ts'
 
-export default function CustomMap() {
+export default function CustomMap({markers, onAddMark}) {
   const mapRef = useRef();
-  const [markers, setMarkers] = useState([{lat: 54.3187, lng: 48.3978}])
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: settings.mapAPIKey,
@@ -21,12 +20,10 @@ export default function CustomMap() {
   }, []);
 
   const handleMapClick = (event) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-      }])
+    onAddMark({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    })
   }
 
   return (

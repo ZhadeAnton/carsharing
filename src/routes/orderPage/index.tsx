@@ -4,6 +4,7 @@ const { TabPane } = Tabs;
 
 import './styles.scss'
 import useToggle from '../../hooks/useToggle'
+import { IMark } from '../../interfaces/mapInterfaces';
 import Aside from '../../components/aside'
 import HamburgerMenu from '../../components/hamburgerMenu'
 import OverlayMenu from '../../components/overlayMenu'
@@ -12,7 +13,12 @@ import StepOne from '../../components/steps/stepOne';
 import StepTwo from '../../components/steps/stepTwo';
 import StepThree from '../../components/steps/stepThree';
 
-export default function OrderPage() {
+interface Props {
+  markers: Array<IMark>,
+  onAddMark: (mark: IMark) => void
+}
+
+export default function OrderPage(props: Props) {
   const [isOpen, setIsOpen] = useToggle(false)
 
   return (
@@ -34,7 +40,10 @@ export default function OrderPage() {
             tab="Местоположение"
             key="1"
           >
-            <StepOne />
+            <StepOne
+              markers={props.markers}
+              onAddMark={props.onAddMark}
+            />
           </TabPane>
 
           <TabPane

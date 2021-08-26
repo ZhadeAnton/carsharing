@@ -1,11 +1,17 @@
 import React from 'react'
 
 import './styles.scss'
+import { IMark } from '../../../interfaces/mapInterfaces'
 import SearchLocationForm from '../../forms/locationForm'
 import OrderInfo from '../../forms/orderInfo'
 import CustomMap from '../../map'
 
-export default function StepOne() {
+interface Props {
+  markers: Array<IMark>,
+  onAddMark: (mark: IMark) => void
+}
+
+export default function StepOne(props: Props) {
   const orderFields = [{title: 'Пункт выдачи', value: 'Ульяновск, Наримова 42'}]
 
   return (
@@ -18,7 +24,10 @@ export default function StepOne() {
         </h6>
 
         <div className='step-one__left--map'>
-          <CustomMap />
+          <CustomMap
+            markers={props.markers}
+            onAddMark={props.onAddMark}
+          />
         </div>
       </div>
 
