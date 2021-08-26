@@ -6,6 +6,8 @@ import {
 } from '@react-google-maps/api';
 
 import * as settings from './mapSettings.ts'
+import './styles.scss'
+import SearchLocationForm from '../forms/locationForm/index'
 
 export default function CustomMap({markers, onAddMark}) {
   const mapRef = useRef();
@@ -28,28 +30,38 @@ export default function CustomMap({markers, onAddMark}) {
 
   return (
     isLoaded ? (
-      <GoogleMap
-        id="map"
-        mapContainerStyle={settings.mapContainerStyle}
-        zoom={12}
-        center={settings.center}
-        options={{...settings.options}}
-        onLoad={onMapLoad}
-        onClick={(event) => handleMapClick(event)}
-      >
-        {markers.map((marker) => (
-          <Marker
-            key={`${marker.lat}-${marker.lng}`}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: `/location-marker.svg`,
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(18, 18),
-            }}
-          />
-        ))}
-      </GoogleMap>
+      <div className='map'>
+        <div className='map__search-form'>
+          <SearchLocationForm />
+        </div>
+
+        <h6 className='map__title'>
+          Выбрать на карте
+        </h6>
+
+        <GoogleMap
+          id="map"
+          mapContainerStyle={settings.mapContainerStyle}
+          zoom={12}
+          center={settings.center}
+          options={{...settings.options}}
+          onLoad={onMapLoad}
+          onClick={(event) => handleMapClick(event)}
+        >
+          {markers.map((marker) => (
+            <Marker
+              key={`${marker.lat}-${marker.lng}`}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              icon={{
+                url: `/location-marker.svg`,
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+                scaledSize: new window.google.maps.Size(18, 18),
+              }}
+            />
+          ))}
+        </GoogleMap>
+      </div>
     ) : <></>
   )
 }

@@ -1,0 +1,18 @@
+@import '../../scss/variables';
+
+.map {
+  height: 100%;
+
+  &__title {
+    margin-top: $space-lg;
+    margin-bottom: $space-md;
+    font-family: 'RobotoLight';
+    font-size: 14px;
+    line-height: 16px;
+    color: $primary-color;
+  }
+
+  &__search-form {
+    
+  }
+}

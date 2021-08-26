@@ -2,15 +2,6 @@
 
 .step-one {
   &__left {
-    &--title {
-      font-family: 'RobotoLight';
-      font-size: 14px;
-      line-height: 16px;
-      color: $primary-color;
-      margin-top: $space-xl;
-      margin-bottom: $space-md;
-    }
-
     &--map {
       width: 736px;
       height: 352px;

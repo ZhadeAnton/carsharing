@@ -1,31 +1,25 @@
 import React from 'react'
 
 import './styles.scss'
-import InputPrimary from '../../inputs/inputPrimary'
+import InputAutoComplete from '../../inputs/selectPrimary'
 
 export default function SearchLocationForm() {
   return (
     <form className='search-location-form'>
       <div className='search-location-form__form-wrapper'>
-        <label htmlFor="townPicker">
+        <h6 className='search-location-form__title'>
           Город
-        </label>
+        </h6>
 
-        <InputPrimary
-          name="townPicker"
-          placeholder='Начните вводить город...'
-        />
+        <InputAutoComplete placeholder='Начните вводить город...' />
       </div>
 
       <div className='search-location-form__form-wrapper'>
-        <label htmlFor="pickUpPoint">
+        <h6 className='search-location-form__title'>
           Пункт выдачи
-        </label>
+        </h6>
 
-        <InputPrimary
-          name="pickUpPoint"
-          placeholder='Начните вводить пункт...'
-        />
+        <InputAutoComplete placeholder='Начните вводить пункт...' />
       </div>
     </form>
   )
