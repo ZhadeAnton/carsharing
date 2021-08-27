@@ -6,7 +6,7 @@ import Car from './car'
 
 interface Props {
   cars: Array<ICar>,
-  selected: ICar | undefined,
+  selected: ICar | null,
   onSelectCar: (car: ICar) => void
 }
 
