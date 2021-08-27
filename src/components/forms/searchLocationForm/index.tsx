@@ -5,8 +5,8 @@ import * as IMap from '../../../interfaces/mapInterfaces'
 import InputAutoComplete from '../../inputs/inputAutoComplete'
 
 interface Props {
-  town: string,
-  pickUp: string,
+  town: string | null,
+  pickUp: string | null,
   coordinatesByPickedTown: IMap.IMark | null,
   onSelectTown: IMap.IFnSelectTown,
   onSelectPickUp: IMap.IFnSelectPickUp,

@@ -63,6 +63,7 @@
   &:disabled {
     background: none;
     background-color: $grey-color;
+    cursor: not-allowed;
   }
 }
 

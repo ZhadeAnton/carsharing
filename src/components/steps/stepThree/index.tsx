@@ -10,11 +10,6 @@ import useStepThreeContainer from './useStepThreeContainer';
 export default function StepThree() {
   const stepThreeContainer = useStepThreeContainer()
 
-  const orderFields = [
-    {title: 'Пункт выдачи', value: 'Ульяновск, Наримова 42'},
-    {title: 'Модель', value: 'Hyndai, i30 N'},
-  ]
-
   return (
     <section className='step-three step'>
       <section className='step__left'>
@@ -64,7 +59,8 @@ export default function StepThree() {
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={orderFields}
+          buttonTitle='Итого'
+          isButtonDisable={false}
         />
       </div>
     </section>

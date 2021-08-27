@@ -19,7 +19,10 @@ export default function MainArticle() {
       </p>
 
       <div className='main-article__button'>
-        <ButtonPrimary onClick={() => history('/order')}>
+        <ButtonPrimary
+          isDisable={false}
+          onClick={() => history('/order')}
+        >
           Забронировать
         </ButtonPrimary>
       </div>

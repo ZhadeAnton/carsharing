@@ -17,8 +17,6 @@ export default function useMapContainer() {
   const state = useAppSelector((state) => state)
 
   const markers = state.location.markers
-  const town = state.location.town
-  const pickUp = state.location.pickUp
   const coordinatesByPickedTown = state.location.coordinatesByPickedTown
 
   const mapContainerStyle = settings.mapContainerStyle
@@ -58,7 +56,7 @@ export default function useMapContainer() {
   return (
     {
       state: {
-        markers, town, pickUp, coordinatesByPickedTown
+        markers, coordinatesByPickedTown
       },
       handlers: {
         handleSelectTown, handleSelectPickUp, handleSelectCoordinates, handleMapClick

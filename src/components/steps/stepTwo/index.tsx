@@ -9,11 +9,6 @@ import CarsList from '../../carsList';
 export default function StepTwo() {
   const stepTwoContainer = useStepTwoContainer()
 
-  const orderFields = [
-    {title: 'Пункт выдачи', value: 'Ульяновск, Наримова 42'},
-    {title: 'Модель', value: stepTwoContainer.state.selectedCar?.carName ?? 'Не выбрано'}
-  ]
-
   return (
     <section className='step-two step'>
       <section className='step-two__left step__left'>
@@ -36,9 +31,8 @@ export default function StepTwo() {
 
       <div className='step-two__right step__right'>
         <OrderInfo
-          orderFields={orderFields}
-          lowPrice={stepTwoContainer.state.selectedCar?.lowPrice}
-          highPrice={stepTwoContainer.state.selectedCar?.highPrice}
+          buttonTitle='Дополнительно'
+          isButtonDisable={false}
         />
       </div>
     </section>

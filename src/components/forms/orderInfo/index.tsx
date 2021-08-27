@@ -6,9 +6,10 @@ import PriceRange from '../priceRange'
 import ButtonPrimary from '../../buttons/buttonPrimary'
 
 interface Props {
-  orderFields: Array<{title: string, value: string | undefined}>,
-  lowPrice?: number | undefined,
-  highPrice?: number | undefined
+  orderFields?: Array<{title: string, value: string | undefined}>,
+  price?: number,
+  buttonTitle: string,
+  isButtonDisable: boolean
 }
 
 export default function OrderInfo(props: Props) {
@@ -20,7 +21,7 @@ export default function OrderInfo(props: Props) {
 
       <div>
         {
-          props.orderFields.map((field, i) => (
+          props.orderFields?.map((field, i) => (
             <OrderField
               key={i}
               fieldName={field.title}
@@ -30,18 +31,18 @@ export default function OrderInfo(props: Props) {
         }
 
         {
-          props.lowPrice && props.highPrice &&
+          props.price &&
           <div className='order-info__price-range'>
             <PriceRange
-              lowPrice={props.lowPrice}
-              highPrice={props.highPrice}
+              // lowPrice={props.lowPrice}
+              // highPrice={props.highPrice}
             />
           </div>
         }
 
         <div className='order-info__button'>
-          <ButtonPrimary>
-            Выбрать модель
+          <ButtonPrimary isDisable={props.isButtonDisable}>
+            { props.buttonTitle }
           </ButtonPrimary>
         </div>
       </div>

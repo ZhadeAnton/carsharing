@@ -3,8 +3,8 @@ import { ILocationTypes } from './locationActionTypes'
 import * as types from './locationActionTypes'
 
 interface ILocationState {
-  town: string,
-  pickUp: string,
+  town: string | null,
+  pickUp: string | null,
   coordinatesByPickedTown: IMark | null,
   markers: Array<IMark>
 }

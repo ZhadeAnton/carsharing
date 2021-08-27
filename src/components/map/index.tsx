@@ -6,7 +6,12 @@ import * as IMap from '../../interfaces/mapInterfaces'
 import useMapContainer from './useMapContainer'
 import SearchLocationForm from '../forms/searchLocationForm/index'
 
-export default function CustomMap() {
+interface Props {
+  town: string | null,
+  pickUp: string | null
+}
+
+export default function CustomMap(props: Props) {
   const mapContainer = useMapContainer()
 
   return (
@@ -14,8 +19,8 @@ export default function CustomMap() {
       <div className='map'>
         <div className='map__search-form'>
           <SearchLocationForm
-            town={mapContainer.state.town}
-            pickUp={mapContainer.state.pickUp}
+            town={props.town}
+            pickUp={props.pickUp}
             coordinatesByPickedTown={mapContainer.state.coordinatesByPickedTown}
             onSelectTown={mapContainer.handlers.handleSelectTown}
             onSelectPickUp={mapContainer.handlers.handleSelectPickUp}
