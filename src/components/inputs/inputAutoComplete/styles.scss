@@ -26,6 +26,10 @@
     border: 1px solid $primary-accent-color;
 
     &::-webkit-scrollbar {
+      display: block;
+    }
+
+    &::-webkit-scrollbar {
       width: 6px;
     }
 
@@ -61,8 +65,4 @@
       }
     }
   }
-}
-
-::-webkit-scrollbar {
-  display: block;
 }

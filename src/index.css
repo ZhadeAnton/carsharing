@@ -40,5 +40,5 @@ code {
 }
 
 ::-webkit-scrollbar {
-  display: block;
+  display: none;
 }

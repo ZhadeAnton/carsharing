@@ -5,23 +5,27 @@ import {
   Marker,
 } from '@react-google-maps/api';
 
-import * as settings from './mapSettings.ts'
 import './styles.scss'
+import * as settings from './mapSettings'
+import * as IMap from '../../interfaces/mapInterfaces'
+import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
 import SearchLocationForm from '../forms/searchLocationForm/index'
+import {
+  addMark,
+  setCoodrinates,
+  setPickUp,
+  setTown
+} from '../../redux/location/locationActionCreators';
 
-export default function CustomMap(props) {
-  const {
-    markers,
-    town,
-    pickUp,
-    coordinatesByPickedTown,
-    onAddMark,
-    onSetTown,
-    onSetPickUp,
-    onSelectCoordinates
-  } = props
-
+export default function CustomMap() {
   const mapRef = useRef();
+  const dispatch = useAppDispatch()
+  const state = useAppSelector((state) => state)
+
+  const markers = state.location.markers
+  const town = state.location.town
+  const pickUp = state.location.pickUp
+  const coordinatesByPickedTown = state.location.coordinatesByPickedTown
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: settings.mapAPIKey,
@@ -32,11 +36,23 @@ export default function CustomMap(props) {
     mapRef.current = map;
   }, []);
 
-  const handleMapClick = (event) => {
-    onAddMark({
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng(),
-    })
+  const handleMapClick = (event: any) => {
+    dispatch(addMark({
+      lat: event.latLng.lat() as IMap.IMark['lat'],
+      lng: event.latLng.lng() as IMap.IMark['lng'],
+    }))
+  }
+
+  const handleSelectTown: IMap.IFnSelectTown = (town) => {
+    dispatch(setTown(town))
+  }
+
+  const handleSelectPickUp: IMap.IFnSelectPickUp = (pickUp) => {
+    dispatch(setPickUp(pickUp))
+  }
+
+  const handleSelectCoordinates: IMap.IFnSelectCoordinates = (coords) => {
+    dispatch(setCoodrinates(coords))
   }
 
   return (
@@ -47,9 +63,9 @@ export default function CustomMap(props) {
             town={town}
             pickUp={pickUp}
             coordinatesByPickedTown={coordinatesByPickedTown}
-            onSetCoordinates={onSelectCoordinates}
-            onSelectTown={onSetTown}
-            onSelectPickUp={onSetPickUp}
+            onSelectTown={handleSelectTown}
+            onSelectPickUp={handleSelectPickUp}
+            onSetCoordinates={handleSelectCoordinates}
           />
         </div>
 
@@ -66,7 +82,7 @@ export default function CustomMap(props) {
           onLoad={onMapLoad}
           onClick={(event) => handleMapClick(event)}
         >
-          {markers.map((marker) => (
+          {markers.map((marker: IMap.IMark) => (
             <Marker
               key={`${marker.lat}-${marker.lng}`}
               position={{ lat: marker.lat, lng: marker.lng }}

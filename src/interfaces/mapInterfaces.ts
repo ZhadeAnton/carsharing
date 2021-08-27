@@ -3,7 +3,7 @@ export interface IMark {
   lng: number
 }
 
-export interface IFnSelectAddMarker {
+export interface IFnAddMarker {
   (mark: IMark): void
 }
 
