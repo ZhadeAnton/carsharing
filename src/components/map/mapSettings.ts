@@ -7,6 +7,8 @@ export const mapContainerStyle = {
   height: '100%'
 }
 
+export const zoom = 12
+
 export const center = {
   lat: 54.3187,
   lng: 48.3978
