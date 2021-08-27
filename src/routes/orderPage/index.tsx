@@ -3,8 +3,8 @@ import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 
 import './styles.scss'
+import { IOrderPageContainer } from '../../containers/orderPageContainer';
 import useToggle from '../../hooks/useToggle'
-import { IMark } from '../../interfaces/mapInterfaces';
 import Aside from '../../components/aside'
 import HamburgerMenu from '../../components/hamburgerMenu'
 import OverlayMenu from '../../components/overlayMenu'
@@ -13,12 +13,7 @@ import StepOne from '../../components/steps/stepOne';
 import StepTwo from '../../components/steps/stepTwo';
 import StepThree from '../../components/steps/stepThree';
 
-interface Props {
-  markers: Array<IMark>,
-  onAddMark: (mark: IMark) => void
-}
-
-export default function OrderPage(props: Props) {
+export default function OrderPage(props: IOrderPageContainer) {
   const [isOpen, setIsOpen] = useToggle(false)
 
   return (
@@ -32,38 +27,29 @@ export default function OrderPage(props: Props) {
           <Header />
         </div>
 
-        <Tabs
-          type="card"
-          className='order-page__tabs'
-        >
-          <TabPane
-            tab="Местоположение"
-            key="1"
-          >
+        <Tabs type="card" className='order-page__tabs' >
+          <TabPane tab="Местоположение" key="1" >
             <StepOne
+              town={props.town}
+              pickUp={props.pickUp}
+              coordinatesByPickedTown={props.coordinatesByPickedTown}
               markers={props.markers}
-              onAddMark={props.onAddMark}
+              onAddMark={props.handleAddMarker}
+              onSetTown={props.handleSelectTown}
+              onSetPickUp={props.handleSelectPickUp}
+              handleSelectCoordinates={props.handleSelectCoordinates}
             />
           </TabPane>
 
-          <TabPane
-            tab="Модель"
-            key="2"
-          >
+          <TabPane tab="Модель" key="2" >
             <StepTwo />
           </TabPane>
 
-          <TabPane
-            tab="Дополнительно"
-            key="3"
-          >
+          <TabPane tab="Дополнительно" key="3">
             <StepThree />
           </TabPane>
 
-          <TabPane
-            tab="Итого"
-            key="4"
-          >
+          <TabPane tab="Итого" key="4">
             <span>V-05</span>
           </TabPane>
         </Tabs>

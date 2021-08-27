@@ -38,3 +38,7 @@ code {
   font-family: 'RobotoBold';
   src: local('Roboto-bold'), url('./assets/typography/Roboto-Bold.ttf')
 }
+
+::-webkit-scrollbar {
+  display: block;
+}

@@ -7,9 +7,20 @@ import {
 
 import * as settings from './mapSettings.ts'
 import './styles.scss'
-import SearchLocationForm from '../forms/locationForm/index'
+import SearchLocationForm from '../forms/searchLocationForm/index'
 
-export default function CustomMap({markers, onAddMark}) {
+export default function CustomMap(props) {
+  const {
+    markers,
+    town,
+    pickUp,
+    coordinatesByPickedTown,
+    onAddMark,
+    onSetTown,
+    onSetPickUp,
+    onSelectCoordinates
+  } = props
+
   const mapRef = useRef();
 
   const { isLoaded } = useLoadScript({
@@ -32,11 +43,18 @@ export default function CustomMap({markers, onAddMark}) {
     isLoaded ? (
       <div className='map'>
         <div className='map__search-form'>
-          <SearchLocationForm />
+          <SearchLocationForm
+            town={town}
+            pickUp={pickUp}
+            coordinatesByPickedTown={coordinatesByPickedTown}
+            onSetCoordinates={onSelectCoordinates}
+            onSelectTown={onSetTown}
+            onSelectPickUp={onSetPickUp}
+          />
         </div>
 
         <h6 className='map__title'>
-          Выбрать на карте
+          Выбрать на карте:
         </h6>
 
         <GoogleMap

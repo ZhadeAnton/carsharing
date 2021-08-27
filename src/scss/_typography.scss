@@ -173,7 +173,7 @@
   &__close-btn {
     @include abs-position(auto, 3.5%, 3%, auto);
     cursor: pointer;
-    z-index: $layer-max;
+    z-index: $layer-max - 1;
 
     &:hover {
       opacity: .9;
