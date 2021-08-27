@@ -8,7 +8,7 @@ export default function useStepTwoContainer() {
 
   const carsList = state.car.carsList
   const selectedCar = state.car.selectedCar
-  const carstSortOptions = state.car.carstSortOptions
+  const carsSortOptions = state.car.carsSortOptions
   const carsSortBy = state.car.carsSortBy
 
   const handleSelectCar: ICar.IFnSelectCar = (car) => {
@@ -21,7 +21,7 @@ export default function useStepTwoContainer() {
 
   return {
     state: {
-      carsList, selectedCar, carsSortBy, carstSortOptions
+      carsList, selectedCar, carsSortBy, carsSortOptions
     },
     handlers: {
       handleSelectCar, handleSortCars

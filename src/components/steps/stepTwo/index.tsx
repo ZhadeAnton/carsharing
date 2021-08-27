@@ -19,7 +19,7 @@ export default function StepTwo() {
       <section className='step-two__left step__left'>
         <div className='step-two__left--form'>
           <RadioGroup
-            buttons={stepTwoContainer.state.carstSortOptions}
+            buttons={stepTwoContainer.state.carsSortOptions}
             selected={stepTwoContainer.state.carsSortBy}
             handleChange={stepTwoContainer.handlers.handleSortCars}
           />
