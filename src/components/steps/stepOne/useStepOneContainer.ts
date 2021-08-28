@@ -6,9 +6,13 @@ export default function useStepOneContainer() {
   const town = state.location.town
   const pickUp = state.location.pickUp
 
+  const orderFields = [
+    { title: 'Город', value: town ? `${town}, ${pickUp}` : 'Не выбрано' }
+  ]
+
   return {
     state: {
-      town, pickUp
+      town, pickUp, orderFields
     }
   }
 }

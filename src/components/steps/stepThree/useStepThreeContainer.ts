@@ -18,9 +18,24 @@ export default function useStepThreeContainer() {
   const dateTo = state.car.dateTo
   const carColorOptions = state.car.carColorOptions
   const carRateOptions = state.car.carRateOptions
+  const town = state.location.town
+  const pickUp = state.location.pickUp
+  const selectedCar = state.car.selectedCar
 
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
+
+  const orderFields = [
+    { title: 'Город', value: town ? `${town}, ${pickUp}` : 'Не выбрано' },
+    { title: 'Модель', value: selectedCar?.carName ?? 'Не выбрано' },
+    { title: 'Цвет', value: carColor.value },
+    { title: 'Длительность аренды', value: durationLease },
+    { title: 'Тариф', value: carRate.value }
+  ]
+
+  carCheckBoxGroup.forEach((item) => {
+    item.isChecked === true ? orderFields.push({title: item.value, value: 'Да'}) : null
+  })
 
   useEffect(() => {
     if (dateFrom && dateTo && isDateAfter) {
@@ -69,7 +84,11 @@ export default function useStepThreeContainer() {
       carCheckBoxGroup,
       durationLease,
       carColorOptions,
-      carRateOptions
+      carRateOptions,
+      town,
+      pickUp,
+      selectedCar,
+      orderFields
     },
     handlers: {
       handleCheckboxChange,

@@ -32,7 +32,8 @@ export default function StepTwo() {
       <div className='step-two__right step__right'>
         <OrderInfo
           buttonTitle='Дополнительно'
-          isButtonDisable={false}
+          orderFields={stepTwoContainer.state.orderFields}
+          isButtonDisable={!stepTwoContainer.state.selectedCar}
         />
       </div>
     </section>

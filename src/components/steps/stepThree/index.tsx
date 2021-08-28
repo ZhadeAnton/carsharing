@@ -59,6 +59,7 @@ export default function StepThree() {
 
       <div className='step__right'>
         <OrderInfo
+          orderFields={stepThreeContainer.state.orderFields}
           buttonTitle='Итого'
           isButtonDisable={false}
         />
