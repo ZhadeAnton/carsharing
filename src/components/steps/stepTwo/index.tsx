@@ -1,12 +1,21 @@
 import React from 'react'
 
 import './styles.scss'
+import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces';
 import useStepTwoContainer from './useStepTwoContainer';
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
 
-export default function StepTwo() {
+interface Props {
+  carsList: IOrderPageContainer['carsList'],
+  selectedCar: IOrderPageContainer['selectedCar'],
+  carsSortOptions: IOrderPageContainer['carsSortOptions'],
+  carsSortBy: IOrderPageContainer['carsSortBy'],
+  stepTwoOrderFields: IOrderPageContainer['stepTwoOrderFields']
+}
+
+export default function StepTwo(props: Props) {
   const stepTwoContainer = useStepTwoContainer()
 
   return (
@@ -14,17 +23,17 @@ export default function StepTwo() {
       <section className='step-two__left step__left'>
         <div className='step-two__left--form'>
           <RadioGroup
-            buttons={stepTwoContainer.state.carsSortOptions}
-            selected={stepTwoContainer.state.carsSortBy}
-            handleChange={stepTwoContainer.handlers.handleSortCars}
+            buttons={props.carsSortOptions}
+            selected={props.carsSortBy}
+            onChange={stepTwoContainer.handleSortCars}
           />
         </div>
 
         <div className='step-two__left--list'>
           <CarsList
-            cars={stepTwoContainer.state.carsList}
-            selected={stepTwoContainer.state.selectedCar}
-            onSelectCar={stepTwoContainer.handlers.handleSelectCar}
+            cars={props.carsList}
+            selected={props.selectedCar}
+            onSelectCar={stepTwoContainer.handleSelectCar}
           />
         </div>
       </section>
@@ -32,8 +41,8 @@ export default function StepTwo() {
       <div className='step-two__right step__right'>
         <OrderInfo
           buttonTitle='Дополнительно'
-          orderFields={stepTwoContainer.state.orderFields}
-          isButtonDisable={!stepTwoContainer.state.selectedCar}
+          orderFields={props.stepTwoOrderFields}
+          isButtonDisable={!props.selectedCar}
         />
       </div>
     </section>

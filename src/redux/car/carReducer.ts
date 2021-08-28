@@ -4,7 +4,7 @@ import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces
 import * as types from './carActonTypes'
 import { carsMock } from '../../utils/carsListMock'
 
-interface ICarState {
+export interface ICarState {
   carsList: Array<ICar>,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,

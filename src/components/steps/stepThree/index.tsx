@@ -1,13 +1,25 @@
 import React from 'react'
 
 import './styles.scss'
+import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces'
 import RadioGroup from '../../forms/radiopGroup'
 import CheckboxGroup from '../../forms/checkboxGroup'
 import DateForm from '../../forms/dateForm'
 import OrderInfo from '../../forms/orderInfo'
 import useStepThreeContainer from './useStepThreeContainer';
+import { ICarState } from '../../../redux/car/carReducer'
 
-export default function StepThree() {
+interface Props {
+  carRate: ICarState['carRate'],
+  carRateOptions: ICarState['carRateOptions'],
+  dateFrom: ICarState['dateFrom'],
+  dateTo: ICarState['dateTo'],
+  carColor: ICarState['carColor'],
+  carColorOptions: ICarState['carColorOptions'],
+  stepThreeOrderFields: IOrderPageContainer['stepThreeOrderFields']
+}
+
+export default function StepThree(props: Props) {
   const stepThreeContainer = useStepThreeContainer()
 
   return (
@@ -18,9 +30,9 @@ export default function StepThree() {
         </h6>
 
         <RadioGroup
-          buttons={stepThreeContainer.state.carColorOptions}
-          selected={stepThreeContainer.state.carColor}
-          handleChange={stepThreeContainer.handlers.handleColorChange}
+          buttons={props.carColorOptions}
+          selected={props.carColor}
+          onChange={stepThreeContainer.handlers.handleColorChange}
         />
 
         <h6 className='step-three__title'>
@@ -28,8 +40,8 @@ export default function StepThree() {
         </h6>
 
         <DateForm
-          dateFrom={stepThreeContainer.state.dateFrom}
-          dateTo={stepThreeContainer.state.dateTo}
+          dateFrom={props.dateFrom}
+          dateTo={props.dateTo}
           onUpdateDateFrom={stepThreeContainer.handlers.handleUpdateDateFrom}
           onUpdateDateTo={stepThreeContainer.handlers.handleUpdateDateTo}
           onClearDateFrom={stepThreeContainer.handlers.handleClearDateFrom}
@@ -41,10 +53,10 @@ export default function StepThree() {
         </h6>
 
         <RadioGroup
-          buttons={stepThreeContainer.state.carRateOptions}
-          selected={stepThreeContainer.state.carRate}
-          handleChange={stepThreeContainer.handlers.handleRateChange}
-          vertical
+          buttons={props.carRateOptions}
+          selected={props.carRate}
+          onChange={stepThreeContainer.handlers.handleRateChange}
+          isVertical={true}
         />
 
         <h6 className='step-three__title'>
@@ -59,9 +71,9 @@ export default function StepThree() {
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={stepThreeContainer.state.orderFields}
+          orderFields={props.stepThreeOrderFields}
           buttonTitle='Итого'
-          isButtonDisable={false}
+          isButtonDisable={!props.dateFrom || !props.dateTo}
         />
       </div>
     </section>

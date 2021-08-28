@@ -2,7 +2,7 @@ import { IMark } from '../../interfaces/mapInterfaces'
 import { ILocationTypes } from './locationActionTypes'
 import * as types from './locationActionTypes'
 
-interface ILocationState {
+export interface ILocationState {
   town: string | null,
   pickUp: string | null,
   coordinatesByPickedTown: IMark | null,

@@ -1,14 +1,15 @@
 import React from 'react'
 
 import './styles.scss'
+import { IOrderField } from '../../../interfaces/orderIntarfaces'
 import OrderField from '../orderField'
 import PriceRange from '../priceRange'
 import ButtonPrimary from '../../buttons/buttonPrimary'
 
 interface Props {
-  orderFields?: Array<{title: string, value: string | undefined}>,
-  price?: number,
   buttonTitle: string,
+  orderFields: Array<IOrderField>,
+  price?: number,
   isButtonDisable: boolean
 }
 
@@ -16,7 +17,7 @@ export default function OrderInfo(props: Props) {
   return (
     <form className='order-info'>
       <h5 className='order-info__title'>
-        Ваш заказ:
+      Ваш заказ:
       </h5>
 
       <div>
@@ -45,6 +46,7 @@ export default function OrderInfo(props: Props) {
             { props.buttonTitle }
           </ButtonPrimary>
         </div>
+
       </div>
     </form>
   )
