@@ -13,6 +13,13 @@
     font-family: 'RobotoLight';
     font-weight: 300;
     color: $primary-color;
+
+    & > * {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
   }
 
   &__suggetion-list {
@@ -46,7 +53,7 @@
 
     &--item {
       &:not(:last-child) {
-        margin-bottom: 6px;
+        margin-bottom: 5px;
       }
 
       cursor: pointer;
@@ -63,6 +70,20 @@
         cursor: pointer;
         color: $primary-accent-color;
       }
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__suggetion-list {
+      font-size: 13px;
+      line-height: 17px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    &__suggetion-list {
+      width: 200px;
+      @include abs-position(calc(100% - 3px), auto, auto, -10%);
     }
   }
 }

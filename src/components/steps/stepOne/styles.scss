@@ -2,6 +2,8 @@
 
 .step-one {
   &__left {
+    height: 900px;
+
     &--map {
       width: 736px;
       height: 352px;
@@ -28,6 +30,8 @@
     flex-direction: column;
 
     &__left {
+      min-height: 470px;
+
       &--map {
         width: 100%;
         height: 300px;
@@ -37,6 +41,8 @@
 
   @media (max-width: getBreackpoint('md')) {
     &__left {
+      min-height: 420px;
+
       &--map {
         height: 260px;
       }
@@ -45,6 +51,8 @@
 
   @media (max-width: getBreackpoint('sm')) {
     &__left {
+      min-height: 400px;
+
       &--map {
         height: 240px;
       }
@@ -53,6 +61,8 @@
 
   @media (max-width: getBreackpoint('vsm')) {
     &__left {
+      min-height: 360px;
+
       &--map {
         height: 210px;
       }
