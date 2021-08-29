@@ -1,8 +1,14 @@
 import { ICar } from '../../interfaces/carsInterfaces'
 import { ICarTypes } from './carActonTypes'
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
-import * as types from './carActonTypes'
 import { carsMock } from '../../utils/carsListMock'
+import * as types from './carActonTypes'
+import {
+  carsSortOptions,
+  carColorOptions,
+  carRateOptions,
+  carCheckBoxGroup
+} from '../../utils/carsUtils'
 
 export interface ICarState {
   carsList: Array<ICar>,
@@ -21,25 +27,10 @@ export interface ICarState {
 const INIT_STATE: ICarState = {
   carsList: carsMock,
   selectedCar: null,
-  carsSortOptions: [
-    {title: 'Все модели', value: 'Все модели'},
-    {title: 'Эконом', value: 'Эконом'},
-    {title: 'Премиум', value: 'Премиум'},
-  ],
-  carColorOptions: [
-    {title: 'Любой', value: 'Любой'},
-    {title: 'Красный', value: 'Красный'},
-    {title: 'Голубой', value: 'Голубой'},
-  ],
-  carRateOptions: [
-    {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
-    {title: 'На сутки 1999 ₽/сутки', value: 'На сутки'}
-  ],
-  carCheckBoxGroup: [
-    {title: 'Полный бак, 500р', value: 'Полный бак', id: 0, isChecked: true},
-    {title: 'Детское кресло, 200р', value: 'Детское кресло', id: 1, isChecked: false},
-    {title: 'Правый руль, 1600р', value: 'Правый руль', id: 2, isChecked: false}
-  ],
+  carsSortOptions,
+  carColorOptions,
+  carRateOptions,
+  carCheckBoxGroup,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
   carRate: {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},

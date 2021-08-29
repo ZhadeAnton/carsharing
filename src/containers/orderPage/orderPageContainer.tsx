@@ -34,6 +34,7 @@ export default function OrderPageContainer() {
 
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
+  let isFullTank = false
 
   const townField = {
     title: 'Пункт выдачи', value: town ? `${town}, ${pickUp}` : 'Не выбрано'
@@ -46,10 +47,11 @@ export default function OrderPageContainer() {
   const stepOneOrderFields = [townField]
   const stepTwoOrderFields = [townField, carModelField]
   const stepThreeOrderFields = [
-    townField, carModelField, carColorField, leaseField, carRateField
+    ...stepTwoOrderFields, carColorField, leaseField, carRateField
   ]
 
   carCheckBoxGroup.forEach((item) => {
+    if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
     item.isChecked === true
     ? stepThreeOrderFields.push({ title: item.value, value: 'Да' }) : null
   })
@@ -88,13 +90,15 @@ export default function OrderPageContainer() {
       carCheckBoxGroup={carCheckBoxGroup}
       dateFrom={dateFrom}
       dateTo={dateTo}
+      activeTab={activeTab}
       carsSortOptions={carsSortOptions}
       carColorOptions={carColorOptions}
       carRateOptions={carRateOptions}
       stepOneOrderFields={stepOneOrderFields}
       stepTwoOrderFields={stepTwoOrderFields}
       stepThreeOrderFields={stepThreeOrderFields}
-      activeTab={activeTab}
+      stepFourOrderFields={stepThreeOrderFields}
+      isFullTank={isFullTank}
       isTwoStepDisable={isTwoStepDisable}
       isThreeStepDisable={isThreeStepDisable}
       isFourStepDisable={isFourStepDisable}

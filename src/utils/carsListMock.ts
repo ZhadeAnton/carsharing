@@ -6,50 +6,66 @@ import sonata from '../assets/mocks/sonata.png'
 export const carsMock = [
   {
     carName: 'ELANTRA',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: elentra
+    carImage: elentra,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'i30 N',
+    carModel: 'Hyundai',
     lowPrice: 10000,
     highPrice: 32000,
-    carImage: i30
+    carImage: i30,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'CRETA',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: creta
+    carImage: creta,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'SONATA',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: sonata
+    carImage: sonata,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'ELANTRA',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: elentra
+    carImage: elentra,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'i30 N',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: i30
+    carImage: i30,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'CRETA',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: creta
+    carImage: creta,
+    carPlateNumber: 'K 761 HA 73'
   },
   {
     carName: 'SONATA',
+    carModel: 'Hyundai',
     lowPrice: 12000,
     highPrice: 25000,
-    carImage: sonata
+    carImage: sonata,
+    carPlateNumber: 'K 761 HA 73'
   },
 ]

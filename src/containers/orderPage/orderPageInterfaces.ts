@@ -20,6 +20,8 @@ export interface IOrderPageContainer {
   stepOneOrderFields: Array<IOrderField>,
   stepTwoOrderFields: Array<IOrderField>,
   stepThreeOrderFields: Array<IOrderField>,
+  stepFourOrderFields: Array<IOrderField>,
+  isFullTank: boolean,
   isTwoStepDisable: boolean,
   isThreeStepDisable: boolean,
   isFourStepDisable: boolean,

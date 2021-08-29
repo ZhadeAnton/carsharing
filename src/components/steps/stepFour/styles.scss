@@ -1,0 +1,97 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+
+.step-four {
+  &__left {
+    display: flex;
+
+    &--info {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    &--image {
+      min-width: 250px;
+      height: auto;
+    }
+  }
+
+  &__car-name {
+    margin-bottom: $space-sm;
+    @extend %heading18;
+    color: $primary-color;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    margin-top: $space-sm;
+
+    &--field {
+      display: flex;
+
+      &:not(:last-child) {
+        margin-bottom: $space-sm;
+      }
+    }
+
+    &--title {
+      margin-right: 6px;
+      @extend %heading14;
+      font-family: 'RobotoBold';
+      font-weight: 700;
+      color: $primary-color;
+    }
+
+    &--number {
+      @extend %heading14;
+      font-family: 'RobotoLight';
+      font-weight: 300;
+      color: $primary-color;
+    }
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    &__left {
+      justify-content: space-between;
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    &__left {
+      &--image {
+        min-width: 220px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    &__left {
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      &--image-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 0 1.5rem;
+        padding-top: $space-sm;
+      }
+
+      &--image {
+        min-width: 200px;
+        height: 100%;
+      }
+    }
+
+    &__info {
+      &--title {
+        margin-right: 5px;
+        font-style: 13px;
+      }
+  
+      &--number {
+        font-size: 13px;
+      }
+    }
+  }
+}

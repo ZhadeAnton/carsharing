@@ -12,6 +12,7 @@ import Header from '../../components/header'
 import StepOne from '../../components/steps/stepOne';
 import StepTwo from '../../components/steps/stepTwo';
 import StepThree from '../../components/steps/stepThree';
+import StepFour from '../../components/steps/stepFour';
 
 export default function OrderPage(props: IOrderPageContainer) {
   const [isOpen, setIsOpen] = useToggle(false)
@@ -69,7 +70,12 @@ export default function OrderPage(props: IOrderPageContainer) {
           </TabPane>
 
           <TabPane tab="Итого" key="4" disabled={props.isFourStepDisable}>
-            <span>V-05</span>
+            <StepFour
+              selectedCar={props.selectedCar}
+              dateFrom={props.dateFrom}
+              stepFourOrderFields={props.stepFourOrderFields}
+              isFullTank={props.isFullTank}
+            />
           </TabPane>
         </Tabs>
       </section>
