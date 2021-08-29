@@ -1,0 +1,54 @@
+@import '../../scss/typography';
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.order-modal {
+  width: 100%;
+  height: 100%;
+  @include fix-position(0, 0, 0, 0);
+  background: rgba(255, 255, 255, 0.9);
+  z-index: $layer-max - 1;
+  @include flex-center;
+
+  &__block {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    @include flex-center;
+    flex-direction: column;
+    z-index: $layer-max;
+
+    &--title {
+      @extend %heading24;
+      font-family: 'RobotoRegular';
+      font-weight: 400;
+      color: $primary-color;
+    }
+
+    &--buttons-block {
+      width: 100%;
+      display: flex;
+      margin-top: $space-lg;
+
+      & > * {
+        &:not(:last-child) {
+          margin-right: $space-md;
+        }
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    &__block {
+      width: 90%;
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__block {
+      &--title {
+        font-size: 22px;
+      }
+    }
+  }
+}

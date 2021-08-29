@@ -16,7 +16,7 @@
   flex-direction: column;
   cursor: pointer;
   @include fix-position(35px, auto, auto, 16px);
-  z-index: $layer-max;
+  z-index: $layer-max - 2;
 
   &:hover {
     & > * {
