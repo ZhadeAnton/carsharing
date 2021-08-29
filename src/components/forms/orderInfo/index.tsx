@@ -10,7 +10,8 @@ interface Props {
   buttonTitle: string,
   orderFields: Array<IOrderField>,
   price?: number,
-  isButtonDisable: boolean
+  isButtonDisable: boolean,
+  onButtonClick?: () => void
 }
 
 export default function OrderInfo(props: Props) {
@@ -42,7 +43,10 @@ export default function OrderInfo(props: Props) {
         }
 
         <div className='order-info__button'>
-          <ButtonPrimary isDisable={props.isButtonDisable}>
+          <ButtonPrimary
+            isDisable={props.isButtonDisable}
+            onClick={props.onButtonClick}
+          >
             { props.buttonTitle }
           </ButtonPrimary>
         </div>

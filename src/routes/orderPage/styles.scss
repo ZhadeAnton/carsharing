@@ -48,15 +48,25 @@
     @extend %container;
   }
 
+  .ant-tabs-tab-disabled {
+    color: $grey-strong-color !important;
+  }
+
+  .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: $primary-accent-color !important;
+  }
+
   .ant-tabs-tab {
     margin-right: 38px !important;
     padding: $space-sm 0 !important;
     background: transparent !important;
     border: none !important;
+    user-select: none;
     font-family: 'RobotoBold';
     font-size: 14px;
     line-height: 16px;
-    color: $grey-strong-color;
+    font-weight: 700;
+    color: $primary-color;
 
     &:not(:first-child) {
       &:after {
@@ -70,10 +80,6 @@
         border-color: transparent transparent transparent $grey-strong-color; 
       }
     }
-  }
-
-  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: $primary-accent-color;
   }
 
   @media (max-width: getBreackpoint('md')) {

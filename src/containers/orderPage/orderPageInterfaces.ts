@@ -1,3 +1,4 @@
+import { ICheckbox } from '../../interfaces/inputInterfaces';
 import { IOrderField } from '../../interfaces/orderIntarfaces';
 import { ICarState } from '../../redux/car/carReducer';
 import { ILocationState } from '../../redux/location/locationReducer';
@@ -19,4 +20,10 @@ export interface IOrderPageContainer {
   stepOneOrderFields: Array<IOrderField>,
   stepTwoOrderFields: Array<IOrderField>,
   stepThreeOrderFields: Array<IOrderField>,
+  isTwoStepDisable: boolean,
+  isThreeStepDisable: boolean,
+  isFourStepDisable: boolean,
+  activeTab: string,
+  handleChangeActiveTab: (key: string) => void,
+  handleCheckboxChange: (checkbox: ICheckbox) => void
 }

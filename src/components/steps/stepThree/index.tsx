@@ -8,6 +8,7 @@ import DateForm from '../../forms/dateForm'
 import OrderInfo from '../../forms/orderInfo'
 import useStepThreeContainer from './useStepThreeContainer';
 import { ICarState } from '../../../redux/car/carReducer'
+import { ICheckbox } from '../../../interfaces/inputInterfaces'
 
 interface Props {
   carRate: ICarState['carRate'],
@@ -16,11 +17,18 @@ interface Props {
   dateTo: ICarState['dateTo'],
   carColor: ICarState['carColor'],
   carColorOptions: ICarState['carColorOptions'],
-  stepThreeOrderFields: IOrderPageContainer['stepThreeOrderFields']
+  carCheckBoxGroup: ICarState['carCheckBoxGroup'],
+  stepThreeOrderFields: IOrderPageContainer['stepThreeOrderFields'],
+  onChangeActiveTab: (key: string) => void,
+  handleCheckboxChange: (checkbox: ICheckbox) => void
 }
 
 export default function StepThree(props: Props) {
   const stepThreeContainer = useStepThreeContainer()
+
+  const handleChangeActiveTab = () => {
+    props.onChangeActiveTab('4')
+  }
 
   return (
     <section className='step-three step'>
@@ -32,7 +40,7 @@ export default function StepThree(props: Props) {
         <RadioGroup
           buttons={props.carColorOptions}
           selected={props.carColor}
-          onChange={stepThreeContainer.handlers.handleColorChange}
+          onChange={stepThreeContainer.handleColorChange}
         />
 
         <h6 className='step-three__title'>
@@ -42,10 +50,10 @@ export default function StepThree(props: Props) {
         <DateForm
           dateFrom={props.dateFrom}
           dateTo={props.dateTo}
-          onUpdateDateFrom={stepThreeContainer.handlers.handleUpdateDateFrom}
-          onUpdateDateTo={stepThreeContainer.handlers.handleUpdateDateTo}
-          onClearDateFrom={stepThreeContainer.handlers.handleClearDateFrom}
-          onClearDateTo={stepThreeContainer.handlers.handleClearDateTo}
+          onUpdateDateFrom={stepThreeContainer.handleUpdateDateFrom}
+          onUpdateDateTo={stepThreeContainer.handleUpdateDateTo}
+          onClearDateFrom={stepThreeContainer.handleClearDateFrom}
+          onClearDateTo={stepThreeContainer.handleClearDateTo}
         />
 
         <h6 className='step-three__title'>
@@ -55,8 +63,8 @@ export default function StepThree(props: Props) {
         <RadioGroup
           buttons={props.carRateOptions}
           selected={props.carRate}
-          onChange={stepThreeContainer.handlers.handleRateChange}
-          isVertical={true}
+          onChange={stepThreeContainer.handleRateChange}
+          isVertical
         />
 
         <h6 className='step-three__title'>
@@ -64,8 +72,8 @@ export default function StepThree(props: Props) {
         </h6>
 
         <CheckboxGroup
-          checkboxes={stepThreeContainer.state.carCheckBoxGroup}
-          handleChange={stepThreeContainer.handlers.handleCheckboxChange}
+          checkboxes={props.carCheckBoxGroup}
+          handleChange={props.handleCheckboxChange}
         />
       </section>
 
@@ -74,6 +82,7 @@ export default function StepThree(props: Props) {
           orderFields={props.stepThreeOrderFields}
           buttonTitle='Итого'
           isButtonDisable={!props.dateFrom || !props.dateTo}
+          onButtonClick={handleChangeActiveTab}
         />
       </div>
     </section>

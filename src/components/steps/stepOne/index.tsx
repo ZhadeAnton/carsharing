@@ -9,9 +9,14 @@ interface Props {
   town: IOrderPageContainer['town'],
   pickUp: IOrderPageContainer['pickUp'],
   stepOneOrderFields: IOrderPageContainer['stepOneOrderFields']
+  onChangeActiveTab: (key: string) => void
 }
 
 export default function StepOne(props: Props) {
+  const handleChangeActiveTab = () => {
+    props.onChangeActiveTab('2')
+  }
+
   return (
     <section className='step-one step'>
       <div className='step-one__left step__left'>
@@ -28,6 +33,7 @@ export default function StepOne(props: Props) {
           orderFields={props.stepOneOrderFields}
           buttonTitle='Выбрать модель'
           isButtonDisable={!props.town}
+          onButtonClick={handleChangeActiveTab}
         />
       </div>
     </section>

@@ -12,11 +12,16 @@ interface Props {
   selectedCar: IOrderPageContainer['selectedCar'],
   carsSortOptions: IOrderPageContainer['carsSortOptions'],
   carsSortBy: IOrderPageContainer['carsSortBy'],
-  stepTwoOrderFields: IOrderPageContainer['stepTwoOrderFields']
+  stepTwoOrderFields: IOrderPageContainer['stepTwoOrderFields'],
+  onChangeActiveTab: (key: string) => void
 }
 
 export default function StepTwo(props: Props) {
   const stepTwoContainer = useStepTwoContainer()
+
+  const handleChangeActiveTab = () => {
+    props.onChangeActiveTab('3')
+  }
 
   return (
     <section className='step-two step'>
@@ -43,6 +48,7 @@ export default function StepTwo(props: Props) {
           buttonTitle='Дополнительно'
           orderFields={props.stepTwoOrderFields}
           isButtonDisable={!props.selectedCar}
+          onButtonClick={handleChangeActiveTab}
         />
       </div>
     </section>

@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment';
 import { message } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
 import { getDifferenceTime } from '../../utils/dateUtils';
-import { setDateFrom, setDateTo } from '../../redux/car/carActionCreators';
+import { ICheckbox } from '../../interfaces/inputInterfaces';
+import {
+  changeCarCheckbox,
+  setDateFrom,
+  setDateTo
+} from '../../redux/car/carActionCreators';
 import OrderPage from '../../routes/orderPage';
 
 export default function OrderPageContainer() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
+
+  const [activeTab, setActiveTab] = useState('1')
 
   const town = state.location.town
   const pickUp = state.location.pickUp
@@ -42,12 +49,14 @@ export default function OrderPageContainer() {
     townField, carModelField, carColorField, leaseField, carRateField
   ]
 
-  useEffect(() => {
-    carCheckBoxGroup.forEach((item) => {
-      item.isChecked === true
-      ? stepThreeOrderFields.push({title: item.value, value: 'Да'}) : null
-    })
-  }, [carCheckBoxGroup])
+  carCheckBoxGroup.forEach((item) => {
+    item.isChecked === true
+    ? stepThreeOrderFields.push({ title: item.value, value: 'Да' }) : null
+  })
+
+  const isTwoStepDisable = !town
+  const isThreeStepDisable = !town || !selectedCar
+  const isFourStepDisable = isTwoStepDisable || isThreeStepDisable || !dateFrom || !dateTo
 
   useEffect(() => {
     if (dateFrom && dateTo && isDateAfter) {
@@ -56,6 +65,16 @@ export default function OrderPageContainer() {
       message.error('Неккоректная дата');
     }
   }, [dateFrom, dateTo])
+
+  const handleCheckboxChange = (checkbox: ICheckbox) => {
+    const newItes = [...carCheckBoxGroup]
+    newItes[checkbox.id] = {...checkbox, isChecked: !newItes[checkbox.id].isChecked}
+    dispatch(changeCarCheckbox(newItes))
+  }
+
+  const handleChangeActiveTab = (key: string) => {
+    setActiveTab(key)
+  }
 
   return (
     <OrderPage
@@ -75,6 +94,12 @@ export default function OrderPageContainer() {
       stepOneOrderFields={stepOneOrderFields}
       stepTwoOrderFields={stepTwoOrderFields}
       stepThreeOrderFields={stepThreeOrderFields}
+      activeTab={activeTab}
+      isTwoStepDisable={isTwoStepDisable}
+      isThreeStepDisable={isThreeStepDisable}
+      isFourStepDisable={isFourStepDisable}
+      handleChangeActiveTab={handleChangeActiveTab}
+      handleCheckboxChange={handleCheckboxChange}
     />
   )
 }
