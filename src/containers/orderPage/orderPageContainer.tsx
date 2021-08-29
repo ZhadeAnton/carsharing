@@ -31,6 +31,7 @@ export default function OrderPageContainer() {
   const carsSortOptions = state.car.carsSortOptions
   const carColorOptions = state.car.carColorOptions
   const carRateOptions = state.car.carRateOptions
+  const isOrder = state.order.isOrder
 
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
@@ -98,6 +99,7 @@ export default function OrderPageContainer() {
       stepTwoOrderFields={stepTwoOrderFields}
       stepThreeOrderFields={stepThreeOrderFields}
       stepFourOrderFields={stepThreeOrderFields}
+      isOrder={isOrder}
       isFullTank={isFullTank}
       isTwoStepDisable={isTwoStepDisable}
       isThreeStepDisable={isThreeStepDisable}

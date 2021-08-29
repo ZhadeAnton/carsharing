@@ -3,7 +3,12 @@ import React from 'react'
 import './styles.scss'
 import ButtonPrimary from '../buttons/buttonPrimary'
 
-export default function OrderModal() {
+interface Props {
+  onConfirmClick: () => void,
+  onRefuseClick: () => void
+}
+
+export default function OrderModal(props: Props) {
   return (
     <div className='order-modal'>
       <div className='order-modal__block'>
@@ -12,11 +17,11 @@ export default function OrderModal() {
         </h5>
 
         <div className='order-modal__block--buttons-block'>
-          <ButtonPrimary>
+          <ButtonPrimary onClick={props.onConfirmClick}>
             Подтвердить
           </ButtonPrimary>
 
-          <ButtonPrimary isRed>
+          <ButtonPrimary isRed onClick={props.onRefuseClick}>
             Вернуться
           </ButtonPrimary>
         </div>

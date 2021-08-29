@@ -4,6 +4,8 @@ import moment from 'moment'
 import './styles.scss'
 import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces'
 import { ICarState } from '../../../redux/car/carReducer'
+import { useAppDispatch } from '../../../hooks/usePreTypedHook'
+import { setOrder } from '../../../redux/order/orderActionCreators'
 import useToggle from '../../../hooks/useToggle'
 import CarPlatesNumber from '../../carsList/car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
@@ -17,7 +19,13 @@ interface Props {
 }
 
 export default function StepFour(props: Props) {
+  const dispatch = useAppDispatch()
   const [isModal, setIsModal] = useToggle()
+
+  const handleConfirmOrder = () => {
+    dispatch(setOrder())
+    setIsModal(false)
+  }
 
   return (
     <section className='step-four step'>
@@ -68,11 +76,16 @@ export default function StepFour(props: Props) {
           orderFields={props.stepFourOrderFields}
           buttonTitle='Заказать'
           isButtonDisable={false}
-          onButtonClick={setIsModal}
+          onButtonClick={() => setIsModal(true)}
         />
       </div>
 
-      { isModal && <OrderModal /> }
+      { isModal &&
+        <OrderModal
+          onConfirmClick={handleConfirmOrder}
+          onRefuseClick={() => setIsModal(false)}
+        />
+      }
     </section>
   )
 }

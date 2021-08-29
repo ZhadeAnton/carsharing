@@ -2,6 +2,7 @@ import { ICheckbox } from '../../interfaces/inputInterfaces';
 import { IOrderField } from '../../interfaces/orderIntarfaces';
 import { ICarState } from '../../redux/car/carReducer';
 import { ILocationState } from '../../redux/location/locationReducer';
+import { IOrderState } from '../../redux/order/orderReducer';
 
 export interface IOrderPageContainer {
   town: ILocationState['town'],
@@ -21,6 +22,7 @@ export interface IOrderPageContainer {
   stepTwoOrderFields: Array<IOrderField>,
   stepThreeOrderFields: Array<IOrderField>,
   stepFourOrderFields: Array<IOrderField>,
+  isOrder: IOrderState['isOrder'],
   isFullTank: boolean,
   isTwoStepDisable: boolean,
   isThreeStepDisable: boolean,

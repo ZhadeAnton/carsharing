@@ -1,11 +1,13 @@
 import * as types from './orderActionTypes'
 
-interface IOrderState {
-  isOrder: boolean
+export interface IOrderState {
+  isOrder: boolean,
+  orderNumber: string
 }
 
 const INIT_STATE: IOrderState = {
-  isOrder: false
+  isOrder: false,
+  orderNumber: 'RU58491823'
 }
 
 const orderReducer = (state = INIT_STATE, action: any): IOrderState => {
