@@ -43,7 +43,10 @@ export default function StepFour(props: Props) {
 
           <div className='step-four__info'>
             { props.isFullTank &&
-              <CarInfoField title='Топливо' value='100%' />
+              <CarInfoField
+                title='Топливо'
+                value='100%'
+              />
             }
 
             <CarInfoField

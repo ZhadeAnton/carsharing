@@ -94,7 +94,8 @@
 
   &__left {
     flex: 3;
-    height: auto;
+    height: fit-content;
+    min-height: 100%;
     padding-top: $space-lg;
     padding-right: $space-lg;
     border-right: 1px solid $grey-color;
@@ -125,6 +126,7 @@
 
     &__left {
       flex: 1;
+      min-height: auto;
       padding: $space-lg 0;
       border-right: none;
     }

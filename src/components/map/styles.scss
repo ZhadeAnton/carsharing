@@ -1,6 +1,6 @@
 @import '../../scss/variables';
 
-.map {
+.custom-map {
   height: 100%;
 
   &__title {
@@ -12,7 +12,45 @@
     color: $primary-color;
   }
 
-  &__search-form {
-    
+  &__canvas {
+    width: 736px;
+    height: 352px;
+  }
+
+  @media (max-width: 1250px) {
+    &__canvas {
+      width: 656px;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    &__canvas {
+      width: 570px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    &__canvas {
+      width: 100%;
+      height: 300px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    &__canvas {
+      height: 250px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__canvas {
+      height: 230px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    &__canvas {
+      height: 200px;
+    }
   }
 }
