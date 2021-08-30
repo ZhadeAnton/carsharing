@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICar } from '../../../../interfaces/carsInterfaces'
+import { ICar } from '../../../interfaces/carsInterfaces'
 
 interface Props {
   carPlatesNumber: ICar['carPlateNumber'] | undefined

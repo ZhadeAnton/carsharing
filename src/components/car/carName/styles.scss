@@ -1,0 +1,8 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+
+.car-name {
+  margin-bottom: $space-sm;
+  @extend %heading18;
+  color: $primary-color;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 
 import './styles.scss'
 import { ICar } from '../../../interfaces/carsInterfaces'
-import CarPrice from './carPrice'
+import CarPrice from '../../car/carPrice'
 
 interface Props {
   car: ICar,
