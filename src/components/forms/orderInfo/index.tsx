@@ -10,6 +10,7 @@ interface Props {
   buttonTitle: string,
   orderFields: Array<IOrderField>,
   price?: number,
+  isRedButton?: boolean,
   isButtonDisable: boolean,
   onButtonClick?: () => void
 }
@@ -46,6 +47,7 @@ export default function OrderInfo(props: Props) {
           <ButtonPrimary
             isDisable={props.isButtonDisable}
             onClick={props.onButtonClick}
+            isRed={props.isRedButton}
           >
             { props.buttonTitle }
           </ButtonPrimary>

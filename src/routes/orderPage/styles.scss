@@ -10,8 +10,25 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  &__tabs {
+  &__header-row {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     width: 100%;
+
+    &--wrapper {
+      width: 100%;
+      padding: $space-sm 0;
+      border-top: 1px solid $grey-color;
+      border-bottom: 1px solid $grey-color;
+    }
+
+    &--title {
+      @extend %heading14;
+      font-family: 'RobotoBold';
+      font-weight: 700;
+      color: $primary-color;
+    }
   }
 
   &__header {

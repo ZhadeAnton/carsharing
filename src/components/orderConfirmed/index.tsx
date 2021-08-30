@@ -1,18 +1,18 @@
 import React from 'react'
 
 import './styles.scss'
-import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces'
-import { ICarState } from '../../../redux/car/carReducer'
-import { useAppDispatch } from '../../../hooks/usePreTypedHook'
-import { setOrder } from '../../../redux/order/orderActionCreators'
-import { parseDate } from '../../../utils/dateUtils'
-import useToggle from '../../../hooks/useToggle'
-import CarPlatesNumber from '../../car/carPlates'
-import OrderInfo from '../../forms/orderInfo'
-import OrderModal from '../../orderModal'
-import CarInfoField from '../../car/carInfoField'
-import CarName from '../../car/carName'
-import CarImage from '../../car/carImage'
+import { IOrderPageContainer } from '../../containers/orderPage/orderPageInterfaces'
+import { ICarState } from '../../redux/car/carReducer'
+import { parseDate } from '../../utils/dateUtils'
+import { useAppDispatch } from '../../hooks/usePreTypedHook'
+import { removeOrder } from '../../redux/order/orderActionCreators'
+import useToggle from '../../hooks/useToggle'
+import CarImage from '../car/carImage'
+import CarInfoField from '../car/carInfoField'
+import CarName from '../car/carName'
+import CarPlatesNumber from '../car/carPlates'
+import OrderInfo from '../forms/orderInfo'
+import OrderModal from '../orderModal'
 
 interface Props {
   selectedCar: ICarState['selectedCar'],
@@ -21,19 +21,23 @@ interface Props {
   isFullTank: IOrderPageContainer['isFullTank']
 }
 
-export default function StepFour(props: Props) {
+export default function OrderConfirmed(props: Props) {
   const dispatch = useAppDispatch()
   const [isModal, setIsModal] = useToggle()
 
   const handleConfirmOrder = () => {
-    dispatch(setOrder())
+    dispatch(removeOrder())
     setIsModal(false)
   }
 
   return (
-    <section className='step-four step'>
+    <section className='step-four step order-confirmed'>
       <section className='step-four__left step__left'>
-        <div className='step-four__left--info'>
+        <div className='step-four__left--info order-confirmed__info'>
+          <h4 className='order-confirmed__info--title'>
+            Ваш заказ подтверждён
+          </h4>
+
           <CarName
             carModel={props.selectedCar?.carModel}
             carName={props.selectedCar?.carName}
@@ -59,7 +63,8 @@ export default function StepFour(props: Props) {
       <div className='step__right'>
         <OrderInfo
           orderFields={props.stepFourOrderFields}
-          buttonTitle='Заказать'
+          buttonTitle='Отменить'
+          isRedButton={true}
           isButtonDisable={false}
           onButtonClick={() => setIsModal(true)}
         />
@@ -67,7 +72,7 @@ export default function StepFour(props: Props) {
 
       { isModal &&
         <OrderModal
-          title='Подтвердить заказ'
+          title='Отменить заказ'
           onConfirmClick={handleConfirmOrder}
           onRefuseClick={() => setIsModal(false)}
         />

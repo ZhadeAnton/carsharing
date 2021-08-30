@@ -13,6 +13,7 @@ import StepOne from '../../components/steps/stepOne';
 import StepTwo from '../../components/steps/stepTwo';
 import StepThree from '../../components/steps/stepThree';
 import StepFour from '../../components/steps/stepFour';
+import OrderConfirmed from '../../components/orderConfirmed';
 
 export default function OrderPage(props: IOrderPageContainer) {
   const [isMenuOpen, setIsMenuOpen] = useToggle(false)
@@ -29,10 +30,10 @@ export default function OrderPage(props: IOrderPageContainer) {
         </div>
 
         { !props.isOrder &&
-          <div className='order-page__tabs'>
             <Tabs
               type="card"
               activeKey={props.activeTab}
+              className='order-page__header-row'
               onChange={(key) => props.handleChangeActiveTab(key)}
             >
               <TabPane tab="Местоположение" key="1">
@@ -79,7 +80,24 @@ export default function OrderPage(props: IOrderPageContainer) {
                 />
               </TabPane>
             </Tabs>
-          </div>
+        }
+
+        {
+          props.isOrder &&
+           <div className='order-page__header-row'>
+             <div className='order-page__header-row--wrapper'>
+               <h6 className='order-page__header-row--title container'>
+                  Заказ номер { props.orderNumber }
+               </h6>
+             </div>
+
+             <OrderConfirmed
+               selectedCar={props.selectedCar}
+               dateFrom={props.dateFrom}
+               stepFourOrderFields={props.stepFourOrderFields}
+               isFullTank={props.isFullTank}
+             />
+           </div>
         }
       </section>
 

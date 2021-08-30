@@ -32,6 +32,7 @@ export default function OrderPageContainer() {
   const carColorOptions = state.car.carColorOptions
   const carRateOptions = state.car.carRateOptions
   const isOrder = state.order.isOrder
+  const orderNumber = state.order.orderNumber
 
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
@@ -53,8 +54,10 @@ export default function OrderPageContainer() {
 
   carCheckBoxGroup.forEach((item) => {
     if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
+
     item.isChecked === true
-    ? stepThreeOrderFields.push({ title: item.value, value: 'Да' }) : null
+    ? stepThreeOrderFields.push({ title: item.value, value: 'Да' })
+    : null
   })
 
   const isTwoStepDisable = !town
@@ -92,6 +95,7 @@ export default function OrderPageContainer() {
       dateFrom={dateFrom}
       dateTo={dateTo}
       activeTab={activeTab}
+      orderNumber={orderNumber}
       carsSortOptions={carsSortOptions}
       carColorOptions={carColorOptions}
       carRateOptions={carRateOptions}
