@@ -15,7 +15,7 @@ export default function OrderPageTabs(props: IOrderPageContainer) {
       type="card"
       activeKey={props.activeTab}
       className='order-page__header-row'
-      onChange={(key) => props.handleChangeActiveTab(key)}
+      onChange={(key: string) => props.handleChangeActiveTab(key)}
     >
       <TabPane tab="Местоположение" key="1">
         <StepOne
@@ -44,11 +44,11 @@ export default function OrderPageTabs(props: IOrderPageContainer) {
           carRateOptions={props.carRateOptions}
           carColorOptions={props.carColorOptions}
           carCheckBoxGroup={props.carCheckBoxGroup}
+          carCurrentPrice={props.carCurrentPrice}
           dateFrom={props.dateFrom}
           dateTo={props.dateTo}
           stepThreeOrderFields={props.stepThreeOrderFields}
           onChangeActiveTab={props.handleChangeActiveTab}
-          handleCheckboxChange={props.handleCheckboxChange}
         />
       </TabPane>
 
@@ -56,6 +56,7 @@ export default function OrderPageTabs(props: IOrderPageContainer) {
         <StepFour
           selectedCar={props.selectedCar}
           dateFrom={props.dateFrom}
+          carCurrentPrice={props.carCurrentPrice}
           stepFourOrderFields={props.stepFourOrderFields}
           isFullTank={props.isFullTank}
         />

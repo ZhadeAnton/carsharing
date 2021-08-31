@@ -16,7 +16,7 @@ export interface ISelectCarQuality {
 export const CAR_CHECKBOX_CHANGE = 'CAR_CHECKBOX_CHANGE'
 export interface ICheckboxChange {
   type: typeof CAR_CHECKBOX_CHANGE,
-  payload: Array<ICheckbox>
+  payload: ICheckbox
 }
 
 export const SET_CAR_COLOR = 'SET_CAR_COLOR'

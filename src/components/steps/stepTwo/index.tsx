@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './styles.scss'
+import { ICarState } from '../../../redux/car/carReducer';
 import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces';
 import useStepTwoContainer from './useStepTwoContainer';
 import RadioGroup from '../../forms/radiopGroup'
@@ -8,10 +9,10 @@ import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
 
 interface Props {
-  carsList: IOrderPageContainer['carsList'],
-  selectedCar: IOrderPageContainer['selectedCar'],
-  carsSortOptions: IOrderPageContainer['carsSortOptions'],
-  carsSortBy: IOrderPageContainer['carsSortBy'],
+  carsList: ICarState['carsList'],
+  selectedCar: ICarState['selectedCar'],
+  carsSortOptions: ICarState['carsSortOptions'],
+  carsSortBy: ICarState['carsSortBy'],
   stepTwoOrderFields: IOrderPageContainer['stepTwoOrderFields'],
   onChangeActiveTab: (key: string) => void
 }
@@ -47,6 +48,8 @@ export default function StepTwo(props: Props) {
         <OrderInfo
           buttonTitle='Дополнительно'
           orderFields={props.stepTwoOrderFields}
+          lowPrice={props.selectedCar?.lowPrice}
+          highPrice={props.selectedCar?.highPrice}
           isButtonDisable={!props.selectedCar}
           onButtonClick={handleChangeActiveTab}
         />

@@ -1,14 +1,13 @@
 import React from 'react'
 
 import './styles.scss'
+import { ICarState } from '../../../redux/car/carReducer'
 import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces'
 import RadioGroup from '../../forms/radiopGroup'
 import CheckboxGroup from '../../forms/checkboxGroup'
 import DateForm from '../../forms/dateForm'
 import OrderInfo from '../../forms/orderInfo'
 import useStepThreeContainer from './useStepThreeContainer';
-import { ICarState } from '../../../redux/car/carReducer'
-import { ICheckbox } from '../../../interfaces/inputInterfaces'
 
 interface Props {
   carRate: ICarState['carRate'],
@@ -16,11 +15,11 @@ interface Props {
   dateFrom: ICarState['dateFrom'],
   dateTo: ICarState['dateTo'],
   carColor: ICarState['carColor'],
+  carCurrentPrice: IOrderPageContainer['carCurrentPrice'],
   carColorOptions: ICarState['carColorOptions'],
   carCheckBoxGroup: ICarState['carCheckBoxGroup'],
   stepThreeOrderFields: IOrderPageContainer['stepThreeOrderFields'],
-  onChangeActiveTab: (key: string) => void,
-  handleCheckboxChange: (checkbox: ICheckbox) => void
+  onChangeActiveTab: (key: string) => void
 }
 
 export default function StepThree(props: Props) {
@@ -73,7 +72,7 @@ export default function StepThree(props: Props) {
 
         <CheckboxGroup
           checkboxes={props.carCheckBoxGroup}
-          handleChange={props.handleCheckboxChange}
+          handleChange={stepThreeContainer.handleCheckboxChange}
         />
       </section>
 
@@ -81,6 +80,7 @@ export default function StepThree(props: Props) {
         <OrderInfo
           orderFields={props.stepThreeOrderFields}
           buttonTitle='Итого'
+          price={props.carCurrentPrice}
           isButtonDisable={!props.dateFrom || !props.dateTo}
           onButtonClick={handleChangeActiveTab}
         />

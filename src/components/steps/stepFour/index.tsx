@@ -15,6 +15,7 @@ import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
 
 interface Props {
+  carCurrentPrice: IOrderPageContainer['carCurrentPrice'],
   selectedCar: ICarState['selectedCar'],
   dateFrom: ICarState['dateFrom'],
   stepFourOrderFields: IOrderPageContainer['stepFourOrderFields'],
@@ -63,6 +64,7 @@ export default function StepFour(props: Props) {
         <OrderInfo
           orderFields={props.stepFourOrderFields}
           buttonTitle='Заказать'
+          price={props.carCurrentPrice}
           isButtonDisable={false}
           onButtonClick={() => setIsModal(true)}
         />

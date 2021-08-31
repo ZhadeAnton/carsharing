@@ -5,17 +5,13 @@ import { message } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
 import { getDifferenceTime } from '../../utils/dateUtils';
 import { ICheckbox } from '../../interfaces/inputInterfaces';
-import {
-  changeCarCheckbox,
-  setDateFrom,
-  setDateTo
-} from '../../redux/car/carActionCreators';
+import { setDateFrom, setDateTo } from '../../redux/car/carActionCreators';
+import { totalCarPriceSelector } from '../../redux/car/carSelectors';
 import OrderPage from '../../routes/orderPage';
 
 export default function OrderPageContainer() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
-
   const [activeTab, setActiveTab] = useState('1')
 
   const town = state.location.town
@@ -31,12 +27,14 @@ export default function OrderPageContainer() {
   const carsSortOptions = state.car.carsSortOptions
   const carColorOptions = state.car.carColorOptions
   const carRateOptions = state.car.carRateOptions
-  const isOrder = state.order.isOrder
   const orderNumber = state.order.orderNumber
+  const isOrderConfirmed = state.order.isOrderConfirmed
+
+  let isCarFullTank = false
+  const carCurrentPrice = totalCarPriceSelector(state)
 
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
-  let isFullTank = false
 
   const townField = {
     title: 'Пункт выдачи', value: town ? `${town}, ${pickUp}` : 'Не выбрано'
@@ -52,12 +50,12 @@ export default function OrderPageContainer() {
     ...stepTwoOrderFields, carColorField, leaseField, carRateField
   ]
 
-  carCheckBoxGroup.forEach((item) => {
-    if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
+  carCheckBoxGroup.forEach((item: ICheckbox) => {
+    if (item.isChecked) {
+      stepThreeOrderFields.push({ title: item.value, value: 'Да' })
+    }
 
-    item.isChecked === true
-    ? stepThreeOrderFields.push({ title: item.value, value: 'Да' })
-    : null
+    if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
   })
 
   const isTwoStepDisable = !town
@@ -71,12 +69,6 @@ export default function OrderPageContainer() {
       message.error('Неккоректная дата');
     }
   }, [dateFrom, dateTo])
-
-  const handleCheckboxChange = (checkbox: ICheckbox) => {
-    const newItes = [...carCheckBoxGroup]
-    newItes[checkbox.id] = {...checkbox, isChecked: !newItes[checkbox.id].isChecked}
-    dispatch(changeCarCheckbox(newItes))
-  }
 
   const handleChangeActiveTab = (key: string) => {
     setActiveTab(key)
@@ -96,6 +88,7 @@ export default function OrderPageContainer() {
       dateTo={dateTo}
       activeTab={activeTab}
       orderNumber={orderNumber}
+      carCurrentPrice={carCurrentPrice}
       carsSortOptions={carsSortOptions}
       carColorOptions={carColorOptions}
       carRateOptions={carRateOptions}
@@ -103,13 +96,12 @@ export default function OrderPageContainer() {
       stepTwoOrderFields={stepTwoOrderFields}
       stepThreeOrderFields={stepThreeOrderFields}
       stepFourOrderFields={stepThreeOrderFields}
-      isOrder={isOrder}
-      isFullTank={isFullTank}
+      isOrder={isOrderConfirmed}
+      isFullTank={isCarFullTank}
       isTwoStepDisable={isTwoStepDisable}
       isThreeStepDisable={isThreeStepDisable}
       isFourStepDisable={isFourStepDisable}
       handleChangeActiveTab={handleChangeActiveTab}
-      handleCheckboxChange={handleCheckboxChange}
     />
   )
 }

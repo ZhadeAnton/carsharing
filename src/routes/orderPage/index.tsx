@@ -24,10 +24,9 @@ export default function OrderPage(props: IOrderPageContainer) {
           <Header />
         </div>
 
-        {
-          !props.isOrder ? (
-            <OrderPageTabs {...props}/>
-          ) : (
+        {!props.isOrder
+          ? <OrderPageTabs {...props}/>
+          : (
             <div className='order-page__header-row'>
               <div className='order-page__header-row--wrapper'>
                 <h6 className='order-page__header-row--title container'>
@@ -38,12 +37,12 @@ export default function OrderPage(props: IOrderPageContainer) {
               <OrderConfirmed
                 selectedCar={props.selectedCar}
                 dateFrom={props.dateFrom}
+                carCurrentPrice={props.carCurrentPrice}
                 stepFourOrderFields={props.stepFourOrderFields}
                 isFullTank={props.isFullTank}
               />
             </div>
-          )
-        }
+          )}
       </section>
 
       <HamburgerMenu

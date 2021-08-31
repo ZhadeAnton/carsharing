@@ -9,6 +9,8 @@ import ButtonPrimary from '../../buttons/buttonPrimary'
 interface Props {
   buttonTitle: string,
   orderFields: Array<IOrderField>,
+  lowPrice?: number,
+  highPrice?: number,
   price?: number,
   isRedButton?: boolean,
   isButtonDisable: boolean,
@@ -19,7 +21,7 @@ export default function OrderInfo(props: Props) {
   return (
     <form className='order-info'>
       <h5 className='order-info__title'>
-      Ваш заказ:
+        Ваш заказ:
       </h5>
 
       <div>
@@ -34,11 +36,20 @@ export default function OrderInfo(props: Props) {
         }
 
         {
+          props.lowPrice && props.highPrice &&
+          <div className='order-info__price-range'>
+            <PriceRange
+              lowPrice={props.lowPrice}
+              highPrice={props.highPrice}
+            />
+          </div>
+        }
+
+        {
           props.price &&
           <div className='order-info__price-range'>
             <PriceRange
-              // lowPrice={props.lowPrice}
-              // highPrice={props.highPrice}
+              totalPrice={props.price}
             />
           </div>
         }

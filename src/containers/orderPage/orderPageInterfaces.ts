@@ -1,4 +1,3 @@
-import { ICheckbox } from '../../interfaces/inputInterfaces';
 import { IOrderField } from '../../interfaces/orderIntarfaces';
 import { ICarState } from '../../redux/car/carReducer';
 import { ILocationState } from '../../redux/location/locationReducer';
@@ -15,6 +14,7 @@ export interface IOrderPageContainer {
   carCheckBoxGroup: ICarState['carCheckBoxGroup'],
   dateFrom: ICarState['dateFrom'],
   dateTo: ICarState['dateTo'],
+  carCurrentPrice: number | undefined,
   carsSortOptions: ICarState['carsSortOptions'],
   carColorOptions: ICarState['carColorOptions'],
   carRateOptions: ICarState['carRateOptions'],
@@ -22,13 +22,12 @@ export interface IOrderPageContainer {
   stepTwoOrderFields: Array<IOrderField>,
   stepThreeOrderFields: Array<IOrderField>,
   stepFourOrderFields: Array<IOrderField>,
-  isOrder: IOrderState['isOrder'],
+  isOrder: IOrderState['isOrderConfirmed'],
   orderNumber: IOrderState['orderNumber'],
   isFullTank: boolean,
   isTwoStepDisable: boolean,
   isThreeStepDisable: boolean,
   isFourStepDisable: boolean,
   activeTab: string,
-  handleChangeActiveTab: (key: string) => void,
-  handleCheckboxChange: (checkbox: ICheckbox) => void
+  handleChangeActiveTab: (key: string) => void
 }

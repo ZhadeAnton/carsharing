@@ -1,9 +1,14 @@
 import { useAppDispatch } from '../../../hooks/usePreTypedHook'
-import { IDate, IRadioButton } from '../../../interfaces/inputInterfaces'
+import { ICheckbox, IDate, IRadioButton } from '../../../interfaces/inputInterfaces'
+import { changeCarCheckbox } from '../../../redux/car/carActionCreators'
 import * as actions from '../../../redux/car/carActionCreators'
 
 export default function useStepThreeContainer() {
   const dispatch = useAppDispatch()
+
+  const handleCheckboxChange = (checkbox:ICheckbox) => {
+    dispatch(changeCarCheckbox(checkbox))
+  }
 
   const handleColorChange = (color: IRadioButton) => {
     dispatch(actions.setCarColor(color))
@@ -30,6 +35,7 @@ export default function useStepThreeContainer() {
   }
 
   return {
+    handleCheckboxChange,
     handleColorChange,
     handleRateChange,
     handleUpdateDateFrom,

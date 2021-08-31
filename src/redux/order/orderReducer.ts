@@ -1,12 +1,12 @@
 import * as types from './orderActionTypes'
 
 export interface IOrderState {
-  isOrder: boolean,
+  isOrderConfirmed: boolean,
   orderNumber: string
 }
 
 const INIT_STATE: IOrderState = {
-  isOrder: false,
+  isOrderConfirmed: false,
   orderNumber: 'RU58491823'
 }
 
@@ -15,13 +15,13 @@ const orderReducer = (state = INIT_STATE, action: any): IOrderState => {
     case types.SET_ORDER:
       return {
         ...state,
-        isOrder: true
+        isOrderConfirmed: true
       }
 
     case types.REMOVE_ORDER:
       return {
         ...state,
-        isOrder: false
+        isOrderConfirmed: false
       }
 
     default:

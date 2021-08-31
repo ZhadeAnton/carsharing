@@ -9,6 +9,7 @@ import {
   carRateOptions,
   carCheckBoxGroup
 } from '../../utils/carsUtils'
+import { changeCarCheckboxGroup } from './carUtils'
 
 export interface ICarState {
   carsList: Array<ICar>,
@@ -67,7 +68,7 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.CAR_CHECKBOX_CHANGE:
       return {
         ...state,
-        carCheckBoxGroup: action.payload
+        carCheckBoxGroup: changeCarCheckboxGroup(state.carCheckBoxGroup, action.payload)
       }
 
     case types.SET_DATE_FROM:
