@@ -37,7 +37,7 @@ export default function OrderPage(props: IOrderPageContainer) {
               <OrderConfirmed
                 selectedCar={props.selectedCar}
                 dateFrom={props.dateFrom}
-                carCurrentPrice={props.carCurrentPrice}
+                totalPriceOfSelectedCar={props.totalPriceOfSelectedCar}
                 stepFourOrderFields={props.stepFourOrderFields}
                 isFullTank={props.isFullTank}
               />

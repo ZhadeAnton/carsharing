@@ -15,14 +15,15 @@ interface Props {
   dateFrom: ICarState['dateFrom'],
   dateTo: ICarState['dateTo'],
   carColor: ICarState['carColor'],
-  carCurrentPrice: IOrderPageContainer['carCurrentPrice'],
+  totalPriceOfSelectedCar: IOrderPageContainer['totalPriceOfSelectedCar'],
   carColorOptions: ICarState['carColorOptions'],
   carCheckBoxGroup: ICarState['carCheckBoxGroup'],
   stepThreeOrderFields: IOrderPageContainer['stepThreeOrderFields'],
+  isFourthStepDisable: IOrderPageContainer['isFourthStepDisable'],
   onChangeActiveTab: (key: string) => void
 }
 
-export default function StepThree(props: Props) {
+export default function ThirdStep(props: Props) {
   const stepThreeContainer = useStepThreeContainer()
 
   const handleChangeActiveTab = () => {
@@ -80,8 +81,8 @@ export default function StepThree(props: Props) {
         <OrderInfo
           orderFields={props.stepThreeOrderFields}
           buttonTitle='Итого'
-          price={props.carCurrentPrice}
-          isButtonDisable={!props.dateFrom || !props.dateTo}
+          price={props.totalPriceOfSelectedCar}
+          isButtonDisable={props.isFourthStepDisable}
           onButtonClick={handleChangeActiveTab}
         />
       </div>

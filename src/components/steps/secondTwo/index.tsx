@@ -14,10 +14,11 @@ interface Props {
   carsSortOptions: ICarState['carsSortOptions'],
   carsSortBy: ICarState['carsSortBy'],
   stepTwoOrderFields: IOrderPageContainer['stepTwoOrderFields'],
+  isThirdStepDisable: IOrderPageContainer['isThirdStepDisable'],
   onChangeActiveTab: (key: string) => void
 }
 
-export default function StepTwo(props: Props) {
+export default function SecondStep(props: Props) {
   const stepTwoContainer = useStepTwoContainer()
 
   const handleChangeActiveTab = () => {
@@ -50,7 +51,7 @@ export default function StepTwo(props: Props) {
           orderFields={props.stepTwoOrderFields}
           lowPrice={props.selectedCar?.lowPrice}
           highPrice={props.selectedCar?.highPrice}
-          isButtonDisable={!props.selectedCar}
+          isButtonDisable={props.isThirdStepDisable}
           onButtonClick={handleChangeActiveTab}
         />
       </div>

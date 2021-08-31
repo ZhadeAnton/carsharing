@@ -7,11 +7,12 @@ import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInte
 interface Props {
   town: IOrderPageContainer['town'],
   pickUp: IOrderPageContainer['pickUp'],
-  stepOneOrderFields: IOrderPageContainer['stepOneOrderFields']
+  stepOneOrderFields: IOrderPageContainer['stepOneOrderFields'],
+  isSecondStepDisable: IOrderPageContainer['isSecondStepDisable'],
   onChangeActiveTab: (key: string) => void
 }
 
-export default function StepOne(props: Props) {
+export default function FirstStep(props: Props) {
   const handleChangeActiveTab = () => {
     props.onChangeActiveTab('2')
   }
@@ -29,7 +30,7 @@ export default function StepOne(props: Props) {
         <OrderInfo
           orderFields={props.stepOneOrderFields}
           buttonTitle='Выбрать модель'
-          isButtonDisable={!props.town}
+          isButtonDisable={props.isSecondStepDisable}
           onButtonClick={handleChangeActiveTab}
         />
       </div>

@@ -15,14 +15,14 @@ import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
 
 interface Props {
-  carCurrentPrice: IOrderPageContainer['carCurrentPrice'],
+  totalPriceOfSelectedCar: IOrderPageContainer['totalPriceOfSelectedCar'],
   selectedCar: ICarState['selectedCar'],
   dateFrom: ICarState['dateFrom'],
   stepFourOrderFields: IOrderPageContainer['stepFourOrderFields'],
   isFullTank: IOrderPageContainer['isFullTank']
 }
 
-export default function StepFour(props: Props) {
+export default function FourthStep(props: Props) {
   const dispatch = useAppDispatch()
   const [isModal, setIsModal] = useToggle()
 
@@ -64,7 +64,7 @@ export default function StepFour(props: Props) {
         <OrderInfo
           orderFields={props.stepFourOrderFields}
           buttonTitle='Заказать'
-          price={props.carCurrentPrice}
+          price={props.totalPriceOfSelectedCar}
           isButtonDisable={false}
           onButtonClick={() => setIsModal(true)}
         />

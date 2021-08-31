@@ -16,8 +16,10 @@ export default function InputAutoComplete(props) {
     isAddress,
     onSetCoordinates } = props
 
-  const handleSelect = async (value) => {
-    onChange(value)
+  const handleSelect = async (address, placed, suggestion) => {
+    if (suggestion) {
+      onChange(suggestion.formattedSuggestion.mainText)
+    }
 
     if (!isAddress) {
       const results = await geocodeByAddress(value)
@@ -57,7 +59,7 @@ export default function InputAutoComplete(props) {
                           suggestion.active && '-active'}`}
                         {...getSuggestionItemProps(suggestion)}
                       >
-                        { suggestion.description }
+                        { suggestion.formattedSuggestion.mainText }
                       </div>
                     )
                   })}

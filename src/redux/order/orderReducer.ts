@@ -1,4 +1,5 @@
 import * as types from './orderActionTypes'
+import { IOrderTypes } from './orderActionTypes'
 
 export interface IOrderState {
   isOrderConfirmed: boolean,
@@ -10,7 +11,7 @@ const INIT_STATE: IOrderState = {
   orderNumber: 'RU58491823'
 }
 
-const orderReducer = (state = INIT_STATE, action: any): IOrderState => {
+const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
   switch (action.type) {
     case types.SET_ORDER:
       return {

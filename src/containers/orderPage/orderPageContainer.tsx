@@ -31,8 +31,7 @@ export default function OrderPageContainer() {
   const isOrderConfirmed = state.order.isOrderConfirmed
 
   let isCarFullTank = false
-  const carCurrentPrice = totalCarPriceSelector(state)
-
+  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const durationLease = getDifferenceTime(dateFrom, dateTo)
 
@@ -44,23 +43,18 @@ export default function OrderPageContainer() {
   const carColorField = { title: 'Цвет', value: carColor.value }
   const leaseField = { title: 'Длительность аренды', value: durationLease }
 
-  const stepOneOrderFields = [townField]
-  const stepTwoOrderFields = [townField, carModelField]
-  const stepThreeOrderFields = [
-    ...stepTwoOrderFields, carColorField, leaseField, carRateField
-  ]
+  const firstStepFields = [townField]
+  const secondStepFields = [townField, carModelField]
+  const thirdStepFields = [...secondStepFields, carColorField, leaseField, carRateField]
 
   carCheckBoxGroup.forEach((item: ICheckbox) => {
-    if (item.isChecked) {
-      stepThreeOrderFields.push({ title: item.value, value: 'Да' })
-    }
-
+    if (item.isChecked) thirdStepFields.push({ title: item.value, value: 'Да' })
     if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
   })
 
-  const isTwoStepDisable = !town
-  const isThreeStepDisable = !town || !selectedCar
-  const isFourStepDisable = isTwoStepDisable || isThreeStepDisable || !dateFrom || !dateTo
+  const isSecondStepDisable = !town || !pickUp
+  const isThirdStepDisable = isSecondStepDisable || !selectedCar
+  const isFourthStepDisable = isThirdStepDisable || !dateFrom || !dateTo
 
   useEffect(() => {
     if (dateFrom && dateTo && isDateAfter) {
@@ -88,19 +82,19 @@ export default function OrderPageContainer() {
       dateTo={dateTo}
       activeTab={activeTab}
       orderNumber={orderNumber}
-      carCurrentPrice={carCurrentPrice}
+      totalPriceOfSelectedCar={totalPriceOfSelectedCar}
       carsSortOptions={carsSortOptions}
       carColorOptions={carColorOptions}
       carRateOptions={carRateOptions}
-      stepOneOrderFields={stepOneOrderFields}
-      stepTwoOrderFields={stepTwoOrderFields}
-      stepThreeOrderFields={stepThreeOrderFields}
-      stepFourOrderFields={stepThreeOrderFields}
+      stepOneOrderFields={firstStepFields}
+      stepTwoOrderFields={secondStepFields}
+      stepThreeOrderFields={thirdStepFields}
+      stepFourOrderFields={thirdStepFields}
       isOrder={isOrderConfirmed}
       isFullTank={isCarFullTank}
-      isTwoStepDisable={isTwoStepDisable}
-      isThreeStepDisable={isThreeStepDisable}
-      isFourStepDisable={isFourStepDisable}
+      isSecondStepDisable={isSecondStepDisable}
+      isThirdStepDisable={isThirdStepDisable}
+      isFourthStepDisable={isFourthStepDisable}
       handleChangeActiveTab={handleChangeActiveTab}
     />
   )

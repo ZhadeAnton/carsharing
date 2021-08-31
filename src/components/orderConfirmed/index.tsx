@@ -17,7 +17,7 @@ import OrderModal from '../orderModal'
 interface Props {
   selectedCar: ICarState['selectedCar'],
   dateFrom: ICarState['dateFrom'],
-  carCurrentPrice: IOrderPageContainer['carCurrentPrice'],
+  totalPriceOfSelectedCar: IOrderPageContainer['totalPriceOfSelectedCar'],
   stepFourOrderFields: IOrderPageContainer['stepFourOrderFields'],
   isFullTank: IOrderPageContainer['isFullTank']
 }
@@ -65,7 +65,7 @@ export default function OrderConfirmed(props: Props) {
         <OrderInfo
           orderFields={props.stepFourOrderFields}
           buttonTitle='Отменить'
-          price={props.carCurrentPrice}
+          price={props.totalPriceOfSelectedCar}
           isRedButton={true}
           isButtonDisable={false}
           onButtonClick={() => setIsModal(true)}
