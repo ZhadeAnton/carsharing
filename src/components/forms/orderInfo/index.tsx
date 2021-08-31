@@ -7,8 +7,8 @@ import ButtonPrimary from '../../buttons/buttonPrimary'
 
 interface Props {
   orderFields: Array<{title: string, value: string | undefined}>,
-  lowPrice: number | undefined,
-  highPrice: number | undefined
+  lowPrice?: number | undefined,
+  highPrice?: number | undefined
 }
 
 export default function OrderInfo(props: Props) {

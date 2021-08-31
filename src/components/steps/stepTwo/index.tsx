@@ -3,22 +3,28 @@ import React, { useState } from 'react'
 import './styles.scss'
 import { carsMock } from '../../../utils/carsListMock';
 import { ICar } from '../../../interfaces/carsInterfaces';
+import { IRadioButton } from '../../../interfaces/inputInterfaces';
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
 
+const radioGroup= [
+  {title: 'Все модели', value: 'Все модели'},
+  {title: 'Эконом', value: 'Эконом'},
+  {title: 'Премиум', value: 'Премиум'},
+]
+
 export default function StepTwo() {
-  const [selected, setSelected] = useState<string>('Все модели')
+  const [selected, setSelected] = useState<IRadioButton>(radioGroup[0])
   const [selectedCar, setSelectedCar] = useState<ICar>()
 
-  const radioGroup= ['Все модели', 'Эконом', 'Премиум']
   const orderFields = [
     {title: 'Пункт выдачи', value: 'Ульяновск, Наримова 42'},
-    {title: 'Модель', value: selectedCar?.carName ? selectedCar?.carName : 'Не выбрано'}
+    {title: 'Модель', value: selectedCar?.carName ?? 'Не выбрано'}
   ]
 
-  const handleButtonChange = (value: string) => {
-    setSelected(value);
+  const handleButtonChange = ({title, value}: IRadioButton) => {
+    setSelected({title, value});
   }
 
   const handleSelect = (car: ICar) => {

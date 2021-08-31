@@ -1,29 +1,31 @@
-import React from 'react';
+import React from 'react'
 
 import './styles.scss'
+import { ICheckbox } from '../../../interfaces/inputInterfaces'
 
 interface Props {
-  value: string,
-  checked: boolean,
-  handleChange: (value: string) => void
+  checkbox: ICheckbox,
+  onChange: (checkbox: ICheckbox) => void
 }
 
-export default function RadioButton(props: Props) {
+export default function CheckboxPrimary(props: Props) {
   return (
-    <div className='radio-button-primary'>
+    <div>
       <input
-        type="radio"
-        value={props.value}
-        name='check-box-primary'
-        checked={props.checked}
-        onChange={() => props.handleChange(props.value)}
+        type="checkbox"
+        className="checkbox-custom"
+        name={props.checkbox.title}
+        checked={props.checkbox.isChecked}
+        onChange={() => props.onChange(props.checkbox)}
       />
 
       <label
-        htmlFor='check-box-primary'
-        onClick={() => props.handleChange(props.value)}
+        key={props.checkbox.title}
+        htmlFor={props.checkbox.title}
+        className="checkbox-custom-label"
+        onClick={() => props.onChange(props.checkbox)}
       >
-        { props.value }
+        { props.checkbox.title }
       </label>
     </div>
   )
