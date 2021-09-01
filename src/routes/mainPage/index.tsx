@@ -2,18 +2,13 @@ import React from 'react'
 
 import './styles.scss'
 import { slides } from '../../utils/sliderUtils'
-import useToggle from '../../hooks/useToggle'
 import Header from '../../components/header'
 import Aside from '../../components/aside'
 import Footer from '../../components/footer'
 import MainArticle from '../../components/mainArticle'
-import HamburgerMenu from '../../components/hamburgerMenu'
-import OverlayMenu from '../../components/overlayMenu'
 import Slider from '../../components/slider'
 
 export default function MainPage() {
-  const [isOpen, setIsOpen] = useToggle(false)
-
   return (
     <main className='main-page'>
       <div className='main-page__aside'>
@@ -39,13 +34,6 @@ export default function MainPage() {
       <section className='main-page__slider'>
         <Slider slides={slides}/>
       </section>
-
-      <HamburgerMenu
-        isOpen={isOpen}
-        onClickByMenu={setIsOpen}
-      />
-
-      { isOpen && <OverlayMenu /> }
     </main>
   )
 }
