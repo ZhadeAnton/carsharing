@@ -1,34 +1,14 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICarState } from '../../../redux/car/carReducer'
-import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces'
 import RadioGroup from '../../forms/radiopGroup'
 import CheckboxGroup from '../../forms/checkboxGroup'
 import DateForm from '../../forms/dateForm'
 import OrderInfo from '../../forms/orderInfo'
 import useStepThreeContainer from './useStepThreeContainer';
 
-interface Props {
-  carRate: ICarState['carRate'],
-  carRateOptions: ICarState['carRateOptions'],
-  dateFrom: ICarState['dateFrom'],
-  dateTo: ICarState['dateTo'],
-  carColor: ICarState['carColor'],
-  totalPriceOfSelectedCar: IOrderPageContainer['totalPriceOfSelectedCar'],
-  carColorOptions: ICarState['carColorOptions'],
-  carCheckBoxGroup: ICarState['carCheckBoxGroup'],
-  stepThreeOrderFields: IOrderPageContainer['stepThreeOrderFields'],
-  isFourthStepDisable: IOrderPageContainer['isFourthStepDisable'],
-  onChangeActiveTab: (key: string) => void
-}
-
-export default function ThirdStep(props: Props) {
+export default function ThirdStep() {
   const stepThreeContainer = useStepThreeContainer()
-
-  const handleChangeActiveTab = () => {
-    props.onChangeActiveTab('4')
-  }
 
   return (
     <section className='step-three step'>
@@ -38,9 +18,9 @@ export default function ThirdStep(props: Props) {
         </h6>
 
         <RadioGroup
-          buttons={props.carColorOptions}
-          selected={props.carColor}
-          onChange={stepThreeContainer.handleColorChange}
+          buttons={stepThreeContainer.state.carColorOptions}
+          selected={stepThreeContainer.state.carColor}
+          onChange={stepThreeContainer.handlers.handleColorChange}
         />
 
         <h6 className='step-three__title'>
@@ -48,12 +28,12 @@ export default function ThirdStep(props: Props) {
         </h6>
 
         <DateForm
-          dateFrom={props.dateFrom}
-          dateTo={props.dateTo}
-          onUpdateDateFrom={stepThreeContainer.handleUpdateDateFrom}
-          onUpdateDateTo={stepThreeContainer.handleUpdateDateTo}
-          onClearDateFrom={stepThreeContainer.handleClearDateFrom}
-          onClearDateTo={stepThreeContainer.handleClearDateTo}
+          dateFrom={stepThreeContainer.state.dateFrom}
+          dateTo={stepThreeContainer.state.dateTo}
+          onUpdateDateFrom={stepThreeContainer.handlers.handleUpdateDateFrom}
+          onUpdateDateTo={stepThreeContainer.handlers.handleUpdateDateTo}
+          onClearDateFrom={stepThreeContainer.handlers.handleClearDateFrom}
+          onClearDateTo={stepThreeContainer.handlers.handleClearDateTo}
         />
 
         <h6 className='step-three__title'>
@@ -61,9 +41,9 @@ export default function ThirdStep(props: Props) {
         </h6>
 
         <RadioGroup
-          buttons={props.carRateOptions}
-          selected={props.carRate}
-          onChange={stepThreeContainer.handleRateChange}
+          buttons={stepThreeContainer.state.carRateOptions}
+          selected={stepThreeContainer.state.carRate}
+          onChange={stepThreeContainer.handlers.handleRateChange}
           isVertical
         />
 
@@ -72,18 +52,18 @@ export default function ThirdStep(props: Props) {
         </h6>
 
         <CheckboxGroup
-          checkboxes={props.carCheckBoxGroup}
-          handleChange={stepThreeContainer.handleCheckboxChange}
+          checkboxes={stepThreeContainer.state.carCheckBoxGroup}
+          handleChange={stepThreeContainer.handlers.handleCheckboxChange}
         />
       </section>
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={props.stepThreeOrderFields}
+          orderFields={stepThreeContainer.state.thirdStepFields}
           buttonTitle='Итого'
-          price={props.totalPriceOfSelectedCar}
-          isButtonDisable={props.isFourthStepDisable}
-          onButtonClick={handleChangeActiveTab}
+          price={stepThreeContainer.state.totalPriceOfSelectedCar}
+          isButtonDisable={stepThreeContainer.state.isFourthStepDisable}
+          onButtonClick={stepThreeContainer.handlers.handleChangeActiveTab}
         />
       </div>
     </section>

@@ -12,8 +12,7 @@ export const selectCarQuality = (quality: IRadioButton): types.ISelectCarQuality
   payload: quality
 })
 
-export const changeCarCheckbox = (checkbox: ICheckbox)
-  : types.ICheckboxChange => ({
+export const changeCarCheckbox = (checkbox: ICheckbox) : types.ICheckboxChange => ({
   type: types.CAR_CHECKBOX_CHANGE,
   payload: checkbox
 })

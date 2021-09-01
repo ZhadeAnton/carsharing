@@ -58,7 +58,9 @@ export default function OrderConfirmed(props: Props) {
           </div>
         </div>
 
-        <CarImage carImage={props.selectedCar?.carImage} />
+        <div className='step-four__image-wrapper'>
+          <CarImage carImage={props.selectedCar?.carImage} />
+        </div>
       </section>
 
       <div className='step__right'>

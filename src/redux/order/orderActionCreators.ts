@@ -7,3 +7,8 @@ export const setOrder = (): types.ISetOrder => ({
 export const removeOrder = (): types.IRemoveOrder => ({
   type: types.REMOVE_ORDER
 })
+
+export const setCurrentTab = (tabKey: string): types.ISetCurrentTabPosition => ({
+  type: types.SET_CURRENT_TAB_POSITION,
+  payload: tabKey
+})

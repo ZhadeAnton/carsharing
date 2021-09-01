@@ -2,23 +2,7 @@
 
 .car-image-wrapper {
   &__image {
-    min-width: 250px;
+    width: 100%;
     height: auto;
-  }
-
-  @media (max-width: getBreackpoint('md')) {
-    &__image {
-      min-width: 205px;
-    }
-  }
-
-  @media (max-width: getBreackpoint('vsm')) {
-    display: flex;
-    justify-content: center;
-
-    &__image {
-      min-width: 200px;
-      height: 100%;
-    }
   }
 }

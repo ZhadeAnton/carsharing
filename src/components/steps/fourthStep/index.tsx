@@ -1,12 +1,8 @@
 import React from 'react'
 
 import './styles.scss'
-import { IOrderPageContainer } from '../../../containers/orderPage/orderPageInterfaces'
-import { ICarState } from '../../../redux/car/carReducer'
-import { useAppDispatch } from '../../../hooks/usePreTypedHook'
-import { setOrder } from '../../../redux/order/orderActionCreators'
 import { parseDate } from '../../../utils/dateUtils'
-import useToggle from '../../../hooks/useToggle'
+import useFourthStepContainer from './useFourthStepContainer'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
 import OrderModal from '../../orderModal'
@@ -14,36 +10,24 @@ import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
 
-interface Props {
-  totalPriceOfSelectedCar: IOrderPageContainer['totalPriceOfSelectedCar'],
-  selectedCar: ICarState['selectedCar'],
-  dateFrom: ICarState['dateFrom'],
-  stepFourOrderFields: IOrderPageContainer['stepFourOrderFields'],
-  isFullTank: IOrderPageContainer['isFullTank']
-}
-
-export default function FourthStep(props: Props) {
-  const dispatch = useAppDispatch()
-  const [isModal, setIsModal] = useToggle()
-
-  const handleConfirmOrder = () => {
-    dispatch(setOrder())
-    setIsModal(false)
-  }
+export default function FourthStep() {
+  const fourthStepContainer = useFourthStepContainer()
 
   return (
     <section className='step-four step'>
       <section className='step-four__left step__left'>
         <div className='step-four__left--info'>
           <CarName
-            carModel={props.selectedCar?.carModel}
-            carName={props.selectedCar?.carName}
+            carModel={fourthStepContainer.selectedCar?.carModel}
+            carName={fourthStepContainer.selectedCar?.carName}
           />
 
-          <CarPlatesNumber carPlatesNumber={props.selectedCar?.carPlateNumber} />
+          <CarPlatesNumber
+            carPlatesNumber={fourthStepContainer.selectedCar?.carPlateNumber}
+          />
 
           <div className='step-four__info'>
-            { props.isFullTank &&
+            { fourthStepContainer.isCarFullTank &&
               <CarInfoField
                 title='Топливо'
                 value='100%'
@@ -52,29 +36,31 @@ export default function FourthStep(props: Props) {
 
             <CarInfoField
               title='Доступна с'
-              value={parseDate(props.dateFrom)}
+              value={parseDate(fourthStepContainer.dateFrom)}
             />
           </div>
         </div>
 
-        <CarImage carImage={props.selectedCar?.carImage} />
+        <div className='step-four__image-wrapper'>
+          <CarImage carImage={fourthStepContainer.selectedCar?.carImage} />
+        </div>
       </section>
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={props.stepFourOrderFields}
           buttonTitle='Заказать'
-          price={props.totalPriceOfSelectedCar}
+          orderFields={fourthStepContainer.fourthStepFields}
+          price={fourthStepContainer.totalPriceOfSelectedCar}
           isButtonDisable={false}
-          onButtonClick={() => setIsModal(true)}
+          onButtonClick={fourthStepContainer.handleOpenModal}
         />
       </div>
 
-      { isModal &&
+      { fourthStepContainer.isModal &&
         <OrderModal
           title='Подтвердить заказ'
-          onConfirmClick={handleConfirmOrder}
-          onRefuseClick={() => setIsModal(false)}
+          onConfirmClick={fourthStepContainer.handleConfirmOrder}
+          onRefuseClick={fourthStepContainer.handleCloseModal}
         />
       }
     </section>

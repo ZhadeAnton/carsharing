@@ -1,13 +1,34 @@
 import { createSelector } from 'reselect'
 
 import { ICheckbox } from '../../interfaces/inputInterfaces'
+import { getDifferenceTime } from '../../utils/dateUtils'
 import { RootState } from '../store'
 
 const carSelector = (state: RootState) => state.car
 
 const currentCarSelector = createSelector(
     [carSelector],
-    (car) => car.selectedCar
+    (carState) => carState.selectedCar
+)
+
+const carRateSelector = createSelector(
+    [carSelector],
+    (carState) => carState.carRate
+)
+
+const carColorSelector = createSelector(
+    [carSelector],
+    (carState) => carState.carColor
+)
+
+const carDateFromSelector = createSelector(
+    [carSelector],
+    (carState) => carState.dateFrom
+)
+
+const carDateToSelector = createSelector(
+    [carSelector],
+    (carState) => carState.dateTo
 )
 
 const carLowPriceSelector = createSelector(
@@ -17,7 +38,7 @@ const carLowPriceSelector = createSelector(
 
 const carCheckboxesSelector = createSelector(
     [carSelector],
-    (car) => car.carCheckBoxGroup
+    (carState) => carState.carCheckBoxGroup
 )
 
 const carCheckboxesCheckedSelector = createSelector(
@@ -37,5 +58,35 @@ export const totalCarPriceSelector = createSelector(
     carCheckboxesCostSelector,
     (carLowPrice, carCheckboxesCost) => {
       if (carLowPrice) return carLowPrice + carCheckboxesCost
+    }
+)
+
+export const getCarModelFiled = createSelector(
+    [currentCarSelector],
+    (selectedCar) => {
+      return { title: 'Модель', value: selectedCar?.carName ?? 'Не выбрано' }
+    }
+)
+
+export const getCarRateField = createSelector(
+    [carRateSelector],
+    (carRate) => {
+      return { title: 'Тариф', value: carRate.value }
+    }
+)
+
+export const getCarColorField = createSelector(
+    [carColorSelector],
+    (carColor) => {
+      return { title: 'Цвет', value: carColor.value }
+    }
+)
+
+export const getCarLeaseField = createSelector(
+    carDateFromSelector,
+    carDateToSelector,
+    (dateFrom, dateTo) => {
+      const durationLease = getDifferenceTime(dateFrom, dateTo)
+      return { title: 'Длительность аренды', value: durationLease }
     }
 )
