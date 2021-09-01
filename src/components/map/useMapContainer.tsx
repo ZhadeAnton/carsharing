@@ -16,6 +16,8 @@ export default function useMapContainer() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
+  const town = state.location.town
+  const pickUp = state.location.pickUp
   const markers = state.location.markers
   const coordinatesByPickedTown = state.location.coordinatesByPickedTown
 
@@ -52,18 +54,20 @@ export default function useMapContainer() {
     }))
   }
 
-
-  return (
-    {
-      state: {
-        markers, coordinatesByPickedTown
-      },
-      handlers: {
-        handleSelectTown, handleSelectPickUp, handleSelectCoordinates, handleMapClick
-      },
-      settings: {
-        onMapLoad, isLoaded, mapContainerStyle, center, options, zoom
-      }
-    }
-  )
+  return {
+    town,
+    pickUp,
+    markers,
+    coordinatesByPickedTown,
+    handleSelectTown,
+    handleSelectPickUp,
+    handleSelectCoordinates,
+    handleMapClick,
+    onMapLoad,
+    isLoaded,
+    mapContainerStyle,
+    center,
+    options,
+    zoom
+  }
 }

@@ -11,10 +11,7 @@ export default function FirstStep() {
   return (
     <section className='step-one step'>
       <div className='step-one__left step__left'>
-        <CustomMap
-          town={stepContainer.town}
-          pickUp={stepContainer.pickUp}
-        />
+        <CustomMap />
       </div>
 
       <div className='step-one__right step__right'>

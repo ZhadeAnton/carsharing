@@ -6,25 +6,20 @@ import * as IMap from '../../interfaces/mapInterfaces'
 import useMapContainer from './useMapContainer'
 import SearchLocationForm from '../forms/searchLocationForm/index'
 
-interface Props {
-  town: string | null,
-  pickUp: string | null
-}
-
-export default function CustomMap(props: Props) {
+export default function CustomMap() {
   const mapContainer = useMapContainer()
 
   return (
-    mapContainer.settings.isLoaded ? (
+    mapContainer.isLoaded ? (
       <div className='custom-map'>
         <div className='custom-map__search-form'>
           <SearchLocationForm
-            town={props.town}
-            pickUp={props.pickUp}
-            coordinatesByPickedTown={mapContainer.state.coordinatesByPickedTown}
-            onSelectTown={mapContainer.handlers.handleSelectTown}
-            onSelectPickUp={mapContainer.handlers.handleSelectPickUp}
-            onSetCoordinates={mapContainer.handlers.handleSelectCoordinates}
+            town={mapContainer.town}
+            pickUp={mapContainer.pickUp}
+            coordinatesByPickedTown={mapContainer.coordinatesByPickedTown}
+            onSelectTown={mapContainer.handleSelectTown}
+            onSelectPickUp={mapContainer.handleSelectPickUp}
+            onSetCoordinates={mapContainer.handleSelectCoordinates}
           />
         </div>
 
@@ -35,14 +30,14 @@ export default function CustomMap(props: Props) {
         <div className='custom-map__canvas'>
           <GoogleMap
             id="map"
-            mapContainerStyle={mapContainer.settings.mapContainerStyle}
-            zoom={mapContainer.settings.zoom}
-            center={mapContainer.settings.center}
-            options={{...mapContainer.settings.options}}
-            onLoad={mapContainer.settings.onMapLoad}
-            onClick={(event) => mapContainer.handlers.handleMapClick(event)}
+            mapContainerStyle={mapContainer.mapContainerStyle}
+            zoom={mapContainer.zoom}
+            center={mapContainer.center}
+            options={{...mapContainer.options}}
+            onLoad={mapContainer.onMapLoad}
+            onClick={(event) => mapContainer.handleMapClick(event)}
           >
-            { mapContainer.state.markers.map((marker: IMap.IMark) => (
+            { mapContainer.markers.map((marker: IMap.IMark) => (
               <Marker
                 key={`${marker.lat}-${marker.lng}`}
                 position={{ lat: marker.lat, lng: marker.lng }}
