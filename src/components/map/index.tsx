@@ -47,7 +47,7 @@ export default function CustomMap(props: Props) {
                 key={`${marker.lat}-${marker.lng}`}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 icon={{
-                  url: `/location-marker.svg`,
+                  url: `./location-marker.svg`,
                   origin: new window.google.maps.Point(0, 0),
                   anchor: new window.google.maps.Point(15, 15),
                   scaledSize: new window.google.maps.Size(18, 18),
