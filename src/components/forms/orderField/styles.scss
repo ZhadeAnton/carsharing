@@ -36,10 +36,15 @@
     @extend %order-font;
     color: $primary-color;
     background-color: inherit;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
   }
 
   &__info {
-    max-width: 95px;
+    max-width: 110px;
+    max-height: 50px;
     @include abs-position(auto, 0, 3px, auto);
     padding-left: $space-sm;
     z-index: $layer-2;
@@ -47,5 +52,7 @@
     @extend %order-font;
     color: $grey-strong-color;
     background-color: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

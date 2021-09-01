@@ -1,0 +1,89 @@
+@import '../../../scss/mixins';
+@import '../../../scss/variables';
+@import '../../../scss/typography';
+
+.input-autocomplete {
+  width: fit-content;
+  position: relative;
+
+  &__input {
+    @extend %input-primary;
+    position: relative;
+    @extend %heading14;
+    font-family: 'RobotoLight';
+    font-weight: 300;
+    color: $primary-color;
+
+    & > * {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+  }
+
+  &__suggetion-list {
+    width: 225px;
+    height: 105px;
+    padding: $space-sm;
+    @include abs-position(calc(100% - 3px), auto, auto, 0);
+    overflow-y: scroll;
+    z-index: $layer-max;
+    background-color: $white-color;
+    border: 1px solid $primary-accent-color;
+
+    &::-webkit-scrollbar {
+      display: block;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-left: 1px solid $grey-color;
+    } 
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $grey-strong-color;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
+
+    &--item {
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      cursor: pointer;
+      @extend %heading14;
+      font-family: 'RobotoLight';
+      font-weight: 300;
+      color: $grey-strong-color;
+
+      &:hover {
+        color: $primary-accent-color;
+      }
+
+      &-active {
+        cursor: pointer;
+        color: $primary-accent-color;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__suggetion-list {
+      font-size: 13px;
+      line-height: 17px;
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    &__suggetion-list {
+      width: 200px;
+      @include abs-position(calc(100% - 3px), auto, auto, -10%);
+    }
+  }
+}

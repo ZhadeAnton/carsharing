@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
 
 interface Props {

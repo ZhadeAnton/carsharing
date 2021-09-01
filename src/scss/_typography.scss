@@ -1,4 +1,5 @@
 @import './variables';
+@import './mixins';
 
 %heading70 {
   font-size: 70px;
@@ -62,6 +63,7 @@
   &:disabled {
     background: none;
     background-color: $grey-color;
+    cursor: not-allowed;
   }
 }
 
@@ -92,7 +94,8 @@
 
   &__left {
     flex: 3;
-    height: auto;
+    height: fit-content;
+    min-height: 100%;
     padding-top: $space-lg;
     padding-right: $space-lg;
     border-right: 1px solid $grey-color;
@@ -123,6 +126,7 @@
 
     &__left {
       flex: 1;
+      min-height: auto;
       padding: $space-lg 0;
       border-right: none;
     }
@@ -130,6 +134,52 @@
     &__right {
       flex: 1;
       padding: $space-md 0;
+    }
+  }
+}
+
+%input-primary {
+  width: 225px;
+  border: none;
+  outline: none;
+  padding: 0 $space-sm;
+  border-bottom: 1px solid $grey-strong-color;
+  font-family: 'RobotoLight';
+  @extend %heading14;
+  color: $primary-color;
+
+  &:hover {
+    border-bottom: 1px solid $grey-strong-color;
+  }
+
+  @extend %input-primary-adaptive;
+}
+
+%input-primary-adaptive {
+  @media (max-width: getBreackpoint('sm')) {
+    width: 200px;
+    font-size: 13px;
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    width: 180px;
+  }
+}
+
+.input-primary {
+  position: relative;
+
+  &__field {
+    @extend %input-primary;
+  }
+
+  &__close-btn {
+    @include abs-position(auto, 3.5%, 3%, auto);
+    cursor: pointer;
+    z-index: $layer-max - 1;
+
+    &:hover {
+      opacity: .9;
     }
   }
 }

@@ -2,11 +2,11 @@ import React from 'react'
 
 import './styles.scss'
 import { ICar } from '../../interfaces/carsInterfaces'
-import Car from './car'
+import Car from './carItem'
 
 interface Props {
   cars: Array<ICar>,
-  selected: ICar | undefined,
+  selected: ICar | null,
   onSelectCar: (car: ICar) => void
 }
 

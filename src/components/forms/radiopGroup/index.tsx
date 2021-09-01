@@ -1,27 +1,28 @@
 import React from 'react'
 
 import './styles.scss'
-import RadioButton from '../../inputs/checkboxPrimary'
+import { IRadioButton } from '../../../interfaces/inputInterfaces'
+import RadioButton from '../../inputs/radioButtonPrimary'
 
 interface Props {
-  buttons: Array<string>,
-  selected: string,
-  vertical?: boolean,
-  handleChange: (value: string) => any
+  buttons: Array<IRadioButton>,
+  selected: IRadioButton | undefined,
+  isVertical?: boolean,
+  onChange: ({title, value}: IRadioButton) => any
 }
 
 export default function RadioGroup(props: Props) {
   return (
     <form className={`radio-buttons-form
-      ${props.vertical ? 'radio-buttons-form-vertical' : ''}`}
+      ${props.isVertical ? 'radio-buttons-form-vertical' : ''}`}
     >
       {
         props.buttons.map((button, i) => (
           <RadioButton
             key={i}
-            value={button}
-            checked={props.selected === button}
-            handleChange={props.handleChange}
+            button={button}
+            checked={props.selected?.title === button.title}
+            handleChange={props.onChange}
           />
         ))
       }

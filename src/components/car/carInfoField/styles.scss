@@ -1,0 +1,36 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+
+.car-field {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: $space-sm;
+  }
+
+  &__title {
+    margin-right: 6px;
+    @extend %heading14;
+    font-family: 'RobotoBold';
+    font-weight: 700;
+    color: $primary-color;
+  }
+
+  &__number {
+    @extend %heading14;
+    font-family: 'RobotoLight';
+    font-weight: 300;
+    color: $primary-color;
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    &__title {
+      margin-right: 5px;
+        font-style: 13px;
+    }
+  
+    &__number {
+      font-size: 13px;
+    }
+  }
+}

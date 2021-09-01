@@ -1,0 +1,77 @@
+@import '../../../scss/variables';
+@import '../../../scss/typography';
+
+.date-picker-primary {
+  max-width: 225px;
+  @extend %input-primary-adaptive;
+
+  .ant-picker, .ant-picker-focused {
+    border: none;
+    box-shadow: none;
+    
+    input {
+      @extend %input-primary;
+    }
+  }
+
+  .ant-picker-suffix, .ant-picker-clear {
+    display: none;
+  }
+
+  .ant-picker-small {
+    padding: 0;
+  }
+}
+
+@media (max-width: getBreackpoint('sm')) {
+  .ant-picker-dropdown {
+    position: fixed;
+    top: 10% !important;
+    left: 6% !important;
+    font-size: 13px;
+  }
+
+  .ant-picker-datetime-panel {
+    flex-direction: column;
+  }
+
+  .ant-picker-header {
+    height: 35px;
+
+    button {
+      line-height: 25px;
+      font-size: 12px;
+    }
+  }
+
+  .ant-picker-date-panel .ant-picker-body {
+    padding: 8px;
+  }
+
+  .ant-picker-date-panel .ant-picker-content {
+    width: 100%;
+  }
+  
+  .ant-picker-time-panel .ant-picker-content {
+    height: 160px;
+  }
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-selected
+.ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start
+.ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-end
+.ant-picker-cell-inner {
+  background: $primary-accent-color;
+}
+
+.ant-btn-primary, .ant-btn-primar:active, .ant-btn-primar:focus {
+  background: $primary-accent-color !important;
+  border-color: $primary-accent-color !important;
+}
+
+.ant-btn-primary[disabled] {
+  background: none !important;
+  border: 1px solid $grey-strong-color !important;
+}
