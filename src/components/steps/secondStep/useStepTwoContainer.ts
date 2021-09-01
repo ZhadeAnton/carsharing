@@ -3,8 +3,11 @@ import { useAppDispatch } from '../../../hooks/usePreTypedHook'
 import { IFnSelectCar, IFnSelectCarQuality } from '../../../interfaces/carsInterfaces'
 import { selectCar, selectCarQuality } from '../../../redux/car/carActionCreators'
 import { getTownField } from '../../../redux/location/locationSelectors';
-import { getCarModelFiled as getCarModelField } from '../../../redux/car/carSelectors';
 import { setCurrentTab } from '../../../redux/order/orderActionCreators';
+import {
+  getCarModelFiled,
+  isSecondStepDisabledSelector
+} from '../../../redux/car/carSelectors';
 
 export default function useStepTwoContainer() {
   const dispatch = useAppDispatch()
@@ -16,9 +19,9 @@ export default function useStepTwoContainer() {
   const carsSortBy = state.car.carsSortBy
 
   const townField = getTownField(state)
-  const carModelField = getCarModelField(state)
+  const carModelField = getCarModelFiled(state)
+  const isSecondStepDisabled = isSecondStepDisabledSelector(state)
   const secondStepFields = [townField, carModelField]
-  const isThirdStepDisable = !carsList
 
   const handleSelectCar: IFnSelectCar = (car) => {
     dispatch(selectCar(car))
@@ -33,16 +36,14 @@ export default function useStepTwoContainer() {
   }
 
   return {
-    state: {
-      carsList,
-      selectedCar,
-      carsSortOptions,
-      carsSortBy,
-      secondStepFields,
-      isThirdStepDisable
-    },
-    handlers: {
-      handleSelectCar, handleSortCars, handleChangeActiveTab
-    }
+    carsList,
+    selectedCar,
+    carsSortOptions,
+    carsSortBy,
+    secondStepFields,
+    isSecondStepDisabled,
+    handleSelectCar,
+    handleSortCars,
+    handleChangeActiveTab
   }
 }

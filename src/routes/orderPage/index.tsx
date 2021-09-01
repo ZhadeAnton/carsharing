@@ -1,17 +1,14 @@
 import React from 'react'
 
 import './styles.scss'
-import { IOrderPageContainer } from '../../containers/orderPage/orderPageInterfaces';
-import useToggle from '../../hooks/useToggle'
+import usePageContainer from './usePageContainer'
 import Aside from '../../components/aside'
-import HamburgerMenu from '../../components/hamburgerMenu'
-import OverlayMenu from '../../components/overlayMenu'
 import Header from '../../components/header'
 import OrderConfirmed from '../../components/orderConfirmed';
 import OrderPageTabs from '../../components/orderPageTabs';
 
-export default function OrderPage(props: IOrderPageContainer) {
-  const [isMenuOpen, setIsMenuOpen] = useToggle(false)
+export default function OrderPage() {
+  const orderPageContainer = usePageContainer()
 
   return (
     <main className='order-page'>
@@ -24,33 +21,20 @@ export default function OrderPage(props: IOrderPageContainer) {
           <Header />
         </div>
 
-        {!props.isOrder
-          ? <OrderPageTabs {...props}/>
+        {!orderPageContainer.isOrderConfirmed
+          ? <OrderPageTabs />
           : (
             <div className='order-page__header-row'>
               <div className='order-page__header-row--wrapper'>
                 <h6 className='order-page__header-row--title container'>
-                  Заказ номер { props.orderNumber }
+                  Заказ номер { orderPageContainer.orderNumber }
                 </h6>
               </div>
 
-              <OrderConfirmed
-                selectedCar={props.selectedCar}
-                dateFrom={props.dateFrom}
-                totalPriceOfSelectedCar={props.totalPriceOfSelectedCar}
-                stepFourOrderFields={props.stepFourOrderFields}
-                isFullTank={props.isFullTank}
-              />
+              <OrderConfirmed />
             </div>
           )}
       </section>
-
-      <HamburgerMenu
-        isOpen={isMenuOpen}
-        onClickByMenu={setIsMenuOpen}
-      />
-
-      { isMenuOpen && <OverlayMenu /> }
     </main>
   )
 }

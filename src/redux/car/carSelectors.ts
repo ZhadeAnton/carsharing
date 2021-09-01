@@ -90,3 +90,14 @@ export const getCarLeaseField = createSelector(
       return { title: 'Длительность аренды', value: durationLease }
     }
 )
+
+export const isSecondStepDisabledSelector = createSelector(
+    [currentCarSelector],
+    (selectedCar) => !selectedCar
+)
+
+export const isThirdStepDisabledSelector = createSelector(
+    carDateFromSelector,
+    carDateToSelector,
+    (dateFrom, dateTo) => !dateFrom || !dateTo
+)

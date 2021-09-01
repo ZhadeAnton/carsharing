@@ -1,6 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
-import { getTownField } from '../../../redux/location/locationSelectors'
 import { setCurrentTab } from '../../../redux/order/orderActionCreators'
+import {
+  getTownField,
+  isFirstStepDisabledSelector
+} from '../../../redux/location/locationSelectors'
 
 export default function useFirstStepContainer() {
   const dispatch = useAppDispatch()
@@ -11,7 +14,7 @@ export default function useFirstStepContainer() {
 
   const townField = getTownField(state)
   const firstStepFields = [townField]
-  const isSecondStepDisable = !town || !pickUp
+  const isFirstStepDisabled = isFirstStepDisabledSelector(state)
 
   const handleChangeActiveTab = () => {
     dispatch(setCurrentTab('2'))
@@ -20,7 +23,7 @@ export default function useFirstStepContainer() {
   return (
     {
       state: {
-        town, pickUp, firstStepFields, isSecondStepDisable
+        town, pickUp, firstStepFields, isFirstStepDisabled
       },
       handlers: {
         handleChangeActiveTab

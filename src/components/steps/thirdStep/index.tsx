@@ -18,9 +18,9 @@ export default function ThirdStep() {
         </h6>
 
         <RadioGroup
-          buttons={stepThreeContainer.state.carColorOptions}
-          selected={stepThreeContainer.state.carColor}
-          onChange={stepThreeContainer.handlers.handleColorChange}
+          buttons={stepThreeContainer.carColorOptions}
+          selected={stepThreeContainer.carColor}
+          onChange={stepThreeContainer.handleColorChange}
         />
 
         <h6 className='step-three__title'>
@@ -28,12 +28,12 @@ export default function ThirdStep() {
         </h6>
 
         <DateForm
-          dateFrom={stepThreeContainer.state.dateFrom}
-          dateTo={stepThreeContainer.state.dateTo}
-          onUpdateDateFrom={stepThreeContainer.handlers.handleUpdateDateFrom}
-          onUpdateDateTo={stepThreeContainer.handlers.handleUpdateDateTo}
-          onClearDateFrom={stepThreeContainer.handlers.handleClearDateFrom}
-          onClearDateTo={stepThreeContainer.handlers.handleClearDateTo}
+          dateFrom={stepThreeContainer.dateFrom}
+          dateTo={stepThreeContainer.dateTo}
+          onUpdateDateFrom={stepThreeContainer.handleUpdateDateFrom}
+          onUpdateDateTo={stepThreeContainer.handleUpdateDateTo}
+          onClearDateFrom={stepThreeContainer.handleClearDateFrom}
+          onClearDateTo={stepThreeContainer.handleClearDateTo}
         />
 
         <h6 className='step-three__title'>
@@ -41,9 +41,9 @@ export default function ThirdStep() {
         </h6>
 
         <RadioGroup
-          buttons={stepThreeContainer.state.carRateOptions}
-          selected={stepThreeContainer.state.carRate}
-          onChange={stepThreeContainer.handlers.handleRateChange}
+          buttons={stepThreeContainer.carRateOptions}
+          selected={stepThreeContainer.carRate}
+          onChange={stepThreeContainer.handleRateChange}
           isVertical
         />
 
@@ -52,18 +52,18 @@ export default function ThirdStep() {
         </h6>
 
         <CheckboxGroup
-          checkboxes={stepThreeContainer.state.carCheckBoxGroup}
-          handleChange={stepThreeContainer.handlers.handleCheckboxChange}
+          checkboxes={stepThreeContainer.carCheckBoxGroup}
+          handleChange={stepThreeContainer.handleCheckboxChange}
         />
       </section>
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={stepThreeContainer.state.thirdStepFields}
+          orderFields={stepThreeContainer.thirdStepFields}
           buttonTitle='Итого'
-          price={stepThreeContainer.state.totalPriceOfSelectedCar}
-          isButtonDisable={stepThreeContainer.state.isFourthStepDisable}
-          onButtonClick={stepThreeContainer.handlers.handleChangeActiveTab}
+          price={stepThreeContainer.totalPriceOfSelectedCar}
+          isButtonDisable={stepThreeContainer.isThirdStepDisable}
+          onButtonClick={stepThreeContainer.handleChangeActiveTab}
         />
       </div>
     </section>

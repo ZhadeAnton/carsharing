@@ -1,6 +1,6 @@
 import useToggle from '../../../hooks/useToggle'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
-import { setOrder } from '../../../redux/order/orderActionCreators'
+import { removeOrder, setOrder } from '../../../redux/order/orderActionCreators'
 import { getTownField } from '../../../redux/location/locationSelectors'
 import {
   getCarColorField,
@@ -43,6 +43,11 @@ export default function useFourthStepContainer() {
     setIsModal(false)
   }
 
+  const handleRemovemOrder = () => {
+    dispatch(removeOrder())
+    setIsModal(false)
+  }
+
   const handleCloseModal = () => {
     setIsModal(false)
   }
@@ -58,8 +63,9 @@ export default function useFourthStepContainer() {
     dateFrom,
     fourthStepFields,
     isCarFullTank,
-    handleConfirmOrder,
     handleCloseModal,
-    handleOpenModal
+    handleOpenModal,
+    handleConfirmOrder,
+    handleRemovemOrder
   }
 }

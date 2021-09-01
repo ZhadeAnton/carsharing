@@ -6,9 +6,13 @@ import { useAppSelector } from './../../../hooks/usePreTypedHook';
 import { useAppDispatch } from '../../../hooks/usePreTypedHook'
 import { ICheckbox, IDate, IRadioButton } from '../../../interfaces/inputInterfaces'
 import { setCurrentTab } from '../../../redux/order/orderActionCreators'
-import { getCarLeaseField, totalCarPriceSelector } from '../../../redux/car/carSelectors';
 import { getTownField } from '../../../redux/location/locationSelectors';
 import * as actions from '../../../redux/car/carActionCreators'
+import {
+  getCarLeaseField,
+  isThirdStepDisabledSelector,
+  totalCarPriceSelector
+} from '../../../redux/car/carSelectors';
 import {
   changeCarCheckbox,
   setDateFrom,
@@ -35,7 +39,7 @@ export default function useStepThreeContainer() {
   let isCarFullTank = false
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
-  const isFourthStepDisable = !dateFrom || !dateTo
+  const isThirdStepDisable = isThirdStepDisabledSelector(state)
 
   const townField = getTownField(state)
   const carModelField = getCarModelFiled(state)
@@ -93,27 +97,23 @@ export default function useStepThreeContainer() {
   }
 
   return {
-    state: {
-      carRate,
-      carColor,
-      dateFrom,
-      dateTo,
-      carRateOptions,
-      carColorOptions,
-      carCheckBoxGroup,
-      totalPriceOfSelectedCar,
-      thirdStepFields,
-      isFourthStepDisable
-    },
-    handlers: {
-      handleChangeActiveTab,
-      handleCheckboxChange,
-      handleColorChange,
-      handleRateChange,
-      handleUpdateDateFrom,
-      handleUpdateDateTo,
-      handleClearDateFrom,
-      handleClearDateTo
-    }
+    carRate,
+    carColor,
+    dateFrom,
+    dateTo,
+    carRateOptions,
+    carColorOptions,
+    carCheckBoxGroup,
+    totalPriceOfSelectedCar,
+    thirdStepFields,
+    isThirdStepDisable,
+    handleChangeActiveTab,
+    handleCheckboxChange,
+    handleColorChange,
+    handleRateChange,
+    handleUpdateDateFrom,
+    handleUpdateDateTo,
+    handleClearDateFrom,
+    handleClearDateTo
   }
 }

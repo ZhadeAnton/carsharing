@@ -14,17 +14,17 @@ export default function SecondStep() {
       <section className='step-two__left step__left'>
         <div className='step-two__left--form'>
           <RadioGroup
-            buttons={stepTwoContainer.state.carsSortOptions}
-            selected={stepTwoContainer.state.carsSortBy}
-            onChange={stepTwoContainer.handlers.handleSortCars}
+            buttons={stepTwoContainer.carsSortOptions}
+            selected={stepTwoContainer.carsSortBy}
+            onChange={stepTwoContainer.handleSortCars}
           />
         </div>
 
         <div className='step-two__left--list'>
           <CarsList
-            cars={stepTwoContainer.state.carsList}
-            selected={stepTwoContainer.state.selectedCar}
-            onSelectCar={stepTwoContainer.handlers.handleSelectCar}
+            cars={stepTwoContainer.carsList}
+            selected={stepTwoContainer.selectedCar}
+            onSelectCar={stepTwoContainer.handleSelectCar}
           />
         </div>
       </section>
@@ -32,11 +32,11 @@ export default function SecondStep() {
       <div className='step-two__right step__right'>
         <OrderInfo
           buttonTitle='Дополнительно'
-          orderFields={stepTwoContainer.state.secondStepFields}
-          lowPrice={stepTwoContainer.state.selectedCar?.lowPrice}
-          highPrice={stepTwoContainer.state.selectedCar?.highPrice}
-          isButtonDisable={stepTwoContainer.state.isThirdStepDisable}
-          onButtonClick={stepTwoContainer.handlers.handleChangeActiveTab}
+          orderFields={stepTwoContainer.secondStepFields}
+          lowPrice={stepTwoContainer.selectedCar?.lowPrice}
+          highPrice={stepTwoContainer.selectedCar?.highPrice}
+          isButtonDisable={stepTwoContainer.isSecondStepDisabled}
+          onButtonClick={stepTwoContainer.handleChangeActiveTab}
         />
       </div>
     </section>

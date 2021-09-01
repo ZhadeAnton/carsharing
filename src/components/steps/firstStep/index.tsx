@@ -21,7 +21,7 @@ export default function FirstStep() {
         <OrderInfo
           buttonTitle='Выбрать модель'
           orderFields={firstStepContainer.state.firstStepFields}
-          isButtonDisable={firstStepContainer.state.isSecondStepDisable}
+          isButtonDisable={firstStepContainer.state.isFirstStepDisabled}
           onButtonClick={firstStepContainer.handlers.handleChangeActiveTab}
         />
       </div>
