@@ -8,6 +8,7 @@ export interface IRadioButton {
 export interface ICheckbox {
   title: string,
   value: string,
+  cost: number,
   id: number,
   isChecked: boolean
 }

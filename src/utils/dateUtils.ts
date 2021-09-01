@@ -2,6 +2,10 @@ import moment from 'moment';
 
 import { IDate } from '../interfaces/inputInterfaces';
 
+export const parseDate = (date: IDate): string => {
+  return moment(date).format('DD.MM.YYYY HH:mm')
+}
+
 export const getDifferenceTime = (dateFrom: IDate, dateTo: IDate): string => {
   const duration = moment.duration(dateTo?.diff(dateFrom))
   const days = duration.asDays()

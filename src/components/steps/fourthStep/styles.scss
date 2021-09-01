@@ -1,0 +1,70 @@
+@import '../../../scss/typography';
+@import '../../../scss/variables';
+
+.step-four {
+  &__left {
+    display: flex;
+
+    &--info {
+      width: 100%;
+      max-width: 480px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    margin-top: $space-sm;
+  }
+
+  &__image-wrapper {
+    min-width: 255px;
+  }
+
+  @media (max-width: getBreackpoint('lg')) {
+    &__left {
+      flex-wrap: wrap;
+    }
+
+    &__image-wrapper {
+      width: 100%;
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 360px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('md')) {
+    &__image-wrapper {
+      img {
+        width: 340px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__image-wrapper {
+      img {
+        width: 300px;
+      }
+    }
+  }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    &__left {
+      &--info {
+        margin-bottom: $space-sm;
+      }
+    }
+
+    &__image-wrapper {
+      img {
+        width: 270px;
+      }
+    }
+  }
+}

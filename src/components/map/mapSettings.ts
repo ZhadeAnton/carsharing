@@ -1,3 +1,4 @@
+
 import mapStyles from './mapStyles'
 
 export const libraries = ['places']
@@ -5,6 +6,8 @@ export const libraries = ['places']
 export const mapContainerStyle = {
   height: '100%'
 }
+
+export const zoom = 12
 
 export const center = {
   lat: 54.3187,

@@ -1,19 +1,14 @@
 import React from 'react'
-import { Tabs } from 'antd';
-const { TabPane } = Tabs;
 
 import './styles.scss'
-import useToggle from '../../hooks/useToggle'
+import useOrderPageContainer from './useOrderPageContainer'
 import Aside from '../../components/aside'
-import HamburgerMenu from '../../components/hamburgerMenu'
-import OverlayMenu from '../../components/overlayMenu'
 import Header from '../../components/header'
-import StepOne from '../../components/steps/stepOne';
-import StepTwo from '../../components/steps/stepTwo';
-import StepThree from '../../components/steps/stepThree';
+import OrderConfirmed from '../../components/orderConfirmed';
+import OrderPageTabs from '../../components/orderPageTabs';
 
 export default function OrderPage() {
-  const [isOpen, setIsOpen] = useToggle(false)
+  const orderPageContainer = useOrderPageContainer()
 
   return (
     <main className='order-page'>
@@ -26,46 +21,20 @@ export default function OrderPage() {
           <Header />
         </div>
 
-        <Tabs
-          type="card"
-          className='order-page__tabs'
-        >
-          <TabPane
-            tab="Местоположение"
-            key="1"
-          >
-            <StepOne />
-          </TabPane>
+        {!orderPageContainer.isOrderConfirmed
+          ? <OrderPageTabs />
+          : (
+            <div className='order-page__header-row'>
+              <div className='order-page__header-row--wrapper'>
+                <h6 className='order-page__header-row--title container'>
+                  Заказ номер { orderPageContainer.orderNumber }
+                </h6>
+              </div>
 
-          <TabPane
-            tab="Модель"
-            key="2"
-          >
-            <StepTwo />
-          </TabPane>
-
-          <TabPane
-            tab="Дополнительно"
-            key="3"
-          >
-            <StepThree />
-          </TabPane>
-
-          <TabPane
-            tab="Итого"
-            key="4"
-          >
-            <span>V-05</span>
-          </TabPane>
-        </Tabs>
+              <OrderConfirmed />
+            </div>
+          )}
       </section>
-
-      <HamburgerMenu
-        isOpen={isOpen}
-        onClickByMenu={setIsOpen}
-      />
-
-      { isOpen && <OverlayMenu /> }
     </main>
   )
 }
