@@ -11,23 +11,23 @@ import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
 
 export default function FourthStep() {
-  const fourthStepContainer = useFourthStepContainer()
+  const stepContainer = useFourthStepContainer()
 
   return (
     <section className='step-four step'>
       <section className='step-four__left step__left'>
         <div className='step-four__left--info'>
           <CarName
-            carModel={fourthStepContainer.selectedCar?.carModel}
-            carName={fourthStepContainer.selectedCar?.carName}
+            carModel={stepContainer.selectedCar?.carModel}
+            carName={stepContainer.selectedCar?.carName}
           />
 
           <CarPlatesNumber
-            carPlatesNumber={fourthStepContainer.selectedCar?.carPlateNumber}
+            carPlatesNumber={stepContainer.selectedCar?.carPlateNumber}
           />
 
           <div className='step-four__info'>
-            { fourthStepContainer.isCarFullTank &&
+            { stepContainer.isCarFullTank &&
               <CarInfoField
                 title='Топливо'
                 value='100%'
@@ -36,31 +36,31 @@ export default function FourthStep() {
 
             <CarInfoField
               title='Доступна с'
-              value={parseDate(fourthStepContainer.dateFrom)}
+              value={parseDate(stepContainer.dateFrom)}
             />
           </div>
         </div>
 
         <div className='step-four__image-wrapper'>
-          <CarImage carImage={fourthStepContainer.selectedCar?.carImage} />
+          <CarImage carImage={stepContainer.selectedCar?.carImage} />
         </div>
       </section>
 
       <div className='step__right'>
         <OrderInfo
           buttonTitle='Заказать'
-          orderFields={fourthStepContainer.fourthStepFields}
-          price={fourthStepContainer.totalPriceOfSelectedCar}
+          orderFields={stepContainer.fourthStepFields}
+          price={stepContainer.totalPriceOfSelectedCar}
           isButtonDisable={false}
-          onButtonClick={fourthStepContainer.handleOpenModal}
+          onButtonClick={stepContainer.handleOpenModal}
         />
       </div>
 
-      { fourthStepContainer.isModal &&
+      { stepContainer.isModal &&
         <OrderModal
           title='Подтвердить заказ'
-          onConfirmClick={fourthStepContainer.handleConfirmOrder}
-          onRefuseClick={fourthStepContainer.handleCloseModal}
+          onConfirmClick={stepContainer.handleConfirmOrder}
+          onRefuseClick={stepContainer.handleCloseModal}
         />
       }
     </section>

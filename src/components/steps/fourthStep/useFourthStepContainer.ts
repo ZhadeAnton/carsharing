@@ -1,4 +1,5 @@
 import useToggle from '../../../hooks/useToggle'
+import { ICheckbox } from '../../../interfaces/inputInterfaces'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import { removeOrder, setOrder } from '../../../redux/order/orderActionCreators'
 import { getTownField } from '../../../redux/location/locationSelectors'
@@ -9,7 +10,6 @@ import {
   getCarRateField,
   totalCarPriceSelector
 } from '../../../redux/car/carSelectors'
-import { ICheckbox } from '../../../interfaces/inputInterfaces'
 
 export default function useFourthStepContainer() {
   const dispatch = useAppDispatch()

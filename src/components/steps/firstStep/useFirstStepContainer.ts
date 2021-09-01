@@ -20,14 +20,7 @@ export default function useFirstStepContainer() {
     dispatch(setCurrentTab('2'))
   }
 
-  return (
-    {
-      state: {
-        town, pickUp, firstStepFields, isFirstStepDisabled
-      },
-      handlers: {
-        handleChangeActiveTab
-      }
-    }
-  )
+  return {
+    town, pickUp, firstStepFields, isFirstStepDisabled, handleChangeActiveTab
+  }
 }

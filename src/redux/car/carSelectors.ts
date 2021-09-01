@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-
 import { ICheckbox } from '../../interfaces/inputInterfaces'
 import { getDifferenceTime } from '../../utils/dateUtils'
 import { RootState } from '../store'

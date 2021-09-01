@@ -6,23 +6,23 @@ import CustomMap from '../../map'
 
 
 export default function FirstStep() {
-  const firstStepContainer = useFirstStepContainer()
+  const stepContainer = useFirstStepContainer()
 
   return (
     <section className='step-one step'>
       <div className='step-one__left step__left'>
         <CustomMap
-          town={firstStepContainer.state.town}
-          pickUp={firstStepContainer.state.pickUp}
+          town={stepContainer.town}
+          pickUp={stepContainer.pickUp}
         />
       </div>
 
       <div className='step-one__right step__right'>
         <OrderInfo
           buttonTitle='Выбрать модель'
-          orderFields={firstStepContainer.state.firstStepFields}
-          isButtonDisable={firstStepContainer.state.isFirstStepDisabled}
-          onButtonClick={firstStepContainer.handlers.handleChangeActiveTab}
+          orderFields={stepContainer.firstStepFields}
+          isButtonDisable={stepContainer.isFirstStepDisabled}
+          onButtonClick={stepContainer.handleChangeActiveTab}
         />
       </div>
     </section>

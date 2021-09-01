@@ -8,7 +8,7 @@ import OrderInfo from '../../forms/orderInfo'
 import useStepThreeContainer from './useStepThreeContainer';
 
 export default function ThirdStep() {
-  const stepThreeContainer = useStepThreeContainer()
+  const stepContainer = useStepThreeContainer()
 
   return (
     <section className='step-three step'>
@@ -18,9 +18,9 @@ export default function ThirdStep() {
         </h6>
 
         <RadioGroup
-          buttons={stepThreeContainer.carColorOptions}
-          selected={stepThreeContainer.carColor}
-          onChange={stepThreeContainer.handleColorChange}
+          buttons={stepContainer.carColorOptions}
+          selected={stepContainer.carColor}
+          onChange={stepContainer.handleColorChange}
         />
 
         <h6 className='step-three__title'>
@@ -28,12 +28,12 @@ export default function ThirdStep() {
         </h6>
 
         <DateForm
-          dateFrom={stepThreeContainer.dateFrom}
-          dateTo={stepThreeContainer.dateTo}
-          onUpdateDateFrom={stepThreeContainer.handleUpdateDateFrom}
-          onUpdateDateTo={stepThreeContainer.handleUpdateDateTo}
-          onClearDateFrom={stepThreeContainer.handleClearDateFrom}
-          onClearDateTo={stepThreeContainer.handleClearDateTo}
+          dateFrom={stepContainer.dateFrom}
+          dateTo={stepContainer.dateTo}
+          onUpdateDateFrom={stepContainer.handleUpdateDateFrom}
+          onUpdateDateTo={stepContainer.handleUpdateDateTo}
+          onClearDateFrom={stepContainer.handleClearDateFrom}
+          onClearDateTo={stepContainer.handleClearDateTo}
         />
 
         <h6 className='step-three__title'>
@@ -41,9 +41,9 @@ export default function ThirdStep() {
         </h6>
 
         <RadioGroup
-          buttons={stepThreeContainer.carRateOptions}
-          selected={stepThreeContainer.carRate}
-          onChange={stepThreeContainer.handleRateChange}
+          buttons={stepContainer.carRateOptions}
+          selected={stepContainer.carRate}
+          onChange={stepContainer.handleRateChange}
           isVertical
         />
 
@@ -52,18 +52,18 @@ export default function ThirdStep() {
         </h6>
 
         <CheckboxGroup
-          checkboxes={stepThreeContainer.carCheckBoxGroup}
-          handleChange={stepThreeContainer.handleCheckboxChange}
+          checkboxes={stepContainer.carCheckBoxGroup}
+          handleChange={stepContainer.handleCheckboxChange}
         />
       </section>
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={stepThreeContainer.thirdStepFields}
+          orderFields={stepContainer.thirdStepFields}
           buttonTitle='Итого'
-          price={stepThreeContainer.totalPriceOfSelectedCar}
-          isButtonDisable={stepThreeContainer.isThirdStepDisable}
-          onButtonClick={stepThreeContainer.handleChangeActiveTab}
+          price={stepContainer.totalPriceOfSelectedCar}
+          isButtonDisable={stepContainer.isThirdStepDisable}
+          onButtonClick={stepContainer.handleChangeActiveTab}
         />
       </div>
     </section>

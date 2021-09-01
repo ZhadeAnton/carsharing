@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-
 import { RootState } from '../store'
 
 const locationSelector = (state: RootState) => state.location

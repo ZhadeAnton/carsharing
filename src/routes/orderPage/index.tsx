@@ -1,14 +1,14 @@
 import React from 'react'
 
 import './styles.scss'
-import usePageContainer from './usePageContainer'
+import useOrderPageContainer from './useOrderPageContainer'
 import Aside from '../../components/aside'
 import Header from '../../components/header'
 import OrderConfirmed from '../../components/orderConfirmed';
 import OrderPageTabs from '../../components/orderPageTabs';
 
 export default function OrderPage() {
-  const orderPageContainer = usePageContainer()
+  const orderPageContainer = useOrderPageContainer()
 
   return (
     <main className='order-page'>
