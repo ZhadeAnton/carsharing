@@ -22,11 +22,13 @@ export default function OrderConfirmed() {
           </h4>
 
           <CarName
-            carModel={orderConfirmed.selectedCar?.carModel}
-            carName={orderConfirmed.selectedCar?.carName}
+            carModel={orderConfirmed.selectedCar?.categoryId.name}
+            carName={orderConfirmed.selectedCar?.name}
           />
 
-          <CarPlatesNumber carPlatesNumber={orderConfirmed.selectedCar?.carPlateNumber} />
+          <CarPlatesNumber
+            carPlatesNumber={orderConfirmed.selectedCar?.categoryId.name}
+          />
 
           <div className='step-four__info'>
             { orderConfirmed.isCarFullTank &&
@@ -41,7 +43,7 @@ export default function OrderConfirmed() {
         </div>
 
         <div className='step-four__image-wrapper'>
-          <CarImage carImage={orderConfirmed.selectedCar?.carImage} />
+          <CarImage carImage={orderConfirmed.selectedCar?.thumbnail.path} />
         </div>
       </section>
 

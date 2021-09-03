@@ -7,7 +7,9 @@ import * as API from '../../API/carsAPI'
 function* fetchAllCars() {
   try {
     const response = yield call(API.getAllCars)
-    const listOfCars = yield response.data
+    const listOfCars = yield response.data.data
+    const countOfCars = yield response.data.count
+    yield put(actions.setCountOfCars(countOfCars))
     yield put(actions.getAllCarsSuccess(listOfCars))
   } catch (error) {
     console.error(error)

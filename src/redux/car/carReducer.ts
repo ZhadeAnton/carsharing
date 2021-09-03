@@ -14,7 +14,8 @@ import { changeCarCheckboxGroup } from './carUtils'
 export interface ICarState {
   carsList: Array<ICar>,
   carsListfromServer: Array<ICarFromServer>,
-  selectedCar: ICar | null,
+  carsCount: number | null,
+  selectedCar: ICarFromServer | null,
   carsSortOptions: Array<IRadioButton>,
   carColorOptions: Array<IRadioButton>,
   carRateOptions: Array<IRadioButton>,
@@ -29,6 +30,7 @@ export interface ICarState {
 const INIT_STATE: ICarState = {
   carsList: carsMock,
   carsListfromServer: [],
+  carsCount: null,
   selectedCar: null,
   carsSortOptions,
   carColorOptions,
@@ -53,6 +55,12 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
       return {
         ...state,
         carsListfromServer: action.payload
+      }
+
+    case types.SET_COUNT_OF_CARS:
+      return {
+        ...state,
+        carsCount: action.payload
       }
 
     case types.SELECT_CAR_QUALITY:

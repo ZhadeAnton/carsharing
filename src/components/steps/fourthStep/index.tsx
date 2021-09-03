@@ -18,12 +18,12 @@ export default function FourthStep() {
       <section className='step-four__left step__left'>
         <div className='step-four__left--info'>
           <CarName
-            carModel={stepContainer.selectedCar?.carModel}
-            carName={stepContainer.selectedCar?.carName}
+            carModel={stepContainer.selectedCar?.categoryId.name}
+            carName={stepContainer.selectedCar?.name}
           />
 
           <CarPlatesNumber
-            carPlatesNumber={stepContainer.selectedCar?.carPlateNumber}
+            carPlatesNumber={stepContainer.selectedCar?.categoryId.name}
           />
 
           <div className='step-four__info'>
@@ -42,7 +42,7 @@ export default function FourthStep() {
         </div>
 
         <div className='step-four__image-wrapper'>
-          <CarImage carImage={stepContainer.selectedCar?.carImage} />
+          <CarImage carImage={stepContainer.selectedCar?.thumbnail.originalname} />
         </div>
       </section>
 

@@ -4,6 +4,9 @@
 %cart-item-properties {
   width: auto;
   max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: $space-md;
   cursor: pointer;
 }

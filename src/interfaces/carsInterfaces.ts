@@ -24,6 +24,7 @@ export interface ICarFromServer {
   thumbnail: {
     mimetype: string,
     originalname: string,
-    path: string
+    path: string,
+    size: number
   }
 }

@@ -1,13 +1,13 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICar } from '../../../interfaces/carsInterfaces'
+import { ICarFromServer } from '../../../interfaces/carsInterfaces'
 import CarPrice from '../../car/carPrice'
 
 interface Props {
-  car: ICar,
+  car: ICarFromServer,
   selected?: boolean,
-  onSelectCart: (car: ICar) => void
+  onSelectCart: (car: ICarFromServer) => void
 }
 
 export default function Car(props: Props) {
@@ -18,20 +18,20 @@ export default function Car(props: Props) {
     >
       <div className='car-item__header'>
         <h6 className='car-item__header--title'>
-          {props.car.carName}
+          {props.car.name}
         </h6>
 
         <CarPrice
-          lowPrice={props.car.lowPrice}
-          highPrice={props.car.highPrice}
+          lowPrice={props.car.priceMin}
+          highPrice={props.car.priceMax}
         />
       </div>
 
       <div className='car-item__image-wrapper'>
         <img
           className='car-item__image-wrapper--image'
-          src={props.car.carImage}
-          alt={props.car.carName}
+          src={props.car.thumbnail.path}
+          alt={props.car.name}
         />
       </div>
     </div>

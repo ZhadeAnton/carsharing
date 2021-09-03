@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
+import { Spin } from 'antd';
 
 import './styles.scss'
-import { ICar } from '../../../interfaces/carsInterfaces';
+import { ICarFromServer } from '../../../interfaces/carsInterfaces';
 import { IRadioButton } from '../../../interfaces/inputInterfaces';
 import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
@@ -23,8 +24,8 @@ export default function SecondStep() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
-  const carsList = state.car.carsList
   const carsListfromServer = state.car.carsListfromServer
+  const carsCount = state.car.carsCount
   const selectedCar = state.car.selectedCar
   const carsSortOptions = state.car.carsSortOptions
   const carsSortBy = state.car.carsSortBy
@@ -38,7 +39,7 @@ export default function SecondStep() {
     dispatch(getAllCars())
   }, [])
 
-  const handleSelectCar = (car: ICar) => {
+  const handleSelectCar = (car: ICarFromServer) => {
     dispatch(selectCar(car))
   }
 
@@ -50,11 +51,7 @@ export default function SecondStep() {
     dispatch(setCurrentTab('3'))
   }
 
-  useEffect(() => {
-    dispatch(getAllCars())
-  }, [])
-
-  console.log(carsListfromServer)
+  if (!carsListfromServer && !carsCount) return <Spin />
 
   return (
     <section className='step-two step'>
@@ -69,7 +66,7 @@ export default function SecondStep() {
 
         <div className='step-two__left--list'>
           <CarsList
-            cars={carsList}
+            cars={carsListfromServer}
             selected={selectedCar}
             onSelectCar={handleSelectCar}
           />
@@ -80,8 +77,8 @@ export default function SecondStep() {
         <OrderInfo
           buttonTitle='Дополнительно'
           orderFields={secondStepFields}
-          lowPrice={selectedCar?.lowPrice}
-          highPrice={selectedCar?.highPrice}
+          lowPrice={selectedCar?.priceMin}
+          highPrice={selectedCar?.priceMax}
           isButtonDisable={isSecondStepDisabled}
           onButtonClick={handleChangeActiveTab}
         />

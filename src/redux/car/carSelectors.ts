@@ -32,7 +32,7 @@ const carDateToSelector = createSelector(
 
 const carLowPriceSelector = createSelector(
     [currentCarSelector],
-    (selectedCar) => selectedCar?.lowPrice
+    (selectedCar) => selectedCar?.priceMin
 )
 
 const carCheckboxesSelector = createSelector(
@@ -63,7 +63,7 @@ export const totalCarPriceSelector = createSelector(
 export const getCarModelFiled = createSelector(
     [currentCarSelector],
     (selectedCar) => {
-      return { title: 'Модель', value: selectedCar?.carName ?? 'Не выбрано' }
+      return { title: 'Модель', value: selectedCar?.name ?? 'Не выбрано' }
     }
 )
 
