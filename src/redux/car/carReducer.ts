@@ -1,4 +1,4 @@
-import { ICar } from '../../interfaces/carsInterfaces'
+import { ICar, ICarFromServer } from '../../interfaces/carsInterfaces'
 import { ICarTypes } from './carActonTypes'
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
 import { carsMock } from '../../utils/carsListMock'
@@ -13,6 +13,7 @@ import { changeCarCheckboxGroup } from './carUtils'
 
 export interface ICarState {
   carsList: Array<ICar>,
+  carsListfromServer: Array<ICarFromServer>,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
   carColorOptions: Array<IRadioButton>,
@@ -27,6 +28,7 @@ export interface ICarState {
 
 const INIT_STATE: ICarState = {
   carsList: carsMock,
+  carsListfromServer: [],
   selectedCar: null,
   carsSortOptions,
   carColorOptions,
@@ -45,6 +47,12 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
       return {
         ...state,
         selectedCar: action.payload
+      }
+
+    case types.GET_ALL_CARS_SUCCESS:
+      return {
+        ...state,
+        carsListfromServer: action.payload
       }
 
     case types.SELECT_CAR_QUALITY:

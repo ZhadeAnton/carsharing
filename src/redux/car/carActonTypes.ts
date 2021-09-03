@@ -1,5 +1,16 @@
-import { ICar } from '../../interfaces/carsInterfaces';
+import { ICar, ICarFromServer } from '../../interfaces/carsInterfaces';
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces';
+
+export const GET_ALL_CARS = 'GET_ALL_CARS'
+export interface IGetAllCars {
+  type: typeof GET_ALL_CARS
+}
+
+export const GET_ALL_CARS_SUCCESS = 'GET_ALL_CARS_SUCCESS'
+export interface IGetAllCarsSuccess {
+  type: typeof GET_ALL_CARS_SUCCESS,
+  payload: Array<ICarFromServer>
+}
 
 export const SELECT_CAR = 'SELECT_CAR'
 export interface ISelectCar {
@@ -54,6 +65,8 @@ export interface IRemoveDateTo {
 }
 
 export type ICarTypes =
+| IGetAllCars
+| IGetAllCarsSuccess
 | ISelectCar
 | ISelectCarQuality
 | ICheckboxChange
