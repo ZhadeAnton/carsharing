@@ -4,6 +4,7 @@
 %cart-item-properties {
   width: auto;
   max-width: 370px;
+  max-height: 225px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,11 +41,10 @@
   &__image-wrapper {
     display: flex;
     justify-content: flex-end;
+    overflow: hidden;
 
     &--image {
-      width: 100%;
-      max-width: 256px;
-      min-width: 100px;
+      width: 256px;
       height: auto;
     }
   }
