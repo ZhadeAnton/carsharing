@@ -4,20 +4,20 @@ import * as types from './carActonTypes'
 import * as actions from './carActionCreators'
 import * as API from '../../API/carsAPI'
 
-function* fetchAllCars() {
+function* fetchCarsByPage({payload: page}) {
   try {
-    const response = yield call(API.getAllCars)
+    const response = yield call(API.getCarsByPage, page)
     const listOfCars = yield response.data.data
     const countOfCars = yield response.data.count
     yield put(actions.setCountOfCars(countOfCars))
-    yield put(actions.getAllCarsSuccess(listOfCars))
+    yield put(actions.getCarsByPageSuccess(listOfCars))
   } catch (error) {
     console.error(error)
   }
 }
 
 function* onGetAllCars() {
-  yield takeLatest(types.GET_ALL_CARS, fetchAllCars)
+  yield takeLatest(types.GET_CARS_BY_PAGE, fetchCarsByPage)
 }
 
 export default function* carSagas() {

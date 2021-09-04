@@ -7,7 +7,7 @@ import Car from './carItem'
 
 interface Props {
   cars: Array<ICarFromServer>,
-  selected: ICarFromServer | null,
+  selectedCarId: ICarFromServer['id'] | undefined,
   onSelectCar: (car: ICarFromServer) => void
 }
 
@@ -23,7 +23,7 @@ export default function CarsList(props: Props) {
           return <Car
             key={i}
             car={car}
-            selected={props.selected === car}
+            selected={props.selectedCarId === car.id}
             onSelectCart={props.onSelectCar}
           />
         })

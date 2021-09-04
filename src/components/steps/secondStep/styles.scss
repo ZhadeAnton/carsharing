@@ -11,6 +11,12 @@
     &--list {
       padding-bottom: 20px;
     }
+
+    &--pagination {
+      display: flex;
+      justify-content: center;
+      margin: $space-md 0;
+    }
   }
 
   @media (max-width: getBreackpoint('lg')) {

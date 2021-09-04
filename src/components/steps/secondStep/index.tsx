@@ -8,7 +8,7 @@ import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
 import { getTownField } from '../../../redux/location/locationSelectors';
 import {
-  getAllCars,
+  getCarsByPage,
   selectCar,
   selectCarQuality
 } from '../../../redux/car/carActionCreators';
@@ -19,6 +19,7 @@ import {
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
+import CustomPagination from '../../pagination';
 
 export default function SecondStep() {
   const dispatch = useAppDispatch()
@@ -36,8 +37,12 @@ export default function SecondStep() {
   const secondStepFields = [townField, carModelField]
 
   useEffect(() => {
-    dispatch(getAllCars())
+    dispatch(getCarsByPage(1))
   }, [])
+
+  const handleChangePagination = (page: number) => {
+    dispatch(getCarsByPage(page))
+  }
 
   const handleSelectCar = (car: ICarFromServer) => {
     dispatch(selectCar(car))
@@ -67,8 +72,16 @@ export default function SecondStep() {
         <div className='step-two__left--list'>
           <CarsList
             cars={carsListfromServer}
-            selected={selectedCar}
+            selectedCarId={selectedCar?.id}
             onSelectCar={handleSelectCar}
+          />
+        </div>
+
+        <div className='step-two__left--pagination'>
+          <CustomPagination
+            pagesLength={carsCount!}
+            defaultPageSize={6}
+            onChange={handleChangePagination}
           />
         </div>
       </section>

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getAllCars = () => {
+export const getCarsByPage = (page = 1) => {
   return axios({
     method: 'GET',
-    url: 'https://api-factory.simbirsoft1.com/api/db/car?page=10&limit=8',
+    url: `https://api-factory.simbirsoft1.com/api/db/car?page=${page}&limit=6`,
     headers: {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     }

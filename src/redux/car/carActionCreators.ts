@@ -2,11 +2,12 @@ import { ICarFromServer } from '../../interfaces/carsInterfaces'
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
 import * as types from './carActonTypes'
 
-export const getAllCars = (): types.IGetAllCars => ({
-  type: types.GET_ALL_CARS
+export const getCarsByPage = (page: number): types.IGetCarsByPage => ({
+  type: types.GET_CARS_BY_PAGE,
+  payload: page
 })
 
-export const getAllCarsSuccess = (listOfCars: Array<ICarFromServer>)
+export const getCarsByPageSuccess = (listOfCars: Array<ICarFromServer>)
   : types.IGetAllCarsSuccess => ({
   type: types.GET_ALL_CARS_SUCCESS,
   payload: listOfCars
