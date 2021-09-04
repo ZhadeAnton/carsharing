@@ -18,6 +18,7 @@
     "@typescript-eslint/parser": "^4.29.2",
     "antd": "^4.16.12",
     "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-react": "^1.1.7",

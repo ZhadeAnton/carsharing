@@ -1,14 +1,14 @@
+/* eslint-disable max-len */
 import axios from 'axios';
 
-const URL = 'https://api-factory.simbirsoft1.com/api/db'
 const carsLimit = 6
 
 export const getAllCars = (page = 1) => {
   return axios({
     method: 'GET',
-    url: `${URL}/car?page=${page}&limit=${carsLimit}?`,
+    url: `${process.env.REACT_APP_DEFAULT_URL}/car?page=${page}&limit=${carsLimit}`,
     headers: {
-      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
     }
   })
 }
@@ -16,9 +16,9 @@ export const getAllCars = (page = 1) => {
 export const getEconomyCars = (page = 1) => {
   return axios({
     method: 'GET',
-    url: `${URL}/car?priceMax[$lt]=30000&limit=${carsLimit}&page=${page}`,
+    url: `${process.env.REACT_APP_DEFAULT_URL}/car?priceMax[$lt]=30000&limit=${carsLimit}&page=${page}`,
     headers: {
-      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
     }
   })
 }
@@ -26,9 +26,9 @@ export const getEconomyCars = (page = 1) => {
 export const getPremiumCars = (page = 1) => {
   return axios({
     method: 'GET',
-    url: `${URL}/car?priceMin[$gt]=30000&limit=${carsLimit}&page=${page}`,
+    url: `${process.env.REACT_APP_DEFAULT_URL}/car?priceMin[$gt]=30000&limit=${carsLimit}&page=${page}`,
     headers: {
-      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
     }
   })
 }

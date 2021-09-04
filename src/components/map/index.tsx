@@ -1,25 +1,73 @@
-import React from 'react'
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import React, { useRef, useCallback } from 'react'
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 
 import './styles.scss'
+import * as settings from './mapSettings'
 import * as IMap from '../../interfaces/mapInterfaces'
-import useMapContainer from './useMapContainer'
 import SearchLocationForm from '../forms/searchLocationForm/index'
+import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
+import {
+  addMark,
+  setCoodrinates,
+  setPickUp,
+  setTown
+} from '../../redux/location/locationActionCreators';
+import { IMark } from '../../interfaces/mapInterfaces';
 
 export default function CustomMap() {
-  const mapContainer = useMapContainer()
+  const mapRef = useRef();
+  const dispatch = useAppDispatch()
+  const state = useAppSelector((state) => state)
+
+  const town = state.location.town
+  const pickUp = state.location.pickUp
+  const markers = state.location.markers
+  const coordinatesByPickedTown = state.location.coordinatesByPickedTown
+
+  const mapContainerStyle = settings.mapContainerStyle
+  const center = settings.center
+  const options = settings.options
+  const zoom = settings.zoom
+
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
+    libraries: settings.libraries,
+  });
+
+  const handleSelectTown = (town: string) => {
+    dispatch(setTown(town))
+  }
+
+  const handleSelectPickUp = (pickUp: string) => {
+    dispatch(setPickUp(pickUp))
+  }
+
+  const handleSelectCoordinates = (coords: IMark) => {
+    dispatch(setCoodrinates(coords))
+  }
+
+  const handleMapClick = (event: any) => {
+    dispatch(addMark({
+      lat: event.latLng.lat() as IMap.IMark['lat'],
+      lng: event.latLng.lng() as IMap.IMark['lng'],
+    }))
+  }
 
   return (
-    mapContainer.isLoaded ? (
+    isLoaded ? (
       <div className='custom-map'>
         <div className='custom-map__search-form'>
           <SearchLocationForm
-            town={mapContainer.town}
-            pickUp={mapContainer.pickUp}
-            coordinatesByPickedTown={mapContainer.coordinatesByPickedTown}
-            onSelectTown={mapContainer.handleSelectTown}
-            onSelectPickUp={mapContainer.handleSelectPickUp}
-            onSetCoordinates={mapContainer.handleSelectCoordinates}
+            town={town}
+            pickUp={pickUp}
+            coordinatesByPickedTown={coordinatesByPickedTown}
+            onSelectTown={handleSelectTown}
+            onSelectPickUp={handleSelectPickUp}
+            onSetCoordinates={handleSelectCoordinates}
           />
         </div>
 
@@ -30,14 +78,14 @@ export default function CustomMap() {
         <div className='custom-map__canvas'>
           <GoogleMap
             id="map"
-            mapContainerStyle={mapContainer.mapContainerStyle}
-            zoom={mapContainer.zoom}
-            center={mapContainer.center}
-            options={{...mapContainer.options}}
-            onLoad={mapContainer.onMapLoad}
-            onClick={(event) => mapContainer.handleMapClick(event)}
+            mapContainerStyle={mapContainerStyle}
+            zoom={zoom}
+            center={center}
+            options={{...options}}
+            onLoad={onMapLoad}
+            onClick={(event) => handleMapClick(event)}
           >
-            { mapContainer.markers.map((marker: IMap.IMark) => (
+            { markers.map((marker: IMap.IMark) => (
               <Marker
                 key={`${marker.lat}-${marker.lng}`}
                 position={{ lat: marker.lat, lng: marker.lng }}
