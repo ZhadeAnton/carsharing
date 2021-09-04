@@ -63,7 +63,7 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
         carsCount: action.payload
       }
 
-    case types.SELECT_CAR_QUALITY:
+    case types.SET_SORTING_OF_CARS:
       return {
         ...state,
         carsSortBy: action.payload

@@ -4,24 +4,58 @@ import * as types from './carActonTypes'
 import * as actions from './carActionCreators'
 import * as API from '../../API/carsAPI'
 
-function* fetchCarsByPage({payload: page}) {
+function* fetchAllCars({payload: page}) {
   try {
-    const response = yield call(API.getCarsByPage, page)
+    const response = yield call(API.getAllCars, page)
     const listOfCars = yield response.data.data
-    const countOfCars = yield response.data.count
-    yield put(actions.setCountOfCars(countOfCars))
+    const countOfRecivedItems = yield response.data.count
+    yield put(actions.setCountOfCars(countOfRecivedItems))
     yield put(actions.getCarsByPageSuccess(listOfCars))
   } catch (error) {
     console.error(error)
   }
 }
 
+function* fetchEconomyCars({payload: page}) {
+  try {
+    const response = yield call(API.getEconomyCars, page)
+    const listOfEconomyCars = yield response.data.data
+    const countOfRecivedItems = yield response.data.count
+    yield put(actions.setCountOfCars(countOfRecivedItems))
+    yield put(actions.getCarsByPageSuccess(listOfEconomyCars))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+function* fetchPremiumCars({payload: page}) {
+  try {
+    const response = yield call(API.getPremiumCars, page)
+    const listOfPremiumCars = yield response.data.data
+    const countOfRecivedItems = yield response.data.count
+    yield put(actions.setCountOfCars(countOfRecivedItems))
+    yield put(actions.getCarsByPageSuccess(listOfPremiumCars))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 function* onGetAllCars() {
-  yield takeLatest(types.GET_CARS_BY_PAGE, fetchCarsByPage)
+  yield takeLatest(types.GET_CARS_BY_PAGE, fetchAllCars)
+}
+
+function* onGetEconomyCars() {
+  yield takeLatest(types.GET_ECONOMY_CARS, fetchEconomyCars)
+}
+
+function* onGetPremiumCars() {
+  yield takeLatest(types.GET_PREMIUM_CARS, fetchPremiumCars)
 }
 
 export default function* carSagas() {
   yield all([
-    call(onGetAllCars)
+    call(onGetAllCars),
+    call(onGetEconomyCars),
+    call(onGetPremiumCars)
   ])
 }

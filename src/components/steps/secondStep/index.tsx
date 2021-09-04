@@ -8,9 +8,11 @@ import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
 import { getTownField } from '../../../redux/location/locationSelectors';
 import {
-  getCarsByPage,
+  getAllCars,
+  getEconomyCars,
+  getPremiumCars,
   selectCar,
-  selectCarQuality
+  setSortingOfCars
 } from '../../../redux/car/carActionCreators';
 import {
   getCarModelFiled,
@@ -37,11 +39,33 @@ export default function SecondStep() {
   const secondStepFields = [townField, carModelField]
 
   useEffect(() => {
-    dispatch(getCarsByPage(1))
-  }, [])
+    switch (carsSortBy.value) {
+      case 'Эконом':
+        dispatch(getEconomyCars(1))
+        break
+
+      case 'Премиум':
+        dispatch(getPremiumCars(1))
+        break
+
+      default:
+        dispatch(getAllCars(1))
+    }
+  }, [carsSortBy])
 
   const handleChangePagination = (page: number) => {
-    dispatch(getCarsByPage(page))
+    switch (carsSortBy.value) {
+      case 'Эконом':
+        dispatch(getEconomyCars(page))
+        break
+
+      case 'Премиум':
+        dispatch(getPremiumCars(page))
+        break
+
+      default:
+        dispatch(getAllCars(page))
+    }
   }
 
   const handleSelectCar = (car: ICarFromServer) => {
@@ -49,7 +73,7 @@ export default function SecondStep() {
   }
 
   const handleSortCars = (quality: IRadioButton) => {
-    dispatch(selectCarQuality(quality))
+    dispatch(setSortingOfCars(quality))
   }
 
   const handleChangeActiveTab = () => {

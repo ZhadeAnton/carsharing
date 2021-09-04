@@ -13,6 +13,18 @@ export interface IGetAllCarsSuccess {
   payload: Array<ICarFromServer>
 }
 
+export const GET_ECONOMY_CARS = 'GET_ECONOMY_CARS'
+export interface IGetEconomyCars {
+  type: typeof GET_ECONOMY_CARS,
+  payload: number
+}
+
+export const GET_PREMIUM_CARS = 'GET_PREMIUM_CARS'
+export interface IGetPremiumCars {
+  type: typeof GET_PREMIUM_CARS,
+  payload: number
+}
+
 export const SET_COUNT_OF_CARS = 'SET_COUNT_OF_CARS'
 export interface ISetCountOfCars {
   type: typeof SET_COUNT_OF_CARS,
@@ -25,9 +37,9 @@ export interface ISelectCar {
   payload: ICarFromServer
 }
 
-export const SELECT_CAR_QUALITY = 'SELECT_CAR_QUALITY'
-export interface ISelectCarQuality {
-  type: typeof SELECT_CAR_QUALITY,
+export const SET_SORTING_OF_CARS = 'SET_SORTING_OF_CARS'
+export interface ISetSortingOfCars {
+  type: typeof SET_SORTING_OF_CARS,
   payload: IRadioButton
 }
 
@@ -76,11 +88,13 @@ export type ICarTypes =
 | IGetAllCarsSuccess
 | ISetCountOfCars
 | ISelectCar
-| ISelectCarQuality
+| ISetSortingOfCars
 | ICheckboxChange
 | ISerCarColor
 | ISetCarRate
 | ISetDateFrom
 | ISetDateTo
+| IGetEconomyCars
+| IGetPremiumCars
 | IRemoveDateFrom
 | IRemoveDateTo
