@@ -18,6 +18,7 @@ export interface ICarFromServer {
   description: string,
   id: string,
   name: string,
+  number: string,
   priceMax: number,
   priceMin: 0,
   tank: number,
