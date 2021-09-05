@@ -32,7 +32,11 @@
     flex-direction: column;
 
     &--title {
+      max-width: 330px;
       margin-bottom: 2px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       @extend %heading18;
       font-family: 'RobotoRegular';
       color: $primary-color;

@@ -43,7 +43,9 @@
 
   &__info {
     max-width: 110px;
-    max-height: 50px;
+    max-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @include abs-position(auto, 0, 3px, auto);
     padding-left: $space-sm;
     z-index: $layer-2;
