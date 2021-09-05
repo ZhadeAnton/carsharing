@@ -4,11 +4,6 @@ export const carsSortOptions = [
   {title: 'Премиум', value: 'Премиум'},
 ]
 
-export const carRateOptions = [
-  {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
-  {title: 'На сутки 1999 ₽/сутки', value: 'На сутки'}
-]
-
 export const carCheckBoxGroup = [
   {
     title: 'Полный бак, 500р',

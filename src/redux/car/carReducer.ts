@@ -1,10 +1,9 @@
 import { ICar } from '../../interfaces/carsInterfaces'
 import { ICarTypes } from './carActonTypes'
-import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
+import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces'
 import * as types from './carActonTypes'
 import {
   carsSortOptions,
-  carRateOptions,
   carCheckBoxGroup
 } from '../../utils/carsUtils'
 import { changeCarCheckboxGroup } from './carUtils'
@@ -14,7 +13,7 @@ export interface ICarState {
   carsCount: number | null,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
-  carRateOptions: Array<IRadioButton>,
+  carRateOptions: Array<IRate> | null,
   carCheckBoxGroup: Array<ICheckbox>,
   carsSortBy: IRadioButton,
   carColor: IRadioButton,
@@ -29,7 +28,7 @@ const INIT_STATE: ICarState = {
   carsCount: null,
   selectedCar: null,
   carsSortOptions,
-  carRateOptions,
+  carRateOptions: null,
   carCheckBoxGroup,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
@@ -61,6 +60,13 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
         carsCount: action.payload
       }
 
+    case types.GET_RATE_TYPES_SUCCESS:
+      return {
+        ...state,
+        carRateOptions: action.payload,
+        isLoading: false
+      }
+
     case types.SET_SORTING_OF_CARS:
       return {
         ...state,
@@ -71,6 +77,7 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.SET_SORTING_OF_CARS:
     case types.GET_PREMIUM_CARS:
     case types.GET_ECONOMY_CARS:
+    case types.GET_RATE_TYPES:
       return {
         ...state,
         isLoading: true

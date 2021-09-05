@@ -40,6 +40,16 @@ function* fetchPremiumCars({payload: page}) {
   }
 }
 
+function* fetchRateTypes() {
+  try {
+    const response = yield call(API.getRateTypes)
+    const listOfRates = response.data.data
+    yield put(actions.getRateTypesSuccess(listOfRates))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 function* onGetAllCars() {
   yield takeLatest(types.GET_CARS_BY_PAGE, fetchAllCars)
 }
@@ -52,10 +62,15 @@ function* onGetPremiumCars() {
   yield takeLatest(types.GET_PREMIUM_CARS, fetchPremiumCars)
 }
 
+function* onGetRateTypes() {
+  yield takeLatest(types.GET_RATE_TYPES, fetchRateTypes)
+}
+
 export default function* carSagas() {
   yield all([
     call(onGetAllCars),
     call(onGetEconomyCars),
-    call(onGetPremiumCars)
+    call(onGetPremiumCars),
+    call(onGetRateTypes)
   ])
 }

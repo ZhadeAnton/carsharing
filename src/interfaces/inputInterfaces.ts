@@ -14,3 +14,9 @@ export interface ICheckbox {
 }
 
 export type IDate = Moment | null | undefined
+
+export interface IRate {
+  id: string,
+  name: string,
+  unit: string
+}

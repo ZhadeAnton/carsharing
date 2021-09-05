@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
+import { message, Spin } from 'antd'
 import moment from 'moment'
-import { message } from 'antd'
 
 import './styles.scss'
 import * as actions from '../../../redux/car/carActionCreators'
@@ -18,6 +18,7 @@ import { getTownField } from '../../../redux/location/locationSelectors'
 import { ICheckbox, IDate, IRadioButton } from '../../../interfaces/inputInterfaces'
 import {
   changeCarCheckbox,
+  getRateTypes,
   setDateFrom,
   setDateTo
 } from '../../../redux/car/carActionCreators'
@@ -37,6 +38,7 @@ export default function ThirdStep() {
   const carCheckBoxGroup = state.car.carCheckBoxGroup
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
+  const isLoading = state.car.isLoading
 
   let isCarFullTank = false
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
@@ -58,6 +60,14 @@ export default function ThirdStep() {
     if (item.isChecked) thirdStepFields.push({ title: item.value, value: 'Да' })
     if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
   })
+
+  const rateOptionsForRadioGroup = carRateOptions?.map((opt) => (
+    { title: opt.name, value: opt.unit }
+  ))
+
+  useEffect(() => {
+    dispatch(getRateTypes())
+  }, [])
 
   useEffect(() => {
     if (dateFrom && dateTo && isDateAfter) {
@@ -102,48 +112,52 @@ export default function ThirdStep() {
   return (
     <section className='step-three step'>
       <section className='step__left'>
-        <h6 className='step-three__title'>
+        <Spin tip="Loading..." spinning={isLoading}>
+
+          <h6 className='step-three__title'>
               Цвет
-        </h6>
+          </h6>
 
-        <RadioGroup
-          buttons={carColorsOptions}
-          selected={carColor}
-          onChange={handleColorChange} />
+          <RadioGroup
+            buttons={carColorsOptions}
+            selected={carColor}
+            onChange={handleColorChange} />
 
-        <h6 className='step-three__title'>
-          Дата аренды
-        </h6>
+          <h6 className='step-three__title'>
+            Дата аренды
+          </h6>
 
-        <DateForm
-          dateFrom={dateFrom}
-          dateTo={dateTo}
-          onUpdateDateFrom={handleUpdateDateFrom}
-          onUpdateDateTo={handleUpdateDateTo}
-          onClearDateFrom={handleClearDateFrom}
-          onClearDateTo={handleClearDateTo}
-        />
+          <DateForm
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            onUpdateDateFrom={handleUpdateDateFrom}
+            onUpdateDateTo={handleUpdateDateTo}
+            onClearDateFrom={handleClearDateFrom}
+            onClearDateTo={handleClearDateTo}
+          />
 
-        <h6 className='step-three__title'>
-          Тариф
-        </h6>
+          <h6 className='step-three__title'>
+            Тариф
+          </h6>
 
-        <RadioGroup
-          buttons={carRateOptions}
-          selected={carRate}
-          onChange={handleRateChange}
-          isVertical
-        />
+          <RadioGroup
+            buttons={rateOptionsForRadioGroup}
+            selected={carRate}
+            onChange={handleRateChange}
+            isVertical
+          />
 
-        <h6 className='step-three__title'>
-          Доп услуги
-        </h6>
+          <h6 className='step-three__title'>
+            Доп услуги
+          </h6>
 
-        <CheckboxGroup
-          checkboxes={carCheckBoxGroup}
-          handleChange={handleCheckboxChange}
-        />
+          <CheckboxGroup
+            checkboxes={carCheckBoxGroup}
+            handleChange={handleCheckboxChange}
+          />
+        </Spin>
       </section>
+
 
       <div className='step__right'>
         <OrderInfo

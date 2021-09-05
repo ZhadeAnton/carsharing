@@ -32,3 +32,13 @@ export const getPremiumCars = (page = 1) => {
     }
   })
 }
+
+export const getRateTypes = () => {
+  return axios({
+    method: 'GET',
+    url: `${process.env.REACT_APP_DEFAULT_URL}/rateType`,
+    headers: {
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+    }
+  })
+}

@@ -1,5 +1,5 @@
 import { ICar } from '../../interfaces/carsInterfaces';
-import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces';
+import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces';
 
 export const GET_CARS_BY_PAGE = 'GET_CARS_BY_PAGE'
 export interface IGetCarsByPage {
@@ -41,6 +41,17 @@ export const SET_SORTING_OF_CARS = 'SET_SORTING_OF_CARS'
 export interface ISetSortingOfCars {
   type: typeof SET_SORTING_OF_CARS,
   payload: IRadioButton
+}
+
+export const GET_RATE_TYPES = 'GET_RATE_TYPES'
+export interface IGetRateTypes {
+  type: typeof GET_RATE_TYPES
+}
+
+export const GET_RATE_TYPES_SUCCESS = 'GET_RATE_TYPES_SUCCESS'
+export interface IGetRateTypesSuccess {
+  type: typeof GET_RATE_TYPES_SUCCESS,
+  payload: Array<IRate>
 }
 
 export const CAR_CHECKBOX_CHANGE = 'CAR_CHECKBOX_CHANGE'
@@ -89,6 +100,8 @@ export type ICarTypes =
 | ISetCountOfCars
 | ISelectCar
 | ISetSortingOfCars
+| IGetRateTypes
+| IGetRateTypesSuccess
 | ICheckboxChange
 | ISerCarColor
 | ISetCarRate

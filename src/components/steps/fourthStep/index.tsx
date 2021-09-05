@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import './styles.scss'
 import { parseDate } from '../../../utils/dateUtils'
-import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
+import { useAppSelector } from '../../../hooks/usePreTypedHook'
 import useToggle from '../../../hooks/useToggle'
 import { getTownField } from '../../../redux/location/locationSelectors'
 import {
@@ -12,7 +12,7 @@ import {
   getCarRateField,
   totalCarPriceSelector
 } from '../../../redux/car/carSelectors'
-import { setOrder } from '../../../redux/order/orderActionCreators'
+// import { setOrder } from '../../../redux/order/orderActionCreators'
 import { ICheckbox } from '../../../interfaces/inputInterfaces'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
@@ -20,14 +20,17 @@ import OrderModal from '../../orderModal'
 import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
+import { getConfirmedOrder } from '../../../API/orderAPI'
 
 export default function FourthStep() {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
 
   const selectedCar = state.car.selectedCar
+  // const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
+  // const dateTo = state.car.dateTo
   const carCheckBoxGroup = state.car.carCheckBoxGroup
 
   let isCarFullTank = false
@@ -49,7 +52,13 @@ export default function FourthStep() {
   })
 
   const handleConfirmOrder = () => {
-    dispatch(setOrder())
+    // dispatch(setOrder({
+    //   carId: selectedCar?.id,
+    //   color: carColor.value,
+    //   dateFrom: dateFrom,
+    //   dateTo: dateTo,
+
+    // }))
     setIsModal(false)
   }
 
@@ -60,6 +69,10 @@ export default function FourthStep() {
   const handleOpenModal = () => {
     setIsModal(true)
   }
+
+  useEffect(() => {
+    getConfirmedOrder().then((res) => console.log(res))
+  })
 
   return (
     <section className='step-four step'>

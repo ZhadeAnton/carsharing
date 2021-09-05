@@ -19,6 +19,12 @@
     }
   }
 
+  .ant-spin-nested-loading > div > .ant-spin {
+    max-height: auto;
+    height: auto;
+    top: 50%;
+  }
+
   @media (max-width: getBreackpoint('sm')) {
     &__title {
       margin-bottom: $space-sm;

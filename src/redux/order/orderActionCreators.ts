@@ -1,7 +1,9 @@
+import { IOrder } from '../../interfaces/orderIntarfaces'
 import * as types from './orderActionTypes'
 
-export const setOrder = (): types.ISetOrder => ({
-  type: types.SET_ORDER
+export const setOrder = (order: IOrder): types.ISetOrder => ({
+  type: types.SET_ORDER,
+  payload: order
 })
 
 export const removeOrder = (): types.IRemoveOrder => ({

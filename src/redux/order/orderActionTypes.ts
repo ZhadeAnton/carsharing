@@ -1,6 +1,9 @@
+import { IOrder } from '../../interfaces/orderIntarfaces'
+
 export const SET_ORDER = 'SET_ORDER'
 export interface ISetOrder {
-  type: typeof SET_ORDER
+  type: typeof SET_ORDER,
+  payload: IOrder
 }
 
 export const REMOVE_ORDER = 'REMOVE_ORDER'
