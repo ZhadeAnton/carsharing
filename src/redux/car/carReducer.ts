@@ -4,7 +4,6 @@ import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces
 import * as types from './carActonTypes'
 import {
   carsSortOptions,
-  carColorOptions,
   carRateOptions,
   carCheckBoxGroup
 } from '../../utils/carsUtils'
@@ -15,7 +14,6 @@ export interface ICarState {
   carsCount: number | null,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
-  carColorOptions: Array<IRadioButton>,
   carRateOptions: Array<IRadioButton>,
   carCheckBoxGroup: Array<ICheckbox>,
   carsSortBy: IRadioButton,
@@ -31,7 +29,6 @@ const INIT_STATE: ICarState = {
   carsCount: null,
   selectedCar: null,
   carsSortOptions,
-  carColorOptions,
   carRateOptions,
   carCheckBoxGroup,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},

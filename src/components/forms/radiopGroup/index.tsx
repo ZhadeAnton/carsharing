@@ -5,7 +5,7 @@ import { IRadioButton } from '../../../interfaces/inputInterfaces'
 import RadioButton from '../../inputs/radioButtonPrimary'
 
 interface Props {
-  buttons: Array<IRadioButton>,
+  buttons: Array<IRadioButton> | undefined,
   selected: IRadioButton | undefined,
   isVertical?: boolean,
   onChange: ({title, value}: IRadioButton) => any
@@ -17,7 +17,7 @@ export default function RadioGroup(props: Props) {
       ${props.isVertical ? 'radio-buttons-form-vertical' : ''}`}
     >
       {
-        props.buttons.map((button, i) => (
+        props.buttons?.map((button, i) => (
           <RadioButton
             key={i}
             button={button}

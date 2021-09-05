@@ -10,7 +10,7 @@ function* fetchAllCars({payload: page}) {
     const listOfCars = yield response.data.data
     const countOfRecivedItems = yield response.data.count
     yield put(actions.setCountOfCars(countOfRecivedItems))
-    yield put(actions.getCarsByPageSuccess(listOfCars))
+    yield put(actions.getCarsSuccess(listOfCars))
   } catch (error) {
     console.error(error)
   }
@@ -22,7 +22,7 @@ function* fetchEconomyCars({payload: page}) {
     const listOfEconomyCars = yield response.data.data
     const countOfRecivedItems = yield response.data.count
     yield put(actions.setCountOfCars(countOfRecivedItems))
-    yield put(actions.getCarsByPageSuccess(listOfEconomyCars))
+    yield put(actions.getCarsSuccess(listOfEconomyCars))
   } catch (error) {
     console.error(error)
   }
@@ -34,7 +34,7 @@ function* fetchPremiumCars({payload: page}) {
     const listOfPremiumCars = yield response.data.data
     const countOfRecivedItems = yield response.data.count
     yield put(actions.setCountOfCars(countOfRecivedItems))
-    yield put(actions.getCarsByPageSuccess(listOfPremiumCars))
+    yield put(actions.getCarsSuccess(listOfPremiumCars))
   } catch (error) {
     console.error(error)
   }

@@ -7,6 +7,7 @@ import * as actions from '../../../redux/car/carActionCreators'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import {
   getCarColorField,
+  getCarColorsOptions,
   getCarLeaseField,
   getCarModelFiled,
   getCarRateField,
@@ -33,7 +34,6 @@ export default function ThirdStep() {
   const carRate = state.car.carRate
   const carColor = state.car.carColor
   const carRateOptions = state.car.carRateOptions
-  const carColorOptions = state.car.carColorOptions
   const carCheckBoxGroup = state.car.carCheckBoxGroup
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
@@ -41,6 +41,7 @@ export default function ThirdStep() {
   let isCarFullTank = false
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
+  const carColorsOptions = getCarColorsOptions(state)
   const isThirdStepDisable = isThirdStepDisabledSelector(state)
 
   const townField = getTownField(state)
@@ -102,14 +103,13 @@ export default function ThirdStep() {
     <section className='step-three step'>
       <section className='step__left'>
         <h6 className='step-three__title'>
-          Цвет
+              Цвет
         </h6>
 
         <RadioGroup
-          buttons={carColorOptions}
+          buttons={carColorsOptions}
           selected={carColor}
-          onChange={handleColorChange}
-        />
+          onChange={handleColorChange} />
 
         <h6 className='step-three__title'>
           Дата аренды

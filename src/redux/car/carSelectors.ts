@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { ICheckbox } from '../../interfaces/inputInterfaces'
+import { ICheckbox, IRadioButton } from '../../interfaces/inputInterfaces'
 import { getDifferenceTime } from '../../utils/dateUtils'
 import { RootState } from '../store'
 
@@ -87,6 +87,17 @@ export const getCarLeaseField = createSelector(
     (dateFrom, dateTo) => {
       const durationLease = getDifferenceTime(dateFrom, dateTo)
       return { title: 'Длительность аренды', value: durationLease }
+    }
+)
+
+export const getCarColorsOptions = createSelector(
+    [currentCarSelector],
+    (selectedCar) => {
+      const arrayOfCarColors = selectedCar?.colors.map((color) => (
+            { title: color, value: color } as IRadioButton
+      ))
+      arrayOfCarColors?.unshift({title: 'Любой', value: 'Любой'})
+      return arrayOfCarColors
     }
 )
 

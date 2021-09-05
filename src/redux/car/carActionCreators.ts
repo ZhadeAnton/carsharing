@@ -17,7 +17,7 @@ export const getPremiumCars = (page: number): types.IGetPremiumCars => ({
   payload: page
 })
 
-export const getCarsByPageSuccess = (listOfCars: Array<ICar>)
+export const getCarsSuccess = (listOfCars: Array<ICar>)
   : types.IGetAllCarsSuccess => ({
   type: types.GET_ALL_CARS_SUCCESS,
   payload: listOfCars
