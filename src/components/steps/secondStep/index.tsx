@@ -32,6 +32,7 @@ export default function SecondStep() {
   const selectedCar = state.car.selectedCar
   const carsSortOptions = state.car.carsSortOptions
   const carsSortBy = state.car.carsSortBy
+  const isLoading = state.car.isLoading
 
   const townField = getTownField(state)
   const carModelField = getCarModelFiled(state)
@@ -80,35 +81,35 @@ export default function SecondStep() {
     dispatch(setCurrentTab('3'))
   }
 
-  if (!carsListfromServer && !carsCount) return <Spin />
-
   return (
     <section className='step-two step'>
-      <section className='step-two__left step__left'>
-        <div className='step-two__left--form'>
-          <RadioGroup
-            buttons={carsSortOptions}
-            selected={carsSortBy}
-            onChange={handleSortCars}
-          />
-        </div>
+      <Spin tip="Loading..." spinning={isLoading}>
+        <section className='step-two__left step__left'>
+          <div className='step-two__left--form'>
+            <RadioGroup
+              buttons={carsSortOptions}
+              selected={carsSortBy}
+              onChange={handleSortCars}
+            />
+          </div>
 
-        <div className='step-two__left--list'>
-          <CarsList
-            cars={carsListfromServer}
-            selectedCarId={selectedCar?.id}
-            onSelectCar={handleSelectCar}
-          />
-        </div>
+          <div className='step-two__left--list'>
+            <CarsList
+              cars={carsListfromServer}
+              selectedCarId={selectedCar?.id}
+              onSelectCar={handleSelectCar}
+            />
+          </div>
 
-        <div className='step-two__left--pagination'>
-          <CustomPagination
-            pagesLength={carsCount!}
-            defaultPageSize={6}
-            onChange={handleChangePagination}
-          />
-        </div>
-      </section>
+          <div className='step-two__left--pagination'>
+            <CustomPagination
+              pagesLength={carsCount!}
+              defaultPageSize={6}
+              onChange={handleChangePagination}
+            />
+          </div>
+        </section>
+      </Spin>
 
       <div className='step-two__right step__right'>
         <OrderInfo

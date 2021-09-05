@@ -8,11 +8,11 @@ import FirstStep from '../steps/firstStep';
 import SecondStep from '../steps/secondStep';
 import ThirdStep from '../steps/thirdStep';
 import FourthStep from '../steps/fourthStep';
-// import { isFirstStepDisabledSelector } from '../../redux/location/locationSelectors';
-// import {
-//   isSecondStepDisabledSelector,
-//   isThirdStepDisabledSelector
-// } from '../../redux/car/carSelectors';
+import { isFirstStepDisabledSelector } from '../../redux/location/locationSelectors';
+import {
+  isSecondStepDisabledSelector,
+  isThirdStepDisabledSelector
+} from '../../redux/car/carSelectors';
 import { setCurrentTab } from '../../redux/order/orderActionCreators';
 
 export default function OrderPageTabs() {
@@ -21,13 +21,13 @@ export default function OrderPageTabs() {
 
   const currentTabPosition = state.order.currentTabPosition
 
-  // const isFirstStepDisabled = isFirstStepDisabledSelector(state)
-  // const isSecondStepDisabled = isSecondStepDisabledSelector(state)
-  // const isThirdStepDisable = isThirdStepDisabledSelector(state)
+  const isFirstStepDisabled = isFirstStepDisabledSelector(state)
+  const isSecondStepDisabled = isSecondStepDisabledSelector(state)
+  const isThirdStepDisable = isThirdStepDisabledSelector(state)
 
-  // const isSecondTabDisabled = isFirstStepDisabled
-  // const isThirdTabDisabled = isSecondTabDisabled || isSecondStepDisabled
-  // const isFourthTabDisabled = isThirdTabDisabled || isThirdStepDisable
+  const isSecondTabDisabled = isFirstStepDisabled
+  const isThirdTabDisabled = isSecondTabDisabled || isSecondStepDisabled
+  const isFourthTabDisabled = isThirdTabDisabled || isThirdStepDisable
 
   const handleChangeActiveTab = (key: string) => {
     dispatch(setCurrentTab(key))
@@ -44,15 +44,15 @@ export default function OrderPageTabs() {
         <FirstStep />
       </TabPane>
 
-      <TabPane tab="Модель" key="2">
+      <TabPane tab="Модель" key="2" disabled={isSecondTabDisabled}>
         <SecondStep />
       </TabPane>
 
-      <TabPane tab="Дополнительно" key="3">
+      <TabPane tab="Дополнительно" key="3" disabled={isThirdTabDisabled}>
         <ThirdStep />
       </TabPane>
 
-      <TabPane tab="Итого" key="4">
+      <TabPane tab="Итого" key="4" disabled={isFourthTabDisabled}>
         <FourthStep />
       </TabPane>
     </Tabs>

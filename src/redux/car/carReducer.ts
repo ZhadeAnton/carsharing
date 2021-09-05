@@ -22,7 +22,8 @@ export interface ICarState {
   carColor: IRadioButton,
   carRate: IRadioButton,
   dateFrom: IDate,
-  dateTo: IDate
+  dateTo: IDate,
+  isLoading: boolean
 }
 
 const INIT_STATE: ICarState = {
@@ -37,7 +38,8 @@ const INIT_STATE: ICarState = {
   carColor: {title: 'Любой', value: 'Любой'},
   carRate: {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
   dateFrom: null,
-  dateTo: null
+  dateTo: null,
+  isLoading: false
 }
 
 const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
@@ -51,7 +53,8 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.GET_ALL_CARS_SUCCESS:
       return {
         ...state,
-        carsListfromServer: action.payload
+        carsListfromServer: action.payload,
+        isLoading: false
       }
 
     case types.SET_COUNT_OF_CARS:
@@ -63,7 +66,16 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.SET_SORTING_OF_CARS:
       return {
         ...state,
-        carsSortBy: action.payload
+        carsSortBy: action.payload,
+      }
+
+    case types.GET_CARS_BY_PAGE:
+    case types.SET_SORTING_OF_CARS:
+    case types.GET_PREMIUM_CARS:
+    case types.GET_ECONOMY_CARS:
+      return {
+        ...state,
+        isLoading: true
       }
 
     case types.SET_CAR_COLOR:
