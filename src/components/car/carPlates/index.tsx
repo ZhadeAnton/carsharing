@@ -1,10 +1,10 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICarFromServer } from '../../../interfaces/carsInterfaces'
+import { ICar } from '../../../interfaces/carsInterfaces'
 
 interface Props {
-  carPlatesNumber: ICarFromServer['number'] | undefined
+  carPlatesNumber: ICar['number'] | undefined
 }
 
 export default function CarPlatesNumber(props: Props) {

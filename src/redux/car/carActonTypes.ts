@@ -1,4 +1,4 @@
-import { ICarFromServer } from '../../interfaces/carsInterfaces';
+import { ICar } from '../../interfaces/carsInterfaces';
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces';
 
 export const GET_CARS_BY_PAGE = 'GET_CARS_BY_PAGE'
@@ -10,7 +10,7 @@ export interface IGetCarsByPage {
 export const GET_ALL_CARS_SUCCESS = 'GET_ALL_CARS_SUCCESS'
 export interface IGetAllCarsSuccess {
   type: typeof GET_ALL_CARS_SUCCESS,
-  payload: Array<ICarFromServer>
+  payload: Array<ICar>
 }
 
 export const GET_ECONOMY_CARS = 'GET_ECONOMY_CARS'
@@ -34,7 +34,7 @@ export interface ISetCountOfCars {
 export const SELECT_CAR = 'SELECT_CAR'
 export interface ISelectCar {
   type: typeof SELECT_CAR,
-  payload: ICarFromServer
+  payload: ICar
 }
 
 export const SET_SORTING_OF_CARS = 'SET_SORTING_OF_CARS'

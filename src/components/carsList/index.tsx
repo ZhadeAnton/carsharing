@@ -1,14 +1,14 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICarFromServer } from '../../interfaces/carsInterfaces'
+import { ICar } from '../../interfaces/carsInterfaces'
 import DefaultCar from '../../assets/PNG/default-car.png'
 import Car from './carItem'
 
 interface Props {
-  cars: Array<ICarFromServer>,
-  selectedCarId: ICarFromServer['id'] | undefined,
-  onSelectCar: (car: ICarFromServer) => void
+  cars: Array<ICar>,
+  selectedCarId: ICar['id'] | undefined,
+  onSelectCar: (car: ICar) => void
 }
 
 export default function CarsList(props: Props) {

@@ -1,10 +1,10 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICarFromServer } from '../../../interfaces/carsInterfaces'
+import { ICar } from '../../../interfaces/carsInterfaces'
 
 interface Props {
-  carName: ICarFromServer['categoryId']['name'] | undefined
+  carName: ICar['categoryId']['name'] | undefined
 }
 
 export default function CarName(props: Props) {

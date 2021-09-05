@@ -5,7 +5,6 @@ import {
   isFirstStepDisabledSelector
 } from '../../../redux/location/locationSelectors'
 import { setCurrentTab } from '../../../redux/order/orderActionCreators'
-
 import OrderInfo from '../../forms/orderInfo'
 import CustomMap from '../../map'
 

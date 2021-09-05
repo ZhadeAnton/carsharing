@@ -1,13 +1,13 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICarFromServer } from '../../../interfaces/carsInterfaces'
+import { ICar } from '../../../interfaces/carsInterfaces'
 import CarPrice from '../../car/carPrice'
 
 interface Props {
-  car: ICarFromServer,
+  car: ICar,
   selected?: boolean,
-  onSelectCart: (car: ICarFromServer) => void
+  onSelectCart: (car: ICar) => void
 }
 
 export default function Car(props: Props) {

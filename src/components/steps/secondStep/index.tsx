@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Spin } from 'antd';
 
 import './styles.scss'
-import { ICarFromServer } from '../../../interfaces/carsInterfaces';
+import { ICar } from '../../../interfaces/carsInterfaces';
 import { IRadioButton } from '../../../interfaces/inputInterfaces';
 import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
@@ -68,7 +68,7 @@ export default function SecondStep() {
     }
   }
 
-  const handleSelectCar = (car: ICarFromServer) => {
+  const handleSelectCar = (car: ICar) => {
     dispatch(selectCar(car))
   }
 

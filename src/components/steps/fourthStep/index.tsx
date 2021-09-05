@@ -12,15 +12,14 @@ import {
   getCarRateField,
   totalCarPriceSelector
 } from '../../../redux/car/carSelectors'
+import { setOrder } from '../../../redux/order/orderActionCreators'
+import { ICheckbox } from '../../../interfaces/inputInterfaces'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
 import OrderModal from '../../orderModal'
 import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
-import { setOrder } from '../../../redux/order/orderActionCreators'
-import { ICheckbox } from '../../../interfaces/inputInterfaces'
-
 
 export default function FourthStep() {
   const dispatch = useAppDispatch()

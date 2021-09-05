@@ -1,7 +1,6 @@
-import { ICar, ICarFromServer } from '../../interfaces/carsInterfaces'
+import { ICar } from '../../interfaces/carsInterfaces'
 import { ICarTypes } from './carActonTypes'
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
-import { carsMock } from '../../utils/carsListMock'
 import * as types from './carActonTypes'
 import {
   carsSortOptions,
@@ -12,10 +11,9 @@ import {
 import { changeCarCheckboxGroup } from './carUtils'
 
 export interface ICarState {
-  carsList: Array<ICar>,
-  carsListfromServer: Array<ICarFromServer>,
+  carsListfromServer: Array<ICar>,
   carsCount: number | null,
-  selectedCar: ICarFromServer | null,
+  selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
   carColorOptions: Array<IRadioButton>,
   carRateOptions: Array<IRadioButton>,
@@ -28,7 +26,6 @@ export interface ICarState {
 }
 
 const INIT_STATE: ICarState = {
-  carsList: carsMock,
   carsListfromServer: [],
   carsCount: null,
   selectedCar: null,

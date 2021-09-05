@@ -1,13 +1,4 @@
 export interface ICar {
-  carName: string,
-  carModel: string,
-  lowPrice: number,
-  highPrice: number,
-  carImage: string
-  carPlateNumber: string,
-}
-
-export interface ICarFromServer {
   categoryId: {
     description: string,
     id: string,
