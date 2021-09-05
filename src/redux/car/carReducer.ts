@@ -44,6 +44,7 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.SELECT_CAR:
       return {
         ...state,
+        carColor: {title: 'Любой', value: 'Любой'},
         selectedCar: action.payload
       }
 

@@ -21,7 +21,7 @@ export default function RadioGroup(props: Props) {
           <RadioButton
             key={i}
             button={button}
-            checked={props.selected?.title === button.title}
+            checked={props.selected?.title === button.title || i === 0}
             handleChange={props.onChange}
           />
         ))
