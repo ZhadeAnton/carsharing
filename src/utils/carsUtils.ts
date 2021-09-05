@@ -39,3 +39,11 @@ export const carCheckBoxGroup = [
   }
 ]
 
+export const parseCarNumber = (carNumber: string | undefined) => {
+  return [
+    carNumber?.slice(0, 1),
+    carNumber?.slice(1, 4),
+    carNumber?.substring(4, 6),
+    carNumber?.slice(6, -1)]
+      .join(' ')
+}
