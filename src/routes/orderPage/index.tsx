@@ -10,7 +10,7 @@ import OrderPageTabs from '../../components/orderPageTabs';
 export default function OrderPage() {
   const state = useAppSelector((state) => state)
 
-  const orderNumber = state.order.orderStatusId
+  const orderId = state.order.confirmedOrder?.id
   const isOrderConfirmed = state.order.isOrderConfirmed
 
   return (
@@ -30,7 +30,7 @@ export default function OrderPage() {
             <div className='order-page__header-row'>
               <div className='order-page__header-row--wrapper'>
                 <h6 className='order-page__header-row--title container'>
-                  Заказ номер { orderNumber }
+                  Заказ номер { orderId }
                 </h6>
               </div>
 

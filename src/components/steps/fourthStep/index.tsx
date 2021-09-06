@@ -34,7 +34,6 @@ export default function FourthStep() {
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const carCheckBoxGroup = state.car.carColorOrtions
-  const orderStatusId = state.order.orderStatusId
 
   let isFullTank = false
   let isNeedChildChair = false
@@ -63,7 +62,7 @@ export default function FourthStep() {
   const order = {
     'orderStatusId': {
       'name': 'Новый заказ',
-      'id': orderStatusId
+      'id': '5e26a191099b810b946c5d89'
     },
     'cityId': {
       'name': 'Ульяновск',

@@ -29,7 +29,7 @@ export default function OrderConfirmed() {
 
   const selectedCar = state.car.selectedCar
   const dateFrom = state.car.dateFrom
-  const orderStatusId = state.order.orderStatusId
+  const orderId = state.order.confirmedOrder!.id
   const carCheckBoxGroup = state.car.carColorOrtions
 
   let isCarFullTank = false
@@ -51,7 +51,7 @@ export default function OrderConfirmed() {
   })
 
   const handleRemovemOrder = () => {
-    dispatch(removeOrder(orderStatusId))
+    dispatch(removeOrder(orderId))
     setIsModal(false)
   }
 

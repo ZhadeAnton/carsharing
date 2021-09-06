@@ -1,19 +1,17 @@
 import * as types from './orderActionTypes'
-import { IOrder } from '../../interfaces/orderIntarfaces'
+import { IConfirmedOrder } from '../../interfaces/orderIntarfaces'
 import { IOrderTypes } from './orderActionTypes'
 
 export interface IOrderState {
   currentTabPosition: string
-  confirmedOrder: IOrder | null,
-  isOrderConfirmed: boolean,
-  orderStatusId: string
+  confirmedOrder: IConfirmedOrder | null,
+  isOrderConfirmed: boolean
 }
 
 const INIT_STATE: IOrderState = {
   currentTabPosition: '1',
   confirmedOrder: null,
-  isOrderConfirmed: false,
-  orderStatusId: '5e26a191099b810b946c5d89'
+  isOrderConfirmed: false
 }
 
 const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {

@@ -31,6 +31,9 @@ export interface IOrder {
   isRightWheel: boolean
 }
 
+export interface IConfirmedOrder extends IOrder {
+  id: string
+}
 
 export interface IOrderField {
   title: string,

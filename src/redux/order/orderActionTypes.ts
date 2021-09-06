@@ -1,4 +1,4 @@
-import { IOrder } from '../../interfaces/orderIntarfaces'
+import { IConfirmedOrder, IOrder } from '../../interfaces/orderIntarfaces'
 
 export const SET_ORDER = 'SET_ORDER'
 export interface ISetOrder {
@@ -9,7 +9,7 @@ export interface ISetOrder {
 export const SET_ORDER_SUCCESS = 'SET_ORDER_SUCCESS'
 export interface ISetOrderSuccess {
   type: typeof SET_ORDER_SUCCESS,
-  payload: IOrder
+  payload: IConfirmedOrder
 }
 
 export const REMOVE_ORDER = 'REMOVE_ORDER'

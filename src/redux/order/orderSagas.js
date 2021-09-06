@@ -16,8 +16,7 @@ function* sendOrder({payload}) {
 
 function* deleteConfirmedOrder({payload}) {
   try {
-    const res = yield call(API.deleteConfirmedOrder, payload)
-    yield console.log(res)
+    yield call(API.deleteConfirmedOrder, payload)
     yield put(actions.removeOrderSuccess())
   } catch (error) {
     console.error(error)
