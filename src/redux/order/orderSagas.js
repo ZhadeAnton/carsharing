@@ -14,12 +14,27 @@ function* sendOrder({payload}) {
   }
 }
 
+function* deleteConfirmedOrder({payload}) {
+  try {
+    const res = yield call(API.deleteConfirmedOrder, payload)
+    yield console.log(res)
+    yield put(actions.removeOrderSuccess())
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 function* onSendOrder() {
   yield takeLatest(types.SET_ORDER, sendOrder)
 }
 
+function* onDeleteConfirmedOrder() {
+  yield takeLatest(types.REMOVE_ORDER, deleteConfirmedOrder)
+}
+
 export default function* orderSagas() {
   yield all([
-    call(onSendOrder)
+    call(onSendOrder),
+    call(onDeleteConfirmedOrder)
   ])
 }

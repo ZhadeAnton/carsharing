@@ -14,7 +14,13 @@ export interface ISetOrderSuccess {
 
 export const REMOVE_ORDER = 'REMOVE_ORDER'
 export interface IRemoveOrder {
-  type: typeof REMOVE_ORDER
+  type: typeof REMOVE_ORDER,
+  payload: IOrder['orderStatusId']['id']
+}
+
+export const REMOVE_ORDER_SUCCESS = 'REMOVE_ORDER_SUCCESS'
+export interface IRemoveOrderSuccess {
+  type: typeof REMOVE_ORDER_SUCCESS
 }
 
 export const SET_CURRENT_TAB_POSITION = 'SET_CURRENT_TAB_POSITION'
@@ -27,4 +33,5 @@ export type IOrderTypes =
 | ISetOrder
 | ISetOrderSuccess
 | IRemoveOrder
+| IRemoveOrderSuccess
 | ISetCurrentTabPosition

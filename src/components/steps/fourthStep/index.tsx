@@ -1,5 +1,6 @@
 /* eslint-disable quotes */
 import React from 'react'
+import moment from 'moment'
 
 import './styles.scss'
 import { parseDate } from '../../../utils/dateUtils'
@@ -21,7 +22,6 @@ import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
 import { setOrder } from '../../../redux/order/orderActionCreators'
-import moment from 'moment'
 
 export default function FourthStep() {
   const dispatch = useAppDispatch()
