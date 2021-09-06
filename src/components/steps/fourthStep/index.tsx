@@ -12,7 +12,6 @@ import {
   getCarRateField,
   totalCarPriceSelector
 } from '../../../redux/car/carSelectors'
-// import { setOrder } from '../../../redux/order/orderActionCreators'
 import { ICheckbox } from '../../../interfaces/inputInterfaces'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
@@ -23,15 +22,12 @@ import CarImage from '../../car/carImage'
 import { getConfirmedOrder } from '../../../API/orderAPI'
 
 export default function FourthStep() {
-  // const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
 
   const selectedCar = state.car.selectedCar
-  // const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
-  // const dateTo = state.car.dateTo
-  const carCheckBoxGroup = state.car.carCheckBoxGroup
+  const carCheckBoxGroup = state.car.carColorOrtions
 
   let isCarFullTank = false
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
@@ -52,13 +48,6 @@ export default function FourthStep() {
   })
 
   const handleConfirmOrder = () => {
-    // dispatch(setOrder({
-    //   carId: selectedCar?.id,
-    //   color: carColor.value,
-    //   dateFrom: dateFrom,
-    //   dateTo: dateTo,
-
-    // }))
     setIsModal(false)
   }
 

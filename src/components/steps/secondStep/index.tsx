@@ -88,7 +88,7 @@ export default function SecondStep() {
           <div className='step-two__left--form'>
             <RadioGroup
               buttons={carsSortOptions}
-              selected={carsSortBy}
+              selected={carsSortBy.title}
               onChange={handleSortCars}
             />
           </div>

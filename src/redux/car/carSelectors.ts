@@ -10,9 +10,14 @@ const currentCarSelector = createSelector(
     (carState) => carState.selectedCar
 )
 
-const carRateSelector = createSelector(
+export const carRateSelector = createSelector(
     [carSelector],
     (carState) => carState.carRate
+)
+
+const carRatesOptionsSelector = createSelector(
+    [carSelector],
+    (carState) => carState.carRateOptions
 )
 
 const carColorSelector = createSelector(
@@ -37,7 +42,7 @@ const carLowPriceSelector = createSelector(
 
 const carCheckboxesSelector = createSelector(
     [carSelector],
-    (carState) => carState.carCheckBoxGroup
+    (carState) => carState.carColorOrtions
 )
 
 const carCheckboxesCheckedSelector = createSelector(
@@ -55,8 +60,9 @@ export const carCheckboxesCostSelector = createSelector(
 export const totalCarPriceSelector = createSelector(
     carLowPriceSelector,
     carCheckboxesCostSelector,
-    (carLowPrice, carCheckboxesCost) => {
-      if (carLowPrice) return carLowPrice + carCheckboxesCost
+    carRateSelector,
+    (carLowPrice, carCheckboxesCost, carRate) => {
+      if (carLowPrice) return carLowPrice + carCheckboxesCost + carRate.price
     }
 )
 
@@ -70,7 +76,7 @@ export const getCarModelFiled = createSelector(
 export const getCarRateField = createSelector(
     [carRateSelector],
     (carRate) => {
-      return { title: 'Тариф', value: carRate.value }
+      return { title: 'Тариф', value: carRate?.rateTypeId.name }
     }
 )
 
@@ -99,6 +105,23 @@ export const getCarColorsOptions = createSelector(
       arrayOfCarColors?.unshift({title: 'Любой', value: 'Любой'})
       return arrayOfCarColors
     }
+)
+
+export const getCarRateOptionsSelector = createSelector(
+    [carRatesOptionsSelector],
+    (carRates) => carRates?.map((rate) => (
+      {
+        title: rate.rateTypeId.name,
+        value: rate.rateTypeId.unit,
+        price: rate.price,
+        id: rate.id,
+        rateTypeId: {
+          id: rate.rateTypeId.id,
+          name: rate.rateTypeId.name,
+          inut: rate.rateTypeId.unit
+        },
+      }
+    ))
 )
 
 export const isSecondStepDisabledSelector = createSelector(

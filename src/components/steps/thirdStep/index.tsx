@@ -5,24 +5,30 @@ import moment from 'moment'
 import './styles.scss'
 import * as actions from '../../../redux/car/carActionCreators'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
+import { getTownField } from '../../../redux/location/locationSelectors'
+import { setCurrentTab } from '../../../redux/order/orderActionCreators'
 import {
   getCarColorField,
   getCarColorsOptions,
   getCarLeaseField,
   getCarModelFiled,
   getCarRateField,
+  getCarRateOptionsSelector,
   isThirdStepDisabledSelector,
   totalCarPriceSelector
 } from '../../../redux/car/carSelectors'
-import { getTownField } from '../../../redux/location/locationSelectors'
-import { ICheckbox, IDate, IRadioButton } from '../../../interfaces/inputInterfaces'
+import {
+  ICheckbox,
+  IDate,
+  IRadioButton,
+  IRate
+} from '../../../interfaces/inputInterfaces'
 import {
   changeCarCheckbox,
   getRateTypes,
   setDateFrom,
   setDateTo
 } from '../../../redux/car/carActionCreators'
-import { setCurrentTab } from '../../../redux/order/orderActionCreators'
 import RadioGroup from '../../forms/radiopGroup'
 import CheckboxGroup from '../../forms/checkboxGroup'
 import DateForm from '../../forms/dateForm'
@@ -34,8 +40,7 @@ export default function ThirdStep() {
 
   const carRate = state.car.carRate
   const carColor = state.car.carColor
-  const carRateOptions = state.car.carRateOptions
-  const carCheckBoxGroup = state.car.carCheckBoxGroup
+  const carCheckBoxGroup = state.car.carColorOrtions
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const isLoading = state.car.isLoading
@@ -44,6 +49,7 @@ export default function ThirdStep() {
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
   const carColorsOptions = getCarColorsOptions(state)
+  const carOptionsRadoiButton = getCarRateOptionsSelector(state)
   const isThirdStepDisable = isThirdStepDisabledSelector(state)
 
   const townField = getTownField(state)
@@ -60,10 +66,6 @@ export default function ThirdStep() {
     if (item.isChecked) thirdStepFields.push({ title: item.value, value: 'Да' })
     if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
   })
-
-  const rateOptionsForRadioGroup = carRateOptions?.map((opt) => (
-    { title: opt.name, value: opt.unit }
-  ))
 
   useEffect(() => {
     dispatch(getRateTypes())
@@ -89,7 +91,7 @@ export default function ThirdStep() {
     dispatch(actions.setCarColor(color))
   }
 
-  const handleRateChange = (rate: IRadioButton) => {
+  const handleRateChange = (rate: IRate) => {
     dispatch(actions.setCarRate(rate))
   }
 
@@ -120,7 +122,7 @@ export default function ThirdStep() {
 
           <RadioGroup
             buttons={carColorsOptions}
-            selected={carColor}
+            selected={carColor.title}
             onChange={handleColorChange} />
 
           <h6 className='step-three__title'>
@@ -141,8 +143,8 @@ export default function ThirdStep() {
           </h6>
 
           <RadioGroup
-            buttons={rateOptionsForRadioGroup}
-            selected={carRate}
+            buttons={carOptionsRadoiButton}
+            selected={carRate?.rateTypeId.name}
             onChange={handleRateChange}
             isVertical
           />

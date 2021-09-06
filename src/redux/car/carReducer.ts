@@ -4,7 +4,7 @@ import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInt
 import * as types from './carActonTypes'
 import {
   carsSortOptions,
-  carCheckBoxGroup
+  carColorOrtions
 } from '../../utils/carsUtils'
 import { changeCarCheckboxGroup } from './carUtils'
 
@@ -14,10 +14,10 @@ export interface ICarState {
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
   carRateOptions: Array<IRate> | null,
-  carCheckBoxGroup: Array<ICheckbox>,
+  carColorOrtions: Array<ICheckbox>,
   carsSortBy: IRadioButton,
   carColor: IRadioButton,
-  carRate: IRadioButton,
+  carRate: IRate,
   dateFrom: IDate,
   dateTo: IDate,
   isLoading: boolean
@@ -29,10 +29,10 @@ const INIT_STATE: ICarState = {
   selectedCar: null,
   carsSortOptions,
   carRateOptions: null,
-  carCheckBoxGroup,
+  carColorOrtions,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
-  carRate: {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
+  carRate: {price: 7, rateTypeId: {name: 'поминутно'}},
   dateFrom: null,
   dateTo: null,
   isLoading: false
@@ -98,7 +98,7 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.CAR_CHECKBOX_CHANGE:
       return {
         ...state,
-        carCheckBoxGroup: changeCarCheckboxGroup(state.carCheckBoxGroup, action.payload)
+        carColorOrtions: changeCarCheckboxGroup(state.carColorOrtions, action.payload)
       }
 
     case types.SET_DATE_FROM:

@@ -4,7 +4,7 @@ export const carsSortOptions = [
   {title: 'Премиум', value: 'Премиум'},
 ]
 
-export const carCheckBoxGroup = [
+export const carColorOrtions = [
   {
     title: 'Полный бак, 500р',
     value: 'Полный бак',

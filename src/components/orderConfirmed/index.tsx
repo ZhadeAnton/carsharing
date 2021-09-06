@@ -29,7 +29,7 @@ export default function OrderConfirmed() {
 
   const selectedCar = state.car.selectedCar
   const dateFrom = state.car.dateFrom
-  const carCheckBoxGroup = state.car.carCheckBoxGroup
+  const carCheckBoxGroup = state.car.carColorOrtions
 
   let isCarFullTank = false
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)

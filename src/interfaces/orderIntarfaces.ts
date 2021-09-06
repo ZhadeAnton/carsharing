@@ -14,5 +14,5 @@ export interface IOrder {
 }
 export interface IOrderField {
   title: string,
-  value: string
+  value: string | undefined
 }

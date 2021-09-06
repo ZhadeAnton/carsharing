@@ -42,7 +42,7 @@ function* fetchPremiumCars({payload: page}) {
 
 function* fetchRateTypes() {
   try {
-    const response = yield call(API.getRateTypes)
+    const response = yield call(API.fetchRateTypes)
     const listOfRates = response.data.data
     yield put(actions.getRateTypesSuccess(listOfRates))
   } catch (error) {

@@ -6,7 +6,7 @@ import { IRadioButton } from '../../../interfaces/inputInterfaces';
 interface Props {
   button: IRadioButton,
   checked: boolean,
-  handleChange: ({title, value}: IRadioButton) => any
+  handleChange: ({}: IRadioButton) => any
 }
 
 export default function RadioButton(props: Props) {

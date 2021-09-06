@@ -1,8 +1,16 @@
 import { Moment } from 'moment'
 
 export interface IRadioButton {
-  title: string,
-  value: string
+  title?: string,
+  value?: string,
+  createdAt?: number,
+  id?: string,
+  price?: number,
+  rateTypeId?: {
+    id?: string,
+    name?: string,
+    unit?: string
+  }
 }
 
 export interface ICheckbox {
@@ -16,7 +24,12 @@ export interface ICheckbox {
 export type IDate = Moment | null | undefined
 
 export interface IRate {
-  id: string,
-  name: string,
-  unit: string
+  createdAt?: number,
+  id?: string,
+  price: number,
+  rateTypeId: {
+    id?: string,
+    name: string,
+    unit?: string
+  }
 }

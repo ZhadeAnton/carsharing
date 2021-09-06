@@ -28,17 +28,17 @@ export const getPremiumCars = (page = 1) => {
     method: 'GET',
     url: `${process.env.REACT_APP_DEFAULT_URL}/car?priceMin[$gt]=20000&limit=${carsLimit}&page=${page}&sort[priceMin]=1`,
     headers: {
-      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID
     }
   })
 }
 
-export const getRateTypes = () => {
+export const fetchRateTypes = () => {
   return axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_DEFAULT_URL}/rateType`,
+    url: `${process.env.REACT_APP_DEFAULT_URL}/rate`,
     headers: {
-      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID
     }
   })
 }

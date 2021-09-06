@@ -58,7 +58,7 @@ export const setCarColor = (color: IRadioButton): types.ISerCarColor => ({
   payload: color
 })
 
-export const setCarRate = (rate: IRadioButton): types.ISetCarRate => ({
+export const setCarRate = (rate: IRate): types.ISetCarRate => ({
   type: types.SET_CAR_RATE,
   payload: rate
 })

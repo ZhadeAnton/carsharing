@@ -69,7 +69,7 @@ export interface ISerCarColor {
 export const SET_CAR_RATE = 'SET_CAR_RATE'
 export interface ISetCarRate {
   type: typeof SET_CAR_RATE,
-  payload: IRadioButton
+  payload: IRate
 }
 
 export const SET_DATE_FROM = 'SET_DATE_FROM'
