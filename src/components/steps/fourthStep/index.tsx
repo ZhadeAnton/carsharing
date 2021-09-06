@@ -1,6 +1,7 @@
 /* eslint-disable quotes */
 import React from 'react'
 import moment from 'moment'
+import { Spin } from 'antd'
 
 import './styles.scss'
 import { parseDate } from '../../../utils/dateUtils'
@@ -34,6 +35,7 @@ export default function FourthStep() {
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const carCheckBoxGroup = state.car.carColorOrtions
+  const isLoading = state.order.isLoading
 
   let isFullTank = false
   let isNeedChildChair = false
@@ -108,33 +110,36 @@ export default function FourthStep() {
   return (
     <section className='step-four step'>
       <section className='step-four__left step__left'>
-        <div className='step-four__left--info'>
-          <CarName carName={selectedCar?.name} />
+        <Spin tip="Loading..." spinning={isLoading}>
+          <div className='step-four__left--info'>
+            <CarName carName={selectedCar?.name} />
 
-          {
-            selectedCar?.number &&
-            <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
-          }
-
-          <div className='step-four__info'>
-            { isFullTank &&
-              <CarInfoField
-                title='Топливо'
-                value='100%'
-              />
+            {
+              selectedCar?.number &&
+              <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
             }
 
-            <CarInfoField
-              title='Доступна с'
-              value={parseDate(dateFrom)}
-            />
-          </div>
-        </div>
+            <div className='step-four__info'>
+              { isFullTank &&
+                <CarInfoField
+                  title='Топливо'
+                  value='100%'
+                />
+              }
 
-        <div className='step-four__image-wrapper'>
-          <CarImage carImage={selectedCar?.thumbnail.path} />
-        </div>
+              <CarInfoField
+                title='Доступна с'
+                value={parseDate(dateFrom)}
+              />
+            </div>
+          </div>
+
+          <div className='step-four__image-wrapper'>
+            <CarImage carImage={selectedCar?.thumbnail.path} />
+          </div>
+        </Spin>
       </section>
+
 
       <div className='step__right'>
         <OrderInfo

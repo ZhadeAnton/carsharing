@@ -115,7 +115,6 @@ export default function ThirdStep() {
     <section className='step-three step'>
       <section className='step__left'>
         <Spin tip="Loading..." spinning={isLoading}>
-
           <h6 className='step-three__title'>
               Цвет
           </h6>

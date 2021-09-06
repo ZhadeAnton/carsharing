@@ -68,22 +68,22 @@ export default function OrderConfirmed() {
       <section className='step-four__left step__left'>
         <div className='step-four__left--info order-confirmed__info'>
           <h4 className='order-confirmed__info--title'>
-            Ваш заказ подтверждён
+          Ваш заказ подтверждён
           </h4>
 
           <CarName carName={selectedCar?.name} />
 
           {
             selectedCar?.number &&
-            <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
+          <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
           }
 
           <div className='step-four__info'>
             { isCarFullTank &&
-              <CarInfoField
-                title='Топливо'
-                value='100%'
-              />
+            <CarInfoField
+              title='Топливо'
+              value='100%'
+            />
             }
 
             <CarInfoField
