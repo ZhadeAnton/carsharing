@@ -6,6 +6,11 @@ export const setOrder = (order: IOrder): types.ISetOrder => ({
   payload: order
 })
 
+export const setOrderSuccess = (order: IOrder): types.ISetOrderSuccess => ({
+  type: types.SET_ORDER_SUCCESS,
+  payload: order
+})
+
 export const removeOrder = (): types.IRemoveOrder => ({
   type: types.REMOVE_ORDER
 })

@@ -10,7 +10,7 @@ import OrderPageTabs from '../../components/orderPageTabs';
 export default function OrderPage() {
   const state = useAppSelector((state) => state)
 
-  const orderNumber = state.order.orderNumber
+  const orderNumber = state.order.orderStatusId
   const isOrderConfirmed = state.order.isOrderConfirmed
 
   return (

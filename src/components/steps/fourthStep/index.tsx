@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+/* eslint-disable quotes */
+import React from 'react'
 
 import './styles.scss'
 import { parseDate } from '../../../utils/dateUtils'
-import { useAppSelector } from '../../../hooks/usePreTypedHook'
+import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import useToggle from '../../../hooks/useToggle'
 import { getTownField } from '../../../redux/location/locationSelectors'
 import {
@@ -19,17 +20,25 @@ import OrderModal from '../../orderModal'
 import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
-import { getConfirmedOrder } from '../../../API/orderAPI'
+import { setOrder } from '../../../redux/order/orderActionCreators'
+import moment from 'moment'
 
 export default function FourthStep() {
+  const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
 
   const selectedCar = state.car.selectedCar
+  const carRate = state.car.carRate
+  const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
+  const dateTo = state.car.dateTo
   const carCheckBoxGroup = state.car.carColorOrtions
+  const orderStatusId = state.order.orderStatusId
 
-  let isCarFullTank = false
+  let isFullTank = false
+  let isNeedChildChair = false
+  let isRightWheel = false
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
 
   const townField = getTownField(state)
@@ -44,10 +53,48 @@ export default function FourthStep() {
 
   carCheckBoxGroup.forEach((item: ICheckbox) => {
     if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
-    if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
+    if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
+    if (item.value === 'Правый руль' && item.isChecked) isRightWheel = !isRightWheel
+    if (item.value === 'Детское кресло' && item.isChecked) {
+      isNeedChildChair = !isNeedChildChair
+    }
   })
 
+  const order = {
+    'orderStatusId': {
+      'name': 'Новый заказ',
+      'id': orderStatusId
+    },
+    'cityId': {
+      'name': 'Ульяновск',
+      'id': '5ea07ad3099b810b946c6254'
+    },
+    'pointId': {
+      'address': 'Гончарова, 27',
+      'name': 'Основная Парковка',
+      'cityId': {
+        'name': 'Ульяновск',
+        'id': '5ea07ad3099b810b946c6254'
+      },
+      'id': '5ea9b9dd099b810b946c71d2'
+    },
+    'carId': {
+      'name': `${selectedCar?.id}`
+    },
+    'color': `${carColor.value}`,
+    'dateFrom': moment(dateFrom).valueOf(),
+    'dateTo': moment(dateTo).valueOf(),
+    'rateId': {
+      'name': `${carRate.rateTypeId.name}`
+    },
+    'price': totalPriceOfSelectedCar,
+    'isFullTank': isFullTank,
+    'isNeedChildChair': isNeedChildChair,
+    'isRightWheel': isRightWheel
+  }
+
   const handleConfirmOrder = () => {
+    dispatch(setOrder(order))
     setIsModal(false)
   }
 
@@ -58,10 +105,6 @@ export default function FourthStep() {
   const handleOpenModal = () => {
     setIsModal(true)
   }
-
-  useEffect(() => {
-    getConfirmedOrder().then((res) => console.log(res))
-  })
 
   return (
     <section className='step-four step'>
@@ -75,7 +118,7 @@ export default function FourthStep() {
           }
 
           <div className='step-four__info'>
-            { isCarFullTank &&
+            { isFullTank &&
               <CarInfoField
                 title='Топливо'
                 value='100%'

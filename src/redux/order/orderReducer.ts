@@ -4,18 +4,18 @@ import { IOrderTypes } from './orderActionTypes'
 export interface IOrderState {
   currentTabPosition: string
   isOrderConfirmed: boolean,
-  orderNumber: string
+  orderStatusId: string
 }
 
 const INIT_STATE: IOrderState = {
   currentTabPosition: '1',
   isOrderConfirmed: false,
-  orderNumber: 'RU58491823'
+  orderStatusId: '5e26a191099b810b946c5d89'
 }
 
 const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
   switch (action.type) {
-    case types.SET_ORDER:
+    case types.SET_ORDER_SUCCESS:
       return {
         ...state,
         isOrderConfirmed: true

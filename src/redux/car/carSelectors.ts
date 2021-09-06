@@ -78,7 +78,9 @@ export const totalCarPriceSelector = createSelector(
     carCheckboxesCostSelector,
     getLeasePriceSelector,
     (carLowPrice, carCheckboxesCost, leasePrice) => {
-      if (carLowPrice) return carLowPrice + carCheckboxesCost + (leasePrice ?? 0)
+      if (carLowPrice) {
+        return Math.trunc(carLowPrice + carCheckboxesCost + (leasePrice ?? 0))
+      }
     }
 )
 
