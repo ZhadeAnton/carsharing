@@ -32,7 +32,7 @@ const INIT_STATE: ICarState = {
   carColorOrtions,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
-  carRate: {price: 7, rateTypeId: {name: 'поминутно'}},
+  carRate: {price: 7, rateTypeId: {name: 'Суточный'}},
   dateFrom: null,
   dateTo: null,
   isLoading: false

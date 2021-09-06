@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { ICheckbox, IRadioButton } from '../../interfaces/inputInterfaces'
-import { getDifferenceTime } from '../../utils/dateUtils'
+import { getTimeString, getTimeDifference } from '../../utils/dateUtils'
 import { RootState } from '../store'
 
 const carSelector = (state: RootState) => state.car
@@ -50,6 +50,22 @@ const carCheckboxesCheckedSelector = createSelector(
     (checkboxes) => checkboxes.filter((checkbox) => checkbox.isChecked)
 )
 
+const getTimeDifferenceSelector = createSelector(
+    carDateFromSelector,
+    carDateToSelector,
+    (dateFrom, dateTo) => {
+      if (dateFrom && dateTo) return getTimeDifference(dateFrom, dateTo)
+    }
+)
+
+const getLeasePriceSelector = createSelector(
+    getTimeDifferenceSelector,
+    carRateSelector,
+    (leaseTime, currentRate) => {
+      if (leaseTime !== undefined) return leaseTime * currentRate.price
+    }
+)
+
 export const carCheckboxesCostSelector = createSelector(
     [carCheckboxesCheckedSelector],
     (checkboxes) => checkboxes.reduce(
@@ -60,9 +76,9 @@ export const carCheckboxesCostSelector = createSelector(
 export const totalCarPriceSelector = createSelector(
     carLowPriceSelector,
     carCheckboxesCostSelector,
-    carRateSelector,
-    (carLowPrice, carCheckboxesCost, carRate) => {
-      if (carLowPrice) return carLowPrice + carCheckboxesCost + carRate.price
+    getLeasePriceSelector,
+    (carLowPrice, carCheckboxesCost, leasePrice) => {
+      if (carLowPrice) return carLowPrice + carCheckboxesCost + (leasePrice ?? 0)
     }
 )
 
@@ -91,7 +107,7 @@ export const getCarLeaseField = createSelector(
     carDateFromSelector,
     carDateToSelector,
     (dateFrom, dateTo) => {
-      const durationLease = getDifferenceTime(dateFrom, dateTo)
+      const durationLease = getTimeString(dateFrom, dateTo)
       return { title: 'Длительность аренды', value: durationLease }
     }
 )

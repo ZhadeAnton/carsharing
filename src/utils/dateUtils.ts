@@ -6,7 +6,13 @@ export const parseDate = (date: IDate): string => {
   return moment(date).format('DD.MM.YYYY HH:mm')
 }
 
-export const getDifferenceTime = (dateFrom: IDate, dateTo: IDate): string => {
+export const getTimeDifference = (dateFrom: IDate, dateTo: IDate) => {
+  const mills = dateTo?.diff(dateFrom, 'milliseconds')
+  const duration = moment.duration(mills, 'millisecond')
+  return duration.asDays()
+}
+
+export const getTimeString = (dateFrom: IDate, dateTo: IDate): string => {
   const duration = moment.duration(dateTo?.diff(dateFrom))
   const days = duration.asDays()
   duration.subtract(moment.duration(days, 'days'))
