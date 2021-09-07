@@ -32,7 +32,9 @@ export default function OrderConfirmed() {
   const orderId = state.order.confirmedOrder!.id
   const carCheckBoxGroup = state.car.carColorOrtions
 
-  let isCarFullTank = false
+  let isFullTank = false
+  let isNeedChildChair = false
+  let isRightWheel = false
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
 
   const townField = getTownField(state)
@@ -47,11 +49,16 @@ export default function OrderConfirmed() {
 
   carCheckBoxGroup.forEach((item: ICheckbox) => {
     if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
-    if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
+    if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
+    if (item.value === 'Правый руль' && item.isChecked) isRightWheel = !isRightWheel
+    if (item.value === 'Детское кресло' && item.isChecked) {
+      isNeedChildChair = !isNeedChildChair
+    }
   })
 
   const handleRemovemOrder = () => {
     dispatch(removeOrder(orderId))
+    localStorage.removeItem('carOrderId')
     setIsModal(false)
   }
 
@@ -68,18 +75,18 @@ export default function OrderConfirmed() {
       <section className='step-four__left step__left'>
         <div className='step-four__left--info order-confirmed__info'>
           <h4 className='order-confirmed__info--title'>
-          Ваш заказ подтверждён
+            Ваш заказ подтверждён
           </h4>
 
           <CarName carName={selectedCar?.name} />
 
           {
             selectedCar?.number &&
-          <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
+            <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
           }
 
           <div className='step-four__info'>
-            { isCarFullTank &&
+            { isFullTank &&
             <CarInfoField
               title='Топливо'
               value='100%'

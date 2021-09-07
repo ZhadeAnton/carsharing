@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import './styles.scss'
-import { useAppSelector } from '../../hooks/usePreTypedHook';
+import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
 import Aside from '../../components/aside'
 import Header from '../../components/header'
 import OrderConfirmed from '../../components/orderConfirmed';
 import OrderPageTabs from '../../components/orderPageTabs';
+import { getOrderById } from '../../redux/order/orderActionCreators';
 
 export default function OrderPage() {
+  const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
   const orderId = state.order.confirmedOrder?.id
   const isOrderConfirmed = state.order.isOrderConfirmed
+
+  useEffect(() => {
+    const carOrderId = localStorage.getItem('carOrderId')
+    if (carOrderId) dispatch(getOrderById(carOrderId))
+  }, [])
 
   return (
     <main className='order-page'>

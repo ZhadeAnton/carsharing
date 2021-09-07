@@ -11,6 +11,12 @@ export const setOrderSuccess = (order: IConfirmedOrder): types.ISetOrderSuccess 
   payload: order
 })
 
+export const getOrderById = (orderId: IOrder['orderStatusId']['id'])
+  : types.IGetOrderById => ({
+  type: types.GET_ORDER_BY_ID,
+  payload: orderId
+})
+
 export const removeOrder = (orderId: IOrder['orderStatusId']['id'])
   : types.IRemoveOrder => ({
   type: types.REMOVE_ORDER,
@@ -24,4 +30,8 @@ export const removeOrderSuccess = (): types.IRemoveOrderSuccess => ({
 export const setCurrentTab = (tabKey: string): types.ISetCurrentTabPosition => ({
   type: types.SET_CURRENT_TAB_POSITION,
   payload: tabKey
+})
+
+export const orderFailure = () => ({
+  type: types.ORDER_FAILURE
 })

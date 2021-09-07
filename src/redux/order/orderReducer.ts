@@ -19,6 +19,7 @@ const INIT_STATE: IOrderState = {
 const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
   switch (action.type) {
     case types.SET_ORDER:
+    case types.GET_ORDER_BY_ID:
       return {
         ...state,
         isLoading: true
@@ -43,6 +44,12 @@ const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
       return {
         ...state,
         currentTabPosition: action.payload
+      }
+
+    case types.ORDER_FAILURE:
+      return {
+        ...state,
+        isLoading: false
       }
 
     default:

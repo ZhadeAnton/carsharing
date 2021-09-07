@@ -12,6 +12,12 @@ export interface ISetOrderSuccess {
   payload: IConfirmedOrder
 }
 
+export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
+export interface IGetOrderById {
+  type: typeof GET_ORDER_BY_ID,
+  payload: IOrder['orderStatusId']['id']
+}
+
 export const REMOVE_ORDER = 'REMOVE_ORDER'
 export interface IRemoveOrder {
   type: typeof REMOVE_ORDER,
@@ -29,9 +35,16 @@ export interface ISetCurrentTabPosition {
   payload: string
 }
 
+export const ORDER_FAILURE = 'ORDER_FAILURE'
+export interface IOrderFailure {
+  type: typeof ORDER_FAILURE
+}
+
 export type IOrderTypes =
 | ISetOrder
 | ISetOrderSuccess
+| IGetOrderById
 | IRemoveOrder
+| IOrderFailure
 | IRemoveOrderSuccess
 | ISetCurrentTabPosition

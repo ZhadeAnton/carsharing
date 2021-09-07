@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import React from 'react'
 import moment from 'moment'
 import { Spin } from 'antd'
@@ -63,8 +62,8 @@ export default function FourthStep() {
 
   const order = {
     'orderStatusId': {
-      'name': 'Новый заказ',
-      'id': '5e26a191099b810b946c5d89'
+      'name': 'Новые',
+      'id': '5ebc0f26099b810b946c93d5'
     },
     'cityId': {
       'name': 'Ульяновск',
@@ -80,7 +79,20 @@ export default function FourthStep() {
       'id': '5ea9b9dd099b810b946c71d2'
     },
     'carId': {
-      'name': `${selectedCar?.id}`
+      'name': `${selectedCar?.name}`,
+      'description': `${selectedCar?.description}`,
+      'priceMax': `${selectedCar?.priceMax}`,
+      'thumbnail': {
+        'size': `${selectedCar?.thumbnail.size}`,
+        'originalname': `${selectedCar?.thumbnail.originalname}`,
+        'mimetype': `${selectedCar?.thumbnail.mimetype}`,
+        'path': `${selectedCar?.thumbnail.path}`,
+      },
+      'priceMin': `${selectedCar?.priceMin}`,
+      'number': `${selectedCar?.number}`,
+      'tank': `${selectedCar?.tank}`,
+      'colors': `${selectedCar?.colors}`,
+      'id': `${selectedCar?.id}`
     },
     'color': `${carColor.value}`,
     'dateFrom': moment(dateFrom).valueOf(),
@@ -91,7 +103,8 @@ export default function FourthStep() {
     'price': totalPriceOfSelectedCar,
     'isFullTank': isFullTank,
     'isNeedChildChair': isNeedChildChair,
-    'isRightWheel': isRightWheel
+    'isRightWheel': isRightWheel,
+    'id': '5ebc0f26099b810b946c93d5'
   }
 
   const handleConfirmOrder = () => {

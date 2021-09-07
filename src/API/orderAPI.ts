@@ -14,6 +14,17 @@ export const sendConfirmedOrder = (order: IOrder) => {
   })
 }
 
+export const getOrderById = (orderId: IOrder['orderStatusId']['id']) => {
+  return axios({
+    method: 'GET',
+    url: `${process.env.REACT_APP_DEFAULT_URL}/order/${orderId}`,
+    headers: {
+      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
 export const deleteConfirmedOrder = (orderId: IOrder['orderStatusId']['id']) => {
   return axios({
     method: 'DELETE',

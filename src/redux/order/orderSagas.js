@@ -9,6 +9,7 @@ function* sendOrder({payload}) {
     const response = yield call(API.sendConfirmedOrder, payload)
     const confirmedOrder = yield response.data.data
     yield put(actions.setOrderSuccess(confirmedOrder))
+    yield localStorage.setItem('carOrderId', confirmedOrder.id)
   } catch (error) {
     console.error(error)
   }
@@ -23,6 +24,17 @@ function* deleteConfirmedOrder({payload}) {
   }
 }
 
+function* fetchOrderById({payload}) {
+  try {
+    const response = yield call(API.getOrderById, payload)
+    const confirmedOrder = yield response.data.data
+    yield put(actions.setOrderSuccess(confirmedOrder))
+  } catch (error) {
+    console.error(error)
+    yield put(actions.orderFailure)
+  }
+}
+
 function* onSendOrder() {
   yield takeLatest(types.SET_ORDER, sendOrder)
 }
@@ -31,9 +43,14 @@ function* onDeleteConfirmedOrder() {
   yield takeLatest(types.REMOVE_ORDER, deleteConfirmedOrder)
 }
 
+function* onGetOrderById() {
+  yield takeLatest(types.GET_ORDER_BY_ID, fetchOrderById)
+}
+
 export default function* orderSagas() {
   yield all([
     call(onSendOrder),
-    call(onDeleteConfirmedOrder)
+    call(onDeleteConfirmedOrder),
+    call(onGetOrderById)
   ])
 }
