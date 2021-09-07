@@ -4,10 +4,6 @@
 .car-field {
   display: flex;
 
-  &:not(:last-child) {
-    margin-bottom: $space-sm;
-  }
-
   &__title {
     margin-right: 6px;
     @extend %heading14;

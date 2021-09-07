@@ -3,33 +3,12 @@ import { message, Spin } from 'antd'
 import moment from 'moment'
 
 import './styles.scss'
-import * as actions from '../../../redux/car/carActionCreators'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import { getTownField } from '../../../redux/location/locationSelectors'
 import { setCurrentTab } from '../../../redux/order/orderActionCreators'
-import {
-  getCarCheckboxFields,
-  getCarColorField,
-  getCarColorsOptions,
-  getCarLeaseField,
-  getCarModelFiled,
-  getCarRateField,
-  getCarRateOptionsSelector,
-  isThirdStepDisabledSelector,
-  totalCarPriceSelector
-} from '../../../redux/car/carSelectors'
-import {
-  ICheckbox,
-  IDate,
-  IRadioButton,
-  IRate
-} from '../../../interfaces/inputInterfaces'
-import {
-  changeCarCheckbox,
-  getRateTypes,
-  setDateFrom,
-  setDateTo
-} from '../../../redux/car/carActionCreators'
+import * as carSelectors from '../../../redux/car/carSelectors'
+import * as IInput from '../../../interfaces/inputInterfaces'
+import * as carActions from '../../../redux/car/carActionCreators'
 import RadioGroup from '../../forms/radiopGroup'
 import CheckboxGroup from '../../forms/checkboxGroup'
 import DateForm from '../../forms/dateForm'
@@ -45,20 +24,17 @@ export default function ThirdStep() {
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const isLoading = state.car.isLoading
-
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
-  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
-  const carColorsOptions = getCarColorsOptions(state)
-  const carOptionsRadoiButton = getCarRateOptionsSelector(state)
-  const isThirdStepDisable = isThirdStepDisabledSelector(state)
-
+  const totalPriceOfSelectedCar = carSelectors.totalCarPriceSelector(state)
+  const carColorsOptions = carSelectors.getCarColorsOptions(state)
+  const carOptionsRadoiButton = carSelectors.getCarRateOptionsSelector(state)
+  const isThirdStepDisable = carSelectors.isThirdStepDisabledSelector(state)
   const townField = getTownField(state)
-  const carModelField = getCarModelFiled(state)
-  const carColorField = getCarColorField(state)
-  const carRateField = getCarRateField(state)
-  const carLeaseField = getCarLeaseField(state)
-  const carCheckboxFields = getCarCheckboxFields(state)
-
+  const carModelField = carSelectors.getCarModelFiled(state)
+  const carColorField = carSelectors.getCarColorField(state)
+  const carRateField = carSelectors.getCarRateField(state)
+  const carLeaseField = carSelectors.getCarLeaseField(state)
+  const carCheckboxFields = carSelectors.getCarCheckboxFields(state)
   const thirdStepFields = [
     townField,
     carModelField,
@@ -69,13 +45,13 @@ export default function ThirdStep() {
   ]
 
   useEffect(() => {
-    dispatch(getRateTypes())
+    dispatch(carActions.getRateTypes())
   }, [])
 
   useEffect(() => {
     if (dateFrom && dateTo && isDateAfter) {
-      dispatch(setDateFrom(null))
-      dispatch(setDateTo(null))
+      dispatch(carActions.setDateFrom(null))
+      dispatch(carActions.setDateTo(null))
       message.error('Неккоректная дата');
     }
   }, [dateFrom, dateTo])
@@ -84,32 +60,32 @@ export default function ThirdStep() {
     dispatch(setCurrentTab('4'))
   }
 
-  const handleCheckboxChange = (checkbox:ICheckbox) => {
-    dispatch(changeCarCheckbox(checkbox))
+  const handleCheckboxChange = (checkbox: IInput.ICheckbox) => {
+    dispatch(carActions.changeCarCheckbox(checkbox))
   }
 
-  const handleColorChange = (color: IRadioButton) => {
-    dispatch(actions.setCarColor(color))
+  const handleColorChange = (color: IInput.IRadioButton) => {
+    dispatch(carActions.setCarColor(color))
   }
 
-  const handleRateChange = (rate: IRate) => {
-    dispatch(actions.setCarRate(rate))
+  const handleRateChange = (rate: IInput.IRate) => {
+    dispatch(carActions.setCarRate(rate))
   }
 
-  const handleUpdateDateFrom = (date: IDate) => {
-    dispatch(actions.setDateFrom(date))
+  const handleUpdateDateFrom = (date: IInput.IDate) => {
+    dispatch(carActions.setDateFrom(date))
   }
 
-  const handleUpdateDateTo = (date: IDate) => {
-    dispatch(actions.setDateTo(date))
+  const handleUpdateDateTo = (date: IInput.IDate) => {
+    dispatch(carActions.setDateTo(date))
   }
 
   const handleClearDateFrom = () => {
-    dispatch(actions.setDateFrom(null))
+    dispatch(carActions.setDateFrom(null))
   }
 
   const handleClearDateTo = () => {
-    dispatch(actions.setDateTo(null))
+    dispatch(carActions.setDateTo(null))
   }
 
   return (

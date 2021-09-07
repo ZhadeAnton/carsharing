@@ -1,17 +1,12 @@
 import React from 'react'
 
 import './styles.scss'
+import useToggle from '../../hooks/useToggle'
 import { parseDate } from '../../utils/dateUtils'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook'
-import useToggle from '../../hooks/useToggle'
-import {
-  getCarColorField,
-  getCarLeaseField,
-  getCarModelFiled,
-  getCarRateField,
-} from '../../redux/car/carSelectors'
 import { getTownField } from '../../redux/location/locationSelectors'
 import { removeOrder } from '../../redux/order/orderActionCreators'
+import * as carSelectors from '../../redux/car/carSelectors'
 import CarImage from '../car/carImage'
 import CarInfoField from '../car/carInfoField'
 import CarName from '../car/carName'
@@ -25,13 +20,11 @@ export default function OrderConfirmed() {
   const [isModal, setIsModal] = useToggle()
 
   const confirmedOrder = state.order.confirmedOrder
-
   const townField = getTownField(state)
-  const carModelField = getCarModelFiled(state)
-  const carColorField = getCarColorField(state)
-  const carRateField = getCarRateField(state)
-  const carLeaseField = getCarLeaseField(state)
-
+  const carModelField = carSelectors.getCarModelFiled(state)
+  const carColorField = carSelectors.getCarColorField(state)
+  const carRateField = carSelectors.getCarRateField(state)
+  const carLeaseField = carSelectors.getCarLeaseField(state)
   const fourthStepFields = [
     townField, carModelField, carColorField, carRateField, carLeaseField
   ]

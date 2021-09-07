@@ -3,25 +3,19 @@ import moment from 'moment'
 import { Spin } from 'antd'
 
 import './styles.scss'
+import useToggle from '../../../hooks/useToggle'
 import { parseDate } from '../../../utils/dateUtils'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
-import useToggle from '../../../hooks/useToggle'
 import { getTownField } from '../../../redux/location/locationSelectors'
-import {
-  getCarCheckboxFields,
-  getCarColorField,
-  getCarLeaseField,
-  getCarModelFiled,
-  getCarRateField,
-  totalCarPriceSelector
-} from '../../../redux/car/carSelectors'
+import { setOrder } from '../../../redux/order/orderActionCreators'
+import * as carSelectors from '../../../redux/car/carSelectors'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
 import OrderModal from '../../orderModal'
 import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
-import { setOrder } from '../../../redux/order/orderActionCreators'
+import CarInfoList from '../../car/carInfoList'
 
 export default function FourthStep() {
   const dispatch = useAppDispatch()
@@ -29,24 +23,22 @@ export default function FourthStep() {
   const [isModal, setIsModal] = useToggle()
 
   const selectedCar = state.car.selectedCar
+  const carCheckboxOrtions = state.car.carCheckboxOrtions
   const carRate = state.car.carRate
   const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const isLoading = state.order.isLoading
-
   const isFullTank = false
   const isNeedChildChair = false
   const isRightWheel = false
-  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
-
+  const totalPriceOfSelectedCar = carSelectors.totalCarPriceSelector(state)
   const townField = getTownField(state)
-  const carModelField = getCarModelFiled(state)
-  const carColorField = getCarColorField(state)
-  const carRateField = getCarRateField(state)
-  const carLeaseField = getCarLeaseField(state)
-  const carCheckboxFields = getCarCheckboxFields(state)
-
+  const carModelField = carSelectors.getCarModelFiled(state)
+  const carColorField = carSelectors.getCarColorField(state)
+  const carRateField = carSelectors.getCarRateField(state)
+  const carLeaseField = carSelectors.getCarLeaseField(state)
+  const carCheckboxFields = carSelectors.getCarCheckboxFields(state)
   const fourthStepFields = [
     townField,
     carModelField,
@@ -129,12 +121,7 @@ export default function FourthStep() {
             }
 
             <div className='step-four__info'>
-              { isFullTank &&
-                <CarInfoField
-                  title='Топливо'
-                  value='100%'
-                />
-              }
+              <CarInfoList carCheckboxes={carCheckboxOrtions} />
 
               <CarInfoField
                 title='Доступна с'

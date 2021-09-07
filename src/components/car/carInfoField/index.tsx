@@ -4,7 +4,7 @@ import './styles.scss'
 
 interface Props {
   title: string,
-  value: string
+  value: string | undefined
 }
 
 export default function CarInfoField(props: Props) {
