@@ -26,11 +26,6 @@ export default function OrderConfirmed() {
 
   const confirmedOrder = state.order.confirmedOrder
 
-  // let isFullTank = false
-  // let isNeedChildChair = false
-  // let isRightWheel = false
-  // const totalPriceOfSelectedCar = totalCarPriceSelector(state)
-
   const townField = getTownField(state)
   const carModelField = getCarModelFiled(state)
   const carColorField = getCarColorField(state)
@@ -40,17 +35,6 @@ export default function OrderConfirmed() {
   const fourthStepFields = [
     townField, carModelField, carColorField, carRateField, carLeaseField
   ]
-
-  // carCheckBoxGroup.forEach((item: ICheckbox) => {
-  //   if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
-  //   if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
-  //   if (item.value === 'Правый руль' && item.isChecked) isRightWheel = !isRightWheel
-  //   if (item.value === 'Детское кресло' && item.isChecked) {
-  //     isNeedChildChair = !isNeedChildChair
-  //   }
-  // })
-
-  console.log(confirmedOrder)
 
   const handleRemovemOrder = () => {
     localStorage.removeItem('carOrderId')

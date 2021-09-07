@@ -8,13 +8,13 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import useToggle from '../../../hooks/useToggle'
 import { getTownField } from '../../../redux/location/locationSelectors'
 import {
+  getCarCheckboxFields,
   getCarColorField,
   getCarLeaseField,
   getCarModelFiled,
   getCarRateField,
   totalCarPriceSelector
 } from '../../../redux/car/carSelectors'
-import { ICheckbox } from '../../../interfaces/inputInterfaces'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
 import OrderModal from '../../orderModal'
@@ -33,12 +33,11 @@ export default function FourthStep() {
   const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
-  const carCheckBoxGroup = state.car.carCheckboxOrtions
   const isLoading = state.order.isLoading
 
-  let isFullTank = false
-  let isNeedChildChair = false
-  let isRightWheel = false
+  const isFullTank = false
+  const isNeedChildChair = false
+  const isRightWheel = false
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
 
   const townField = getTownField(state)
@@ -46,19 +45,16 @@ export default function FourthStep() {
   const carColorField = getCarColorField(state)
   const carRateField = getCarRateField(state)
   const carLeaseField = getCarLeaseField(state)
+  const carCheckboxFields = getCarCheckboxFields(state)
 
   const fourthStepFields = [
-    townField, carModelField, carColorField, carRateField, carLeaseField
+    townField,
+    carModelField,
+    carColorField,
+    carRateField,
+    carLeaseField,
+    ...carCheckboxFields
   ]
-
-  carCheckBoxGroup.forEach((item: ICheckbox) => {
-    if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
-    if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
-    if (item.value === 'Правый руль' && item.isChecked) isRightWheel = !isRightWheel
-    if (item.value === 'Детское кресло' && item.isChecked) {
-      isNeedChildChair = !isNeedChildChair
-    }
-  })
 
   const order = {
     'orderStatusId': {

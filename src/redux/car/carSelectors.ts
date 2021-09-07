@@ -114,6 +114,16 @@ export const getCarLeaseField = createSelector(
     }
 )
 
+export const getCarCheckboxFields = createSelector(
+    [carSelector],
+    (car) => {
+      const checkboxes = car.carCheckboxOrtions
+      return checkboxes
+          .filter((checkbox) => checkbox.isChecked)
+          .map((checkbox) => ({ title: checkbox.value, value: 'Да' }))
+    }
+)
+
 export const getCarColorsOptions = createSelector(
     [currentCarSelector],
     (selectedCar) => {

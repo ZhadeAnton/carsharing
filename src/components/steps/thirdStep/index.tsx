@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import { getTownField } from '../../../redux/location/locationSelectors'
 import { setCurrentTab } from '../../../redux/order/orderActionCreators'
 import {
+  getCarCheckboxFields,
   getCarColorField,
   getCarColorsOptions,
   getCarLeaseField,
@@ -45,7 +46,6 @@ export default function ThirdStep() {
   const dateTo = state.car.dateTo
   const isLoading = state.car.isLoading
 
-  let isCarFullTank = false
   const isDateAfter = moment(dateFrom).isAfter(dateTo)
   const totalPriceOfSelectedCar = totalCarPriceSelector(state)
   const carColorsOptions = getCarColorsOptions(state)
@@ -57,15 +57,16 @@ export default function ThirdStep() {
   const carColorField = getCarColorField(state)
   const carRateField = getCarRateField(state)
   const carLeaseField = getCarLeaseField(state)
+  const carCheckboxFields = getCarCheckboxFields(state)
 
   const thirdStepFields = [
-    townField, carModelField, carColorField, carRateField, carLeaseField
+    townField,
+    carModelField,
+    carColorField,
+    carRateField,
+    carLeaseField,
+    ...carCheckboxFields
   ]
-
-  carCheckBoxGroup.forEach((item: ICheckbox) => {
-    if (item.isChecked) thirdStepFields.push({ title: item.value, value: 'Да' })
-    if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
-  })
 
   useEffect(() => {
     dispatch(getRateTypes())
