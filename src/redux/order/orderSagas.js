@@ -6,6 +6,7 @@ import * as API from '../../API/orderAPI.ts'
 
 function* sendOrder({payload}) {
   try {
+    yield localStorage.setItem('carOrderId', payload.id)
     const response = yield call(API.sendConfirmedOrder, payload)
     const confirmedOrder = yield response.data.data
     yield put(actions.setOrderSuccess(confirmedOrder))
@@ -28,7 +29,7 @@ function* fetchOrderById({payload}) {
   try {
     const response = yield call(API.getOrderById, payload)
     const confirmedOrder = yield response.data.data
-    yield put(actions.setOrderSuccess(confirmedOrder))
+    yield put(actions.getOrderByIdSuccess(confirmedOrder))
   } catch (error) {
     console.error(error)
     yield put(actions.orderFailure)

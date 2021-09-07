@@ -3,7 +3,7 @@ import { ILocationTypes } from './locationActionTypes'
 import * as types from './locationActionTypes'
 import {
   IOrderTypes,
-  SET_ORDER_SUCCESS,
+  GET_ORDER_BY_ID_SUCCESS,
   REMOVE_ORDER
 } from '../order/orderActionTypes'
 
@@ -49,7 +49,7 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
         coordinatesByPickedTown: action.payload
       }
 
-    case SET_ORDER_SUCCESS:
+    case GET_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
         town: action.payload.cityId.name,

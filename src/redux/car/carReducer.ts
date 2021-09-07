@@ -6,12 +6,12 @@ import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInt
 import * as types from './carActonTypes'
 import {
   carsSortOptions,
-  carColorOrtions
+  carCheckboxOrtions
 } from '../../utils/carsUtils'
 import { changeCarCheckboxGroup } from './carUtils'
 import {
   IOrderTypes,
-  SET_ORDER_SUCCESS,
+  GET_ORDER_BY_ID_SUCCESS,
   REMOVE_ORDER
 } from '../order/orderActionTypes'
 
@@ -21,7 +21,7 @@ export interface ICarState {
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
   carRateOptions: Array<IRate> | null,
-  carColorOrtions: Array<ICheckbox>,
+  carCheckboxOrtions: Array<ICheckbox>,
   carsSortBy: IRadioButton,
   carColor: IRadioButton,
   carRate: IRate,
@@ -36,7 +36,7 @@ const INIT_STATE: ICarState = {
   selectedCar: null,
   carsSortOptions,
   carRateOptions: null,
-  carColorOrtions,
+  carCheckboxOrtions,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
   carRate: {price: 7, rateTypeId: {name: 'Суточный'}},
@@ -82,17 +82,18 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
         carsSortBy: action.payload,
       }
 
-    case SET_ORDER_SUCCESS:
+    case GET_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
         dateFrom: moment(action.payload.dateFrom),
+        dateTo: moment(action.payload.dateTo),
         carColor: {title: action.payload.color, value: action.payload.color},
         selectedCar: {
           isRightWheel: action.payload.isRightWheel,
           isNeedChildChair: action.payload.isNeedChildChair,
           isFullTank: action.payload.isFullTank,
-          number: action.payload.number,
-          name: action.payload.name,
+          number: action.payload.carId.number,
+          name: action.payload.carId.name,
           thumbnail: action.payload.thumbnail
         }
       }
@@ -122,7 +123,8 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
     case types.CAR_CHECKBOX_CHANGE:
       return {
         ...state,
-        carColorOrtions: changeCarCheckboxGroup(state.carColorOrtions, action.payload)
+        carCheckboxOrtions: changeCarCheckboxGroup(
+            state.carCheckboxOrtions, action.payload)
       }
 
     case types.SET_DATE_FROM:

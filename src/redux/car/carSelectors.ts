@@ -42,7 +42,7 @@ const carLowPriceSelector = createSelector(
 
 const carCheckboxesSelector = createSelector(
     [carSelector],
-    (carState) => carState.carColorOrtions
+    (carState) => carState.carCheckboxOrtions
 )
 
 const carCheckboxesCheckedSelector = createSelector(

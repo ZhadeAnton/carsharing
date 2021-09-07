@@ -26,6 +26,7 @@ const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
       }
 
     case types.SET_ORDER_SUCCESS:
+    case types.GET_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
         confirmedOrder: action.payload,
@@ -33,15 +34,15 @@ const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
         isLoading: false
       }
 
-    case types.REMOVE_ORDER:
-      return {
-        ...INIT_STATE
-      }
-
     case types.SET_CURRENT_TAB_POSITION:
       return {
         ...state,
         currentTabPosition: action.payload
+      }
+
+    case types.REMOVE_ORDER:
+      return {
+        ...INIT_STATE
       }
 
     case types.ORDER_FAILURE:

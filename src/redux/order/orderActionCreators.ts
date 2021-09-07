@@ -17,6 +17,12 @@ export const getOrderById = (orderId: IOrder['orderStatusId']['id'])
   payload: orderId
 })
 
+export const getOrderByIdSuccess = (order: IConfirmedOrder)
+  : types.IGetOrderByIdSuccess => ({
+  type: types.GET_ORDER_BY_ID_SUCCESS,
+  payload: order
+})
+
 export const removeOrder = (orderId: IOrder['orderStatusId']['id'])
   : types.IRemoveOrder => ({
   type: types.REMOVE_ORDER,

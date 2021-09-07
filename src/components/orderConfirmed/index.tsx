@@ -26,8 +26,6 @@ export default function OrderConfirmed() {
 
   const confirmedOrder = state.order.confirmedOrder
 
-  console.log('confirmedOrder', confirmedOrder)
-
   // let isFullTank = false
   // let isNeedChildChair = false
   // let isRightWheel = false
@@ -52,9 +50,11 @@ export default function OrderConfirmed() {
   //   }
   // })
 
+  console.log(confirmedOrder)
+
   const handleRemovemOrder = () => {
-    dispatch(removeOrder(confirmedOrder!.id))
     localStorage.removeItem('carOrderId')
+    dispatch(removeOrder(confirmedOrder!.id))
     setIsModal(false)
   }
 
@@ -74,19 +74,19 @@ export default function OrderConfirmed() {
             Ваш заказ подтверждён
           </h4>
 
-          <CarName carName={confirmedOrder!.name} />
+          <CarName carName={confirmedOrder!.carId.name} />
 
           {
-            confirmedOrder!.number &&
-            <CarPlatesNumber carPlatesNumber={confirmedOrder!.number} />
+            confirmedOrder!.carId.number &&
+            <CarPlatesNumber carPlatesNumber={confirmedOrder!.carId.number} />
           }
 
           <div className='step-four__info'>
             { confirmedOrder!.isFullTank &&
-            <CarInfoField
-              title='Топливо'
-              value='100%'
-            />
+              <CarInfoField
+                title='Топливо'
+                value='100%'
+              />
             }
 
             <CarInfoField

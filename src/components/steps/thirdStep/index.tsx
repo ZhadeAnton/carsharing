@@ -40,7 +40,7 @@ export default function ThirdStep() {
 
   const carRate = state.car.carRate
   const carColor = state.car.carColor
-  const carCheckBoxGroup = state.car.carColorOrtions
+  const carCheckBoxGroup = state.car.carCheckboxOrtions
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const isLoading = state.car.isLoading

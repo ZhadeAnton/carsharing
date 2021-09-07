@@ -34,7 +34,8 @@ export interface IOrder {
 export interface IConfirmedOrder extends IOrder {
   thumbnail: { mimetype: string; originalname: string; path: string; size: number; };
   carId: {
-    name: string
+    name: string,
+    number: string,
     thumbnail?: {
       mimetype: string,
       originalname: string,

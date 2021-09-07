@@ -33,7 +33,7 @@ export default function FourthStep() {
   const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
-  const carCheckBoxGroup = state.car.carColorOrtions
+  const carCheckBoxGroup = state.car.carCheckboxOrtions
   const isLoading = state.order.isLoading
 
   let isFullTank = false

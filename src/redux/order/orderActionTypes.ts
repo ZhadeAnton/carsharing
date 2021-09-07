@@ -18,6 +18,12 @@ export interface IGetOrderById {
   payload: IOrder['orderStatusId']['id']
 }
 
+export const GET_ORDER_BY_ID_SUCCESS = 'GET_ORDER_BY_ID_SUCCESS'
+export interface IGetOrderByIdSuccess {
+  type: typeof GET_ORDER_BY_ID_SUCCESS,
+  payload: IConfirmedOrder
+}
+
 export const REMOVE_ORDER = 'REMOVE_ORDER'
 export interface IRemoveOrder {
   type: typeof REMOVE_ORDER,
@@ -44,6 +50,7 @@ export type IOrderTypes =
 | ISetOrder
 | ISetOrderSuccess
 | IGetOrderById
+| IGetOrderByIdSuccess
 | IRemoveOrder
 | IOrderFailure
 | IRemoveOrderSuccess
