@@ -93,7 +93,7 @@ export default function ThirdStep() {
       <section className='step__left'>
         <Spin tip="Loading..." spinning={isLoading}>
           <h6 className='step-three__title'>
-              Цвет
+            Цвет
           </h6>
 
           <RadioGroup
@@ -135,7 +135,6 @@ export default function ThirdStep() {
           />
         </Spin>
       </section>
-
 
       <div className='step__right'>
         <OrderInfo
