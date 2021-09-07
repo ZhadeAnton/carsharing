@@ -7,13 +7,7 @@ import { IRadioButton } from '../../../interfaces/inputInterfaces';
 import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
 import { getTownField } from '../../../redux/location/locationSelectors';
-import {
-  getAllCars,
-  getEconomyCars,
-  getPremiumCars,
-  selectCar,
-  setSortingOfCars
-} from '../../../redux/car/carActionCreators';
+import * as carActions from '../../../redux/car/carActionCreators';
 import {
   getCarModelFiled,
   isSecondStepDisabledSelector
@@ -42,39 +36,39 @@ export default function SecondStep() {
   useEffect(() => {
     switch (carsSortBy.value) {
       case 'Эконом':
-        dispatch(getEconomyCars(1))
+        dispatch(carActions.getEconomyCars(1))
         break
 
       case 'Премиум':
-        dispatch(getPremiumCars(1))
+        dispatch(carActions.getPremiumCars(1))
         break
 
       default:
-        dispatch(getAllCars(1))
+        dispatch(carActions.getAllCars(1))
     }
   }, [carsSortBy])
 
   const handleChangePagination = (page: number) => {
     switch (carsSortBy.value) {
       case 'Эконом':
-        dispatch(getEconomyCars(page))
+        dispatch(carActions.getEconomyCars(page))
         break
 
       case 'Премиум':
-        dispatch(getPremiumCars(page))
+        dispatch(carActions.getPremiumCars(page))
         break
 
       default:
-        dispatch(getAllCars(page))
+        dispatch(carActions.getAllCars(page))
     }
   }
 
   const handleSelectCar = (car: ICar) => {
-    dispatch(selectCar(car))
+    dispatch(carActions.selectCar(car))
   }
 
   const handleSortCars = (quality: IRadioButton) => {
-    dispatch(setSortingOfCars(quality))
+    dispatch(carActions.setSortingOfCars(quality))
   }
 
   const handleChangeActiveTab = () => {

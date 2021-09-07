@@ -66,6 +66,20 @@ export default function OrderConfirmed() {
               />
             }
 
+            { confirmedOrder!.isNeedChildChair &&
+              <CarInfoField
+                title='Детское кресло'
+                value='Включено'
+              />
+            }
+
+            { confirmedOrder!.isRightWheel &&
+              <CarInfoField
+                title='Правый руль'
+                value='Включено'
+              />
+            }
+
             <CarInfoField
               title='Доступна с'
               value={parseDate(confirmedOrder!.dateFrom as any)}
