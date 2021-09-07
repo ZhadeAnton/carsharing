@@ -4,7 +4,7 @@ import './styles.scss'
 import { ICar } from '../../../interfaces/carsInterfaces'
 
 interface Props {
-  carName: ICar['categoryId']['name'] | undefined
+  carName: ICar['name'] | undefined
 }
 
 export default function CarName(props: Props) {

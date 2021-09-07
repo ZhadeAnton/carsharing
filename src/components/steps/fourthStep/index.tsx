@@ -90,7 +90,7 @@ export default function FourthStep() {
       },
       'priceMin': `${selectedCar?.priceMin}`,
       'number': `${selectedCar?.number}`,
-      'tank': `${selectedCar?.tank}`,
+      'tank': `${selectedCar?.isFullTank}`,
       'colors': `${selectedCar?.colors}`,
       'id': `${selectedCar?.id}`
     },

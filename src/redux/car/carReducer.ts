@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import { ICar } from '../../interfaces/carsInterfaces'
 import { ICarTypes } from './carActonTypes'
 import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces'
@@ -7,6 +9,11 @@ import {
   carColorOrtions
 } from '../../utils/carsUtils'
 import { changeCarCheckboxGroup } from './carUtils'
+import {
+  IOrderTypes,
+  SET_ORDER_SUCCESS,
+  REMOVE_ORDER
+} from '../order/orderActionTypes'
 
 export interface ICarState {
   carsListfromServer: Array<ICar>,
@@ -38,7 +45,9 @@ const INIT_STATE: ICarState = {
   isLoading: false
 }
 
-const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
+type ITypes = ICarTypes | IOrderTypes
+
+const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
   switch (action.type) {
     case types.SELECT_CAR:
       return {
@@ -71,6 +80,21 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
       return {
         ...state,
         carsSortBy: action.payload,
+      }
+
+    case SET_ORDER_SUCCESS:
+      return {
+        ...state,
+        dateFrom: moment(action.payload.dateFrom),
+        carColor: {title: action.payload.color, value: action.payload.color},
+        selectedCar: {
+          isRightWheel: action.payload.isRightWheel,
+          isNeedChildChair: action.payload.isNeedChildChair,
+          isFullTank: action.payload.isFullTank,
+          number: action.payload.number,
+          name: action.payload.name,
+          thumbnail: action.payload.thumbnail
+        }
       }
 
     case types.GET_CARS_BY_PAGE:
@@ -123,6 +147,11 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
       return {
         ...state,
         dateTo: null
+      }
+
+    case REMOVE_ORDER:
+      return {
+        ...INIT_STATE
       }
 
     default:

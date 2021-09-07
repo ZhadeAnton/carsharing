@@ -117,7 +117,7 @@ export const getCarLeaseField = createSelector(
 export const getCarColorsOptions = createSelector(
     [currentCarSelector],
     (selectedCar) => {
-      const arrayOfCarColors = selectedCar?.colors.map((color) => (
+      const arrayOfCarColors = selectedCar?.colors?.map((color) => (
             { title: color, value: color } as IRadioButton
       ))
       arrayOfCarColors?.unshift({title: 'Любой', value: 'Любой'})

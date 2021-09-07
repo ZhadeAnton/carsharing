@@ -35,9 +35,7 @@ const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
 
     case types.REMOVE_ORDER:
       return {
-        ...state,
-        confirmedOrder: null,
-        isOrderConfirmed: false
+        ...INIT_STATE
       }
 
     case types.SET_CURRENT_TAB_POSITION:

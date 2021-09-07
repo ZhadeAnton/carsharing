@@ -2,7 +2,6 @@ import React from 'react'
 
 import './styles.scss'
 import { parseDate } from '../../utils/dateUtils'
-
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook'
 import useToggle from '../../hooks/useToggle'
 import {
@@ -10,10 +9,8 @@ import {
   getCarLeaseField,
   getCarModelFiled,
   getCarRateField,
-  totalCarPriceSelector
 } from '../../redux/car/carSelectors'
 import { getTownField } from '../../redux/location/locationSelectors'
-import { ICheckbox } from '../../interfaces/inputInterfaces'
 import { removeOrder } from '../../redux/order/orderActionCreators'
 import CarImage from '../car/carImage'
 import CarInfoField from '../car/carInfoField'
@@ -27,15 +24,14 @@ export default function OrderConfirmed() {
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
 
-  const selectedCar = state.car.selectedCar
-  const dateFrom = state.car.dateFrom
-  const orderId = state.order.confirmedOrder!.id
-  const carCheckBoxGroup = state.car.carColorOrtions
+  const confirmedOrder = state.order.confirmedOrder
 
-  let isFullTank = false
-  let isNeedChildChair = false
-  let isRightWheel = false
-  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
+  console.log('confirmedOrder', confirmedOrder)
+
+  // let isFullTank = false
+  // let isNeedChildChair = false
+  // let isRightWheel = false
+  // const totalPriceOfSelectedCar = totalCarPriceSelector(state)
 
   const townField = getTownField(state)
   const carModelField = getCarModelFiled(state)
@@ -47,17 +43,17 @@ export default function OrderConfirmed() {
     townField, carModelField, carColorField, carRateField, carLeaseField
   ]
 
-  carCheckBoxGroup.forEach((item: ICheckbox) => {
-    if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
-    if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
-    if (item.value === 'Правый руль' && item.isChecked) isRightWheel = !isRightWheel
-    if (item.value === 'Детское кресло' && item.isChecked) {
-      isNeedChildChair = !isNeedChildChair
-    }
-  })
+  // carCheckBoxGroup.forEach((item: ICheckbox) => {
+  //   if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
+  //   if (item.value === 'Полный бак' && item.isChecked) isFullTank = !isFullTank
+  //   if (item.value === 'Правый руль' && item.isChecked) isRightWheel = !isRightWheel
+  //   if (item.value === 'Детское кресло' && item.isChecked) {
+  //     isNeedChildChair = !isNeedChildChair
+  //   }
+  // })
 
   const handleRemovemOrder = () => {
-    dispatch(removeOrder(orderId))
+    dispatch(removeOrder(confirmedOrder!.id))
     localStorage.removeItem('carOrderId')
     setIsModal(false)
   }
@@ -78,15 +74,15 @@ export default function OrderConfirmed() {
             Ваш заказ подтверждён
           </h4>
 
-          <CarName carName={selectedCar?.name} />
+          <CarName carName={confirmedOrder!.name} />
 
           {
-            selectedCar?.number &&
-            <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
+            confirmedOrder!.number &&
+            <CarPlatesNumber carPlatesNumber={confirmedOrder!.number} />
           }
 
           <div className='step-four__info'>
-            { isFullTank &&
+            { confirmedOrder!.isFullTank &&
             <CarInfoField
               title='Топливо'
               value='100%'
@@ -95,13 +91,13 @@ export default function OrderConfirmed() {
 
             <CarInfoField
               title='Доступна с'
-              value={parseDate(dateFrom)}
+              value={parseDate(confirmedOrder!.dateFrom as any)}
             />
           </div>
         </div>
 
         <div className='step-four__image-wrapper'>
-          <CarImage carImage={selectedCar?.thumbnail.path} />
+          <CarImage carImage={confirmedOrder!.carId.thumbnail?.path} />
         </div>
       </section>
 
@@ -109,7 +105,7 @@ export default function OrderConfirmed() {
         <OrderInfo
           orderFields={fourthStepFields}
           buttonTitle='Отменить'
-          price={totalPriceOfSelectedCar}
+          price={confirmedOrder?.price}
           isRedButton={true}
           isButtonDisable={false}
           onButtonClick={handleOpenModal}

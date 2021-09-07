@@ -1,17 +1,19 @@
 import React from 'react'
 
 import './styles.scss'
-import { ICar } from '../../../interfaces/carsInterfaces'
+import DefaultCar from '../../../assets/PNG/default-car.png'
 
 interface Props {
-  carImage: ICar['thumbnail']['path'] | undefined
+  carImage: string | undefined
 }
 
 export default function CarImage(props: Props) {
+  const image = props.carImage?.includes('/files') ? DefaultCar : props.carImage
+
   return (
     <div className='car-image-wrapper'>
       <img
-        src={props.carImage}
+        src={image}
         alt='car'
         className='car-image-wrapper__image'
       />

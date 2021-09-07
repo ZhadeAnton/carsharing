@@ -1,18 +1,20 @@
 export interface ICar {
-  categoryId: {
+  categoryId?: {
     description: string,
     id: string,
     name: string
   },
-  colors: Array<string>
-  createdAt: number,
-  description: string,
-  id: string,
+  colors?: Array<string>
+  createdAt?: number,
+  description?: string,
+  id?: string,
   name: string,
   number: string,
-  priceMax: number,
-  priceMin: 0,
-  tank: number,
+  priceMax?: number,
+  priceMin?: 0,
+  isFullTank: boolean,
+  isNeedChildChair: boolean,
+  isRightWheel: boolean,
   thumbnail: {
     mimetype: string,
     originalname: string,

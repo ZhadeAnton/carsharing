@@ -3,15 +3,15 @@ import React from 'react'
 import './styles.scss'
 
 interface Props {
-  lowPrice: number,
-  highPrice: number
+  lowPrice: number | undefined,
+  highPrice: number | undefined
 }
 
 export default function CarPrice(props: Props) {
   return (
     <div className='car-price'>
       <output>
-        { props.lowPrice.toLocaleString('ru') }
+        { props.lowPrice?.toLocaleString('ru') }
       </output>
 
       <span className='car-price__separator'>
@@ -19,7 +19,7 @@ export default function CarPrice(props: Props) {
       </span>
 
       <output>
-        { props.highPrice.toLocaleString('ru') } &#8381;
+        { props.highPrice?.toLocaleString('ru') } &#8381;
       </output>
     </div>
   )
