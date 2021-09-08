@@ -2,23 +2,26 @@ import React, { useEffect } from 'react'
 
 import './styles.scss'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
+import { getOrderById } from '../../redux/order/orderActionCreators';
 import Aside from '../../components/aside'
 import Header from '../../components/header'
 import OrderConfirmed from '../../components/orderConfirmed';
 import OrderPageTabs from '../../components/orderPageTabs';
-import { getOrderById } from '../../redux/order/orderActionCreators';
 
 export default function OrderPage() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
+  const carOrderId = localStorage.getItem('carOrderId')
   const orderId = state.order.confirmedOrder?.id
+  const isLoading = state.order.isLoading
   const isOrderConfirmed = state.order.isOrderConfirmed
 
   useEffect(() => {
-    const carOrderId = localStorage.getItem('carOrderId')
     if (carOrderId) dispatch(getOrderById(carOrderId))
   }, [])
+
+  if (isLoading) return <main className='order-page' />
 
   return (
     <main className='order-page'>
@@ -32,12 +35,12 @@ export default function OrderPage() {
         </div>
 
         {!isOrderConfirmed
-          ? <OrderPageTabs />
-          : (
+            ? <OrderPageTabs />
+            : (
             <div className='order-page__header-row'>
               <div className='order-page__header-row--wrapper'>
                 <h6 className='order-page__header-row--title container'>
-                  Заказ номер { orderId }
+                    Заказ номер { orderId }
                 </h6>
               </div>
 

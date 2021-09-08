@@ -1,5 +1,4 @@
 import React from 'react'
-import { Spin } from 'antd'
 
 import './styles.scss'
 import useToggle from '../../../hooks/useToggle'
@@ -28,7 +27,6 @@ export default function FourthStep() {
   const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
-  const isLoading = state.order.isLoading
   const totalPriceOfSelectedCar = carSelectors.totalCarPriceSelector(state)
   const townField = getTownField(state)
   const carModelField = carSelectors.getCarModelFiled(state)
@@ -73,29 +71,27 @@ export default function FourthStep() {
   return (
     <section className='step-four step'>
       <section className='step-four__left step__left'>
-        <Spin tip="Loading..." spinning={isLoading}>
-          <div className='step-four__left--info'>
-            <CarName carName={selectedCar?.name} />
+        <div className='step-four__left--info'>
+          <CarName carName={selectedCar?.name} />
 
-            {
-              selectedCar?.number &&
-              <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
-            }
+          {
+            selectedCar?.number &&
+            <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
+          }
 
-            <div className='step-four__info'>
-              <CarInfoList carCheckboxes={carCheckboxOrtions} />
+          <div className='step-four__info'>
+            <CarInfoList carCheckboxes={carCheckboxOrtions} />
 
-              <CarInfoField
-                title='Доступна с'
-                value={parseDate(dateFrom)}
-              />
-            </div>
+            <CarInfoField
+              title='Доступна с'
+              value={parseDate(dateFrom)}
+            />
           </div>
+        </div>
 
-          <div className='step-four__image-wrapper'>
-            <CarImage carImage={selectedCar?.thumbnail.path} />
-          </div>
-        </Spin>
+        <div className='step-four__image-wrapper'>
+          <CarImage carImage={selectedCar?.thumbnail.path} />
+        </div>
       </section>
 
       <div className='step__right'>
