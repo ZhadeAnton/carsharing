@@ -2,16 +2,65 @@ import React from 'react'
 
 import './styles.scss'
 import { parseDate } from '../../utils/dateUtils'
+
+import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook'
+import useToggle from '../../hooks/useToggle'
+import {
+  getCarColorField,
+  getCarLeaseField,
+  getCarModelFiled,
+  getCarRateField,
+  totalCarPriceSelector
+} from '../../redux/car/carSelectors'
+import { getTownField } from '../../redux/location/locationSelectors'
+import { ICheckbox } from '../../interfaces/inputInterfaces'
+import { removeOrder } from '../../redux/order/orderActionCreators'
 import CarImage from '../car/carImage'
 import CarInfoField from '../car/carInfoField'
 import CarName from '../car/carName'
 import CarPlatesNumber from '../car/carPlates'
 import OrderInfo from '../forms/orderInfo'
 import OrderModal from '../orderModal'
-import useFourthStepContainer from '../steps/fourthStep/useFourthStepContainer'
 
 export default function OrderConfirmed() {
-  const orderConfirmed = useFourthStepContainer()
+  const dispatch = useAppDispatch()
+  const state = useAppSelector((state) => state)
+  const [isModal, setIsModal] = useToggle()
+
+  const selectedCar = state.car.selectedCar
+  const dateFrom = state.car.dateFrom
+  const carCheckBoxGroup = state.car.carCheckBoxGroup
+
+  let isCarFullTank = false
+  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
+
+  const townField = getTownField(state)
+  const carModelField = getCarModelFiled(state)
+  const carColorField = getCarColorField(state)
+  const carRateField = getCarRateField(state)
+  const carLeaseField = getCarLeaseField(state)
+
+  const fourthStepFields = [
+    townField, carModelField, carColorField, carRateField, carLeaseField
+  ]
+
+  carCheckBoxGroup.forEach((item: ICheckbox) => {
+    if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
+    if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
+  })
+
+  const handleRemovemOrder = () => {
+    dispatch(removeOrder())
+    setIsModal(false)
+  }
+
+  const handleCloseModal = () => {
+    setIsModal(false)
+  }
+
+  const handleOpenModal = () => {
+    setIsModal(true)
+  }
 
   return (
     <section className='step-four step order-confirmed'>
@@ -21,46 +70,49 @@ export default function OrderConfirmed() {
             Ваш заказ подтверждён
           </h4>
 
-          <CarName
-            carModel={orderConfirmed.selectedCar?.carModel}
-            carName={orderConfirmed.selectedCar?.carName}
-          />
+          <CarName carName={selectedCar?.name} />
 
-          <CarPlatesNumber carPlatesNumber={orderConfirmed.selectedCar?.carPlateNumber} />
+          {
+            selectedCar?.number &&
+            <CarPlatesNumber carPlatesNumber={selectedCar?.number} />
+          }
 
           <div className='step-four__info'>
-            { orderConfirmed.isCarFullTank &&
-              <CarInfoField title='Топливо' value='100%' />
+            { isCarFullTank &&
+              <CarInfoField
+                title='Топливо'
+                value='100%'
+              />
             }
 
             <CarInfoField
               title='Доступна с'
-              value={parseDate(orderConfirmed.dateFrom)}
+              value={parseDate(dateFrom)}
             />
           </div>
         </div>
 
         <div className='step-four__image-wrapper'>
-          <CarImage carImage={orderConfirmed.selectedCar?.carImage} />
+          <CarImage carImage={selectedCar?.thumbnail.path} />
         </div>
       </section>
 
       <div className='step__right'>
         <OrderInfo
-          orderFields={orderConfirmed.fourthStepFields}
+          orderFields={fourthStepFields}
           buttonTitle='Отменить'
-          price={orderConfirmed.totalPriceOfSelectedCar}
+          price={totalPriceOfSelectedCar}
           isRedButton={true}
           isButtonDisable={false}
-          onButtonClick={orderConfirmed.handleOpenModal}
+          onButtonClick={handleOpenModal}
         />
       </div>
 
-      { orderConfirmed.isModal &&
+      { isModal &&
         <OrderModal
           title='Отменить заказ'
-          onConfirmClick={orderConfirmed.handleRemovemOrder}
-          onRefuseClick={orderConfirmed.handleCloseModal}
+          onConfirmClick={handleRemovemOrder}
+          onRefuseClick={handleCloseModal}
         />
       }
     </section>

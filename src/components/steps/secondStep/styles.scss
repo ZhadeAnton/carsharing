@@ -9,8 +9,19 @@
     }
 
     &--list {
-      padding-bottom: 20px;
+      padding-bottom: $space-sm;
     }
+
+    &--pagination {
+      margin-top: $space-sm;
+      margin-bottom: $space-md;
+    }
+  }
+
+  .ant-spin-nested-loading > div > .ant-spin {
+    max-height: auto;
+    height: auto;
+    top: 50%;
   }
 
   @media (max-width: getBreackpoint('lg')) {
@@ -36,7 +47,11 @@
       height: 100%;
   
       &--form {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+      }
+
+      &--pagination {
+        margin-bottom: $space-sm;
       }
     }
   }

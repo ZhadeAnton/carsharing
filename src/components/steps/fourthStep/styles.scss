@@ -24,6 +24,10 @@
   @media (max-width: getBreackpoint('lg')) {
     &__left {
       flex-wrap: wrap;
+
+      &--info {
+        margin-bottom: $space-md;
+      }
     }
 
     &__image-wrapper {
@@ -33,15 +37,7 @@
       justify-content: center;
 
       img {
-        width: 360px;
-      }
-    }
-  }
-
-  @media (max-width: getBreackpoint('md')) {
-    &__image-wrapper {
-      img {
-        width: 340px;
+        width: 270px;
       }
     }
   }
@@ -49,21 +45,15 @@
   @media (max-width: getBreackpoint('sm')) {
     &__image-wrapper {
       img {
-        width: 300px;
+        width: 250px;
       }
     }
   }
 
   @media (max-width: getBreackpoint('vsm')) {
-    &__left {
-      &--info {
-        margin-bottom: $space-sm;
-      }
-    }
-
     &__image-wrapper {
       img {
-        width: 270px;
+        width: 240px;
       }
     }
   }

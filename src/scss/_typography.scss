@@ -136,6 +136,12 @@
       padding: $space-md 0;
     }
   }
+
+  @media (max-width: getBreackpoint('sm')) {
+    &__left {
+      padding: $space-md 0;
+    }
+  }
 }
 
 %input-primary {

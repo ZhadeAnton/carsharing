@@ -4,12 +4,6 @@ export const carsSortOptions = [
   {title: 'Премиум', value: 'Премиум'},
 ]
 
-export const carColorOptions = [
-  {title: 'Любой', value: 'Любой'},
-  {title: 'Красный', value: 'Красный'},
-  {title: 'Голубой', value: 'Голубой'},
-]
-
 export const carRateOptions = [
   {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
   {title: 'На сутки 1999 ₽/сутки', value: 'На сутки'}
@@ -39,3 +33,11 @@ export const carCheckBoxGroup = [
   }
 ]
 
+export const parseCarNumber = (carNumber: string | undefined) => {
+  return [
+    carNumber?.slice(0, 1),
+    carNumber?.slice(1, 4),
+    carNumber?.substring(4, 6),
+    carNumber?.slice(6, -1)]
+      .join(' ')
+}

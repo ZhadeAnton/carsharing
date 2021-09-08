@@ -25,6 +25,7 @@
     font-family: 'RobotoLight';
     font-weight: 300;
     @extend %heading14;
+    text-transform: capitalize;
     color: $grey-strong-color;
   }
 

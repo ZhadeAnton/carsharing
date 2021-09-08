@@ -19,5 +19,3 @@ export const options = {
   disableDefaultUI: true,
   zoomControl: false,
 }
-
-export const mapAPIKey = 'AIzaSyAHsXVmKxiEc2J3QSK6wjzhGsWpMJvtTzk'
