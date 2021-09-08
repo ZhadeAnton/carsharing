@@ -1,6 +1,8 @@
 @import '../../../scss/variables';
 
 .step-two {
+  overflow: hidden !important;
+
   &__left {
     height: 100%;
 
@@ -25,6 +27,8 @@
   }
 
   @media (max-width: getBreackpoint('lg')) {
+    overflow: auto !important;
+
     &__left {
       &--list {
         padding-bottom: 0;

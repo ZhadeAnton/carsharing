@@ -1,14 +1,11 @@
 import moment from 'moment'
 
 import { ICar } from '../../interfaces/carsInterfaces'
+import { changeCarCheckboxGroup } from './carUtils'
 import { ICarTypes } from './carActonTypes'
 import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces'
+import { carsSortOptions, carCheckboxOrtions } from '../../utils/carsUtils'
 import * as types from './carActonTypes'
-import {
-  carsSortOptions,
-  carCheckboxOrtions
-} from '../../utils/carsUtils'
-import { changeCarCheckboxGroup } from './carUtils'
 import {
   IOrderTypes,
   GET_ORDER_BY_ID_SUCCESS,
@@ -16,8 +13,9 @@ import {
 } from '../order/orderActionTypes'
 
 export interface ICarState {
-  carsListfromServer: Array<ICar>,
-  carsCount: number | null,
+  carsList: Array<ICar>,
+  carListCurrentPage: number,
+  carsCount: number,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
   carRateOptions: Array<IRate> | null,
@@ -31,8 +29,9 @@ export interface ICarState {
 }
 
 const INIT_STATE: ICarState = {
-  carsListfromServer: [],
-  carsCount: null,
+  carsList: [],
+  carListCurrentPage: 0,
+  carsCount: 0,
   selectedCar: null,
   carsSortOptions,
   carRateOptions: null,
@@ -59,7 +58,8 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
     case types.GET_ALL_CARS_SUCCESS:
       return {
         ...state,
-        carsListfromServer: action.payload,
+        carsList: [...state.carsList, ...action.payload],
+        carListCurrentPage: state.carListCurrentPage + 1,
         isLoading: false
       }
 
@@ -80,6 +80,8 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
       return {
         ...state,
         carsSortBy: action.payload,
+        carsList: [],
+        carListCurrentPage: 0
       }
 
     case GET_ORDER_BY_ID_SUCCESS:

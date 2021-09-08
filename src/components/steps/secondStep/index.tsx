@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import './styles.scss'
-import { ICar } from '../../../interfaces/carsInterfaces';
 import { IRadioButton } from '../../../interfaces/inputInterfaces';
 import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
@@ -14,56 +13,18 @@ import {
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList';
-import CustomPagination from '../../pagination';
 
 export default function SecondStep() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
-  const carsListfromServer = state.car.carsListfromServer
-  const carsCount = state.car.carsCount
   const selectedCar = state.car.selectedCar
   const carsSortOptions = state.car.carsSortOptions
   const carsSortBy = state.car.carsSortBy
-
   const townField = getTownField(state)
   const carModelField = getCarModelFiled(state)
   const isSecondStepDisabled = isSecondStepDisabledSelector(state)
   const secondStepFields = [townField, carModelField]
-
-  useEffect(() => {
-    switch (carsSortBy.value) {
-      case 'Эконом':
-        dispatch(carActions.getEconomyCars(1))
-        break
-
-      case 'Премиум':
-        dispatch(carActions.getPremiumCars(1))
-        break
-
-      default:
-        dispatch(carActions.getAllCars(1))
-    }
-  }, [carsSortBy])
-
-  const handleChangePagination = (page: number) => {
-    switch (carsSortBy.value) {
-      case 'Эконом':
-        dispatch(carActions.getEconomyCars(page))
-        break
-
-      case 'Премиум':
-        dispatch(carActions.getPremiumCars(page))
-        break
-
-      default:
-        dispatch(carActions.getAllCars(page))
-    }
-  }
-
-  const handleSelectCar = (car: ICar) => {
-    dispatch(carActions.selectCar(car))
-  }
 
   const handleSortCars = (quality: IRadioButton) => {
     dispatch(carActions.setSortingOfCars(quality))
@@ -85,19 +46,7 @@ export default function SecondStep() {
         </div>
 
         <div className='step-two__left--list'>
-          <CarsList
-            cars={carsListfromServer}
-            selectedCarId={selectedCar?.id}
-            onSelectCar={handleSelectCar}
-          />
-        </div>
-
-        <div className='step-two__left--pagination'>
-          <CustomPagination
-            pagesLength={carsCount!}
-            defaultPageSize={6}
-            onChange={handleChangePagination}
-          />
+          <CarsList />
         </div>
       </section>
 
