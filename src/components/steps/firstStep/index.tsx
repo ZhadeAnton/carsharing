@@ -1,28 +1,38 @@
 import React from 'react'
-
-import useFirstStepContainer from './useFirstStepContainer'
+import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
+import {
+  getTownField,
+  isFirstStepDisabledSelector
+} from '../../../redux/location/locationSelectors'
+import { setCurrentTab } from '../../../redux/order/orderActionCreators'
 import OrderInfo from '../../forms/orderInfo'
 import CustomMap from '../../map'
 
 
 export default function FirstStep() {
-  const stepContainer = useFirstStepContainer()
+  const dispatch = useAppDispatch()
+  const state = useAppSelector((state) => state)
+
+  const townField = getTownField(state)
+  const firstStepFields = [townField]
+  const isFirstStepDisabled = isFirstStepDisabledSelector(state)
+
+  const handleChangeActiveTab = () => {
+    dispatch(setCurrentTab('2'))
+  }
 
   return (
     <section className='step-one step'>
       <div className='step-one__left step__left'>
-        <CustomMap
-          town={stepContainer.town}
-          pickUp={stepContainer.pickUp}
-        />
+        <CustomMap />
       </div>
 
       <div className='step-one__right step__right'>
         <OrderInfo
           buttonTitle='Выбрать модель'
-          orderFields={stepContainer.firstStepFields}
-          isButtonDisable={stepContainer.isFirstStepDisabled}
-          onButtonClick={stepContainer.handleChangeActiveTab}
+          orderFields={firstStepFields}
+          isButtonDisable={isFirstStepDisabled}
+          onButtonClick={handleChangeActiveTab}
         />
       </div>
     </section>

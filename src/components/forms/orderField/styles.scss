@@ -29,30 +29,32 @@
   }
 
   &__name {
+    max-width: 95px;
     display: inline;
     position: relative;
     padding-right: $space-sm;
     z-index: $layer-2;
+    overflow: hidden;
     @extend %order-font;
+    text-overflow: ellipsis;
     color: $primary-color;
     background-color: inherit;
-    max-width: 95px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
   }
 
   &__info {
     max-width: 110px;
-    max-height: 50px;
+    max-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @include abs-position(auto, 0, 3px, auto);
     padding-left: $space-sm;
     z-index: $layer-2;
+    overflow: hidden;
     text-align: right;
     @extend %order-font;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
     color: $grey-strong-color;
     background-color: inherit;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }

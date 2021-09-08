@@ -21,4 +21,8 @@
   @media (max-width: getBreackpoint('sm')) {
     font-size: 11px;
   }
+
+  @media (max-width: getBreackpoint('vsm')) {
+    font-size: 10px;
+  }
 }

@@ -4,7 +4,7 @@ import './styles.scss'
 import { ICar } from '../../../interfaces/carsInterfaces'
 
 interface Props {
-  carImage: ICar['carImage'] | undefined
+  carImage: ICar['thumbnail']['path'] | undefined
 }
 
 export default function CarImage(props: Props) {

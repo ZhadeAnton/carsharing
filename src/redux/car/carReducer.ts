@@ -1,42 +1,42 @@
 import { ICar } from '../../interfaces/carsInterfaces'
 import { ICarTypes } from './carActonTypes'
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
-import { carsMock } from '../../utils/carsListMock'
 import * as types from './carActonTypes'
 import {
   carsSortOptions,
-  carColorOptions,
   carRateOptions,
   carCheckBoxGroup
 } from '../../utils/carsUtils'
 import { changeCarCheckboxGroup } from './carUtils'
 
 export interface ICarState {
-  carsList: Array<ICar>,
+  carsListfromServer: Array<ICar>,
+  carsCount: number | null,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
-  carColorOptions: Array<IRadioButton>,
   carRateOptions: Array<IRadioButton>,
   carCheckBoxGroup: Array<ICheckbox>,
   carsSortBy: IRadioButton,
   carColor: IRadioButton,
   carRate: IRadioButton,
   dateFrom: IDate,
-  dateTo: IDate
+  dateTo: IDate,
+  isLoading: boolean
 }
 
 const INIT_STATE: ICarState = {
-  carsList: carsMock,
+  carsListfromServer: [],
+  carsCount: null,
   selectedCar: null,
   carsSortOptions,
-  carColorOptions,
   carRateOptions,
   carCheckBoxGroup,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
   carRate: {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
   dateFrom: null,
-  dateTo: null
+  dateTo: null,
+  isLoading: false
 }
 
 const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
@@ -44,13 +44,36 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.SELECT_CAR:
       return {
         ...state,
+        carColor: {title: 'Любой', value: 'Любой'},
         selectedCar: action.payload
       }
 
-    case types.SELECT_CAR_QUALITY:
+    case types.GET_ALL_CARS_SUCCESS:
       return {
         ...state,
-        carsSortBy: action.payload
+        carsListfromServer: action.payload,
+        isLoading: false
+      }
+
+    case types.SET_COUNT_OF_CARS:
+      return {
+        ...state,
+        carsCount: action.payload
+      }
+
+    case types.SET_SORTING_OF_CARS:
+      return {
+        ...state,
+        carsSortBy: action.payload,
+      }
+
+    case types.GET_CARS_BY_PAGE:
+    case types.SET_SORTING_OF_CARS:
+    case types.GET_PREMIUM_CARS:
+    case types.GET_ECONOMY_CARS:
+      return {
+        ...state,
+        isLoading: true
       }
 
     case types.SET_CAR_COLOR:

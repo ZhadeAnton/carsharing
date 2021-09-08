@@ -2,16 +2,17 @@ import React from 'react'
 
 import './styles.scss'
 import { ICar } from '../../../interfaces/carsInterfaces'
+import { parseCarNumber } from '../../../utils/carsUtils'
 
 interface Props {
-  carPlatesNumber: ICar['carPlateNumber'] | undefined
+  carPlatesNumber: ICar['number'] | undefined
 }
 
 export default function CarPlatesNumber(props: Props) {
   return (
     <div className='car-plates'>
       <h5 className='car-plates__number'>
-        { props.carPlatesNumber }
+        { parseCarNumber(props.carPlatesNumber) }
       </h5>
     </div>
   )

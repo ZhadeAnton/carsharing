@@ -2,14 +2,40 @@ import { ICar } from '../../interfaces/carsInterfaces'
 import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
 import * as types from './carActonTypes'
 
+export const getAllCars = (page: number): types.IGetCarsByPage => ({
+  type: types.GET_CARS_BY_PAGE,
+  payload: page
+})
+
+export const getEconomyCars = (page: number): types.IGetEconomyCars => ({
+  type: types.GET_ECONOMY_CARS,
+  payload: page
+})
+
+export const getPremiumCars = (page: number): types.IGetPremiumCars => ({
+  type: types.GET_PREMIUM_CARS,
+  payload: page
+})
+
+export const getCarsSuccess = (listOfCars: Array<ICar>)
+  : types.IGetAllCarsSuccess => ({
+  type: types.GET_ALL_CARS_SUCCESS,
+  payload: listOfCars
+})
+
+export const setCountOfCars = (carsCount: number): types.ISetCountOfCars => ({
+  type: types.SET_COUNT_OF_CARS,
+  payload: carsCount
+})
+
 export const selectCar = (car: ICar): types.ISelectCar => ({
   type: types.SELECT_CAR,
   payload: car
 })
 
-export const selectCarQuality = (quality: IRadioButton): types.ISelectCarQuality => ({
-  type: types.SELECT_CAR_QUALITY,
-  payload: quality
+export const setSortingOfCars = (sortBy: IRadioButton): types.ISetSortingOfCars => ({
+  type: types.SET_SORTING_OF_CARS,
+  payload: sortBy
 })
 
 export const changeCarCheckbox = (checkbox: ICheckbox) : types.ICheckboxChange => ({
