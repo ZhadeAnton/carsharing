@@ -12,7 +12,7 @@ import {
 } from '../../../redux/car/carSelectors';
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
-import CarsList from '../../carsList';
+import CarsList from '../../carsList/index';
 
 export default function SecondStep() {
   const dispatch = useAppDispatch()

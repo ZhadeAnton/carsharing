@@ -1,10 +1,8 @@
 @import '../../scss/variables';
 
 .cars-list {
-  height: 100%;
-  max-height: 800px;
-  display: grid;
-  grid-template-columns: 370px 370px;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 
   @media (max-width: 1250px) {
@@ -32,4 +30,9 @@
   @media (max-width: getBreackpoint('vsm')) {
     max-height: 280px;
   }
+}
+
+.cars__row {
+  display: flex;
+  width: 100%;
 }
