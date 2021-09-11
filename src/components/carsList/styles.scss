@@ -1,8 +1,7 @@
 @import '../../scss/variables';
 
 .cars-list {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   overflow-y: auto;
 
   @media (max-width: 1250px) {

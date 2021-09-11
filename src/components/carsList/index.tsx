@@ -8,7 +8,6 @@ import DefaultCar from '../../assets/PNG/default-car.png'
 import Car from './carItem'
 
 export default function CarsList() {
-  // const listRef: any = useRef()
   const rootRef: any = useRef()
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
@@ -17,14 +16,17 @@ export default function CarsList() {
 
   const carsList = state.car.carsList
   const carListCurrentPage = state.car.carListCurrentPage
-  // const carsCount = state.car.carsCount
+  const carsOnTheServer = state.car.carsCount
   const carsSortBy = state.car.carsSortBy
   const selectedCar = state.car.selectedCar
 
   const rowHeight = 225
   const visibleRows = 3
+  const maxRows = Math.floor(carsList.length / 2)
 
   useEffect(() => {
+    setStart(0)
+
     switch (carsSortBy.value) {
       case 'Эконом':
         dispatch(carActions.getEconomyCars(0))
@@ -57,43 +59,36 @@ export default function CarsList() {
     }
   }, [isFetchingNewCars])
 
-  // useEffect(() => {
-  //   if (listRef && listRef.current) {
-  //     listRef.current.addEventListener('scroll', handleScroll)
-  //   }
-
-  //   return function() {
-  //     if (listRef && listRef.current) {
-  //       listRef.current.removeEventListener('scroll', handleScroll)
-  //     }
-  //   }
-  // }, [carsList, carsCount])
-
-  // const handleScroll = (e: any) => {
-  //   const scrollTop = e.target.scrollTop
-  //   const scrollHeight = e.target.scrollHeight
-  //   const clientHeight = e.target.clientHeight
-
-  //   if (scrollHeight - (scrollTop + clientHeight) < 50
-  //     && carsList.length < carsCount) {
-  //     setIsFetchingNewCars(true)
-  //   }
-  // }
-
-  const handleSelectCar = (car: ICar) => {
-    dispatch(carActions.selectCar(car))
-  }
-
   useEffect(() => {
-    rootRef.current.addEventListener('scroll', onScroll)
+    if (!isFetchingNewCars) {
+      rootRef.current.addEventListener('scroll', onScroll)
+    }
 
     return () => {
       rootRef.current.removeEventListener('scroll', onScroll)
     }
   })
 
-  function onScroll(e: any) {
+  const handleSelectCar = (car: ICar) => {
+    dispatch(carActions.selectCar(car))
+  }
+
+  const isEndOfList = () => {
+    return (start + (visibleRows + 1)) > maxRows
+  }
+
+  const isLoadMoreItems = (scrollTop: number) => {
+    return ((maxRows - visibleRows) * rowHeight) - scrollTop <= 50
+    && carsList.length < carsOnTheServer
+  }
+
+  const onScroll = (e: any) => {
     setStart(Math.floor(e.target.scrollTop / rowHeight))
+    const scrollTop = e.target.scrollTop
+
+    if (isLoadMoreItems(scrollTop)) {
+      setIsFetchingNewCars(true)
+    }
   }
 
   function getTopHeight() {
@@ -101,7 +96,11 @@ export default function CarsList() {
   }
 
   function getBottomHeight() {
-    return rowHeight * (carsList.length - (start + visibleRows))
+    if (!isEndOfList()) {
+      return rowHeight * (carsList.length - (start + visibleRows))
+    } else {
+      return 0
+    }
   }
 
   const Row = ({ index, carItems }: any) => {
@@ -125,21 +124,29 @@ export default function CarsList() {
       )
     }
 
-    return <div className='cars__row'>{items}</div>
+    return (
+      <div className='cars__row'>
+        {items}
+      </div>
+    )
   }
 
   return (
-    <div style={{ height: rowHeight * visibleRows + 1, overflow: 'auto' }} ref={rootRef}>
+    <div
+      className='cars-list'
+      style={{ height: rowHeight * (visibleRows + 1)}}
+      ref={rootRef}
+    >
       <div style={{ height: getTopHeight() }} />
       {
         carsList
-            .slice(start, start + visibleRows + 1)
-            .map((car, i) => {
+            .slice(start, start + (visibleRows + 1))
+            .map((car, index) => {
               return (
                 <Row
-                  key={'' + i + start + car.id}
+                  key={'' + index + start + car.id}
                   carItems={carsList}
-                  index={start + i}
+                  index={start + index}
                 />
               )
             })
