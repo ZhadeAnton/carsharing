@@ -3,15 +3,16 @@ import React, { useState, useEffect, useRef } from 'react'
 import './styles.scss'
 import { ICar } from '../../interfaces/carsInterfaces'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook'
-import useWindowDimensions from '../../hooks/useWindowDimensions'
-import * as carActions from '../../redux/car/carActionCreators'
-import DefaultCar from '../../assets/PNG/default-car.png'
-import Car from './carItem'
 import { setCarsRowStart } from '../../redux/car/carActionCreators'
 import { carsListSelector } from '../../redux/car/carSelectors'
+import * as carActions from '../../redux/car/carActionCreators'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
+import useScrollListener from '../../hooks/useScrollListener'
+import DefaultCar from '../../assets/PNG/default-car.png'
+import Car from './carItem'
 
 export default function CarsList() {
-  const listRef: any = useRef()
+  const listRef: any = useRef(null)
   const dispatch = useAppDispatch()
   const windowDimensions = useWindowDimensions()
   const state = useAppSelector((state) => state)
@@ -64,19 +65,16 @@ export default function CarsList() {
     }
   }, [isFetchingNewCars])
 
-  useEffect(() => {
-    if (!isFetchingNewCars) {
-      listRef.current.onscroll = (e: any) => {
-        console.log('dispatch')
-        dispatch(setCarsRowStart((Math.floor(e.target.scrollTop / rowHeight))))
-        const scrollTop = e.target.scrollTop
+  useScrollListener(listRef, handleScroll)
 
-        if (isLoadMoreItems(scrollTop)) {
-          setIsFetchingNewCars(true)
-        }
-      }
+  function handleScroll(e: any) {
+    dispatch(setCarsRowStart((Math.floor(e.target.scrollTop / rowHeight))))
+    const scrollTop = e.target.scrollTop
+
+    if (isLoadMoreItems(scrollTop)) {
+      setIsFetchingNewCars(true)
     }
-  })
+  }
 
   useEffect(() => {
     if (windowDimensions.width > 1200) {
@@ -133,7 +131,6 @@ export default function CarsList() {
   }
 
   const isLoadMoreItems = (scrollTop: number) => {
-    dispatch(setCarsRowStart(carRowsStart))
     return ((maxRows - visibleRows) * rowHeight) - scrollTop <= 80
     && carsList.length < carsOnTheServer
   }
