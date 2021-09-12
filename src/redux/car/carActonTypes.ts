@@ -54,6 +54,12 @@ export interface IGetRateTypesSuccess {
   payload: Array<IRate>
 }
 
+export const SET_CARS_ROW_START = 'SET_CARS_ROW_START'
+export interface ISetCarsRowStart {
+  type: typeof SET_CARS_ROW_START,
+  payload: number
+}
+
 export const CAR_CHECKBOX_CHANGE = 'CAR_CHECKBOX_CHANGE'
 export interface ICheckboxChange {
   type: typeof CAR_CHECKBOX_CHANGE,
@@ -109,5 +115,6 @@ export type ICarTypes =
 | ISetDateTo
 | IGetEconomyCars
 | IGetPremiumCars
+| ISetCarsRowStart
 | IRemoveDateFrom
 | IRemoveDateTo

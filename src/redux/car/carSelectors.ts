@@ -5,6 +5,11 @@ import { RootState } from '../store'
 
 const carSelector = (state: RootState) => state.car
 
+export const carsListSelector = createSelector(
+    [carSelector],
+    (carState) => carState.carsList
+)
+
 const carCheckboxesCheckedSelector = createSelector(
     [carSelector],
     (car) => car.carCheckboxOrtions.filter((checkbox) => checkbox.isChecked)
