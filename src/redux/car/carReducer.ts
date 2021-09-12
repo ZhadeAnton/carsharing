@@ -16,7 +16,6 @@ export interface ICarState {
   carsList: Array<ICar>,
   carListCurrentPage: number,
   carsCount: number,
-  carRowsStart: number,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
   carRateOptions: Array<IRate> | null,
@@ -33,7 +32,6 @@ const INIT_STATE: ICarState = {
   carsList: [],
   carListCurrentPage: 0,
   carsCount: 0,
-  carRowsStart: 0,
   selectedCar: null,
   carsSortOptions,
   carRateOptions: null,
@@ -129,12 +127,6 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
         ...state,
         carCheckboxOrtions: changeCarCheckboxGroup(
             state.carCheckboxOrtions, action.payload)
-      }
-
-    case types.SET_CARS_ROW_START:
-      return {
-        ...state,
-        carRowsStart: action.payload
       }
 
     case types.SET_DATE_FROM:

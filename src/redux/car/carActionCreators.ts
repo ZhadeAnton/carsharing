@@ -33,11 +33,6 @@ export const selectCar = (car: ICar): types.ISelectCar => ({
   payload: car
 })
 
-export const setCarsRowStart = (rowStart: number): types.ISetCarsRowStart => ({
-  type: types.SET_CARS_ROW_START,
-  payload: rowStart
-})
-
 export const getRateTypes = (): types.IGetRateTypes => ({
   type: types.GET_RATE_TYPES
 })

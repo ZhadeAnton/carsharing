@@ -1,33 +1,30 @@
 import { useCallback, useRef, useEffect } from 'react'
 
-const useScrollListener = (element, handleScroll, throttle = 200) => {
-  const scrollingTimer = useRef();
+
+const useScrollListener = (element, handleScroll, throttle = 300) => {
+  const scrollingTimer = useRef()
 
   const listenToScroll = useCallback((e) => {
-    clearTimeout(scrollingTimer.current);
+    element.current?.removeEventListener('scroll', listenToScroll)
+    clearTimeout(scrollingTimer.current)
     scrollingTimer.current = setTimeout(
-        () =>
-          requestAnimationFrame(() => {
-            handleScroll(e);
-          }),
+        () => element.current?.addEventListener('scroll', listenToScroll),
         throttle
-    );
-  }, [scrollingTimer, throttle]);
-
-  const removeScrollListener = useCallback(() => {
-    if (element.current) {
-      clearTimeout(scrollingTimer.current);
-      element.current?.removeEventListener('scroll', listenToScroll);
-    }
-  }, [scrollingTimer, listenToScroll, element]);
+    )
+    handleScroll(e)
+  }, [throttle, element, handleScroll])
 
   useEffect(() => {
-    element.current.addEventListener('scroll', listenToScroll);
+    const currentElement = element.current;
+    if (currentElement) {
+      currentElement.addEventListener('scroll', listenToScroll)
+    }
 
     return () => {
-      removeScrollListener();
-    };
-  });
-};
+      currentElement?.removeEventListener('scroll', listenToScroll)
+      clearTimeout(scrollingTimer.current)
+    }
+  }, [listenToScroll, element])
+}
 
-export default useScrollListener;
+export default useScrollListener

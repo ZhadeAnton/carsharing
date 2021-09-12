@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 
 import './styles.scss'
 import { ICar } from '../../interfaces/carsInterfaces'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook'
-import { setCarsRowStart } from '../../redux/car/carActionCreators'
-import { carsListSelector } from '../../redux/car/carSelectors'
 import * as carActions from '../../redux/car/carActionCreators'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 import useScrollListener from '../../hooks/useScrollListener'
@@ -13,24 +11,27 @@ import Car from './carItem'
 
 export default function CarsList() {
   const listRef: any = useRef(null)
-  const dispatch = useAppDispatch()
+  const makingCall = useRef(false)
   const windowDimensions = useWindowDimensions()
+  const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
+
+  const [rowStartPosition, setRowStartPosition] = useState(0)
   const [rowHeight, setRowHeight] = useState(225)
   const [itemsPerRow, setItemsPerRow] = useState(2)
   const [visibleRows, setVisibleRows] = useState(3)
-  const [isFetchingNewCars, setIsFetchingNewCars] = useState(true)
-
-  const carsList = carsListSelector(state)
+  const [isFetchingNewCars, setIsFetchingNewCars] = useState(false)
+  const carsList = state.car.carsList
   const carListCurrentPage = state.car.carListCurrentPage
   const carsOnTheServer = state.car.carsCount
   const carsSortBy = state.car.carsSortBy
   const selectedCar = state.car.selectedCar
-  const carRowsStart = state.car.carRowsStart
   const maxRows = Math.floor(carsList.length / itemsPerRow)
 
+  useScrollListener(listRef, handleScroll, 320)
+
   useEffect(() => {
-    dispatch(setCarsRowStart(0))
+    setRowStartPosition(0)
 
     switch (carsSortBy.value) {
       case 'Эконом':
@@ -47,7 +48,13 @@ export default function CarsList() {
   }, [carsSortBy])
 
   useEffect(() => {
-    if (isFetchingNewCars) {
+    if (!isFetchingNewCars || makingCall.current) return
+
+    makingCall.current = true
+
+    setTimeout(() => {
+      makingCall.current = false
+
       switch (carsSortBy.value) {
         case 'Эконом':
           dispatch(carActions.getEconomyCars(carListCurrentPage))
@@ -62,16 +69,13 @@ export default function CarsList() {
       }
 
       setIsFetchingNewCars(false)
-    }
-  }, [isFetchingNewCars])
-
-  useScrollListener(listRef, handleScroll)
+    }, 350)
+  }, [isFetchingNewCars, makingCall])
 
   function handleScroll(e: any) {
-    dispatch(setCarsRowStart((Math.floor(e.target.scrollTop / rowHeight))))
-    const scrollTop = e.target.scrollTop
+    setRowStartPosition((Math.floor(e.target.scrollTop / rowHeight)))
 
-    if (isLoadMoreItems(scrollTop)) {
+    if (isLoadMoreItems(e.target.scrollTop)) {
       setIsFetchingNewCars(true)
     }
   }
@@ -122,26 +126,26 @@ export default function CarsList() {
     }
   }, [windowDimensions.width])
 
-  const handleSelectCar = (car: ICar) => {
+  const handleSelectCar = useCallback((car: ICar) => {
     dispatch(carActions.selectCar(car))
-  }
+  }, [])
 
   const isEndOfList = () => {
-    return (carRowsStart + visibleRows + 1) >= maxRows
+    return (rowStartPosition + (visibleRows + 1)) >= maxRows
   }
 
   const isLoadMoreItems = (scrollTop: number) => {
-    return ((maxRows - visibleRows) * rowHeight) - scrollTop <= 80
+    return ((maxRows - visibleRows - 1) * rowHeight) - scrollTop <= 70
     && carsList.length < carsOnTheServer
   }
 
   function getTopHeight() {
-    return rowHeight * carRowsStart
+    return rowHeight * rowStartPosition
   }
 
   function getBottomHeight() {
     if (!isEndOfList()) {
-      return rowHeight * (carsList.length - (carRowsStart + visibleRows + 1))
+      return rowHeight * (carsList.length - (rowStartPosition + visibleRows + 1))
     } else {
       return 0
     }
@@ -188,13 +192,13 @@ export default function CarsList() {
       <div style={{ height: getTopHeight() }} />
       {
         carsList
-            .slice(carRowsStart, carRowsStart + (visibleRows + 2))
+            .slice(rowStartPosition, rowStartPosition + (visibleRows + 2))
             .map((car, index) => {
               return (
                 <Row
-                  key={'' + index + carRowsStart + car.id}
+                  key={'' + index + rowStartPosition + car.id}
                   carItems={carsList}
-                  index={carRowsStart + index}
+                  index={rowStartPosition + index}
                 />
               )
             })
