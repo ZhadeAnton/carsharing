@@ -15,11 +15,11 @@ export default function CarsList() {
   const windowDimensions = useWindowDimensions()
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
-
   const [rowStartPosition, setRowStartPosition] = useState(0)
   const [rowHeight, setRowHeight] = useState(225)
   const [itemsPerRow, setItemsPerRow] = useState(2)
-  const [visibleRows, setVisibleRows] = useState(3)
+  const [visibleRows, setVisibleRows] = useState(2)
+  const [extraRows, setExtraRows] = useState(2)
   const [isFetchingNewCars, setIsFetchingNewCars] = useState(false)
   const carsList = state.car.carsList
   const carListCurrentPage = state.car.carListCurrentPage
@@ -27,8 +27,9 @@ export default function CarsList() {
   const carsSortBy = state.car.carsSortBy
   const selectedCar = state.car.selectedCar
   const maxRows = Math.floor(carsList.length / itemsPerRow)
+  const carsListLength = carsList.length
 
-  useScrollListener(listRef, handleScroll, 320)
+  useScrollListener(listRef, handleScroll, 220)
 
   useEffect(() => {
     setRowStartPosition(0)
@@ -49,7 +50,6 @@ export default function CarsList() {
 
   useEffect(() => {
     if (!isFetchingNewCars || makingCall.current) return
-
     makingCall.current = true
 
     setTimeout(() => {
@@ -69,33 +69,21 @@ export default function CarsList() {
       }
 
       setIsFetchingNewCars(false)
-    }, 350)
+    }, 290)
   }, [isFetchingNewCars, makingCall])
 
-  function handleScroll(e: any) {
-    setRowStartPosition((Math.floor(e.target.scrollTop / rowHeight)))
-
-    if (isLoadMoreItems(e.target.scrollTop)) {
-      setIsFetchingNewCars(true)
-    }
-  }
-
   useEffect(() => {
-    if (windowDimensions.width > 1200) {
-      setRowHeight(225)
-    }
-
-    if (windowDimensions.width > 1024) {
-      setItemsPerRow(2)
-      setVisibleRows(3)
-    }
-
     if (windowDimensions.width <= 1200) {
       setRowHeight(200)
     }
 
     if (windowDimensions.width <= 1100) {
       setRowHeight(180)
+    }
+
+    if (windowDimensions.width > 1024) {
+      setItemsPerRow(2)
+      setVisibleRows(2)
     }
 
     if (windowDimensions.width <= 1024) {
@@ -112,31 +100,50 @@ export default function CarsList() {
       setRowHeight(130)
     }
 
+    if (windowDimensions.width > 666 && windowDimensions.width < 1024) {
+      setItemsPerRow(3)
+      setVisibleRows(1)
+    }
+
     if (windowDimensions.width <= 666) {
       setRowHeight(150)
       setItemsPerRow(2)
+      setVisibleRows(2)
+      setExtraRows(2)
     }
 
-    if (windowDimensions.width <= 460) {
-      setRowHeight(130)
+    if (windowDimensions.width <= 576) {
+      setRowHeight(140)
+    }
+
+    if (windowDimensions.width <= 500) {
+      setRowHeight(120)
     }
 
     if (windowDimensions.width <= 400) {
-      setRowHeight(110)
+      setRowHeight(100)
     }
   }, [windowDimensions.width])
+
+  function handleScroll(e: any) {
+    setRowStartPosition((Math.floor(e.target.scrollTop / rowHeight)))
+
+    if (isLoadMoreItems(e.target.scrollTop)) {
+      setIsFetchingNewCars(true)
+    }
+  }
 
   const handleSelectCar = useCallback((car: ICar) => {
     dispatch(carActions.selectCar(car))
   }, [])
 
   const isEndOfList = () => {
-    return (rowStartPosition + (visibleRows + 1)) >= maxRows
+    return (rowStartPosition + (visibleRows + extraRows)) >= maxRows
   }
 
   const isLoadMoreItems = (scrollTop: number) => {
-    return ((maxRows - visibleRows - 1) * rowHeight) - scrollTop <= 70
-    && carsList.length < carsOnTheServer
+    return ((maxRows - visibleRows - 1) * rowHeight) - scrollTop <= 110
+    && carsListLength < carsOnTheServer
   }
 
   function getTopHeight() {
@@ -145,7 +152,7 @@ export default function CarsList() {
 
   function getBottomHeight() {
     if (!isEndOfList()) {
-      return rowHeight * (carsList.length - (rowStartPosition + visibleRows + 1))
+      return rowHeight * (carsListLength - (rowStartPosition + visibleRows + 1))
     } else {
       return 0
     }
@@ -154,7 +161,7 @@ export default function CarsList() {
   const Row = ({ index, carItems }: any) => {
     const items = []
     const fromIndex = index * itemsPerRow
-    const toIndex = Math.min(fromIndex + itemsPerRow, carItems.length)
+    const toIndex = Math.min(fromIndex + itemsPerRow, carsListLength)
 
     for (let i = fromIndex; i < toIndex; i++) {
       const carItem = carItems[i]
@@ -192,7 +199,7 @@ export default function CarsList() {
       <div style={{ height: getTopHeight() }} />
       {
         carsList
-            .slice(rowStartPosition, rowStartPosition + (visibleRows + 2))
+            .slice(rowStartPosition, rowStartPosition + (visibleRows + extraRows))
             .map((car, index) => {
               return (
                 <Row

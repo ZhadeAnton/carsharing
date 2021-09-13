@@ -1,6 +1,5 @@
 import { useCallback, useRef, useEffect } from 'react'
 
-
 const useScrollListener = (element, handleScroll, throttle = 300) => {
   const scrollingTimer = useRef()
 

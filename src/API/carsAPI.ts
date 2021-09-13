@@ -1,10 +1,9 @@
 /* eslint-disable max-len */
 import axios from 'axios';
 
-const carsLimit = 10
+const carsLimit = 12
 
 export const getAllCars = (page = 0) => {
-  console.log('fire fetch')
   return axios({
     method: 'GET',
     url: `${process.env.REACT_APP_DEFAULT_URL}/car?page=${page}&limit=${carsLimit}`,
