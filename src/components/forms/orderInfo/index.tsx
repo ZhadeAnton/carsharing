@@ -63,7 +63,6 @@ export default function OrderInfo(props: Props) {
             { props.buttonTitle }
           </ButtonPrimary>
         </div>
-
       </div>
     </form>
   )

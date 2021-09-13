@@ -8,6 +8,7 @@ import MainPage from './routes/mainPage';
 import OrderPage from './routes/orderPage';
 import HamburgerMenu from './components/hamburgerMenu';
 import OverlayMenu from './components/overlayMenu';
+import OrderConfirmed from './components/orderConfirmed';
 
 export default function App() {
   const state = useAppSelector((state) => state)
@@ -23,6 +24,7 @@ export default function App() {
         <Switch>
           <Route exact path='/' component={MainPage} />
           <Route exact path='/order' component={OrderPage} />
+          <Route exact path='/order/:id' component={OrderConfirmed} />
         </Switch>
 
         <HamburgerMenu

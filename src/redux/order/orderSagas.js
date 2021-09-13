@@ -6,7 +6,6 @@ import * as API from '../../API/orderAPI.ts'
 
 function* sendOrder({payload}) {
   try {
-    yield localStorage.setItem('carOrderId', payload.id)
     const response = yield call(API.sendConfirmedOrder, payload)
     const confirmedOrder = yield response.data.data
     yield put(actions.setOrderSuccess(confirmedOrder))
