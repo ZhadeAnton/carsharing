@@ -11,12 +11,12 @@ export default function OrderPage() {
   const redirect = useHistoryPush()
   const state = useAppSelector((state) => state)
 
-  const carOrderId = localStorage.getItem('carOrderId')
+  const confirmedOrderId = state.order.confirmedOrder?.id
   const isLoading = state.order.isLoading
 
   useEffect(() => {
-    if (carOrderId) redirect(`/order/${carOrderId}`)
-  }, [carOrderId])
+    if (confirmedOrderId) redirect(`/order/${confirmedOrderId}`)
+  }, [confirmedOrderId])
 
   if (isLoading) return <main className='order-page' />
 

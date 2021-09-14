@@ -100,7 +100,7 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
           isFullTank: action.payload.isFullTank,
           number: action.payload.carId.number,
           name: action.payload.carId.name,
-          thumbnail: action.payload.thumbnail
+          thumbnail: action.payload.carId.thumbnail!
         }
       }
 

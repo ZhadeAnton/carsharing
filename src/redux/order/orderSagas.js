@@ -9,7 +9,6 @@ function* sendOrder({payload}) {
     const response = yield call(API.sendConfirmedOrder, payload)
     const confirmedOrder = yield response.data.data
     yield put(actions.setOrderSuccess(confirmedOrder))
-    yield localStorage.setItem('carOrderId', confirmedOrder.id)
   } catch (error) {
     console.error(error)
   }
