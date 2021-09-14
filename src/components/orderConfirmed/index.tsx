@@ -5,9 +5,7 @@ import useToggle from '../../hooks/useToggle'
 import useHistoryPush from '../../hooks/useHistory'
 import { parseDate } from '../../utils/dateUtils'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook'
-import { getTownField } from '../../redux/location/locationSelectors'
 import { getOrderById, removeOrder } from '../../redux/order/orderActionCreators'
-import * as carSelectors from '../../redux/car/carSelectors'
 import CarImage from '../car/carImage'
 import CarInfoField from '../car/carInfoField'
 import CarName from '../car/carName'
@@ -24,15 +22,6 @@ export default function OrderConfirmed() {
   const carOrderId = localStorage.getItem('carOrderId')
   const confirmedOrder = state.order.confirmedOrder
   const isOrderConfirmed = state.order.isOrderConfirmed
-
-  const townField = getTownField(state)
-  const carModelField = carSelectors.getCarModelFiled(state)
-  const carColorField = carSelectors.getCarColorField(state)
-  const carRateField = carSelectors.getCarRateField(state)
-  const carLeaseField = carSelectors.getCarLeaseField(state)
-  const fourthStepFields = [
-    townField, carModelField, carColorField, carRateField, carLeaseField
-  ]
 
   useEffect(() => {
     if (carOrderId) dispatch(getOrderById(carOrderId))
@@ -117,7 +106,6 @@ export default function OrderConfirmed() {
 
           <div className='step__right'>
             <OrderInfo
-              orderFields={fourthStepFields}
               buttonTitle='Отменить'
               price={confirmedOrder?.price}
               isRedButton={true}

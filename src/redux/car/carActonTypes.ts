@@ -89,6 +89,16 @@ export interface IRemoveDateFrom {
   type: typeof REMOVE_DATE_FROM
 }
 
+export const IS_CARS_TAB_ACTIVE = 'IS_CARS_TAB_ACTIVE'
+export interface IIsCarTabActive {
+  type: typeof IS_CARS_TAB_ACTIVE
+}
+
+export const IS_CARS_EXTRA_TAB_ACTIVE = 'IS_CARS_EXTRA_TAB_ACTIVE'
+export interface IIsCarExtraTabActive {
+  type: typeof IS_CARS_EXTRA_TAB_ACTIVE
+}
+
 export const REMOVE_DATE_TO = 'REMOVE_DATE_TO'
 export interface IRemoveDateTo {
   type: typeof REMOVE_DATE_TO
@@ -111,3 +121,5 @@ export type ICarTypes =
 | IGetPremiumCars
 | IRemoveDateFrom
 | IRemoveDateTo
+| IIsCarTabActive
+| IIsCarExtraTabActive

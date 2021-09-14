@@ -4,8 +4,8 @@ import './styles.scss'
 import useToggle from '../../../hooks/useToggle'
 import { parseDate } from '../../../utils/dateUtils'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
-import { getTownField } from '../../../redux/location/locationSelectors'
 import { setOrder } from '../../../redux/order/orderActionCreators'
+import { createOrderBody } from '../../../utils/orderUtils'
 import * as carSelectors from '../../../redux/car/carSelectors'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
@@ -14,7 +14,6 @@ import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
 import CarInfoList from '../../car/carInfoList'
-import { createOrderBody } from '../../../utils/orderUtils'
 
 export default function FourthStep() {
   const dispatch = useAppDispatch()
@@ -28,20 +27,6 @@ export default function FourthStep() {
   const dateFrom = state.car.dateFrom
   const dateTo = state.car.dateTo
   const totalPriceOfSelectedCar = carSelectors.totalCarPriceSelector(state)
-  const townField = getTownField(state)
-  const carModelField = carSelectors.getCarModelFiled(state)
-  const carColorField = carSelectors.getCarColorField(state)
-  const carRateField = carSelectors.getCarRateField(state)
-  const carLeaseField = carSelectors.getCarLeaseField(state)
-  const carCheckboxFields = carSelectors.getCarCheckboxFields(state)
-  const fourthStepFields = [
-    townField,
-    carModelField,
-    carColorField,
-    carRateField,
-    carLeaseField,
-    ...carCheckboxFields
-  ]
 
   const order = createOrderBody({
     selectedCar,
@@ -97,7 +82,6 @@ export default function FourthStep() {
       <div className='step__right'>
         <OrderInfo
           buttonTitle='Заказать'
-          orderFields={fourthStepFields}
           price={totalPriceOfSelectedCar}
           isButtonDisable={false}
           onButtonClick={handleOpenModal}

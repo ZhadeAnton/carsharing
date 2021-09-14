@@ -25,7 +25,9 @@ export interface ICarState {
   carRate: IRate,
   dateFrom: IDate,
   dateTo: IDate,
-  isLoading: boolean
+  isLoading: boolean,
+  isCarTabActive: boolean,
+  isCarExtraTabActive: boolean
 }
 
 const INIT_STATE: ICarState = {
@@ -41,7 +43,9 @@ const INIT_STATE: ICarState = {
   carRate: {price: 1234, rateTypeId: {name: 'Суточный'}},
   dateFrom: null,
   dateTo: null,
-  isLoading: false
+  isLoading: false,
+  isCarTabActive: false,
+  isCarExtraTabActive: false
 }
 
 type ITypes = ICarTypes | IOrderTypes
@@ -156,6 +160,18 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
     case REMOVE_ORDER:
       return {
         ...INIT_STATE
+      }
+
+    case types.IS_CARS_TAB_ACTIVE:
+      return {
+        ...state,
+        isCarTabActive: true
+      }
+
+    case types.IS_CARS_EXTRA_TAB_ACTIVE:
+      return {
+        ...state,
+        isCarExtraTabActive: true
       }
 
     default:

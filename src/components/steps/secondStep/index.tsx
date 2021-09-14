@@ -1,15 +1,12 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import './styles.scss'
 import { IRadioButton } from '../../../interfaces/inputInterfaces';
 import { setCurrentTab } from '../../../redux/order/orderActionCreators';
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook';
-import { getTownField } from '../../../redux/location/locationSelectors';
+import { isSecondStepDisabledSelector } from '../../../redux/car/carSelectors';
+import { setIsCarTabActive } from '../../../redux/car/carActionCreators';
 import * as carActions from '../../../redux/car/carActionCreators';
-import {
-  getCarModelFiled,
-  isSecondStepDisabledSelector
-} from '../../../redux/car/carSelectors';
 import RadioGroup from '../../forms/radiopGroup'
 import OrderInfo from '../../forms/orderInfo';
 import CarsList from '../../carsList/index';
@@ -21,18 +18,19 @@ export default function SecondStep() {
   const selectedCar = state.car.selectedCar
   const carsSortOptions = state.car.carsSortOptions
   const carsSortBy = state.car.carsSortBy
-  const townField = getTownField(state)
-  const carModelField = getCarModelFiled(state)
   const isSecondStepDisabled = isSecondStepDisabledSelector(state)
-  const secondStepFields = [townField, carModelField]
 
-  const handleSortCars = (quality: IRadioButton) => {
+  useEffect(() => {
+    dispatch(setIsCarTabActive())
+  }, [])
+
+  const handleSortCars = useCallback((quality: IRadioButton) => {
     dispatch(carActions.setSortingOfCars(quality))
-  }
+  }, [carsSortBy])
 
-  const handleChangeActiveTab = () => {
+  const handleChangeActiveTab = useCallback(() => {
     dispatch(setCurrentTab('3'))
-  }
+  }, [])
 
   return (
     <section className='step-two step'>
@@ -53,7 +51,6 @@ export default function SecondStep() {
       <div className='step-two__right step__right'>
         <OrderInfo
           buttonTitle='Дополнительно'
-          orderFields={secondStepFields}
           lowPrice={selectedCar?.priceMin}
           highPrice={selectedCar?.priceMax}
           isButtonDisable={isSecondStepDisabled}

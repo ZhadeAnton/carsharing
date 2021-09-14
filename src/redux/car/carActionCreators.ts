@@ -80,3 +80,11 @@ export const removeDateFrom = (): types.IRemoveDateFrom => ({
 export const removeDateTo = (): types.IRemoveDateTo => ({
   type: types.REMOVE_DATE_TO
 })
+
+export const setIsCarTabActive = (): types.IIsCarTabActive => ({
+  type: types.IS_CARS_TAB_ACTIVE
+})
+
+export const setIsCarExtraActive = (): types.IIsCarExtraTabActive => ({
+  type: types.IS_CARS_EXTRA_TAB_ACTIVE
+})
