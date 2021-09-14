@@ -9,6 +9,7 @@ function* sendOrder({payload}) {
     const response = yield call(API.sendConfirmedOrder, payload)
     const confirmedOrder = yield response.data.data
     yield put(actions.setOrderSuccess(confirmedOrder))
+    yield localStorage.setItem('carOrderId', confirmedOrder.id)
   } catch (error) {
     console.error(error)
   }
@@ -16,6 +17,7 @@ function* sendOrder({payload}) {
 
 function* deleteConfirmedOrder({payload}) {
   try {
+    yield localStorage.removeItem('carOrderId')
     yield call(API.deleteConfirmedOrder, payload)
     yield put(actions.removeOrderSuccess())
   } catch (error) {

@@ -11,7 +11,8 @@ export default function OrderPage() {
   const redirect = useHistoryPush()
   const state = useAppSelector((state) => state)
 
-  const confirmedOrderId = state.order.confirmedOrder?.id
+  const confirmedOrderIdFromLS = localStorage.getItem('carOrderId')
+  const confirmedOrderId = state.order.confirmedOrder?.id ?? confirmedOrderIdFromLS
   const isLoading = state.order.isLoading
 
   useEffect(() => {
