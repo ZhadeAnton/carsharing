@@ -1,4 +1,4 @@
-import { IMark, ITown } from '../../interfaces/mapInterfaces';
+import { IMark, IPickUp, ITown } from '../../interfaces/mapInterfaces';
 
 export const ADD_MARKER = 'ADD_MARKER'
 export interface IAddMarker {
@@ -19,19 +19,32 @@ export interface ISetPickUp {
 }
 
 export const GET_ALL_TOWNS = 'GET_ALL_TOWNS'
-export interface IGetAllTowns {
+export interface IGetTowns {
   type: typeof GET_ALL_TOWNS
 }
 
 export const GET_ALL_TOWNS_SUCCESS = 'GET_ALL_TOWNS_SUCCESS'
-export interface IGetAllTownsSuccess {
+export interface IGetTownsSuccess {
   type: typeof GET_ALL_TOWNS_SUCCESS,
   payload: Array<ITown>
+}
+
+export const GET_PICK_UPS = 'GET_PICK_UPS'
+export interface IGetPickUps {
+  type: typeof GET_PICK_UPS
+}
+
+export const GET_PICK_UPS_SUCCESS = 'GET_PICK_UPS_SUCCESS'
+export interface IGetPickUpsSuccess {
+  type: typeof GET_PICK_UPS_SUCCESS,
+  payload: Array<IPickUp>
 }
 
 export type ILocationTypes =
 | IAddMarker
 | ISetTown
 | ISetPickUp
-| IGetAllTowns
-| IGetAllTownsSuccess
+| IGetTowns
+| IGetTownsSuccess
+| IGetPickUps
+| IGetPickUpsSuccess

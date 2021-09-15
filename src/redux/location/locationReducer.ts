@@ -1,4 +1,4 @@
-import { IMark, ITown } from '../../interfaces/mapInterfaces'
+import { IMark, IPickUp, ITown } from '../../interfaces/mapInterfaces'
 import { ILocationTypes } from './locationActionTypes'
 import * as types from './locationActionTypes'
 import {
@@ -9,6 +9,7 @@ import {
 
 export interface ILocationState {
   towns: Array<ITown>,
+  pickUps: Array<IPickUp>,
   selectedTown: string | null,
   selectedPickUp: string | null,
   markers: Array<IMark>
@@ -16,6 +17,7 @@ export interface ILocationState {
 
 const INIT_STATE: ILocationState = {
   towns: [],
+  pickUps: [],
   selectedTown: '',
   selectedPickUp: '',
   markers: [{lat: 54.3187, lng: 48.3978}]
@@ -29,6 +31,12 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
       return {
         ...state,
         towns: action.payload
+      }
+
+    case types.GET_PICK_UPS_SUCCESS:
+      return {
+        ...state,
+        pickUps: action.payload
       }
 
     case types.ADD_MARKER:
