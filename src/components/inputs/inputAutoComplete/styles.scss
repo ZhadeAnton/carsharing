@@ -20,6 +20,10 @@
       text-overflow: ellipsis;
       max-width: 180px;
     }
+
+    &-disable {
+      cursor: not-allowed;
+    }
   }
 
   &__suggetion-list {
@@ -75,8 +79,10 @@
 
   @media (max-width: getBreackpoint('sm')) {
     &__suggetion-list {
-      font-size: 13px;
-      line-height: 17px;
+      &--item {
+        font-size: 13px;
+        line-height: 17px;
+      }
     }
   }
 

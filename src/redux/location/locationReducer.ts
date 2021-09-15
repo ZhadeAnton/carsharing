@@ -10,8 +10,8 @@ import {
 export interface ILocationState {
   towns: Array<ITown>,
   pickUps: Array<IPickUp>,
-  selectedTown: string | null,
-  selectedPickUp: string | null,
+  selectedTown: string,
+  selectedPickUp: string,
   markers: Array<IMark>
 }
 

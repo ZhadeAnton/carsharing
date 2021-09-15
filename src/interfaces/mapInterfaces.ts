@@ -13,7 +13,8 @@ export interface IPickUp {
   cityId: {
     name: string,
     id: string
-  }
+  },
+  address: string
 }
 
 export interface IFnAddMarker {
