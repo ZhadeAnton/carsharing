@@ -8,11 +8,13 @@ export const getTownField = createSelector(
     (location) => {
       return {
         title: 'Пункт выдачи',
-        value: location.town ? `${location.town}, ${location.pickUp}` : 'Не выбрано'}
+        value: location.selectedTown
+            ? `${location.selectedTown}, ${location.selectedPickUp}`
+            : 'Не выбрано'}
     }
 )
 
 export const isFirstStepDisabledSelector = createSelector(
     locationSelector,
-    (location) => !location.town || !location.pickUp
+    (location) => !location.selectedTown || !location.selectedPickUp
 )

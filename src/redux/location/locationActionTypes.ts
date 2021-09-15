@@ -1,4 +1,4 @@
-import { IMark } from '../../interfaces/mapInterfaces';
+import { IMark, ITown } from '../../interfaces/mapInterfaces';
 
 export const ADD_MARKER = 'ADD_MARKER'
 export interface IAddMarker {
@@ -18,14 +18,20 @@ export interface ISetPickUp {
   payload: string
 }
 
-export const SET_COORDINATES = 'SET_COORDINATES'
-export interface ISetCoordinates {
-  type: typeof SET_COORDINATES,
-  payload: IMark
+export const GET_ALL_TOWNS = 'GET_ALL_TOWNS'
+export interface IGetAllTowns {
+  type: typeof GET_ALL_TOWNS
+}
+
+export const GET_ALL_TOWNS_SUCCESS = 'GET_ALL_TOWNS_SUCCESS'
+export interface IGetAllTownsSuccess {
+  type: typeof GET_ALL_TOWNS_SUCCESS,
+  payload: Array<ITown>
 }
 
 export type ILocationTypes =
 | IAddMarker
 | ISetTown
 | ISetPickUp
-| ISetCoordinates
+| IGetAllTowns
+| IGetAllTownsSuccess

@@ -8,22 +8,14 @@ import SearchLocationForm from '../forms/searchLocationForm/index'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
 import {
   addMark,
-  setCoodrinates,
-  setPickUp,
-  setTown
 } from '../../redux/location/locationActionCreators';
-import { IMark } from '../../interfaces/mapInterfaces';
 
 export default function CustomMap() {
   const mapRef = useRef();
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
-  const town = state.location.town
-  const pickUp = state.location.pickUp
   const markers = state.location.markers
-  const coordinatesByPickedTown = state.location.coordinatesByPickedTown
-
   const mapContainerStyle = settings.mapContainerStyle
   const center = settings.center
   const options = settings.options
@@ -38,18 +30,6 @@ export default function CustomMap() {
     libraries: settings.libraries,
   });
 
-  const handleSelectTown = (town: string) => {
-    dispatch(setTown(town))
-  }
-
-  const handleSelectPickUp = (pickUp: string) => {
-    dispatch(setPickUp(pickUp))
-  }
-
-  const handleSelectCoordinates = (coords: IMark) => {
-    dispatch(setCoodrinates(coords))
-  }
-
   const handleMapClick = (event: any) => {
     dispatch(addMark({
       lat: event.latLng.lat() as IMap.IMark['lat'],
@@ -62,12 +42,6 @@ export default function CustomMap() {
       <div className='custom-map'>
         <div className='custom-map__search-form'>
           <SearchLocationForm
-            town={town}
-            pickUp={pickUp}
-            coordinatesByPickedTown={coordinatesByPickedTown}
-            onSelectTown={handleSelectTown}
-            onSelectPickUp={handleSelectPickUp}
-            onSetCoordinates={handleSelectCoordinates}
           />
         </div>
 
