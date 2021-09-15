@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Skeleton } from 'antd'
 
 import './styles.scss'
 import useToggle from '../../hooks/useToggle'
@@ -104,7 +105,11 @@ export default function OrderConfirmed() {
               </div>
 
               <div className='step-four__image-wrapper'>
-                <CarImage carImage={confirmedOrder?.carId.thumbnail?.path} />
+                {
+                  confirmedOrder?.carId.thumbnail?.path
+                  ? <CarImage carImage={confirmedOrder?.carId.thumbnail?.path} />
+                  : <Skeleton.Image style={{width: '250px'}} />
+                }
               </div>
             </section>
 

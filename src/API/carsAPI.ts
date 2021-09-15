@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import axios from 'axios';
 
-const carsLimit = 12
+const carsLimit = 15
 
 export const getAllCars = (page = 0) => {
   return axios({

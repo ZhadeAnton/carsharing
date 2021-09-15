@@ -18,7 +18,7 @@ export default function CarsList() {
   const [rowStartPosition, setRowStartPosition] = useState(0)
   const [rowHeight, setRowHeight] = useState(225)
   const [itemsPerRow, setItemsPerRow] = useState(2)
-  const [visibleRows, setVisibleRows] = useState(2)
+  const [visibleRows, setVisibleRows] = useState(4)
   const [extraRows, setExtraRows] = useState(2)
   const [isFetchingNewCars, setIsFetchingNewCars] = useState(false)
   const carsList = state.car.carsList
@@ -26,10 +26,10 @@ export default function CarsList() {
   const carsOnTheServer = state.car.carsCount
   const carsSortBy = state.car.carsSortBy
   const selectedCar = state.car.selectedCar
-  const maxRows = Math.floor(carsList.length / itemsPerRow)
   const carsListLength = carsList.length
+  const maxRows = Math.floor(carsListLength / itemsPerRow)
 
-  useScrollListener(listRef, handleScroll, 220)
+  useScrollListener(listRef, handleScroll, 150)
 
   useEffect(() => {
     setRowStartPosition(0)
@@ -52,27 +52,30 @@ export default function CarsList() {
     if (!isFetchingNewCars || makingCall.current) return
     makingCall.current = true
 
+    switch (carsSortBy.value) {
+      case 'Эконом':
+        dispatch(carActions.getEconomyCars(carListCurrentPage))
+        break
+
+      case 'Премиум':
+        dispatch(carActions.getPremiumCars(carListCurrentPage))
+        break
+
+      default:
+        dispatch(carActions.getAllCars(carListCurrentPage))
+    }
+
     setTimeout(() => {
-      makingCall.current = false
-
-      switch (carsSortBy.value) {
-        case 'Эконом':
-          dispatch(carActions.getEconomyCars(carListCurrentPage))
-          break
-
-        case 'Премиум':
-          dispatch(carActions.getPremiumCars(carListCurrentPage))
-          break
-
-        default:
-          dispatch(carActions.getAllCars(carListCurrentPage))
-      }
-
       setIsFetchingNewCars(false)
-    }, 290)
-  }, [isFetchingNewCars, makingCall])
+      makingCall.current = false
+    }, 300)
+  }, [isFetchingNewCars])
 
   useEffect(() => {
+    if (windowDimensions.width > 1200) {
+      setRowHeight(225)
+    }
+
     if (windowDimensions.width <= 1200) {
       setRowHeight(200)
     }
@@ -83,13 +86,15 @@ export default function CarsList() {
 
     if (windowDimensions.width > 1024) {
       setItemsPerRow(2)
-      setVisibleRows(2)
+      setVisibleRows(4)
+      setExtraRows(2)
     }
 
     if (windowDimensions.width <= 1024) {
       setRowHeight(170)
       setItemsPerRow(3)
-      setVisibleRows(1)
+      setVisibleRows(3)
+      setExtraRows(2)
     }
 
     if (windowDimensions.width <= 870) {
@@ -102,13 +107,14 @@ export default function CarsList() {
 
     if (windowDimensions.width > 666 && windowDimensions.width < 1024) {
       setItemsPerRow(3)
-      setVisibleRows(1)
+      setVisibleRows(3)
+      setExtraRows(2)
     }
 
     if (windowDimensions.width <= 666) {
       setRowHeight(150)
       setItemsPerRow(2)
-      setVisibleRows(2)
+      setVisibleRows(3)
       setExtraRows(2)
     }
 
@@ -122,6 +128,10 @@ export default function CarsList() {
 
     if (windowDimensions.width <= 400) {
       setRowHeight(100)
+    }
+
+    if (windowDimensions.width <= 350) {
+      setRowHeight(90)
     }
   }, [windowDimensions.width])
 
@@ -142,7 +152,7 @@ export default function CarsList() {
   }
 
   const isLoadMoreItems = (scrollTop: number) => {
-    return ((maxRows - visibleRows - 1) * rowHeight) - scrollTop <= 110
+    return ((maxRows - (visibleRows + extraRows)) * rowHeight) - scrollTop <= 100
     && carsListLength < carsOnTheServer
   }
 
@@ -193,7 +203,7 @@ export default function CarsList() {
   return (
     <div
       className='cars-list'
-      style={{ height: rowHeight * (visibleRows + 1)}}
+      style={{ height: rowHeight * (visibleRows + extraRows)}}
       ref={listRef}
     >
       <div style={{ height: getTopHeight() }} />

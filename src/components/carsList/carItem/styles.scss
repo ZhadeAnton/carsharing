@@ -85,6 +85,12 @@
         line-height: 17px;
       }
     }
+
+    &__image-wrapper {
+      &--image {
+        width: 70%;
+      }
+    }
   }
 
   @media (max-width: getBreackpoint('vsm')) {
@@ -104,7 +110,7 @@
 
     &__image-wrapper {
       &--image {
-        min-width: 110px;
+        min-width: 90px;
       }
     }
   }
