@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import './styles.scss'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import { setPickUp, setTown } from '../../../redux/location/locationActionCreators'
 import { pickUpsSelector } from '../../../redux/location/locationSelectors'
+import useSearchMarkers from '../../../hooks/useSearchMarkers'
 import InputAutoComplete from '../../inputs/inputAutoComplete'
 
 export default function SearchLocationForm() {
+  const searchMarkers = useSearchMarkers()
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
@@ -14,6 +16,10 @@ export default function SearchLocationForm() {
   const selectedPickUp = state.location.selectedPickUp
   const towns = state.location.towns
   const pickUps = pickUpsSelector(state)
+
+  console.log('pickUps', pickUps)
+
+  useMemo(() => searchMarkers(pickUps), [selectedTown])
 
   const handleSelectTown = (town: string) => {
     dispatch(setTown(town))

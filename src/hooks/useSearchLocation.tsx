@@ -8,8 +8,7 @@ export default function useSearchLocation() {
   const handleSearch = async (address: string) => {
     try {
       const results = await getGeocode({ address })
-      const { lat, lng } = await getLatLng(results[0])
-      dispatch(setCurrentLocation({ lat, lng }))
+      dispatch(setCurrentLocation(await getLatLng(results[0])))
     } catch (error) {
       console.error(error)
     }

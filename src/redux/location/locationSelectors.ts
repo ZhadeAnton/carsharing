@@ -8,7 +8,9 @@ export const pickUpsSelector = createSelector(
     (locationState) => {
       const town = locationState.selectedTown
       return locationState.pickUps.filter((item) => {
-        if (item.cityId) return item.cityId.name === town
+        if (item.cityId) {
+          return item.cityId.name === town
+        }
       })
     }
 )

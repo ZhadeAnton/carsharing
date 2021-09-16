@@ -24,6 +24,12 @@ export interface ISetCurrentLocation {
   payload: IMark
 }
 
+export const SET_MARKERS_BY_CURRENT_LOCATION = 'SET_MARKERS_BY_CURRENT_LOCATION'
+export interface ISetMarkersByCurrentLocation {
+  type: typeof SET_MARKERS_BY_CURRENT_LOCATION,
+  payload: Array<IMark>
+}
+
 export const GET_ALL_TOWNS = 'GET_ALL_TOWNS'
 export interface IGetTowns {
   type: typeof GET_ALL_TOWNS
@@ -55,3 +61,4 @@ export type ILocationTypes =
 | IGetPickUps
 | IGetPickUpsSuccess
 | ISetCurrentLocation
+| ISetMarkersByCurrentLocation

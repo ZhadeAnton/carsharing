@@ -28,7 +28,7 @@ const INIT_STATE: ILocationState = {
     lat: 54.3187,
     lng: 48.3978
   },
-  markers: [{lat: 54.3187, lng: 48.3978}]
+  markers: []
 }
 
 type ITypes = ILocationTypes | IOrderTypes
@@ -51,6 +51,12 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
       return {
         ...state,
         currentLatLng: action.payload
+      }
+
+    case types.SET_MARKERS_BY_CURRENT_LOCATION:
+      return {
+        ...state,
+        markers: action.payload
       }
 
     case types.ADD_MARKER:

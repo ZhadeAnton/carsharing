@@ -21,6 +21,12 @@ export const setCurrentLocation = (location: IMark): types.ISetCurrentLocation =
   payload: location
 })
 
+export const setMarkersByCurrentLocation = (markers: Array<IMark>)
+  : types.ISetMarkersByCurrentLocation => ({
+  type: types.SET_MARKERS_BY_CURRENT_LOCATION,
+  payload: markers
+})
+
 export const getTowns = (): types.IGetTowns => ({
   type: types.GET_ALL_TOWNS
 })

@@ -7,7 +7,7 @@ export const mapContainerStyle = {
   height: '100%'
 }
 
-export const zoom = 12
+export const zoom = 11
 
 export const options = {
   styles: mapStyles,
