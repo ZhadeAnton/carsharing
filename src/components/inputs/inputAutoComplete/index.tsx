@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
 import { ITown, IPickUp } from '../../../interfaces/mapInterfaces'
+import useSearchLocation from '../../../hooks/useSearchLocation'
 
 interface Props {
   array: Array<ITown | IPickUp>,
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export default function InputAutoComplete(props: Props) {
+  const useSetLocation = useSearchLocation()
   const [value, setValue] = useState(props.value)
   const [focused, setFocused] = useState(false)
   const [isOpenList, setIsOpenList] = useState(false)
@@ -29,6 +31,7 @@ export default function InputAutoComplete(props: Props) {
 
     if (props.type === 'town') {
       setValue(item.name)
+      useSetLocation(item.name)
       props.onChange(item.name)
     } else {
       setValue(item.address)

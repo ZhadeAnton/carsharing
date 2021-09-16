@@ -16,6 +16,11 @@ export const setPickUp = (pickUp: string): types.ISetPickUp => ({
   payload: pickUp
 })
 
+export const setCurrentLocation = (location: IMark): types.ISetCurrentLocation => ({
+  type: types.SET_CURRENT_LOCATION,
+  payload: location
+})
+
 export const getTowns = (): types.IGetTowns => ({
   type: types.GET_ALL_TOWNS
 })

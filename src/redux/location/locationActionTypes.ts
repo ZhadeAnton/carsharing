@@ -18,6 +18,12 @@ export interface ISetPickUp {
   payload: string
 }
 
+export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION'
+export interface ISetCurrentLocation {
+  type: typeof SET_CURRENT_LOCATION,
+  payload: IMark
+}
+
 export const GET_ALL_TOWNS = 'GET_ALL_TOWNS'
 export interface IGetTowns {
   type: typeof GET_ALL_TOWNS
@@ -48,3 +54,4 @@ export type ILocationTypes =
 | IGetTownsSuccess
 | IGetPickUps
 | IGetPickUpsSuccess
+| ISetCurrentLocation

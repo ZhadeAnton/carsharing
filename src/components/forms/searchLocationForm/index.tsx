@@ -1,10 +1,10 @@
 import React from 'react'
 
 import './styles.scss'
-import InputAutoComplete from '../../inputs/inputAutoComplete'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import { setPickUp, setTown } from '../../../redux/location/locationActionCreators'
 import { pickUpsSelector } from '../../../redux/location/locationSelectors'
+import InputAutoComplete from '../../inputs/inputAutoComplete'
 
 export default function SearchLocationForm() {
   const dispatch = useAppDispatch()

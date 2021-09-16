@@ -12,6 +12,10 @@ export interface ILocationState {
   pickUps: Array<IPickUp>,
   selectedTown: string,
   selectedPickUp: string,
+  currentLatLng: {
+    lat: number,
+    lng: number
+  }
   markers: Array<IMark>
 }
 
@@ -20,6 +24,10 @@ const INIT_STATE: ILocationState = {
   pickUps: [],
   selectedTown: '',
   selectedPickUp: '',
+  currentLatLng: {
+    lat: 54.3187,
+    lng: 48.3978
+  },
   markers: [{lat: 54.3187, lng: 48.3978}]
 }
 
@@ -37,6 +45,12 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
       return {
         ...state,
         pickUps: action.payload
+      }
+
+    case types.SET_CURRENT_LOCATION:
+      return {
+        ...state,
+        currentLatLng: action.payload
       }
 
     case types.ADD_MARKER:

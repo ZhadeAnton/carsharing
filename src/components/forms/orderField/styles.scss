@@ -45,7 +45,7 @@
 
   &__info {
     padding: 2px;
-    max-width: 160px;
+    max-width: 115px;
     max-height: 32px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -59,9 +59,5 @@
     text-overflow: ellipsis;
     color: $grey-strong-color;
     background-color: inherit;
-
-    @media (max-width: 1215px) {
-      max-width: 148px;
-    }
   }
 }

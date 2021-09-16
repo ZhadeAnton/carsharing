@@ -1,5 +1,9 @@
 import React, { useRef, useCallback } from 'react'
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  Marker,
+  useLoadScript,
+} from '@react-google-maps/api';
 
 import './styles.scss'
 import * as settings from './mapSettings'
@@ -16,10 +20,7 @@ export default function CustomMap() {
   const state = useAppSelector((state) => state)
 
   const markers = state.location.markers
-  const mapContainerStyle = settings.mapContainerStyle
-  const center = settings.center
-  const options = settings.options
-  const zoom = settings.zoom
+  const currentLatLng = state.location.currentLatLng
 
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
@@ -52,10 +53,10 @@ export default function CustomMap() {
         <div className='custom-map__canvas'>
           <GoogleMap
             id="map"
-            mapContainerStyle={mapContainerStyle}
-            zoom={zoom}
-            center={center}
-            options={{...options}}
+            mapContainerStyle={settings.mapContainerStyle}
+            zoom={settings.zoom}
+            center={currentLatLng}
+            options={{...settings.options}}
             onLoad={onMapLoad}
             onClick={(event) => handleMapClick(event)}
           >
