@@ -56,7 +56,6 @@ export default function SearchLocationForm() {
           placeholder='Начните вводить пункт...'
           type='pickUp'
           isDisable={!selectedTown}
-          isForceClear={!selectedTown}
           onChange={handleSelectPickUp}
         />
       </div>

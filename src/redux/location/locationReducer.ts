@@ -116,6 +116,7 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case types.CLEAR_TOWN:
       return {
         ...state,
+        selectedPickUp: '',
         mapZoom: 12
       }
 

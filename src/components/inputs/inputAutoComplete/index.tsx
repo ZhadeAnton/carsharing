@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
@@ -14,51 +14,41 @@ interface Props {
   placeholder: string,
   isDisable?: boolean,
   type: 'town' | 'pickUp',
-  isForceClear?: boolean,
   onChange: (value: string) => void
 }
 
 export default function InputAutoComplete(props: Props) {
   const dispatch = useAppDispatch()
   const useSetLocation = useSearchLocation()
-  const [value, setValue] = useState(props.value)
   const [focused, setFocused] = useState(false)
   const [isOpenList, setIsOpenList] = useState(false)
-
-  useEffect(() => {
-    if (props.isForceClear) setValue('')
-  }, [props.isForceClear])
 
   const handleClickByItem = (item: any) => {
     setIsOpenList(false)
     setFocused(false)
 
     if (props.type === 'town') {
-      setValue(item.name)
       useSetLocation(item.name)
       props.onChange(item.name)
     } else {
-      setValue(item.address)
       props.onChange(item.address)
     }
   }
 
-  const handleChange = (e: any) => {
-    setValue(e.target.value)
+  const handleChange = () => {
     setIsOpenList(true)
   }
 
   const handleClear = () => {
     props.type === 'pickUp' ? dispatch(clearPickUp()) : dispatch(clearTown())
-    setValue('')
     props.onChange('')
     setIsOpenList(false)
     setFocused(false)
   }
 
   const handleFilterArray = (item: any) => {
-    if (props.type === 'town') return isAddressIncludesValue(item.name, value)
-    if (props.type === 'pickUp') return isAddressIncludesValue(item.address, value)
+    if (props.type === 'town') return isAddressIncludesValue(item.name, props.value)
+    if (props.type === 'pickUp') return isAddressIncludesValue(item.address, props.value)
   }
 
   return (
@@ -69,18 +59,18 @@ export default function InputAutoComplete(props: Props) {
       <input
         className={ `input-autocomplete__input
           input-autocomplete__input${!props.isDisable ? '' : '-disable'}`}
-        value={value}
+        value={props.value}
         placeholder={props.placeholder}
         disabled={props.isDisable}
         onFocus={() => setFocused(true)}
-        onChange={(e: any) => handleChange(e)}
+        onChange={handleChange}
       />
 
       <span
         className='input-primary__close-btn'
         onClick={handleClear}
       >
-        { value && <Close /> }
+        { props.value && <Close /> }
       </span>
 
       <div className='input-autocomplete__wrapper'>
