@@ -9,7 +9,7 @@ export const pickUpsSelector = createSelector(
       const town = locationState.selectedTown
       return locationState.pickUps.filter((item) => {
         if (item.cityId) {
-          return item.cityId.name === town
+          return item.cityId.name === town?.name
         }
       })
     }
@@ -20,8 +20,8 @@ export const getTownField = createSelector(
     (location) => {
       return {
         title: 'Пункт выдачи',
-        value: location.selectedTown
-            ? `${location.selectedTown}, ${location.selectedPickUp}`
+        value: location.selectedTown?.name
+            ? `${location.selectedTown.name}, ${location.selectedPickUp}`
             : 'Не выбрано'}
     }
 )

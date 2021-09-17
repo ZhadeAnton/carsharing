@@ -10,7 +10,7 @@ import {
 export interface ILocationState {
   towns: Array<ITown>,
   pickUps: Array<IPickUp>,
-  selectedTown: string,
+  selectedTown: ITown | null,
   selectedPickUp: string,
   currentTownLatLng: {
     lat: number,
@@ -31,7 +31,7 @@ export interface ILocationState {
 const INIT_STATE: ILocationState = {
   towns: [],
   pickUps: [],
-  selectedTown: '',
+  selectedTown: null,
   selectedPickUp: '',
   currentTownLatLng: {
     lat: 0,
@@ -101,7 +101,7 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case GET_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
-        selectedTown: action.payload.cityId.name,
+        selectedTown: action.payload,
         selectedPickUp: action.payload.pointId.name
       }
 

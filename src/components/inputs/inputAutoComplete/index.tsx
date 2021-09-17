@@ -10,11 +10,11 @@ import useSearchLocation from '../../../hooks/useSearchLocation'
 
 interface Props {
   array: Array<ITown | IPickUp>,
-  value: string,
+  value: string | undefined,
   placeholder: string,
   isDisable?: boolean,
   type: 'town' | 'pickUp',
-  onChange: (value: string) => void
+  onChange: (value: any) => void
 }
 
 export default function InputAutoComplete(props: Props) {
@@ -29,7 +29,7 @@ export default function InputAutoComplete(props: Props) {
 
     if (props.type === 'town') {
       useSetLocation(item.name)
-      props.onChange(item.name)
+      props.onChange(item)
     } else {
       props.onChange(item.address)
     }
@@ -41,14 +41,17 @@ export default function InputAutoComplete(props: Props) {
 
   const handleClear = () => {
     props.type === 'pickUp' ? dispatch(clearPickUp()) : dispatch(clearTown())
-    props.onChange('')
+    props.onChange(null)
     setIsOpenList(false)
     setFocused(false)
   }
 
   const handleFilterArray = (item: any) => {
-    if (props.type === 'town') return isAddressIncludesValue(item.name, props.value)
-    if (props.type === 'pickUp') return isAddressIncludesValue(item.address, props.value)
+    if (props.type === 'town') {
+      return isAddressIncludesValue(item.name, props.value ?? '')
+    } else {
+      return isAddressIncludesValue(item.address, props.value ?? '')
+    }
   }
 
   return (

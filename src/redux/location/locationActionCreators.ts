@@ -1,7 +1,7 @@
 import * as types from './locationActionTypes'
 import { IMark, IPickUp, ITown } from '../../interfaces/mapInterfaces'
 
-export const setTown = (town: string): types.ISetTown => ({
+export const setTown = (town: ITown): types.ISetTown => ({
   type: types.SET_TOWN,
   payload: town
 })

@@ -3,7 +3,7 @@ import { IMark, IPickUp, ITown } from '../../interfaces/mapInterfaces';
 export const SET_TOWN = 'SET_TOWN'
 export interface ISetTown {
   type: typeof SET_TOWN,
-  payload: string
+  payload: ITown
 }
 
 export const SET_PICK_UP = 'SET_PICK_UP'

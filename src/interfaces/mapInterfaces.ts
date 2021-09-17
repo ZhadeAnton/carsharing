@@ -9,12 +9,13 @@ export interface ITown {
 }
 
 export interface IPickUp {
-  name: string,
+  address: string,
   cityId: {
     name: string,
     id: string
   },
-  address: string
+  id: string,
+  name: string
 }
 
 export interface IFnAddMarker {
