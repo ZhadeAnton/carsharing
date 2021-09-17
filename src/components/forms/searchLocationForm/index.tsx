@@ -4,7 +4,7 @@ import './styles.scss'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
 import { setPickUp, setTown } from '../../../redux/location/locationActionCreators'
 import { pickUpsSelector } from '../../../redux/location/locationSelectors'
-import { ITown } from '../../../interfaces/mapInterfaces'
+import { IPickUp, ITown } from '../../../interfaces/mapInterfaces'
 import useSearchMarkers from '../../../hooks/useSearchMarkers'
 import InputAutoComplete from '../../inputs/inputAutoComplete'
 
@@ -26,7 +26,7 @@ export default function SearchLocationForm() {
     dispatch(setTown(town))
   }
 
-  const handleSelectPickUp = (pickUp: string) => {
+  const handleSelectPickUp = (pickUp: IPickUp) => {
     dispatch(setPickUp(pickUp))
   }
 
@@ -53,7 +53,7 @@ export default function SearchLocationForm() {
 
         <InputAutoComplete
           array={pickUps}
-          value={selectedPickUp}
+          value={selectedPickUp?.address ?? ''}
           placeholder='Начните вводить пункт...'
           type='pickUp'
           isDisable={!selectedTown}

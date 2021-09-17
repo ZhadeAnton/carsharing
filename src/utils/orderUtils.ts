@@ -8,6 +8,15 @@ interface IProps {
     name: string,
     id: string
   },
+  pointId: {
+    address: string,
+    name: string,
+    cityId: {
+      name: string,
+      id: string
+    } | undefined,
+    id: string
+  },
   selectedCar: ICar | null,
   carColor: string | undefined,
   carRate: string,
@@ -30,11 +39,11 @@ export const createOrderBody = (props: IProps) => {
       'id': `${props.cityId.id}`
     },
     'pointId': {
-      'address': 'Гончарова, 27',
-      'name': 'Основная Парковка',
+      'address': `${props.pointId.address}`,
+      'name': `${props.pointId.name}`,
       'cityId': {
-        'name': 'Ульяновск',
-        'id': '5ea07ad3099b810b946c6254'
+        'name': `${props.cityId.name}`,
+        'id': `${props.cityId.id}`
       },
       'id': '5ea9b9dd099b810b946c71d2'
     },

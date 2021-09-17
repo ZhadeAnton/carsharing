@@ -9,7 +9,7 @@ export interface ISetTown {
 export const SET_PICK_UP = 'SET_PICK_UP'
 export interface ISetPickUp {
   type: typeof SET_PICK_UP,
-  payload: string
+  payload: IPickUp
 }
 
 export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION'

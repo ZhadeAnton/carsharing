@@ -11,7 +11,7 @@ export interface ILocationState {
   towns: Array<ITown>,
   pickUps: Array<IPickUp>,
   selectedTown: ITown | null,
-  selectedPickUp: string,
+  selectedPickUp: IPickUp | null,
   currentTownLatLng: {
     lat: number,
     lng: number
@@ -32,7 +32,7 @@ const INIT_STATE: ILocationState = {
   towns: [],
   pickUps: [],
   selectedTown: null,
-  selectedPickUp: '',
+  selectedPickUp: null,
   currentTownLatLng: {
     lat: 0,
     lng: 0
@@ -95,20 +95,23 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case types.SET_PICK_UP:
       return {
         ...state,
-        selectedPickUp: action.payload
+        selectedPickUp: {
+          ...state.selectedPickUp, address: action.payload.address
+        } as IPickUp
       }
 
     case GET_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
-        selectedTown: action.payload,
-        selectedPickUp: action.payload.pointId.name
+        selectedTown: action.payload.cityId,
+        selectedPickUp: action.payload.pointId
       }
 
     case types.CLEAR_PICK_UP:
       return {
         ...state,
         currentPickUpLatLng: {lat: 0, lng: 0},
+        selectedPickUp: null,
         mapCenter: {...state.currentTownLatLng},
         mapZoom: 12
       }
@@ -116,7 +119,8 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case types.CLEAR_TOWN:
       return {
         ...state,
-        selectedPickUp: '',
+        selectedTown: null,
+        selectedPickUp: null,
         mapZoom: 12
       }
 

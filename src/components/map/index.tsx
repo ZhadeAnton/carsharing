@@ -17,7 +17,7 @@ import useSearchByLatLng from '../../hooks/useSearchByLatLng';
 export default function CustomMap() {
   const mapRef = useRef();
   const searchPickUp = useSearchPickUp()
-  const searchBylng = useSearchByLatLng()
+  const searchBylanLng = useSearchByLatLng()
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
@@ -28,7 +28,9 @@ export default function CustomMap() {
   const selectedPickUp = state.location.selectedPickUp
 
   useMemo(() => {
-    if (selectedTown && selectedPickUp) searchPickUp(selectedTown + selectedPickUp)
+    if (selectedTown && selectedPickUp) {
+      searchPickUp(selectedTown.name + selectedPickUp.address)
+    }
   }, [selectedPickUp])
 
   const onMapLoad = useCallback((map) => {
@@ -43,7 +45,7 @@ export default function CustomMap() {
   const handleClickByMarker = (e: any) => {
     const lat = e.latLng.lat()
     const lng = e.latLng.lng()
-    searchBylng({lat, lng})
+    searchBylanLng(selectedPickUp!, {lat, lng})
     dispatch(setCurrentMarker({lat, lng}))
   }
 

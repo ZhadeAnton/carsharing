@@ -5,10 +5,6 @@
 %order-font {
   font-family: 'RobotoLight';
   @extend %heading14;
-
-  @media (max-width: 1370px) {
-    font-size: 13px;
-  }
 }
 
 .order-field {

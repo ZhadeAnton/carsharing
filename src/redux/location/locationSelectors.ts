@@ -21,7 +21,7 @@ export const getTownField = createSelector(
       return {
         title: 'Пункт выдачи',
         value: location.selectedTown?.name
-            ? `${location.selectedTown.name}, ${location.selectedPickUp}`
+            ? `${location.selectedTown.name}, ${location.selectedPickUp?.address ?? ''}`
             : 'Не выбрано'}
     }
 )

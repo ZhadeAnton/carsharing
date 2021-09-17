@@ -31,7 +31,7 @@ export default function InputAutoComplete(props: Props) {
       useSetLocation(item.name)
       props.onChange(item)
     } else {
-      props.onChange(item.address)
+      props.onChange(item)
     }
   }
 
@@ -41,7 +41,6 @@ export default function InputAutoComplete(props: Props) {
 
   const handleClear = () => {
     props.type === 'pickUp' ? dispatch(clearPickUp()) : dispatch(clearTown())
-    props.onChange(null)
     setIsOpenList(false)
     setFocused(false)
   }

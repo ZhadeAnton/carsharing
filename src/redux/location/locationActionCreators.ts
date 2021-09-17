@@ -6,7 +6,7 @@ export const setTown = (town: ITown): types.ISetTown => ({
   payload: town
 })
 
-export const setPickUp = (pickUp: string): types.ISetPickUp => ({
+export const setPickUp = (pickUp: IPickUp): types.ISetPickUp => ({
   type: types.SET_PICK_UP,
   payload: pickUp
 })

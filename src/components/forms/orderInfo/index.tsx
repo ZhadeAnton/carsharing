@@ -9,6 +9,7 @@ import {
   getCarColorField,
   getCarLeaseField,
   getCarModelFiled,
+  getCarOrderCheckboxField,
   getCarRateField,
 } from '../../../redux/car/carSelectors'
 import OrderField from '../orderField'
@@ -29,6 +30,7 @@ export default function OrderInfo(props: Props) {
   const state = useAppSelector((state) => state)
   const isCarsTabActive = state.car.isCarTabActive
   const isCarExtraTabActive = state.car.isCarExtraTabActive
+  const isOrderConfirmed = state.order.isOrderConfirmed
 
   const townField = getTownField(state)
   const carModelField = getCarModelFiled(state)
@@ -36,20 +38,24 @@ export default function OrderInfo(props: Props) {
   const carRateField = getCarRateField(state)
   const carLeaseField = getCarLeaseField(state)
   const carCheckboxFields = getCarCheckboxFields(state)
+  const carOrderCheckboxFields = getCarOrderCheckboxField(state)
   const orderFields: Array<IOrderField> = [townField]
 
-  if (isCarsTabActive) {
+  if (isCarsTabActive || isOrderConfirmed) {
     orderFields.push(carModelField)
   }
 
-  if (isCarExtraTabActive) {
+  if (isCarExtraTabActive || isOrderConfirmed) {
     orderFields.push(
         carColorField,
         carRateField,
         carLeaseField,
-        ...carCheckboxFields
     )
   }
+
+  isOrderConfirmed
+  ? orderFields.push(...carOrderCheckboxFields)
+  : orderFields.push(...carCheckboxFields)
 
   return (
     <form className='order-info'>

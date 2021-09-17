@@ -9,7 +9,7 @@ export interface ITown {
 }
 
 export interface IPickUp {
-  address: string,
+  address: string
   cityId: {
     name: string,
     id: string
