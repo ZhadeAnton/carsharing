@@ -48,3 +48,7 @@ export const getPickUpsSuccess = (pickUps: Array<IPickUp>): types.IGetPickUpsSuc
 export const clearPickUp = (): types.IClearPickUp => ({
   type: types.CLEAR_PICK_UP
 })
+
+export const clearTown = (): types.IClearTown => ({
+  type: types.CLEAR_TOWN
+})

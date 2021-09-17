@@ -57,6 +57,11 @@ export interface IClearPickUp {
   type: typeof CLEAR_PICK_UP
 }
 
+export const CLEAR_TOWN = 'CLEAR_TOWN'
+export interface IClearTown {
+  type: typeof CLEAR_TOWN
+}
+
 export type ILocationTypes =
 | ISetTown
 | ISetPickUp
@@ -68,3 +73,4 @@ export type ILocationTypes =
 | ISetCurrentMarker
 | ISetMarkersByCurrentLocation
 | IClearPickUp
+| IClearTown

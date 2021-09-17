@@ -20,7 +20,12 @@ export interface ILocationState {
     lat: number,
     lng: number
   },
-  markers: Array<IMark>
+  markers: Array<IMark>,
+  mapZoom: number,
+  mapCenter: {
+    lat: number,
+    lng: number
+  }
 }
 
 const INIT_STATE: ILocationState = {
@@ -29,14 +34,19 @@ const INIT_STATE: ILocationState = {
   selectedTown: '',
   selectedPickUp: '',
   currentTownLatLng: {
-    lat: 54.3187,
-    lng: 48.3978
+    lat: 0,
+    lng: 0
   },
   currentPickUpLatLng: {
     lat: 0,
     lng: 0
   },
-  markers: []
+  markers: [],
+  mapZoom: 12,
+  mapCenter: {
+    lat: 54.3187,
+    lng: 48.3978
+  }
 }
 
 type ITypes = ILocationTypes | IOrderTypes
@@ -58,7 +68,8 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case types.SET_CURRENT_LOCATION:
       return {
         ...state,
-        currentTownLatLng: action.payload
+        currentTownLatLng: action.payload,
+        mapCenter: action.payload
       }
 
     case types.SET_MARKERS_BY_CURRENT_LOCATION:
@@ -70,7 +81,9 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case types.SET_CURRENT_MARKER:
       return {
         ...state,
-        currentPickUpLatLng: action.payload
+        currentPickUpLatLng: action.payload,
+        mapCenter: action.payload,
+        mapZoom: 16
       }
 
     case types.SET_TOWN:
@@ -95,7 +108,15 @@ const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => 
     case types.CLEAR_PICK_UP:
       return {
         ...state,
-        currentPickUpLatLng: {lat: 0, lng: 0}
+        currentPickUpLatLng: {lat: 0, lng: 0},
+        mapCenter: {...state.currentTownLatLng},
+        mapZoom: 12
+      }
+
+    case types.CLEAR_TOWN:
+      return {
+        ...state,
+        mapZoom: 12
       }
 
     case REMOVE_ORDER:

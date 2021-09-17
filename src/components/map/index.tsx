@@ -20,30 +20,14 @@ export default function CustomMap() {
   const state = useAppSelector((state) => state)
 
   const markers = state.location.markers
-  const currentTownLatLng = state.location.currentTownLatLng
-  const currentPickUpLatLng = state.location.currentPickUpLatLng
+  const mapCenter = state.location.mapCenter
+  const mapZoom = state.location.mapZoom
   const selectedTown = state.location.selectedTown
   const selectedPickUp = state.location.selectedPickUp
 
   useMemo(() => {
     if (selectedTown && selectedPickUp) searchPickUp(selectedTown + selectedPickUp)
   }, [selectedPickUp])
-
-  const mapCenter = {
-    position: {
-      lat: 54.3187,
-      lng: 48.3978
-    },
-    zoom: 12
-  }
-
-  if (currentPickUpLatLng.lat !== 0 && currentPickUpLatLng.lng !== 0 && selectedPickUp) {
-    mapCenter.position = currentPickUpLatLng
-    mapCenter.zoom = 16
-  } else {
-    mapCenter.position = currentTownLatLng
-    mapCenter.zoom = 12
-  }
 
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
@@ -75,8 +59,8 @@ export default function CustomMap() {
           <GoogleMap
             id="map"
             mapContainerStyle={settings.mapContainerStyle}
-            zoom={mapCenter.zoom}
-            center={mapCenter.position}
+            zoom={mapZoom}
+            center={mapCenter}
             options={{...settings.options}}
             onLoad={onMapLoad}
           >

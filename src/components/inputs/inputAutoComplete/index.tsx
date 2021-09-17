@@ -4,7 +4,8 @@ import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
 import { ITown, IPickUp } from '../../../interfaces/mapInterfaces'
 import { useAppDispatch } from '../../../hooks/usePreTypedHook'
-import { clearPickUp } from '../../../redux/location/locationActionCreators'
+import { clearPickUp, clearTown } from '../../../redux/location/locationActionCreators'
+import { isAddressIncludesValue } from '../../../utils/mapUtils'
 import useSearchLocation from '../../../hooks/useSearchLocation'
 
 interface Props {
@@ -48,9 +49,7 @@ export default function InputAutoComplete(props: Props) {
   }
 
   const handleClear = () => {
-    if (props.type === 'town') {
-      dispatch(clearPickUp())
-    }
+    props.type === 'pickUp' ? dispatch(clearPickUp()) : dispatch(clearTown())
     setValue('')
     props.onChange('')
     setIsOpenList(false)
@@ -58,11 +57,8 @@ export default function InputAutoComplete(props: Props) {
   }
 
   const handleFilterArray = (item: any) => {
-    if (props.type === 'town') {
-      return item.name.toLocaleLowerCase().includes(value?.toLocaleLowerCase())
-    } else {
-      return item.address.toLocaleLowerCase().includes(value?.toLocaleLowerCase())
-    }
+    if (props.type === 'town') return isAddressIncludesValue(item.name, value)
+    if (props.type === 'pickUp') return isAddressIncludesValue(item.address, value)
   }
 
   return (
