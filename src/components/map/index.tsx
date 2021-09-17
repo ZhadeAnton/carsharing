@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useMemo } from 'react'
 import {
   GoogleMap,
   Marker,
@@ -8,19 +8,42 @@ import {
 import './styles.scss'
 import * as settings from './mapSettings'
 import * as IMap from '../../interfaces/mapInterfaces'
-import SearchLocationForm from '../forms/searchLocationForm/index'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
-import {
-  addMark,
-} from '../../redux/location/locationActionCreators';
+import { setCurrentMarker } from '../../redux/location/locationActionCreators';
+import SearchLocationForm from '../forms/searchLocationForm/index'
+import useSearchPickUp from '../../hooks/useSearchPickUp';
 
 export default function CustomMap() {
   const mapRef = useRef();
+  const searchPickUp = useSearchPickUp()
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
   const markers = state.location.markers
-  const currentLatLng = state.location.currentLatLng
+  const currentTownLatLng = state.location.currentTownLatLng
+  const currentPickUpLatLng = state.location.currentPickUpLatLng
+  const selectedTown = state.location.selectedTown
+  const selectedPickUp = state.location.selectedPickUp
+
+  useMemo(() => {
+    if (selectedTown && selectedPickUp) searchPickUp(selectedTown + selectedPickUp)
+  }, [selectedPickUp])
+
+  const mapCenter = {
+    position: {
+      lat: 54.3187,
+      lng: 48.3978
+    },
+    zoom: 12
+  }
+
+  if (currentPickUpLatLng.lat !== 0 && currentPickUpLatLng.lng !== 0 && selectedPickUp) {
+    mapCenter.position = currentPickUpLatLng
+    mapCenter.zoom = 16
+  } else {
+    mapCenter.position = currentTownLatLng
+    mapCenter.zoom = 12
+  }
 
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
@@ -31,19 +54,17 @@ export default function CustomMap() {
     libraries: settings.libraries,
   });
 
-  const handleMapClick = (event: any) => {
-    dispatch(addMark({
-      lat: event.latLng.lat() as IMap.IMark['lat'],
-      lng: event.latLng.lng() as IMap.IMark['lng'],
-    }))
+  const handleClickByMarker = (e: any) => {
+    const lat = e.latLng.lat()
+    const lng = e.latLng.lng()
+    dispatch(setCurrentMarker({lat, lng}))
   }
 
   return (
     isLoaded ? (
       <div className='custom-map'>
         <div className='custom-map__search-form'>
-          <SearchLocationForm
-          />
+          <SearchLocationForm />
         </div>
 
         <h6 className='custom-map__title'>
@@ -54,11 +75,10 @@ export default function CustomMap() {
           <GoogleMap
             id="map"
             mapContainerStyle={settings.mapContainerStyle}
-            zoom={settings.zoom}
-            center={currentLatLng}
+            zoom={mapCenter.zoom}
+            center={mapCenter.position}
             options={{...settings.options}}
             onLoad={onMapLoad}
-            onClick={(event) => handleMapClick(event)}
           >
             { markers.map((marker: IMap.IMark) => (
               <Marker
@@ -70,6 +90,7 @@ export default function CustomMap() {
                   anchor: new window.google.maps.Point(15, 15),
                   scaledSize: new window.google.maps.Size(18, 18),
                 }}
+                onClick={(e) => handleClickByMarker(e)}
               />
             ))}
           </GoogleMap>

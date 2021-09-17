@@ -1,11 +1,6 @@
 import * as types from './locationActionTypes'
 import { IMark, IPickUp, ITown } from '../../interfaces/mapInterfaces'
 
-export const addMark = (mark: IMark): types.IAddMarker => ({
-  type: types.ADD_MARKER,
-  payload: mark
-})
-
 export const setTown = (town: string): types.ISetTown => ({
   type: types.SET_TOWN,
   payload: town
@@ -27,6 +22,11 @@ export const setMarkersByCurrentLocation = (markers: Array<IMark>)
   payload: markers
 })
 
+export const setCurrentMarker = (mark: IMark): types.ISetCurrentMarker => ({
+  type: types.SET_CURRENT_MARKER,
+  payload: mark
+})
+
 export const getTowns = (): types.IGetTowns => ({
   type: types.GET_ALL_TOWNS
 })
@@ -43,4 +43,8 @@ export const getPickUps = (): types.IGetPickUps => ({
 export const getPickUpsSuccess = (pickUps: Array<IPickUp>): types.IGetPickUpsSuccess => ({
   type: types.GET_PICK_UPS_SUCCESS,
   payload: pickUps
+})
+
+export const clearPickUp = (): types.IClearPickUp => ({
+  type: types.CLEAR_PICK_UP
 })

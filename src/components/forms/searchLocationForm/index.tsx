@@ -17,8 +17,6 @@ export default function SearchLocationForm() {
   const towns = state.location.towns
   const pickUps = pickUpsSelector(state)
 
-  console.log('pickUps', pickUps)
-
   useMemo(() => searchMarkers(pickUps), [selectedTown])
 
   const handleSelectTown = (town: string) => {

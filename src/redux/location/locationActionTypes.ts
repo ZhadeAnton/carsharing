@@ -1,11 +1,5 @@
 import { IMark, IPickUp, ITown } from '../../interfaces/mapInterfaces';
 
-export const ADD_MARKER = 'ADD_MARKER'
-export interface IAddMarker {
-  type: typeof ADD_MARKER,
-  payload: IMark
-}
-
 export const SET_TOWN = 'SET_TOWN'
 export interface ISetTown {
   type: typeof SET_TOWN,
@@ -30,6 +24,12 @@ export interface ISetMarkersByCurrentLocation {
   payload: Array<IMark>
 }
 
+export const SET_CURRENT_MARKER = 'SET_CURRENT_MARKER'
+export interface ISetCurrentMarker {
+  type: typeof SET_CURRENT_MARKER,
+  payload: IMark
+}
+
 export const GET_ALL_TOWNS = 'GET_ALL_TOWNS'
 export interface IGetTowns {
   type: typeof GET_ALL_TOWNS
@@ -52,8 +52,12 @@ export interface IGetPickUpsSuccess {
   payload: Array<IPickUp>
 }
 
+export const CLEAR_PICK_UP = 'CLEAR_PICK_UP'
+export interface IClearPickUp {
+  type: typeof CLEAR_PICK_UP
+}
+
 export type ILocationTypes =
-| IAddMarker
 | ISetTown
 | ISetPickUp
 | IGetTowns
@@ -61,4 +65,6 @@ export type ILocationTypes =
 | IGetPickUps
 | IGetPickUpsSuccess
 | ISetCurrentLocation
+| ISetCurrentMarker
 | ISetMarkersByCurrentLocation
+| IClearPickUp

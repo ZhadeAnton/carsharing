@@ -14,9 +14,8 @@ export default function useSearchMarkers() {
         return await getLatLng(results[0])
       })
 
-      const pickUpsPromise: any = await Promise.all(arrayOfPickUps)
-
-      dispatch(setMarkersByCurrentLocation(pickUpsPromise))
+      const allPickUps: any = await Promise.all(arrayOfPickUps)
+      dispatch(setMarkersByCurrentLocation(allPickUps))
     } catch (error) {
       console.error(error)
     }

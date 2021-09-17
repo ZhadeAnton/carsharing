@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
 import { ITown, IPickUp } from '../../../interfaces/mapInterfaces'
+import { useAppDispatch } from '../../../hooks/usePreTypedHook'
+import { clearPickUp } from '../../../redux/location/locationActionCreators'
 import useSearchLocation from '../../../hooks/useSearchLocation'
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export default function InputAutoComplete(props: Props) {
+  const dispatch = useAppDispatch()
   const useSetLocation = useSearchLocation()
   const [value, setValue] = useState(props.value)
   const [focused, setFocused] = useState(false)
@@ -45,6 +48,9 @@ export default function InputAutoComplete(props: Props) {
   }
 
   const handleClear = () => {
+    if (props.type === 'town') {
+      dispatch(clearPickUp())
+    }
     setValue('')
     props.onChange('')
     setIsOpenList(false)
