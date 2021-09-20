@@ -21,16 +21,15 @@ export default function OrderConfirmed() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
+
   const confirmedOrder = state.order.confirmedOrder
-  const confirmedOrderIdFromLS = localStorage.getItem('carOrderId')
-  const confirmedOrderId = state.order.confirmedOrder?.id ?? confirmedOrderIdFromLS!
 
   useEffect(() => {
-    dispatch(getOrderById(confirmedOrderId))
+    confirmedOrder?.id ? dispatch(getOrderById(confirmedOrder?.id)) : redirect('/order')
   }, [])
 
   const handleRemovemOrder = () => {
-    dispatch(removeOrder(confirmedOrderId))
+    dispatch(removeOrder(confirmedOrder?.id!))
     setIsModal(false)
     redirect('/order')
   }
