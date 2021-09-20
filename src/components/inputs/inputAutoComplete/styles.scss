@@ -40,15 +40,15 @@
     &::-webkit-scrollbar {
       display: block;
     }
-
+  
     &::-webkit-scrollbar {
       width: 6px;
     }
-
+  
     &::-webkit-scrollbar-track {
       border-left: 1px solid $grey-color;
     } 
-
+  
     &::-webkit-scrollbar-thumb {
       background-color: $grey-strong-color;
       border: 2px solid transparent;
