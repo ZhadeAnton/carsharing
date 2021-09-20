@@ -6,9 +6,9 @@ import RadioButton from '../../inputs/radioButtonPrimary'
 
 interface Props {
   buttons: Array<IRadioButton> | undefined,
-  selected: IRadioButton | undefined,
+  selected: string | undefined,
   isVertical?: boolean,
-  onChange: ({title, value}: IRadioButton) => any
+  onChange: any
 }
 
 export default function RadioGroup(props: Props) {
@@ -21,7 +21,7 @@ export default function RadioGroup(props: Props) {
           <RadioButton
             key={i}
             button={button}
-            checked={props.selected?.title === button.title || i === 0}
+            checked={props.selected === button.title || i === 0}
             handleChange={props.onChange}
           />
         ))

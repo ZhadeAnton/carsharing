@@ -4,15 +4,11 @@ export const carsSortOptions = [
   {title: 'Премиум', value: 'Премиум'},
 ]
 
-export const carRateOptions = [
-  {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
-  {title: 'На сутки 1999 ₽/сутки', value: 'На сутки'}
-]
-
-export const carCheckBoxGroup = [
+export const carCheckboxOrtions = [
   {
     title: 'Полный бак, 500р',
     value: 'Полный бак',
+    info: 'Топливо 100%',
     cost: 500,
     id: 0,
     isChecked: true
@@ -20,6 +16,7 @@ export const carCheckBoxGroup = [
   {
     title: 'Детское кресло, 200р',
     value: 'Детское кресло',
+    info: 'Включено',
     cost: 200,
     id: 1,
     isChecked: false
@@ -27,6 +24,7 @@ export const carCheckBoxGroup = [
   {
     title: 'Правый руль, 1600р',
     value: 'Правый руль',
+    info: 'Включено',
     cost: 1600,
     id: 2,
     isChecked: false

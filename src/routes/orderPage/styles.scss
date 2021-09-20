@@ -50,6 +50,12 @@
       display: block;
     }
 
+    &__header-row {
+      &--title {
+        font-size: 13px;
+      }
+    }
+
     &__aside {
       display: none;
     }

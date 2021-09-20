@@ -1,36 +1,54 @@
 import * as types from './orderActionTypes'
+import { IConfirmedOrder } from '../../interfaces/orderIntarfaces'
 import { IOrderTypes } from './orderActionTypes'
 
 export interface IOrderState {
   currentTabPosition: string
+  confirmedOrder: IConfirmedOrder | null,
   isOrderConfirmed: boolean,
-  orderNumber: string
+  isLoading: boolean
 }
 
 const INIT_STATE: IOrderState = {
   currentTabPosition: '1',
+  confirmedOrder: null,
   isOrderConfirmed: false,
-  orderNumber: 'RU58491823'
+  isLoading: false
 }
 
 const orderReducer = (state = INIT_STATE, action: IOrderTypes): IOrderState => {
   switch (action.type) {
     case types.SET_ORDER:
+    case types.GET_ORDER_BY_ID:
       return {
         ...state,
-        isOrderConfirmed: true
+        isLoading: true
       }
 
-    case types.REMOVE_ORDER:
+    case types.SET_ORDER_SUCCESS:
+    case types.GET_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
-        isOrderConfirmed: false
+        confirmedOrder: action.payload,
+        isOrderConfirmed: true,
+        isLoading: false
       }
 
     case types.SET_CURRENT_TAB_POSITION:
       return {
         ...state,
         currentTabPosition: action.payload
+      }
+
+    case types.REMOVE_ORDER:
+      return {
+        ...INIT_STATE
+      }
+
+    case types.ORDER_FAILURE:
+      return {
+        ...state,
+        isLoading: false
       }
 
     default:

@@ -1,48 +1,28 @@
 import { createSelector } from 'reselect'
 import { ICheckbox, IRadioButton } from '../../interfaces/inputInterfaces'
-import { getDifferenceTime } from '../../utils/dateUtils'
+import { getTimeString, getTimeDifference } from '../../utils/dateUtils'
 import { RootState } from '../store'
 
 const carSelector = (state: RootState) => state.car
 
-const currentCarSelector = createSelector(
-    [carSelector],
-    (carState) => carState.selectedCar
-)
-
-const carRateSelector = createSelector(
-    [carSelector],
-    (carState) => carState.carRate
-)
-
-const carColorSelector = createSelector(
-    [carSelector],
-    (carState) => carState.carColor
-)
-
-const carDateFromSelector = createSelector(
-    [carSelector],
-    (carState) => carState.dateFrom
-)
-
-const carDateToSelector = createSelector(
-    [carSelector],
-    (carState) => carState.dateTo
-)
-
-const carLowPriceSelector = createSelector(
-    [currentCarSelector],
-    (selectedCar) => selectedCar?.priceMin
-)
-
-const carCheckboxesSelector = createSelector(
-    [carSelector],
-    (carState) => carState.carCheckBoxGroup
-)
-
 const carCheckboxesCheckedSelector = createSelector(
-    [carCheckboxesSelector],
-    (checkboxes) => checkboxes.filter((checkbox) => checkbox.isChecked)
+    [carSelector],
+    (car) => car.carCheckboxOrtions.filter((checkbox) => checkbox.isChecked)
+)
+
+const getTimeDifferenceSelector = createSelector(
+    carSelector,
+    (car) => {
+      if (car.dateFrom && car.dateTo) return getTimeDifference(car.dateFrom, car.dateTo)
+    }
+)
+
+const getLeasePriceSelector = createSelector(
+    getTimeDifferenceSelector,
+    carSelector,
+    (leaseTime, car) => {
+      if (leaseTime !== undefined) return leaseTime * car.carRate.price
+    }
 )
 
 export const carCheckboxesCostSelector = createSelector(
@@ -53,47 +33,60 @@ export const carCheckboxesCostSelector = createSelector(
 )
 
 export const totalCarPriceSelector = createSelector(
-    carLowPriceSelector,
+    carSelector,
     carCheckboxesCostSelector,
-    (carLowPrice, carCheckboxesCost) => {
-      if (carLowPrice) return carLowPrice + carCheckboxesCost
+    getLeasePriceSelector,
+    (car, carCheckboxesCost, leasePrice) => {
+      if (car.selectedCar?.priceMin) {
+        return Math.trunc(
+            car.selectedCar?.priceMin + carCheckboxesCost + (leasePrice ?? 0))
+      }
     }
 )
 
 export const getCarModelFiled = createSelector(
-    [currentCarSelector],
-    (selectedCar) => {
-      return { title: 'Модель', value: selectedCar?.name ?? 'Не выбрано' }
+    [carSelector],
+    (car) => {
+      return { title: 'Модель', value: car.selectedCar?.name ?? 'Не выбрано' }
     }
 )
 
 export const getCarRateField = createSelector(
-    [carRateSelector],
-    (carRate) => {
-      return { title: 'Тариф', value: carRate.value }
+    [carSelector],
+    (car) => {
+      return { title: 'Тариф', value: car?.carRate.rateTypeId.name }
     }
 )
 
 export const getCarColorField = createSelector(
-    [carColorSelector],
-    (carColor) => {
-      return { title: 'Цвет', value: carColor.value }
+    [carSelector],
+    (car) => {
+      return { title: 'Цвет', value: car.carColor.value }
     }
 )
 
 export const getCarLeaseField = createSelector(
-    carDateFromSelector,
-    carDateToSelector,
-    (dateFrom, dateTo) => {
-      const durationLease = getDifferenceTime(dateFrom, dateTo)
+    carSelector,
+    (car) => {
+      const durationLease = getTimeString(car.dateFrom, car.dateTo)
       return { title: 'Длительность аренды', value: durationLease }
     }
 )
 
+export const getCarCheckboxFields = createSelector(
+    [carSelector],
+    (car) => {
+      const checkboxes = car.carCheckboxOrtions
+      return checkboxes
+          .filter((checkbox) => checkbox.isChecked)
+          .map((checkbox) => ({ title: checkbox.value, value: 'Да' }))
+    }
+)
+
 export const getCarColorsOptions = createSelector(
-    [currentCarSelector],
-    (selectedCar) => {
-      const arrayOfCarColors = selectedCar?.colors.map((color) => (
+    [carSelector],
+    (car) => {
+      const arrayOfCarColors = car.selectedCar?.colors?.map((color) => (
             { title: color, value: color } as IRadioButton
       ))
       arrayOfCarColors?.unshift({title: 'Любой', value: 'Любой'})
@@ -101,13 +94,29 @@ export const getCarColorsOptions = createSelector(
     }
 )
 
+export const getCarRateOptionsSelector = createSelector(
+    [carSelector],
+    (car) => car.carRateOptions?.map((rate) => (
+      {
+        title: rate.rateTypeId.name,
+        value: rate.rateTypeId.unit,
+        price: rate.price,
+        id: rate.id,
+        rateTypeId: {
+          id: rate.rateTypeId.id,
+          name: rate.rateTypeId.name,
+          inut: rate.rateTypeId.unit
+        },
+      }
+    ))
+)
+
 export const isSecondStepDisabledSelector = createSelector(
-    [currentCarSelector],
-    (selectedCar) => !selectedCar
+    [carSelector],
+    (car) => !car.selectedCar
 )
 
 export const isThirdStepDisabledSelector = createSelector(
-    carDateFromSelector,
-    carDateToSelector,
-    (dateFrom, dateTo) => !dateFrom || !dateTo
+    carSelector,
+    (car) => !car.dateFrom || !car.dateTo
 )

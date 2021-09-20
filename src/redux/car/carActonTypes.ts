@@ -1,5 +1,5 @@
 import { ICar } from '../../interfaces/carsInterfaces';
-import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces';
+import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces';
 
 export const GET_CARS_BY_PAGE = 'GET_CARS_BY_PAGE'
 export interface IGetCarsByPage {
@@ -43,6 +43,17 @@ export interface ISetSortingOfCars {
   payload: IRadioButton
 }
 
+export const GET_RATE_TYPES = 'GET_RATE_TYPES'
+export interface IGetRateTypes {
+  type: typeof GET_RATE_TYPES
+}
+
+export const GET_RATE_TYPES_SUCCESS = 'GET_RATE_TYPES_SUCCESS'
+export interface IGetRateTypesSuccess {
+  type: typeof GET_RATE_TYPES_SUCCESS,
+  payload: Array<IRate>
+}
+
 export const CAR_CHECKBOX_CHANGE = 'CAR_CHECKBOX_CHANGE'
 export interface ICheckboxChange {
   type: typeof CAR_CHECKBOX_CHANGE,
@@ -58,7 +69,7 @@ export interface ISerCarColor {
 export const SET_CAR_RATE = 'SET_CAR_RATE'
 export interface ISetCarRate {
   type: typeof SET_CAR_RATE,
-  payload: IRadioButton
+  payload: IRate
 }
 
 export const SET_DATE_FROM = 'SET_DATE_FROM'
@@ -78,6 +89,16 @@ export interface IRemoveDateFrom {
   type: typeof REMOVE_DATE_FROM
 }
 
+export const IS_CARS_TAB_ACTIVE = 'IS_CARS_TAB_ACTIVE'
+export interface IIsCarTabActive {
+  type: typeof IS_CARS_TAB_ACTIVE
+}
+
+export const IS_CARS_EXTRA_TAB_ACTIVE = 'IS_CARS_EXTRA_TAB_ACTIVE'
+export interface IIsCarExtraTabActive {
+  type: typeof IS_CARS_EXTRA_TAB_ACTIVE
+}
+
 export const REMOVE_DATE_TO = 'REMOVE_DATE_TO'
 export interface IRemoveDateTo {
   type: typeof REMOVE_DATE_TO
@@ -89,6 +110,8 @@ export type ICarTypes =
 | ISetCountOfCars
 | ISelectCar
 | ISetSortingOfCars
+| IGetRateTypes
+| IGetRateTypesSuccess
 | ICheckboxChange
 | ISerCarColor
 | ISetCarRate
@@ -98,3 +121,5 @@ export type ICarTypes =
 | IGetPremiumCars
 | IRemoveDateFrom
 | IRemoveDateTo
+| IIsCarTabActive
+| IIsCarExtraTabActive
