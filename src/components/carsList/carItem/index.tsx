@@ -6,6 +6,7 @@ import CarPrice from '../../car/carPrice'
 
 interface Props {
   car: ICar,
+  style?: any,
   selected?: boolean,
   onSelectCart: (car: ICar) => void
 }
@@ -13,6 +14,7 @@ interface Props {
 export default function Car(props: Props) {
   return (
     <div
+      style={props.style}
       className={`car-item${props.selected ? '-selected' : ''}`}
       onClick={() => props.onSelectCart(props.car)}
     >

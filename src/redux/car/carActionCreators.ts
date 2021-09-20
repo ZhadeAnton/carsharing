@@ -1,5 +1,5 @@
 import { ICar } from '../../interfaces/carsInterfaces'
-import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
+import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces'
 import * as types from './carActonTypes'
 
 export const getAllCars = (page: number): types.IGetCarsByPage => ({
@@ -33,6 +33,16 @@ export const selectCar = (car: ICar): types.ISelectCar => ({
   payload: car
 })
 
+export const getRateTypes = (): types.IGetRateTypes => ({
+  type: types.GET_RATE_TYPES
+})
+
+export const getRateTypesSuccess = (rateTypes: Array<IRate>)
+  : types.IGetRateTypesSuccess => ({
+  type: types.GET_RATE_TYPES_SUCCESS,
+  payload: rateTypes
+})
+
 export const setSortingOfCars = (sortBy: IRadioButton): types.ISetSortingOfCars => ({
   type: types.SET_SORTING_OF_CARS,
   payload: sortBy
@@ -48,7 +58,7 @@ export const setCarColor = (color: IRadioButton): types.ISerCarColor => ({
   payload: color
 })
 
-export const setCarRate = (rate: IRadioButton): types.ISetCarRate => ({
+export const setCarRate = (rate: IRate): types.ISetCarRate => ({
   type: types.SET_CAR_RATE,
   payload: rate
 })
@@ -69,4 +79,12 @@ export const removeDateFrom = (): types.IRemoveDateFrom => ({
 
 export const removeDateTo = (): types.IRemoveDateTo => ({
   type: types.REMOVE_DATE_TO
+})
+
+export const setIsCarTabActive = (): types.IIsCarTabActive => ({
+  type: types.IS_CARS_TAB_ACTIVE
+})
+
+export const setIsCarExtraActive = (): types.IIsCarExtraTabActive => ({
+  type: types.IS_CARS_EXTRA_TAB_ACTIVE
 })

@@ -1,6 +1,11 @@
 import { IMark } from '../../interfaces/mapInterfaces'
 import { ILocationTypes } from './locationActionTypes'
 import * as types from './locationActionTypes'
+import {
+  IOrderTypes,
+  GET_ORDER_BY_ID_SUCCESS,
+  REMOVE_ORDER
+} from '../order/orderActionTypes'
 
 export interface ILocationState {
   town: string | null,
@@ -16,7 +21,9 @@ const INIT_STATE: ILocationState = {
   markers: [{lat: 54.3187, lng: 48.3978}]
 }
 
-const locationReducer = (state = INIT_STATE, action: ILocationTypes): ILocationState => {
+type ITypes = ILocationTypes | IOrderTypes
+
+const locationReducer = (state = INIT_STATE, action: ITypes): ILocationState => {
   switch (action.type) {
     case types.ADD_MARKER:
       return {
@@ -40,6 +47,18 @@ const locationReducer = (state = INIT_STATE, action: ILocationTypes): ILocationS
       return {
         ...state,
         coordinatesByPickedTown: action.payload
+      }
+
+    case GET_ORDER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        town: action.payload.cityId.name,
+        pickUp: action.payload.pointId.name
+      }
+
+    case REMOVE_ORDER:
+      return {
+        ...INIT_STATE
       }
 
     default:

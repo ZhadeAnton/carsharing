@@ -1,25 +1,19 @@
 import React from 'react'
 
 import './styles.scss'
+import useToggle from '../../../hooks/useToggle'
 import { parseDate } from '../../../utils/dateUtils'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
-import useToggle from '../../../hooks/useToggle'
-import { getTownField } from '../../../redux/location/locationSelectors'
-import {
-  getCarColorField,
-  getCarLeaseField,
-  getCarModelFiled,
-  getCarRateField,
-  totalCarPriceSelector
-} from '../../../redux/car/carSelectors'
 import { setOrder } from '../../../redux/order/orderActionCreators'
-import { ICheckbox } from '../../../interfaces/inputInterfaces'
+import { createOrderBody } from '../../../utils/orderUtils'
+import * as carSelectors from '../../../redux/car/carSelectors'
 import CarPlatesNumber from '../../car/carPlates'
 import OrderInfo from '../../forms/orderInfo'
 import OrderModal from '../../orderModal'
 import CarInfoField from '../../car/carInfoField'
 import CarName from '../../car/carName'
 import CarImage from '../../car/carImage'
+import CarInfoList from '../../car/carInfoList'
 
 export default function FourthStep() {
   const dispatch = useAppDispatch()
@@ -27,29 +21,27 @@ export default function FourthStep() {
   const [isModal, setIsModal] = useToggle()
 
   const selectedCar = state.car.selectedCar
+  const carCheckboxOrtions = state.car.carCheckboxOrtions
+  const carRate = state.car.carRate
+  const carColor = state.car.carColor
   const dateFrom = state.car.dateFrom
-  const carCheckBoxGroup = state.car.carCheckBoxGroup
+  const dateTo = state.car.dateTo
+  const totalPriceOfSelectedCar = carSelectors.totalCarPriceSelector(state)
 
-  let isCarFullTank = false
-  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
-
-  const townField = getTownField(state)
-  const carModelField = getCarModelFiled(state)
-  const carColorField = getCarColorField(state)
-  const carRateField = getCarRateField(state)
-  const carLeaseField = getCarLeaseField(state)
-
-  const fourthStepFields = [
-    townField, carModelField, carColorField, carRateField, carLeaseField
-  ]
-
-  carCheckBoxGroup.forEach((item: ICheckbox) => {
-    if (item.isChecked) fourthStepFields.push({ title: item.value, value: 'Да' })
-    if (item.value === 'Полный бак' && item.isChecked) isCarFullTank = !isCarFullTank
+  const order = createOrderBody({
+    selectedCar,
+    carColor: carColor.value,
+    carRate: carRate.rateTypeId.name,
+    dateFrom,
+    dateTo,
+    totalPrice: totalPriceOfSelectedCar,
+    isFullTank: carCheckboxOrtions[0].isChecked,
+    isNeedChildChair: carCheckboxOrtions[1].isChecked,
+    isRightWheel: carCheckboxOrtions[2].isChecked
   })
 
   const handleConfirmOrder = () => {
-    dispatch(setOrder())
+    dispatch(setOrder(order))
     setIsModal(false)
   }
 
@@ -73,12 +65,7 @@ export default function FourthStep() {
           }
 
           <div className='step-four__info'>
-            { isCarFullTank &&
-              <CarInfoField
-                title='Топливо'
-                value='100%'
-              />
-            }
+            <CarInfoList carCheckboxes={carCheckboxOrtions} />
 
             <CarInfoField
               title='Доступна с'
@@ -95,7 +82,6 @@ export default function FourthStep() {
       <div className='step__right'>
         <OrderInfo
           buttonTitle='Заказать'
-          orderFields={fourthStepFields}
           price={totalPriceOfSelectedCar}
           isButtonDisable={false}
           onButtonClick={handleOpenModal}

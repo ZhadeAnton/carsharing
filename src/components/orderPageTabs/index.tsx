@@ -4,27 +4,25 @@ const { TabPane } = Tabs;
 
 import './styles.scss'
 import { useAppDispatch, useAppSelector } from '../../hooks/usePreTypedHook';
-import FirstStep from '../steps/firstStep';
-import SecondStep from '../steps/secondStep';
-import ThirdStep from '../steps/thirdStep';
-import FourthStep from '../steps/fourthStep';
 import { isFirstStepDisabledSelector } from '../../redux/location/locationSelectors';
 import {
   isSecondStepDisabledSelector,
   isThirdStepDisabledSelector
 } from '../../redux/car/carSelectors';
 import { setCurrentTab } from '../../redux/order/orderActionCreators';
+import FirstStep from '../steps/firstStep';
+import SecondStep from '../steps/secondStep';
+import ThirdStep from '../steps/thirdStep';
+import FourthStep from '../steps/fourthStep';
 
 export default function OrderPageTabs() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
 
   const currentTabPosition = state.order.currentTabPosition
-
   const isFirstStepDisabled = isFirstStepDisabledSelector(state)
   const isSecondStepDisabled = isSecondStepDisabledSelector(state)
   const isThirdStepDisable = isThirdStepDisabledSelector(state)
-
   const isSecondTabDisabled = isFirstStepDisabled
   const isThirdTabDisabled = isSecondTabDisabled || isSecondStepDisabled
   const isFourthTabDisabled = isThirdTabDisabled || isThirdStepDisable

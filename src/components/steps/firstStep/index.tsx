@@ -1,20 +1,15 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
-import {
-  getTownField,
-  isFirstStepDisabledSelector
-} from '../../../redux/location/locationSelectors'
 import { setCurrentTab } from '../../../redux/order/orderActionCreators'
+import { isFirstStepDisabledSelector } from '../../../redux/location/locationSelectors'
+import { totalCarPriceSelector } from '../../../redux/car/carSelectors'
 import OrderInfo from '../../forms/orderInfo'
 import CustomMap from '../../map'
-
 
 export default function FirstStep() {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
-
-  const townField = getTownField(state)
-  const firstStepFields = [townField]
+  const totalPriceOfSelectedCar = totalCarPriceSelector(state)
   const isFirstStepDisabled = isFirstStepDisabledSelector(state)
 
   const handleChangeActiveTab = () => {
@@ -30,9 +25,9 @@ export default function FirstStep() {
       <div className='step-one__right step__right'>
         <OrderInfo
           buttonTitle='Выбрать модель'
-          orderFields={firstStepFields}
           isButtonDisable={isFirstStepDisabled}
           onButtonClick={handleChangeActiveTab}
+          price={totalPriceOfSelectedCar}
         />
       </div>
     </section>

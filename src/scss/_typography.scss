@@ -189,3 +189,11 @@
     }
   }
 }
+
+.ant-spin-nested-loading > div > .ant-spin {
+  width: 100%;
+  max-height: 0;
+  display: block;
+  @include abs-position(50%, auto, auto, 0);
+  z-index: $layer-max;
+}

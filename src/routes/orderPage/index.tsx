@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import './styles.scss'
 import { useAppSelector } from '../../hooks/usePreTypedHook';
+import useHistoryPush from '../../hooks/useHistory';
 import Aside from '../../components/aside'
 import Header from '../../components/header'
-import OrderConfirmed from '../../components/orderConfirmed';
 import OrderPageTabs from '../../components/orderPageTabs';
 
 export default function OrderPage() {
+  const redirect = useHistoryPush()
   const state = useAppSelector((state) => state)
 
-  const orderNumber = state.order.orderNumber
-  const isOrderConfirmed = state.order.isOrderConfirmed
+  const confirmedOrderIdFromLS = localStorage.getItem('carOrderId')
+  const confirmedOrderId = state.order.confirmedOrder?.id ?? confirmedOrderIdFromLS
+  const isLoading = state.order.isLoading
+
+  useEffect(() => {
+    if (confirmedOrderId) redirect(`/order/${confirmedOrderId}`)
+  }, [confirmedOrderId])
+
+  if (isLoading) return <main className='order-page' />
 
   return (
     <main className='order-page'>
@@ -24,19 +32,7 @@ export default function OrderPage() {
           <Header />
         </div>
 
-        {!isOrderConfirmed
-          ? <OrderPageTabs />
-          : (
-            <div className='order-page__header-row'>
-              <div className='order-page__header-row--wrapper'>
-                <h6 className='order-page__header-row--title container'>
-                  Заказ номер { orderNumber }
-                </h6>
-              </div>
-
-              <OrderConfirmed />
-            </div>
-          )}
+        <OrderPageTabs />
       </section>
     </main>
   )

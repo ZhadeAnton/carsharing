@@ -3,10 +3,7 @@
 
 .car-field {
   display: flex;
-
-  &:not(:last-child) {
-    margin-bottom: $space-sm;
-  }
+  margin-bottom: $space-sm;
 
   &__title {
     margin-right: 6px;
@@ -26,7 +23,7 @@
   @media (max-width: getBreackpoint('vsm')) {
     &__title {
       margin-right: 5px;
-        font-style: 13px;
+      font-style: 13px;
     }
   
     &__number {

@@ -1,45 +1,56 @@
+import moment from 'moment'
+
 import { ICar } from '../../interfaces/carsInterfaces'
+import { changeCarCheckboxGroup } from './carUtils'
 import { ICarTypes } from './carActonTypes'
-import { ICheckbox, IDate, IRadioButton } from '../../interfaces/inputInterfaces'
+import { ICheckbox, IDate, IRadioButton, IRate } from '../../interfaces/inputInterfaces'
+import { carsSortOptions, carCheckboxOrtions } from '../../utils/carsUtils'
 import * as types from './carActonTypes'
 import {
-  carsSortOptions,
-  carRateOptions,
-  carCheckBoxGroup
-} from '../../utils/carsUtils'
-import { changeCarCheckboxGroup } from './carUtils'
+  IOrderTypes,
+  GET_ORDER_BY_ID_SUCCESS,
+  REMOVE_ORDER
+} from '../order/orderActionTypes'
 
 export interface ICarState {
-  carsListfromServer: Array<ICar>,
-  carsCount: number | null,
+  carsList: Array<ICar>,
+  carListCurrentPage: number,
+  carsCount: number,
   selectedCar: ICar | null,
   carsSortOptions: Array<IRadioButton>,
-  carRateOptions: Array<IRadioButton>,
-  carCheckBoxGroup: Array<ICheckbox>,
+  carRateOptions: Array<IRate> | null,
+  carCheckboxOrtions: Array<ICheckbox>,
   carsSortBy: IRadioButton,
   carColor: IRadioButton,
-  carRate: IRadioButton,
+  carRate: IRate,
   dateFrom: IDate,
   dateTo: IDate,
-  isLoading: boolean
+  isLoading: boolean,
+  isCarTabActive: boolean,
+  isCarExtraTabActive: boolean
 }
 
 const INIT_STATE: ICarState = {
-  carsListfromServer: [],
-  carsCount: null,
+  carsList: [],
+  carListCurrentPage: 0,
+  carsCount: 0,
   selectedCar: null,
   carsSortOptions,
-  carRateOptions,
-  carCheckBoxGroup,
+  carRateOptions: null,
+  carCheckboxOrtions,
   carsSortBy: {title: 'Все модели', value: 'Все модели'},
   carColor: {title: 'Любой', value: 'Любой'},
-  carRate: {title: 'Поминутно, 7₽/мин', value: 'Поминутно'},
+  carRate: {price: 1234, rateTypeId: {name: 'Суточный'}},
   dateFrom: null,
   dateTo: null,
-  isLoading: false
+  isLoading: false,
+  isCarTabActive: false,
+  isCarExtraTabActive: false
 }
 
-const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
+type ITypes = ICarTypes | IOrderTypes
+
+const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
   switch (action.type) {
     case types.SELECT_CAR:
       return {
@@ -51,7 +62,8 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.GET_ALL_CARS_SUCCESS:
       return {
         ...state,
-        carsListfromServer: action.payload,
+        carsList: [...state.carsList, ...action.payload],
+        carListCurrentPage: state.carListCurrentPage + 1,
         isLoading: false
       }
 
@@ -61,16 +73,42 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
         carsCount: action.payload
       }
 
+    case types.GET_RATE_TYPES_SUCCESS:
+      return {
+        ...state,
+        carRateOptions: action.payload,
+        isLoading: false
+      }
+
     case types.SET_SORTING_OF_CARS:
       return {
         ...state,
         carsSortBy: action.payload,
+        carsList: [],
+        carListCurrentPage: 0
+      }
+
+    case GET_ORDER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        dateFrom: moment(action.payload.dateFrom),
+        dateTo: moment(action.payload.dateTo),
+        carColor: {title: action.payload.color, value: action.payload.color},
+        selectedCar: {
+          isRightWheel: action.payload.isRightWheel,
+          isNeedChildChair: action.payload.isNeedChildChair,
+          isFullTank: action.payload.isFullTank,
+          number: action.payload.carId.number,
+          name: action.payload.carId.name,
+          thumbnail: action.payload.carId.thumbnail!
+        }
       }
 
     case types.GET_CARS_BY_PAGE:
     case types.SET_SORTING_OF_CARS:
     case types.GET_PREMIUM_CARS:
     case types.GET_ECONOMY_CARS:
+    case types.GET_RATE_TYPES:
       return {
         ...state,
         isLoading: true
@@ -91,7 +129,8 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
     case types.CAR_CHECKBOX_CHANGE:
       return {
         ...state,
-        carCheckBoxGroup: changeCarCheckboxGroup(state.carCheckBoxGroup, action.payload)
+        carCheckboxOrtions: changeCarCheckboxGroup(
+            state.carCheckboxOrtions, action.payload)
       }
 
     case types.SET_DATE_FROM:
@@ -116,6 +155,23 @@ const carReducer = (state = INIT_STATE, action: ICarTypes): ICarState => {
       return {
         ...state,
         dateTo: null
+      }
+
+    case REMOVE_ORDER:
+      return {
+        ...INIT_STATE
+      }
+
+    case types.IS_CARS_TAB_ACTIVE:
+      return {
+        ...state,
+        isCarTabActive: true
+      }
+
+    case types.IS_CARS_EXTRA_TAB_ACTIVE:
+      return {
+        ...state,
+        isCarExtraTabActive: true
       }
 
     default:
