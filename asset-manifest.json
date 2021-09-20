@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/carsharing/static/css/main.bab132fb.chunk.css",
-    "main.js": "/carsharing/static/js/main.2f018dab.chunk.js",
-    "main.js.map": "/carsharing/static/js/main.2f018dab.chunk.js.map",
-    "runtime-main.js": "/carsharing/static/js/runtime-main.31aa18f5.js",
-    "runtime-main.js.map": "/carsharing/static/js/runtime-main.31aa18f5.js.map",
+    "main.css": "/carsharing/static/css/main.e4ab22ef.chunk.css",
+    "main.js": "/carsharing/static/js/main.5bf74831.chunk.js",
+    "main.js.map": "/carsharing/static/js/main.5bf74831.chunk.js.map",
+    "runtime-main.js": "/carsharing/static/js/runtime-main.091551db.js",
+    "runtime-main.js.map": "/carsharing/static/js/runtime-main.091551db.js.map",
     "static/css/2.786ae0dd.chunk.css": "/carsharing/static/css/2.786ae0dd.chunk.css",
-    "static/js/2.9f3c427a.chunk.js": "/carsharing/static/js/2.9f3c427a.chunk.js",
-    "static/js/2.9f3c427a.chunk.js.map": "/carsharing/static/js/2.9f3c427a.chunk.js.map",
+    "static/js/2.e77a48b5.chunk.js": "/carsharing/static/js/2.e77a48b5.chunk.js",
+    "static/js/2.e77a48b5.chunk.js.map": "/carsharing/static/js/2.e77a48b5.chunk.js.map",
     "index.html": "/carsharing/index.html",
     "static/css/2.786ae0dd.chunk.css.map": "/carsharing/static/css/2.786ae0dd.chunk.css.map",
-    "static/css/main.bab132fb.chunk.css.map": "/carsharing/static/css/main.bab132fb.chunk.css.map",
-    "static/js/2.9f3c427a.chunk.js.LICENSE.txt": "/carsharing/static/js/2.9f3c427a.chunk.js.LICENSE.txt",
+    "static/css/main.e4ab22ef.chunk.css.map": "/carsharing/static/css/main.e4ab22ef.chunk.css.map",
+    "static/js/2.e77a48b5.chunk.js.LICENSE.txt": "/carsharing/static/js/2.e77a48b5.chunk.js.LICENSE.txt",
     "static/media/index.css": "/carsharing/static/media/Roboto-Regular.a8d6ac03.ttf",
     "static/media/close.13854ee1.svg": "/carsharing/static/media/close.13854ee1.svg",
     "static/media/facebook.c1876cc3.svg": "/carsharing/static/media/facebook.c1876cc3.svg",
@@ -26,10 +26,10 @@
     "static/media/telegram.e8137bbe.svg": "/carsharing/static/media/telegram.e8137bbe.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.31aa18f5.js",
+    "static/js/runtime-main.091551db.js",
     "static/css/2.786ae0dd.chunk.css",
-    "static/js/2.9f3c427a.chunk.js",
-    "static/css/main.bab132fb.chunk.css",
-    "static/js/main.2f018dab.chunk.js"
+    "static/js/2.e77a48b5.chunk.js",
+    "static/css/main.e4ab22ef.chunk.css",
+    "static/js/main.5bf74831.chunk.js"
   ]
 }
