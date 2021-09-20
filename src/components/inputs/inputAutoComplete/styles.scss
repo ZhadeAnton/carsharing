@@ -22,6 +22,7 @@
     }
 
     &-disable {
+      @extend %input-primary;
       cursor: not-allowed;
     }
   }

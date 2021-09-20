@@ -30,6 +30,16 @@ export default function SearchLocationForm() {
     dispatch(setPickUp(pickUp))
   }
 
+  const handleChangeTown = (town: string) => {
+    const result = {...selectedTown, name: town} as ITown
+    dispatch(setTown(result))
+  }
+
+  const handleChangePickUp = (pickUp: string) => {
+    const result = {...selectedPickUp, address: pickUp} as IPickUp
+    dispatch(setPickUp(result))
+  }
+
   return (
     <form className='search-location-form'>
       <div className='search-location-form__form-wrapper'>
@@ -42,7 +52,8 @@ export default function SearchLocationForm() {
           value={selectedTown?.name ?? ''}
           placeholder='Начните вводить город...'
           type='town'
-          onChange={handleSelectTown}
+          onItemClick={handleSelectTown}
+          onChange={handleChangeTown}
         />
       </div>
 
@@ -57,7 +68,8 @@ export default function SearchLocationForm() {
           placeholder='Начните вводить пункт...'
           type='pickUp'
           isDisable={!selectedTown}
-          onChange={handleSelectPickUp}
+          onItemClick={handleSelectPickUp}
+          onChange={handleChangePickUp}
         />
       </div>
     </form>

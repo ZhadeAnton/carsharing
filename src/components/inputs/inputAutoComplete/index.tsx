@@ -10,47 +10,51 @@ import useSearchLocation from '../../../hooks/useSearchLocation'
 
 interface Props {
   array: Array<ITown | IPickUp>,
-  value: string | undefined,
+  value: string,
   placeholder: string,
   isDisable?: boolean,
   type: 'town' | 'pickUp',
-  onChange: (value: any) => void
+  onItemClick: (value: any) => void,
+  onChange: (value: string) => void
 }
 
 export default function InputAutoComplete(props: Props) {
   const dispatch = useAppDispatch()
   const useSetLocation = useSearchLocation()
-  const [focused, setFocused] = useState(false)
+  const [isInputFocused, setIsInputFocused] = useState(false)
   const [isOpenList, setIsOpenList] = useState(false)
 
-  const handleClickByItem = (item: any) => {
-    setIsOpenList(false)
-    setFocused(false)
-
-    if (props.type === 'town') {
-      useSetLocation(item.name)
-      props.onChange(item)
-    } else {
-      props.onChange(item)
-    }
+  const handleClickByTown = (item: ITown) => {
+    useSetLocation(item.name)
+    props.onItemClick(item)
   }
 
-  const handleChange = () => {
+  const handleClickByPickUp = (item: IPickUp) => {
+    props.onItemClick(item)
+  }
+
+  const handleClickByItem = (item: any) => {
+    props.type === 'town' ? handleClickByTown(item) : handleClickByPickUp(item)
+    setIsOpenList(false)
+    setIsInputFocused(false)
+  }
+
+  const handleChangeInputValue = (e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLTextAreaElement
+    props.onChange(target.value)
     setIsOpenList(true)
   }
 
   const handleClear = () => {
     props.type === 'pickUp' ? dispatch(clearPickUp()) : dispatch(clearTown())
     setIsOpenList(false)
-    setFocused(false)
+    setIsInputFocused(false)
   }
 
   const handleFilterArray = (item: any) => {
-    if (props.type === 'town') {
-      return isAddressIncludesValue(item.name, props.value ?? '')
-    } else {
-      return isAddressIncludesValue(item.address, props.value ?? '')
-    }
+    return props.type === 'town'
+    ? isAddressIncludesValue(item.name, props.value ?? '')
+    : isAddressIncludesValue(item.address, props.value ?? '')
   }
 
   return (
@@ -59,13 +63,13 @@ export default function InputAutoComplete(props: Props) {
       onClick={() => setIsOpenList(true)}
     >
       <input
-        className={ `input-autocomplete__input
-          input-autocomplete__input${!props.isDisable ? '' : '-disable'}`}
+        className={ `input-autocomplete__input${!props.isDisable ? '' : '-disable'}`}
         value={props.value}
         placeholder={props.placeholder}
         disabled={props.isDisable}
-        onFocus={() => setFocused(true)}
-        onChange={handleChange}
+        onFocus={() => setIsInputFocused(true)}
+        onBlur={() => setTimeout(() => setIsInputFocused(false), 120)}
+        onChange={(e) => handleChangeInputValue(e)}
       />
 
       <span
@@ -77,7 +81,7 @@ export default function InputAutoComplete(props: Props) {
 
       <div className='input-autocomplete__wrapper'>
         {
-          isOpenList && !props.isDisable && focused &&
+          isOpenList && !props.isDisable && isInputFocused &&
           <ul className='input-autocomplete__suggetion-list'>
             {
               props.array

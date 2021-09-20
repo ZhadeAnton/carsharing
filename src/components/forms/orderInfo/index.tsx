@@ -53,9 +53,8 @@ export default function OrderInfo(props: Props) {
     )
   }
 
-  isOrderConfirmed
-  ? orderFields.push(...carOrderCheckboxFields)
-  : orderFields.push(...carCheckboxFields)
+  if (isCarExtraTabActive && !isOrderConfirmed) orderFields.push(...carCheckboxFields)
+  if (isOrderConfirmed) orderFields.push(...carOrderCheckboxFields)
 
   return (
     <form className='order-info'>
