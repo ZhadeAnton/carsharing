@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect, MutableRefObject } from 'react'
 
 import './styles.scss'
 import { ReactComponent as Close } from '../../../assets/SVG/close.svg'
@@ -14,15 +14,28 @@ interface Props {
   placeholder: string,
   isDisable?: boolean,
   type: 'town' | 'pickUp',
-  onItemClick: (value: any) => void,
+  onItemClick: (item: ITown |IPickUp) => void,
   onChange: (value: string) => void
 }
 
 export default function InputAutoComplete(props: Props) {
+  const listRef: MutableRefObject<HTMLDivElement | null> = useRef(null)
   const dispatch = useAppDispatch()
   const useSetLocation = useSearchLocation()
   const [isInputFocused, setIsInputFocused] = useState(false)
   const [isOpenList, setIsOpenList] = useState(false)
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [listRef])
+
+  function handleClickOutside(event: any) {
+    if (listRef.current && !listRef.current.contains(event.target as HTMLElement)) {
+      setIsOpenList(false)
+    }
+  }
 
   const handleClickByTown = (item: ITown) => {
     useSetLocation(item.name)
@@ -33,8 +46,8 @@ export default function InputAutoComplete(props: Props) {
     props.onItemClick(item)
   }
 
-  const handleClickByItem = (item: any) => {
-    props.type === 'town' ? handleClickByTown(item) : handleClickByPickUp(item)
+  const handleClickByItem = (item: ITown | IPickUp) => {
+    props.type === 'town' ? handleClickByTown(item) : handleClickByPickUp(item as IPickUp)
     setIsOpenList(false)
     setIsInputFocused(false)
   }
@@ -51,10 +64,13 @@ export default function InputAutoComplete(props: Props) {
     setIsInputFocused(false)
   }
 
-  const handleFilterArray = (item: any) => {
+  const handleFilterArray = (item: ITown | IPickUp) => {
+    const townItem = item as ITown
+    const pickUpItem = item as IPickUp
+
     return props.type === 'town'
-    ? isAddressIncludesValue(item.name, props.value ?? '')
-    : isAddressIncludesValue(item.address, props.value ?? '')
+    ? isAddressIncludesValue(townItem.name, props.value ?? '')
+    : isAddressIncludesValue(pickUpItem.address, props.value ?? '')
   }
 
   return (
@@ -68,7 +84,6 @@ export default function InputAutoComplete(props: Props) {
         placeholder={props.placeholder}
         disabled={props.isDisable}
         onFocus={() => setIsInputFocused(true)}
-        onBlur={() => setTimeout(() => setIsInputFocused(false), 120)}
         onChange={(e) => handleChangeInputValue(e)}
       />
 
@@ -79,26 +94,34 @@ export default function InputAutoComplete(props: Props) {
         { props.value && <Close /> }
       </span>
 
-      <div className='input-autocomplete__wrapper'>
+      <div
+        ref={listRef}
+        className='input-autocomplete__wrapper'
+      >
         {
           isOpenList && !props.isDisable && isInputFocused &&
           <ul className='input-autocomplete__suggetion-list'>
             {
               props.array
-                  .filter((item: any) => handleFilterArray(item))
-                  .map((item: any, index: number) => (
-                    <li
-                      key={index}
-                      className='input-autocomplete__suggetion-list--item'
-                      onClick={() => handleClickByItem(item)}
-                    >
-                      {
-                        <span>
-                          { props.type === 'town' ? item.name : item.address }
-                        </span>
-                      }
-                    </li>
-                  ))
+                  .filter((item: IPickUp | ITown) => handleFilterArray(item))
+                  .map((item: IPickUp | ITown, index: number) => {
+                    const townItem = item as ITown
+                    const pickUpItem = item as IPickUp
+
+                    return (
+                      <li
+                        key={index}
+                        className='input-autocomplete__suggetion-list--item'
+                        onClick={() => handleClickByItem(item)}
+                      >
+                        {
+                          <span>
+                            { props.type === 'town' ? townItem.name : pickUpItem.address }
+                          </span>
+                        }
+                      </li>
+                    )
+                  })
             }
           </ul>
         }

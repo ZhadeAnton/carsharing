@@ -12,8 +12,8 @@ export default function useSearchByLatLng() {
   const handleSearch = async (pickUp: IPickUp, latLng: IMark) => {
     Geocode.fromLatLng(`${latLng.lat}`, `${latLng.lng}`).then(
         (response) => {
-          const street = response.results[0].address_components[1].short_name
-          const number = response.results[0].address_components[0].short_name
+          const street = response.results[1].address_components[1].short_name
+          const number = response.results[1].address_components[0].short_name
           const address = street + ',' + ' ' + number
           const result = {...pickUp, address}
           dispatch(setPickUp(result))

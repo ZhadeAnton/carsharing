@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect } from 'react'
 
 import './styles.scss'
 import { useAppDispatch, useAppSelector } from '../../../hooks/usePreTypedHook'
@@ -18,16 +18,12 @@ export default function SearchLocationForm() {
   const towns = state.location.towns
   const pickUps = pickUpsSelector(state)
 
-  useMemo(() => {
+  useEffect(() => {
     searchMarkers(pickUps)
   }, [selectedTown])
 
-  const handleSelectTown = (town: ITown) => {
-    dispatch(setTown(town))
-  }
-
-  const handleSelectPickUp = (pickUp: IPickUp) => {
-    dispatch(setPickUp(pickUp))
+  const handleSelectItem = (item: ITown | IPickUp) => {
+    'address' in item ? dispatch(setPickUp(item)) : dispatch(setTown(item))
   }
 
   const handleChangeTown = (town: string) => {
@@ -52,7 +48,7 @@ export default function SearchLocationForm() {
           value={selectedTown?.name ?? ''}
           placeholder='Начните вводить город...'
           type='town'
-          onItemClick={handleSelectTown}
+          onItemClick={handleSelectItem}
           onChange={handleChangeTown}
         />
       </div>
@@ -68,7 +64,7 @@ export default function SearchLocationForm() {
           placeholder='Начните вводить пункт...'
           type='pickUp'
           isDisable={!selectedTown}
-          onItemClick={handleSelectPickUp}
+          onItemClick={handleSelectItem}
           onChange={handleChangePickUp}
         />
       </div>
