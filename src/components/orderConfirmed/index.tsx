@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Skeleton } from 'antd'
+import { useParams } from 'react-router-dom'
 
 import './styles.scss'
 import useToggle from '../../hooks/useToggle'
@@ -17,20 +18,20 @@ import Aside from '../aside'
 import Header from '../header'
 
 export default function OrderConfirmed() {
+  const params: {id: string} = useParams()
   const redirect = useHistoryPush()
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
+
   const confirmedOrder = state.order.confirmedOrder
-  const confirmedOrderIdFromLS = localStorage.getItem('carOrderId')
-  const confirmedOrderId = state.order.confirmedOrder?.id ?? confirmedOrderIdFromLS!
 
   useEffect(() => {
-    dispatch(getOrderById(confirmedOrderId))
+    params.id ? dispatch(getOrderById(params.id)) : redirect('/order')
   }, [])
 
   const handleRemovemOrder = () => {
-    dispatch(removeOrder(confirmedOrderId))
+    dispatch(removeOrder(params.id))
     setIsModal(false)
     redirect('/order')
   }

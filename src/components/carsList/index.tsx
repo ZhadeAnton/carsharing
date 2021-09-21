@@ -148,7 +148,7 @@ export default function CarsList() {
   }, [])
 
   const isEndOfList = () => {
-    return (rowStartPosition + (visibleRows + extraRows)) >= maxRows
+    return (rowStartPosition + (visibleRows - extraRows)) === maxRows
   }
 
   const isLoadMoreItems = (scrollTop: number) => {

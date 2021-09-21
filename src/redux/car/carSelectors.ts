@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createSelector } from 'reselect'
 import { ICheckbox, IRadioButton } from '../../interfaces/inputInterfaces'
 import { getTimeString, getTimeDifference } from '../../utils/dateUtils'
@@ -80,6 +81,21 @@ export const getCarCheckboxFields = createSelector(
       return checkboxes
           .filter((checkbox) => checkbox.isChecked)
           .map((checkbox) => ({ title: checkbox.value, value: 'Да' }))
+    }
+)
+
+export const getCarOrderCheckboxField = createSelector(
+    [carSelector],
+    (car) => {
+      const selectedCar = car.selectedCar
+      const checkboxes = [
+        { title: 'Полный бак', value: 'Да', isChecked: selectedCar?.isFullTank },
+        { title: 'Детское кресло', value: 'Да', isChecked: selectedCar?.isNeedChildChair },
+        { title: 'Правый руль', value: 'Да', isChecked: selectedCar?.isRightWheel },
+      ]
+      return checkboxes
+          .filter((checkbox) => checkbox.isChecked)
+          .map((checkbox) => ({ title: checkbox.title, value: 'Да' }))
     }
 )
 

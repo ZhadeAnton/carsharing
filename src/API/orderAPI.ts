@@ -2,13 +2,16 @@ import axios from 'axios'
 
 import { IOrder } from '../interfaces/orderIntarfaces'
 
+const url = process.env.REACT_APP_DEFAULT_URL
+const appId = process.env.REACT_APP_APPLICATION_ID
+
 export const sendConfirmedOrder = (order: IOrder) => {
   return axios({
     method: 'POST',
-    url: `${process.env.REACT_APP_DEFAULT_URL}/order`,
+    url: `${url}/order`,
     data: order,
     headers: {
-      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+      'X-Api-Factory-Application-Id': appId,
       'Content-Type': 'application/json'
     }
   })
@@ -17,9 +20,9 @@ export const sendConfirmedOrder = (order: IOrder) => {
 export const getOrderById = (orderId: IOrder['orderStatusId']['id']) => {
   return axios({
     method: 'GET',
-    url: `${process.env.REACT_APP_DEFAULT_URL}/order/${orderId}`,
+    url: `${url}/order/${orderId}`,
     headers: {
-      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+      'X-Api-Factory-Application-Id': appId,
       'Content-Type': 'application/json'
     }
   })
@@ -28,9 +31,9 @@ export const getOrderById = (orderId: IOrder['orderStatusId']['id']) => {
 export const deleteConfirmedOrder = (orderId: IOrder['orderStatusId']['id']) => {
   return axios({
     method: 'DELETE',
-    url: `${process.env.REACT_APP_DEFAULT_URL}/order/${orderId}`,
+    url: `${url}/order/${orderId}`,
     headers: {
-      'X-Api-Factory-Application-Id': process.env.REACT_APP_APPLICATION_ID,
+      'X-Api-Factory-Application-Id': appId,
       'Content-Type': 'application/json'
     }
   })
