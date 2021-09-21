@@ -95,11 +95,11 @@ const carReducer = (state = INIT_STATE, action: ITypes): ICarState => {
         dateTo: moment(action.payload.dateTo),
         carColor: {title: action.payload.color, value: action.payload.color},
         selectedCar: {
+          number: action.payload.carId.number,
+          name: action.payload.carId.name,
           isRightWheel: action.payload.isRightWheel,
           isNeedChildChair: action.payload.isNeedChildChair,
           isFullTank: action.payload.isFullTank,
-          number: action.payload.carId.number,
-          name: action.payload.carId.name,
           thumbnail: action.payload.carId.thumbnail!
         }
       }

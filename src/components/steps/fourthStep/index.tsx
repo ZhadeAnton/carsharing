@@ -20,6 +20,8 @@ export default function FourthStep() {
   const state = useAppSelector((state) => state)
   const [isModal, setIsModal] = useToggle()
 
+  const selectedTown = state.location.selectedTown
+  const selectedPickUp = state.location.selectedPickUp
   const selectedCar = state.car.selectedCar
   const carCheckboxOrtions = state.car.carCheckboxOrtions
   const carRate = state.car.carRate
@@ -29,6 +31,16 @@ export default function FourthStep() {
   const totalPriceOfSelectedCar = carSelectors.totalCarPriceSelector(state)
 
   const order = createOrderBody({
+    cityId: {
+      name: selectedTown!.name,
+      id: selectedTown!.id
+    },
+    pointId: {
+      address: selectedPickUp!.address,
+      cityId: selectedPickUp!.cityId,
+      name: selectedPickUp!.name,
+      id: selectedPickUp!.id
+    },
     selectedCar,
     carColor: carColor.value,
     carRate: carRate.rateTypeId.name,

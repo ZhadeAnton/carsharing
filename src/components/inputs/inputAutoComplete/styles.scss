@@ -7,8 +7,8 @@
   position: relative;
 
   &__input {
-    @extend %input-primary;
     position: relative;
+    @extend %input-primary;
     @extend %heading14;
     font-family: 'RobotoLight';
     font-weight: 300;
@@ -20,6 +20,11 @@
       text-overflow: ellipsis;
       max-width: 180px;
     }
+
+    &-disable {
+      @extend %input-primary;
+      cursor: not-allowed;
+    }
   }
 
   &__suggetion-list {
@@ -28,6 +33,7 @@
     padding: $space-sm;
     @include abs-position(calc(100% - 3px), auto, auto, 0);
     overflow-y: scroll;
+    user-select: none;
     z-index: $layer-max;
     background-color: $white-color;
     border: 1px solid $primary-accent-color;
@@ -35,15 +41,15 @@
     &::-webkit-scrollbar {
       display: block;
     }
-
+  
     &::-webkit-scrollbar {
       width: 6px;
     }
-
+  
     &::-webkit-scrollbar-track {
       border-left: 1px solid $grey-color;
     } 
-
+  
     &::-webkit-scrollbar-thumb {
       background-color: $grey-strong-color;
       border: 2px solid transparent;
@@ -52,10 +58,8 @@
     }
 
     &--item {
-      &:not(:last-child) {
-        margin-bottom: 5px;
-      }
-
+      padding: 2.5px;
+      display: block;
       cursor: pointer;
       @extend %heading14;
       font-family: 'RobotoLight';
@@ -75,8 +79,10 @@
 
   @media (max-width: getBreackpoint('sm')) {
     &__suggetion-list {
-      font-size: 13px;
-      line-height: 17px;
+      &--item {
+        font-size: 13px;
+        line-height: 17px;
+      }
     }
   }
 

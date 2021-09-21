@@ -3,6 +3,21 @@ export interface IMark {
   lng: number
 }
 
+export interface ITown {
+  name: string,
+  id: string
+}
+
+export interface IPickUp {
+  address: string
+  cityId: {
+    name: string,
+    id: string
+  },
+  id: string,
+  name: string
+}
+
 export interface IFnAddMarker {
   (mark: IMark): void
 }
