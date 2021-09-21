@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useMemo } from 'react'
+import React, { useRef, useEffect } from 'react'
 import {
   GoogleMap,
   Marker,
@@ -27,15 +27,15 @@ export default function CustomMap() {
   const selectedTown = state.location.selectedTown
   const selectedPickUp = state.location.selectedPickUp
 
-  useMemo(() => {
+  useEffect(() => {
     if (selectedTown && selectedPickUp) {
       searchPickUp(selectedTown.name + selectedPickUp.address)
     }
   }, [selectedPickUp])
 
-  const onMapLoad = useCallback((map) => {
+  const onMapLoad =(map: any) => {
     mapRef.current = map;
-  }, []);
+  }
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
@@ -45,6 +45,7 @@ export default function CustomMap() {
   const handleClickByMarker = (e: any) => {
     const lat = e.latLng.lat()
     const lng = e.latLng.lng()
+
     searchBylanLng(selectedPickUp!, {lat, lng})
     dispatch(setCurrentMarker({lat, lng}))
   }
